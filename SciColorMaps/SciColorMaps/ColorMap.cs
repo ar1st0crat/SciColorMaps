@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace SciColorMaps
 {
@@ -27,6 +28,11 @@ namespace SciColorMaps
         /// <summary>
         /// 
         /// </summary>
+        private float _step;
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="name"></param>
         /// <param name="lower"></param>
         /// <param name="upper"></param>
@@ -39,6 +45,13 @@ namespace SciColorMaps
             _bins = bins;
             _lower = lower;
             _upper = upper;
+
+            if (_lower >= _upper)
+            {
+                throw new ArgumentException("Upper bound should be greater than the lower one!");
+            }
+
+            _step = (_upper - _lower) / _bins;
 
             // well, maybe some sort of a dictionary could be used here...
             // however, polymorphism, imo, would be an overdesign in this case
@@ -66,7 +79,7 @@ namespace SciColorMaps
                 value = (value > _upper) ? _upper : value;
                 value = (value < _lower) ? _lower : value;
 
-                var idx = value * _bins / (_upper - _lower);
+                var idx = Math.Min(_bins - 1, (value - _lower) / _step);
 
                 var res = new float[3]
                 {
@@ -91,6 +104,18 @@ namespace SciColorMaps
             return Color.FromArgb((int)(rgb[0] * 255), 
                                   (int)(rgb[1] * 255),
                                   (int)(rgb[2] * 255));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="no"></param>
+        /// <returns></returns>
+        public Color GetColorByNumber(int no)
+        {
+            var value = _lower + no * _step;
+
+            return GetColor(value);
         }
 
         // TODO: 
