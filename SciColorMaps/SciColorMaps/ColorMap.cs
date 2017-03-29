@@ -6,43 +6,59 @@ namespace SciColorMaps
     public class ColorMap
     {
         /// <summary>
-        /// 
+        /// Color palette is an array of predefined RGB values
         /// </summary>
-        private float[,] _palette = Palettes.Viridis;
+        private float[,] _palette;
 
         /// <summary>
-        /// 
+        /// Palette name ("viridis", "terrain", etc.)
         /// </summary>
-        private int _bins;
+        public string PaletteName { get; private set; }
 
         /// <summary>
-        /// 
+        /// Number of colors in colormap
+        /// </summary>
+        private int _colorCount;
+
+        /// <summary>
+        /// Lower bound of the colormap range
         /// </summary>
         private float _lower;
 
         /// <summary>
-        /// 
+        /// Upper bound of the colormap range
         /// </summary>
         private float _upper;
 
         /// <summary>
-        /// 
+        /// Range of values corresponding to one color
         /// </summary>
         private float _step;
-
+        
         /// <summary>
         /// 
         /// </summary>
         /// <param name="name"></param>
         /// <param name="lower"></param>
         /// <param name="upper"></param>
-        /// <param name="bins"></param>
+        /// <param name="colorCount"></param>
+        /// <exception cref="ArgumentException">Thrown if </exception>
         public ColorMap(string name,
                         float lower = 0.0f,
                         float upper = 1.0f,
-                        int bins = 256)
+                        int colorCount = 256)
         {
-            _bins = bins;
+            if (name == null)
+            {
+                throw new ArgumentException("Palette name should not be null!");
+            }
+
+            if (colorCount <= 0)
+            {
+                throw new ArgumentException("Number of colors should be positive!");
+            }
+
+            _colorCount = colorCount;
             _lower = lower;
             _upper = upper;
 
@@ -50,18 +66,22 @@ namespace SciColorMaps
             {
                 throw new ArgumentException("Upper bound should be greater than the lower one!");
             }
-
-            _step = (_upper - _lower) / _bins;
+            
+            _step = (_upper - _lower) / _colorCount;
 
             // well, maybe some sort of a dictionary could be used here...
             // however, polymorphism, imo, would be an overdesign in this case
-
+            PaletteName = name;
             switch (name.ToLower())
             {
                 case "afmhot":  _palette = Palettes.Afmhot; break;
                 case "inferno": _palette = Palettes.Inferno; break;
                 case "terrain": _palette = Palettes.Terrain; break;
-                case "viridis": _palette = Palettes.Viridis; break;
+                case "viridis": 
+                default:
+                    _palette = Palettes.Viridis;
+                    PaletteName = "viridis";
+                    break;
             }
             
             // ...
@@ -79,7 +99,7 @@ namespace SciColorMaps
                 value = (value > _upper) ? _upper : value;
                 value = (value < _lower) ? _lower : value;
 
-                var idx = Math.Min(_bins - 1, (value - _lower) / _step);
+                var idx = Math.Min(_colorCount - 1, (value - _lower) / _step);
 
                 var res = new float[3]
                 {
