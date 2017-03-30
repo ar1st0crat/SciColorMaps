@@ -42,9 +42,9 @@ namespace SciColorMaps.WinForms
             float min = float.MaxValue;
             float max = float.MinValue;
             
-            for (int x = 0; x < 100; x++)
+            for (int x = -100; x < 100; x++)
             {
-                for (int y = 0; y < 100; y++)
+                for (int y = -50; y < 50; y++)
                 {
                     float z = (float)function(x, y);
 
@@ -85,20 +85,39 @@ namespace SciColorMaps.WinForms
         
         private void ShowSurface(Func<double, double, double> function)
         {
-            var bmp = new Bitmap(100, 100);
+            var bmp = new Bitmap(200, 100);
             
-            for (int x = 0; x < 100; x++)
+            for (int x = -100; x < 100; x++)
             {
-                for (int y = 0; y < 100; y++)
+                for (int y = -50; y < 50; y++)
                 {
                     float z = (float)function(x, y);
-                    bmp.SetPixel(x, y, _cmap.GetColor(z));
+                    bmp.SetPixel(x+100, y+50, _cmap.GetColor(z));
                 }
             }
 
             _surfacePanel.BackgroundImage = bmp;
-            
-            var g = _surfacePanel.CreateGraphics();
+        }
+
+        private void ShowSurface3D(Func<double, double, double> function)
+        {
+            var bmp3d = new Bitmap(200, 100);
+
+            for (int x = -100; x < 100; x++)
+            {
+                for (int y = -50; y < 50; y++)
+                {
+                    float z = (float)function(x, y);
+
+                    var px = (int)(x / z * 20);
+                    var py = (int)(y / z * 20);
+
+                    if (px > 0 && py > 0 && px < 200 && py < 100)
+                        bmp3d.SetPixel(px, py, _cmap.GetColor(z));
+                }
+            }
+
+            _surface3dPanel.BackgroundImage = bmp3d;
         }
 
         private void _buttonShow_Click(object sender, EventArgs e)
@@ -106,6 +125,7 @@ namespace SciColorMaps.WinForms
             CreateColorMap(HyperbolicParaboloid);
             ShowColormap();
             ShowSurface(HyperbolicParaboloid);
+            ShowSurface3D(HyperbolicParaboloid);
         }
     }
 }

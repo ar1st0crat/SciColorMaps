@@ -3,18 +3,19 @@ using System.Drawing;
 
 namespace SciColorMaps
 {
+    /// <summary>
+    /// Color map 
+    /// 1) uses particular color palette,
+    /// 2) automatically calculates color by value and range,
+    /// 3) can work with any number of colors
+    /// </summary>
     public class ColorMap
     {
         /// <summary>
         /// Color palette is an array of predefined RGB values
         /// </summary>
-        private float[,] _palette;
-
-        /// <summary>
-        /// Palette name ("viridis", "terrain", etc.)
-        /// </summary>
-        public string PaletteName { get; private set; }
-
+        private byte[,] _palette;
+        
         /// <summary>
         /// Number of colors in colormap
         /// </summary>
@@ -34,15 +35,24 @@ namespace SciColorMaps
         /// Range of values corresponding to one color
         /// </summary>
         private float _step;
-        
+
         /// <summary>
-        /// 
+        /// Palette name ("viridis", "terrain", etc.)
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="lower"></param>
-        /// <param name="upper"></param>
-        /// <param name="colorCount"></param>
-        /// <exception cref="ArgumentException">Thrown if </exception>
+        public string PaletteName { get; private set; }
+
+        /// <summary>
+        /// Construct new colormap
+        /// </summary>
+        /// <param name="name">Palette name</param>
+        /// <param name="lower">Lower bound of the colormap range</param>
+        /// <param name="upper">Upper bound of the colormap range</param>
+        /// <param name="colorCount">Number of colors in colormap</param>
+        /// <exception cref="ArgumentException">Thrown if:
+        /// 1) Palette name is null
+        /// 2) Number of colors is 0 or negative
+        /// 3) Lower bound is greater than the upper one
+        /// </exception>
         public ColorMap(string name,
                         float lower = 0.0f,
                         float upper = 1.0f,
@@ -58,33 +68,30 @@ namespace SciColorMaps
                 throw new ArgumentException("Number of colors should be positive!");
             }
 
-            _colorCount = colorCount;
-            _lower = lower;
-            _upper = upper;
-
-            if (_lower >= _upper)
+            if (lower >= upper)
             {
                 throw new ArgumentException("Upper bound should be greater than the lower one!");
             }
-            
+
+            _colorCount = colorCount;
+            _lower = lower;
+            _upper = upper;
             _step = (_upper - _lower) / _colorCount;
 
-            // well, maybe some sort of a dictionary could be used here...
-            // however, polymorphism, imo, would be an overdesign in this case
-            PaletteName = name;
-            switch (name.ToLower())
+            // setting palette by name:
+
+            string keyName = name.ToLower();
+
+            if (Palettes.ByName.ContainsKey(keyName))
             {
-                case "afmhot":  _palette = Palettes.Afmhot; break;
-                case "inferno": _palette = Palettes.Inferno; break;
-                case "terrain": _palette = Palettes.Terrain; break;
-                case "viridis": 
-                default:
-                    _palette = Palettes.Viridis;
-                    PaletteName = "viridis";
-                    break;
+                _palette = Palettes.ByName[keyName];
+                PaletteName = keyName;
             }
-            
-            // ...
+            else
+            {
+                _palette = Palettes.Viridis;
+                PaletteName = "viridis";
+            }
         }
 
         /// <summary>
@@ -92,20 +99,20 @@ namespace SciColorMaps
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public float[] this[float value]
+        public byte[] this[float value]
         {
             get
             {
                 value = (value > _upper) ? _upper : value;
                 value = (value < _lower) ? _lower : value;
 
-                var idx = Math.Min(_colorCount - 1, (value - _lower) / _step);
+                var idx = (int)Math.Min(_colorCount - 1, (value - _lower) / _step);
 
-                var res = new float[3]
+                var res = new byte[3]
                 {
-                    _palette[(int)idx, 0],
-                    _palette[(int)idx, 1],
-                    _palette[(int)idx, 2]
+                    _palette[idx, 0],   // R
+                    _palette[idx, 1],   // G
+                    _palette[idx, 2]    // B
                 };
 
                 return res;
@@ -121,9 +128,7 @@ namespace SciColorMaps
         {
             var rgb = this[value];
 
-            return Color.FromArgb((int)(rgb[0] * 255), 
-                                  (int)(rgb[1] * 255),
-                                  (int)(rgb[2] * 255));
+            return Color.FromArgb(rgb[0], rgb[1], rgb[2]);
         }
 
         /// <summary>
@@ -139,6 +144,6 @@ namespace SciColorMaps
         }
 
         // TODO: 
-        // add static methods for transforming float[] to Color and vice versa
+        // add static methods for transforming byte[] to Color and vice versa
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace SciColorMaps.WinForms
+﻿using System.Linq;
+
+namespace SciColorMaps.WinForms
 {
     partial class SciColorMapsForm
     {
@@ -50,17 +52,13 @@
             // _colorMapsList
             // 
             this._colorMapsList.FormattingEnabled = true;
-            this._colorMapsList.Items.AddRange(new object[] {
-            "Afmhot",
-            "Inferno",
-            "Terrain",
-            "Viridis"});
+            this._colorMapsList.Items.AddRange(Palettes.ByName.Keys.ToArray());
             this._colorMapsList.Location = new System.Drawing.Point(13, 42);
             this._colorMapsList.Name = "_colorMapsList";
             this._colorMapsList.Size = new System.Drawing.Size(241, 24);
             this._colorMapsList.Sorted = true;
             this._colorMapsList.TabIndex = 1;
-            this._colorMapsList.Text = "Afmhot";
+            this._colorMapsList.Text = Palettes.ByName.Keys.FirstOrDefault();
             // 
             // _labelColorMapsList
             // 
