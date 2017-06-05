@@ -7,6 +7,8 @@ namespace SciColorMaps
     /// </summary>
     public static class Palettes
     {
+        public const int Resolution = 256;
+
         /* =============================== NOTE! =================================
          * 
          * Accessing elements in jagged arrays is significantly faster (up to 40%)

@@ -32,9 +32,16 @@ namespace SciColorMaps
         private float _upper;
 
         /// <summary>
-        /// Range of values corresponding to one color
+        /// Range of values corresponding to one color in the colormap
+        /// (it is calculated in the constructor based on given parameters)
         /// </summary>
         private float _step;
+
+        /// <summary>
+        /// Number of palette colors corresponding to one color in the colormap
+        /// (it is calculated in the constructor based on given parameters)
+        /// </summary>
+        private float _colorStep;
 
         /// <summary>
         /// Palette name ("viridis", "terrain", etc.)
@@ -50,22 +57,23 @@ namespace SciColorMaps
         /// <param name="colorCount">Number of colors in colormap</param>
         /// <exception cref="ArgumentException">Thrown if:
         /// 1) Palette name is null
-        /// 2) Number of colors is 0 or negative
+        /// 2) Number of colors is less than 2 or greater than number of colors in palette
         /// 3) Lower bound is greater than the upper one
         /// </exception>
         public ColorMap(string name,
                         float lower = 0.0f,
                         float upper = 1.0f,
-                        int colorCount = 256)
+                        int colorCount = Palettes.Resolution)
         {
             if (name == null)
             {
                 throw new ArgumentException("Palette name should not be null!");
             }
 
-            if (colorCount <= 0)
+            if (colorCount <= 1 || colorCount > Palettes.Resolution)
             {
-                throw new ArgumentException("Number of colors should be positive!");
+                throw new ArgumentException(string.Format(
+                    "Number of colors should be in range [2, {0}]!", Palettes.Resolution));
             }
 
             if (lower >= upper)
@@ -77,6 +85,7 @@ namespace SciColorMaps
             _lower = lower;
             _upper = upper;
             _step = (_upper - _lower) / _colorCount;
+            _colorStep = Palettes.Resolution / _colorCount;
 
             // setting palette by name:
 
@@ -103,10 +112,21 @@ namespace SciColorMaps
         {
             get
             {
-                value = (value > _upper) ? _upper : value;
-                value = (value < _lower) ? _lower : value;
+                if (value <= _lower)
+                {
+                    return _palette[0];
+                }
 
-                var idx = (int)Math.Min(_colorCount - 1, (value - _lower) / _step);
+                if (value >= _upper)
+                {
+                    return _palette[Palettes.Resolution - 1];
+                }
+
+                // get the closest color with current resolution
+                value -= (value % _colorStep);
+
+                // get the index of this color in palette
+                int idx = (int)((value - _lower) / _step * _colorStep);
 
                 return _palette[idx];
             }
@@ -135,8 +155,5 @@ namespace SciColorMaps
 
             return GetColor(value);
         }
-
-        // TODO: 
-        // add static methods for transforming byte[] to Color and vice versa
     }
 }

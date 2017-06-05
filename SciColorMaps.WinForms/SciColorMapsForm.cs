@@ -8,7 +8,7 @@ namespace SciColorMaps.WinForms
 {
     public partial class SciColorMapsForm : Form
     {
-        private const int ColorCount = 256;
+        private int _colorCount = Palettes.Resolution;
 
         private ColorMap _cmap;
 
@@ -17,89 +17,7 @@ namespace SciColorMaps.WinForms
             InitializeComponent();
         }
 
-        private double FancySurface(double x, double y)
-        {
-            x /= 60;
-            y /= 90;
-
-            double z = x * x + y * y;
-            return 70 * Math.Exp(-z) * Math.Sin(2 * Math.PI * x * y);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        private double HyperbolicParaboloid(double x, double y)
-        {
-            float a = 6, b = 5, p = 2;
-
-            return ((x * x) / (a * a) - (y * y) / (b * b)) / (2 * p);
-        }
-
-        private void CreateColorMap(Func<double, double, double> function)
-        {
-            float min = float.MaxValue;
-            float max = float.MinValue;
-            
-            for (int x = -100; x < 100; x++)
-            {
-                for (int y = -70; y < 70; y++)
-                {
-                    float z = (float)function(x, y);
-
-                    if (z > max)
-                    {
-                        max = z;
-                    }
-                    if (z < min)
-                    {
-                        min = z;
-                    }
-                }
-            }
-
-            _cmap = new ColorMap(_colorMapsList.Text, min, max, ColorCount);
-        }
-
-        private void ShowColormap()
-        {
-            LinearGradientBrush brush = new LinearGradientBrush(
-                _colorMapPanel.ClientRectangle, Color.White, Color.White, 0, false);
-
-            var blend = new ColorBlend();
-            //
-            blend.Positions = Enumerable.Range(0, ColorCount + 1)
-                                        .Select(pos => (float)pos / ColorCount)
-                                        .ToArray();
-            //
-            blend.Colors = Enumerable.Range(0, ColorCount + 1)
-                                     .Select(i => _cmap.GetColorByNumber(i))
-                                     .ToArray();
-            //
-            brush.InterpolationColors = blend;
-
-            _colorMapPanel.CreateGraphics()
-                          .FillRectangle(brush, _colorMapPanel.ClientRectangle);
-        }
-        
-        private void ShowSurface(Func<double, double, double> function)
-        {
-            var bmp = new Bitmap(200, 140);
-            
-            for (int x = -100; x < 100; x++)
-            {
-                for (int y = -70; y < 70; y++)
-                {
-                    float z = (float)function(x, y);
-                    bmp.SetPixel(x+100, y+70, _cmap.GetColor(z));
-                }
-            }
-
-            _surfacePanel.BackgroundImage = bmp;
-        }
+        #region rotation functions
 
         private float[] RotateX(float x, float y, float z, float theta)
         {
@@ -138,6 +56,70 @@ namespace SciColorMaps.WinForms
             coord[2] = z;
 
             return coord;
+        }
+
+        #endregion
+
+        private void CreateColorMap(Func<double, double, double> function)
+        {
+            float min = float.MaxValue;
+            float max = float.MinValue;
+            
+            for (int x = -100; x < 100; x++)
+            {
+                for (int y = -70; y < 70; y++)
+                {
+                    float z = (float)function(x, y);
+
+                    if (z > max)
+                    {
+                        max = z;
+                    }
+                    if (z < min)
+                    {
+                        min = z;
+                    }
+                }
+            }
+
+            _cmap = new ColorMap(_colorMapsList.Text, min, max, _colorCount);
+        }
+
+        private void ShowColormap()
+        {
+            LinearGradientBrush brush = new LinearGradientBrush(
+                _colorMapPanel.ClientRectangle, Color.White, Color.White, 0, false);
+
+            var blend = new ColorBlend();
+            
+            blend.Positions = Enumerable.Range(0, _colorCount + 1)
+                                        .Select(pos => (float)pos / _colorCount)
+                                        .ToArray();
+            
+            blend.Colors = Enumerable.Range(0, _colorCount + 1)
+                                     .Select(i => _cmap.GetColorByNumber(i))
+                                     .ToArray();
+            
+            brush.InterpolationColors = blend;
+
+            _colorMapPanel.CreateGraphics()
+                          .FillRectangle(brush, _colorMapPanel.ClientRectangle);
+        }
+        
+        private void ShowSurface2D(Func<double, double, double> function)
+        {
+            var bmp = new Bitmap(200, 140);
+            
+            for (int x = -100; x < 100; x++)
+            {
+                for (int y = -70; y < 70; y++)
+                {
+                    float z = (float)function(x, y);
+                    bmp.SetPixel(x + 100, y + 70, _cmap.GetColor(z));
+                }
+            }
+
+            _surfacePanel.BackgroundImage = bmp;
         }
 
         private void ShowSurface3D(Func<double, double, double> function)
@@ -192,12 +174,26 @@ namespace SciColorMaps.WinForms
 
         private void _buttonShow_Click(object sender, EventArgs e)
         {
-            Func<double, double, double> surface = FancySurface;
+            Func<double, double, double> surface;
+            switch (_surfacesList.SelectedIndex)
+            {
+                case 0:
+                    surface = Surface.HyperbolicParaboloid;
+                    break;
+                case 1:
+                    surface = Surface.EllipticParaboloid;
+                    break;
+                case 2:
+                default:
+                    surface = Surface.FancySurface;
+                    break;
+            }
+
+            _colorCount = (int)_colorCountUpDown.Value;
 
             CreateColorMap(surface);
             ShowColormap();
-
-            ShowSurface(surface);
+            ShowSurface2D(surface);
             ShowSurface3D(surface);
         }
     }
