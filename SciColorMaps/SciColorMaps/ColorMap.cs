@@ -14,7 +14,7 @@ namespace SciColorMaps
         /// <summary>
         /// Color palette is an array of predefined RGB values
         /// </summary>
-        private byte[,] _palette;
+        private byte[][] _palette;
         
         /// <summary>
         /// Number of colors in colormap
@@ -108,14 +108,7 @@ namespace SciColorMaps
 
                 var idx = (int)Math.Min(_colorCount - 1, (value - _lower) / _step);
 
-                var res = new byte[3]
-                {
-                    _palette[idx, 0],   // R
-                    _palette[idx, 1],   // G
-                    _palette[idx, 2]    // B
-                };
-
-                return res;
+                return _palette[idx];
             }
         }
 

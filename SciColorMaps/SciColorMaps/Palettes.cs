@@ -7,6 +7,389 @@ namespace SciColorMaps
     /// </summary>
     public static class Palettes
     {
+        /* =============================== NOTE! =================================
+         * 
+         * Accessing elements in jagged arrays is significantly faster (up to 40%)
+         * compared to rectangular arrays
+         * so the following code is compiled by default.
+         *
+         * If an efficient memory management is of more importance then compile
+         * with the 'RECTANGULAR' conditional symbol.
+         * 
+         * ======================================================================= */ 
+
+#if !RECTANGULAR
+        /// <summary>
+        /// Colormap "afmhot" taken from matplotlib
+        /// </summary>
+        public static readonly byte[][] Afmhot = new byte[][]
+        {
+            new byte[] {  0,   0,   0}, new byte[] {  2,   0,   0}, new byte[] {  4,   0,   0}, new byte[] {  6,   0,   0},
+            new byte[] {  8,   0,   0}, new byte[] { 10,   0,   0}, new byte[] { 12,   0,   0}, new byte[] { 14,   0,   0},
+            new byte[] { 16,   0,   0}, new byte[] { 18,   0,   0}, new byte[] { 20,   0,   0}, new byte[] { 22,   0,   0},
+            new byte[] { 24,   0,   0}, new byte[] { 26,   0,   0}, new byte[] { 28,   0,   0}, new byte[] { 30,   0,   0},
+            new byte[] { 32,   0,   0}, new byte[] { 34,   0,   0}, new byte[] { 36,   0,   0}, new byte[] { 38,   0,   0},
+            new byte[] { 40,   0,   0}, new byte[] { 42,   0,   0}, new byte[] { 44,   0,   0}, new byte[] { 46,   0,   0},
+            new byte[] { 48,   0,   0}, new byte[] { 50,   0,   0}, new byte[] { 52,   0,   0}, new byte[] { 54,   0,   0},
+            new byte[] { 56,   0,   0}, new byte[] { 58,   0,   0}, new byte[] { 60,   0,   0}, new byte[] { 62,   0,   0},
+            new byte[] { 64,   0,   0}, new byte[] { 65,   0,   0}, new byte[] { 68,   0,   0}, new byte[] { 70,   0,   0},
+            new byte[] { 72,   0,   0}, new byte[] { 73,   0,   0}, new byte[] { 76,   0,   0}, new byte[] { 78,   0,   0},
+            new byte[] { 80,   0,   0}, new byte[] { 81,   0,   0}, new byte[] { 84,   0,   0}, new byte[] { 86,   0,   0},
+            new byte[] { 88,   0,   0}, new byte[] { 89,   0,   0}, new byte[] { 92,   0,   0}, new byte[] { 94,   0,   0},
+            new byte[] { 96,   0,   0}, new byte[] { 97,   0,   0}, new byte[] {100,   0,   0}, new byte[] {102,   0,   0},
+            new byte[] {104,   0,   0}, new byte[] {105,   0,   0}, new byte[] {108,   0,   0}, new byte[] {110,   0,   0},
+            new byte[] {112,   0,   0}, new byte[] {113,   0,   0}, new byte[] {116,   0,   0}, new byte[] {118,   0,   0},
+            new byte[] {120,   0,   0}, new byte[] {121,   0,   0}, new byte[] {124,   0,   0}, new byte[] {126,   0,   0},
+            new byte[] {128,   0,   0}, new byte[] {130,   2,   0}, new byte[] {131,   4,   0}, new byte[] {134,   6,   0},
+            new byte[] {136,   8,   0}, new byte[] {138,  10,   0}, new byte[] {140,  12,   0}, new byte[] {142,  14,   0},
+            new byte[] {144,  16,   0}, new byte[] {146,  18,   0}, new byte[] {147,  20,   0}, new byte[] {150,  22,   0},
+            new byte[] {152,  24,   0}, new byte[] {154,  26,   0}, new byte[] {156,  28,   0}, new byte[] {158,  30,   0},
+            new byte[] {160,  32,   0}, new byte[] {162,  34,   0}, new byte[] {163,  36,   0}, new byte[] {166,  38,   0},
+            new byte[] {168,  40,   0}, new byte[] {170,  42,   0}, new byte[] {172,  44,   0}, new byte[] {174,  46,   0},
+            new byte[] {176,  48,   0}, new byte[] {178,  50,   0}, new byte[] {179,  52,   0}, new byte[] {182,  54,   0},
+            new byte[] {184,  56,   0}, new byte[] {186,  58,   0}, new byte[] {188,  60,   0}, new byte[] {190,  62,   0},
+            new byte[] {192,  64,   0}, new byte[] {194,  66,   0}, new byte[] {195,  68,   0}, new byte[] {198,  70,   0},
+            new byte[] {200,  72,   0}, new byte[] {202,  74,   0}, new byte[] {204,  76,   0}, new byte[] {206,  78,   0},
+            new byte[] {208,  80,   0}, new byte[] {210,  82,   0}, new byte[] {211,  84,   0}, new byte[] {214,  86,   0},
+            new byte[] {216,  88,   0}, new byte[] {218,  90,   0}, new byte[] {220,  92,   0}, new byte[] {222,  94,   0},
+            new byte[] {224,  96,   0}, new byte[] {226,  98,   0}, new byte[] {227, 100,   0}, new byte[] {230, 102,   0},
+            new byte[] {232, 104,   0}, new byte[] {234, 106,   0}, new byte[] {236, 108,   0}, new byte[] {238, 110,   0},
+            new byte[] {240, 112,   0}, new byte[] {242, 114,   0}, new byte[] {243, 116,   0}, new byte[] {246, 118,   0},
+            new byte[] {248, 120,   0}, new byte[] {250, 122,   0}, new byte[] {252, 124,   0}, new byte[] {254, 126,   0},
+            new byte[] {255, 128,   0}, new byte[] {255, 130,   2}, new byte[] {255, 132,   4}, new byte[] {255, 134,   6},
+            new byte[] {255, 136,   8}, new byte[] {255, 138,  11}, new byte[] {255, 140,  13}, new byte[] {255, 142,  15},
+            new byte[] {255, 144,  16}, new byte[] {255, 146,  18}, new byte[] {255, 148,  20}, new byte[] {255, 150,  22},
+            new byte[] {255, 152,  25}, new byte[] {255, 154,  27}, new byte[] {255, 156,  29}, new byte[] {255, 158,  31},
+            new byte[] {255, 160,  32}, new byte[] {255, 162,  34}, new byte[] {255, 164,  36}, new byte[] {255, 166,  38},
+            new byte[] {255, 168,  40}, new byte[] {255, 170,  43}, new byte[] {255, 172,  45}, new byte[] {255, 174,  47},
+            new byte[] {255, 176,  48}, new byte[] {255, 178,  50}, new byte[] {255, 180,  52}, new byte[] {255, 182,  54},
+            new byte[] {255, 184,  57}, new byte[] {255, 186,  59}, new byte[] {255, 188,  61}, new byte[] {255, 190,  63},
+            new byte[] {255, 192,  65}, new byte[] {255, 194,  66}, new byte[] {255, 196,  68}, new byte[] {255, 198,  70},
+            new byte[] {255, 200,  72}, new byte[] {255, 202,  75}, new byte[] {255, 204,  77}, new byte[] {255, 206,  79},
+            new byte[] {255, 208,  81}, new byte[] {255, 210,  82}, new byte[] {255, 212,  84}, new byte[] {255, 214,  86},
+            new byte[] {255, 216,  89}, new byte[] {255, 218,  91}, new byte[] {255, 220,  93}, new byte[] {255, 222,  95},
+            new byte[] {255, 224,  97}, new byte[] {255, 226,  98}, new byte[] {255, 228, 100}, new byte[] {255, 230, 102},
+            new byte[] {255, 232, 104}, new byte[] {255, 234, 107}, new byte[] {255, 236, 109}, new byte[] {255, 238, 111},
+            new byte[] {255, 240, 113}, new byte[] {255, 242, 114}, new byte[] {255, 244, 116}, new byte[] {255, 246, 118},
+            new byte[] {255, 248, 121}, new byte[] {255, 250, 123}, new byte[] {255, 252, 125}, new byte[] {255, 254, 127},
+            new byte[] {255, 255, 129}, new byte[] {255, 255, 131}, new byte[] {255, 255, 132}, new byte[] {255, 255, 134},
+            new byte[] {255, 255, 136}, new byte[] {255, 255, 139}, new byte[] {255, 255, 141}, new byte[] {255, 255, 143},
+            new byte[] {255, 255, 145}, new byte[] {255, 255, 147}, new byte[] {255, 255, 148}, new byte[] {255, 255, 150},
+            new byte[] {255, 255, 153}, new byte[] {255, 255, 155}, new byte[] {255, 255, 157}, new byte[] {255, 255, 159},
+            new byte[] {255, 255, 161}, new byte[] {255, 255, 163}, new byte[] {255, 255, 164}, new byte[] {255, 255, 166},
+            new byte[] {255, 255, 168}, new byte[] {255, 255, 171}, new byte[] {255, 255, 173}, new byte[] {255, 255, 175},
+            new byte[] {255, 255, 177}, new byte[] {255, 255, 179}, new byte[] {255, 255, 180}, new byte[] {255, 255, 182},
+            new byte[] {255, 255, 185}, new byte[] {255, 255, 187}, new byte[] {255, 255, 189}, new byte[] {255, 255, 191},
+            new byte[] {255, 255, 193}, new byte[] {255, 255, 195}, new byte[] {255, 255, 196}, new byte[] {255, 255, 198},
+            new byte[] {255, 255, 200}, new byte[] {255, 255, 203}, new byte[] {255, 255, 205}, new byte[] {255, 255, 207},
+            new byte[] {255, 255, 209}, new byte[] {255, 255, 211}, new byte[] {255, 255, 212}, new byte[] {255, 255, 214},
+            new byte[] {255, 255, 217}, new byte[] {255, 255, 219}, new byte[] {255, 255, 221}, new byte[] {255, 255, 223},
+            new byte[] {255, 255, 225}, new byte[] {255, 255, 227}, new byte[] {255, 255, 228}, new byte[] {255, 255, 230},
+            new byte[] {255, 255, 232}, new byte[] {255, 255, 235}, new byte[] {255, 255, 237}, new byte[] {255, 255, 239},
+            new byte[] {255, 255, 241}, new byte[] {255, 255, 243}, new byte[] {255, 255, 244}, new byte[] {255, 255, 246},
+            new byte[] {255, 255, 249}, new byte[] {255, 255, 251}, new byte[] {255, 255, 253}, new byte[] {255, 255, 255}
+        };
+
+        /// <summary>
+        /// Colormap "gist_earth" taken from matplotlib
+        /// </summary>
+        public static readonly byte[][] GistEarth = new byte[][]
+        {
+            new byte[] {  0,   0,   0}, new byte[] {  0,   0,  43}, new byte[] {  1,   0,  56}, new byte[] {  1,   0,  67},
+            new byte[] {  2,   0,  78}, new byte[] {  3,   0,  88}, new byte[] {  3,   0,  99}, new byte[] {  4,   0, 110},
+            new byte[] {  5,   2, 115}, new byte[] {  5,   4, 116}, new byte[] {  6,   6, 116}, new byte[] {  7,   9, 116},
+            new byte[] {  7,  11, 116}, new byte[] {  8,  13, 116}, new byte[] {  9,  16, 117}, new byte[] {  9,  18, 117},
+            new byte[] { 10,  20, 117}, new byte[] { 11,  22, 117}, new byte[] { 11,  25, 117}, new byte[] { 12,  27, 117},
+            new byte[] { 13,  29, 118}, new byte[] { 13,  32, 118}, new byte[] { 14,  34, 118}, new byte[] { 15,  36, 118},
+            new byte[] { 15,  39, 118}, new byte[] { 16,  41, 119}, new byte[] { 17,  43, 119}, new byte[] { 17,  45, 119},
+            new byte[] { 18,  48, 119}, new byte[] { 19,  50, 119}, new byte[] { 19,  52, 119}, new byte[] { 20,  54, 120},
+            new byte[] { 21,  56, 120}, new byte[] { 21,  58, 120}, new byte[] { 22,  60, 120}, new byte[] { 23,  62, 120},
+            new byte[] { 23,  64, 121}, new byte[] { 24,  66, 121}, new byte[] { 25,  69, 121}, new byte[] { 25,  71, 121},
+            new byte[] { 26,  73, 121}, new byte[] { 27,  75, 121}, new byte[] { 27,  77, 122}, new byte[] { 28,  79, 122},
+            new byte[] { 29,  81, 122}, new byte[] { 29,  83, 122}, new byte[] { 30,  84, 122}, new byte[] { 31,  86, 123},
+            new byte[] { 31,  88, 123}, new byte[] { 32,  90, 123}, new byte[] { 33,  92, 123}, new byte[] { 33,  94, 123},
+            new byte[] { 34,  96, 123}, new byte[] { 35,  97, 124}, new byte[] { 35,  99, 124}, new byte[] { 36, 101, 124},
+            new byte[] { 37, 102, 124}, new byte[] { 37, 104, 124}, new byte[] { 38, 105, 125}, new byte[] { 39, 107, 125},
+            new byte[] { 39, 109, 125}, new byte[] { 40, 110, 125}, new byte[] { 41, 112, 125}, new byte[] { 41, 113, 125},
+            new byte[] { 42, 115, 126}, new byte[] { 43, 116, 126}, new byte[] { 43, 118, 126}, new byte[] { 44, 120, 126},
+            new byte[] { 45, 121, 126}, new byte[] { 45, 123, 127}, new byte[] { 46, 124, 127}, new byte[] { 47, 126, 127},
+            new byte[] { 47, 127, 127}, new byte[] { 48, 128, 126}, new byte[] { 48, 129, 125}, new byte[] { 49, 129, 123},
+            new byte[] { 49, 130, 122}, new byte[] { 50, 130, 121}, new byte[] { 50, 131, 120}, new byte[] { 51, 132, 119},
+            new byte[] { 51, 132, 117}, new byte[] { 52, 133, 116}, new byte[] { 52, 133, 115}, new byte[] { 53, 134, 114},
+            new byte[] { 53, 134, 112}, new byte[] { 54, 135, 111}, new byte[] { 54, 136, 110}, new byte[] { 55, 136, 109},
+            new byte[] { 55, 137, 108}, new byte[] { 56, 137, 106}, new byte[] { 56, 138, 105}, new byte[] { 56, 138, 104},
+            new byte[] { 57, 139, 103}, new byte[] { 57, 140, 101}, new byte[] { 58, 140, 100}, new byte[] { 58, 141,  99},
+            new byte[] { 59, 141,  98}, new byte[] { 59, 142,  97}, new byte[] { 60, 142,  95}, new byte[] { 60, 143,  94},
+            new byte[] { 61, 144,  93}, new byte[] { 61, 144,  92}, new byte[] { 62, 145,  90}, new byte[] { 62, 145,  89},
+            new byte[] { 63, 146,  88}, new byte[] { 63, 147,  87}, new byte[] { 64, 147,  85}, new byte[] { 64, 148,  84},
+            new byte[] { 64, 148,  83}, new byte[] { 65, 149,  82}, new byte[] { 65, 149,  81}, new byte[] { 66, 150,  79},
+            new byte[] { 66, 151,  78}, new byte[] { 67, 151,  77}, new byte[] { 67, 152,  76}, new byte[] { 68, 152,  74},
+            new byte[] { 68, 153,  73}, new byte[] { 69, 153,  72}, new byte[] { 71, 154,  71}, new byte[] { 73, 155,  70},
+            new byte[] { 75, 155,  70}, new byte[] { 78, 156,  71}, new byte[] { 80, 156,  71}, new byte[] { 82, 157,  72},
+            new byte[] { 84, 157,  72}, new byte[] { 87, 158,  73}, new byte[] { 89, 159,  74}, new byte[] { 91, 159,  74},
+            new byte[] { 93, 160,  75}, new byte[] { 95, 160,  75}, new byte[] { 98, 161,  76}, new byte[] {100, 161,  77},
+            new byte[] {102, 162,  77}, new byte[] {104, 163,  78}, new byte[] {107, 163,  78}, new byte[] {109, 163,  79},
+            new byte[] {111, 164,  79}, new byte[] {113, 164,  80}, new byte[] {115, 165,  81}, new byte[] {118, 165,  81},
+            new byte[] {120, 166,  82}, new byte[] {121, 166,  82}, new byte[] {123, 167,  82}, new byte[] {125, 167,  82},
+            new byte[] {126, 167,  83}, new byte[] {128, 168,  83}, new byte[] {130, 168,  83}, new byte[] {131, 169,  84},
+            new byte[] {133, 169,  84}, new byte[] {135, 170,  84}, new byte[] {136, 170,  85}, new byte[] {138, 171,  85},
+            new byte[] {140, 171,  85}, new byte[] {141, 171,  86}, new byte[] {143, 172,  86}, new byte[] {145, 172,  86},
+            new byte[] {146, 173,  87}, new byte[] {148, 173,  87}, new byte[] {150, 174,  87}, new byte[] {151, 174,  88},
+            new byte[] {153, 174,  88}, new byte[] {154, 175,  88}, new byte[] {156, 175,  88}, new byte[] {158, 176,  89},
+            new byte[] {159, 176,  89}, new byte[] {161, 177,  89}, new byte[] {163, 177,  90}, new byte[] {164, 178,  90},
+            new byte[] {166, 178,  90}, new byte[] {168, 178,  91}, new byte[] {169, 179,  91}, new byte[] {171, 179,  91},
+            new byte[] {173, 180,  92}, new byte[] {174, 180,  92}, new byte[] {176, 181,  92}, new byte[] {178, 181,  93},
+            new byte[] {179, 181,  93}, new byte[] {181, 182,  93}, new byte[] {182, 182,  94}, new byte[] {183, 181,  94},
+            new byte[] {183, 181,  94}, new byte[] {184, 180,  95}, new byte[] {184, 179,  95}, new byte[] {185, 178,  95},
+            new byte[] {185, 177,  95}, new byte[] {185, 176,  96}, new byte[] {186, 175,  96}, new byte[] {186, 175,  96},
+            new byte[] {187, 174,  97}, new byte[] {187, 173,  97}, new byte[] {188, 172,  97}, new byte[] {188, 171,  98},
+            new byte[] {188, 170,  98}, new byte[] {189, 169,  98}, new byte[] {189, 169,  99}, new byte[] {190, 168,  99},
+            new byte[] {190, 167,  99}, new byte[] {190, 166, 100}, new byte[] {191, 165, 100}, new byte[] {191, 164, 100},
+            new byte[] {192, 163, 101}, new byte[] {192, 163, 103}, new byte[] {193, 163, 105}, new byte[] {194, 163, 108},
+            new byte[] {195, 164, 110}, new byte[] {197, 164, 113}, new byte[] {198, 165, 115}, new byte[] {199, 166, 118},
+            new byte[] {200, 166, 120}, new byte[] {201, 167, 123}, new byte[] {202, 168, 125}, new byte[] {203, 169, 127},
+            new byte[] {204, 170, 130}, new byte[] {206, 171, 132}, new byte[] {207, 172, 135}, new byte[] {208, 173, 137},
+            new byte[] {209, 173, 140}, new byte[] {210, 174, 142}, new byte[] {211, 175, 145}, new byte[] {212, 176, 147},
+            new byte[] {213, 177, 150}, new byte[] {214, 178, 152}, new byte[] {216, 179, 154}, new byte[] {217, 181, 157},
+            new byte[] {218, 182, 159}, new byte[] {219, 183, 162}, new byte[] {220, 185, 164}, new byte[] {221, 186, 167},
+            new byte[] {222, 188, 169}, new byte[] {223, 189, 172}, new byte[] {225, 191, 175}, new byte[] {226, 193, 178},
+            new byte[] {227, 195, 181}, new byte[] {228, 197, 184}, new byte[] {229, 199, 187}, new byte[] {230, 201, 190},
+            new byte[] {231, 203, 193}, new byte[] {232, 205, 196}, new byte[] {233, 207, 199}, new byte[] {235, 209, 202},
+            new byte[] {236, 211, 205}, new byte[] {237, 213, 208}, new byte[] {238, 215, 211}, new byte[] {239, 217, 214},
+            new byte[] {240, 220, 217}, new byte[] {241, 222, 220}, new byte[] {242, 224, 223}, new byte[] {244, 227, 226},
+            new byte[] {245, 230, 229}, new byte[] {246, 233, 232}, new byte[] {247, 236, 235}, new byte[] {248, 239, 238},
+            new byte[] {249, 242, 241}, new byte[] {250, 245, 244}, new byte[] {251, 248, 247}, new byte[] {253, 250, 250}
+        };
+
+        /// <summary>
+        /// Colormap "inferno" taken from matplotlib
+        /// </summary>
+        public static readonly byte[][] Inferno = new byte[][]
+        {
+            new byte[] {  0,   0,   3}, new byte[] {  0,   0,   4}, new byte[] {  0,   0,   6}, new byte[] {  1,   0,   7},
+            new byte[] {  1,   1,   9}, new byte[] {  1,   1,  11}, new byte[] {  2,   1,  14}, new byte[] {  2,   2,  16},
+            new byte[] {  3,   2,  18}, new byte[] {  4,   3,  20}, new byte[] {  4,   3,  22}, new byte[] {  5,   4,  24},
+            new byte[] {  6,   4,  27}, new byte[] {  7,   5,  29}, new byte[] {  8,   6,  31}, new byte[] {  9,   6,  33},
+            new byte[] { 10,   7,  35}, new byte[] { 11,   7,  38}, new byte[] { 13,   8,  40}, new byte[] { 14,   8,  42},
+            new byte[] { 15,   9,  45}, new byte[] { 16,   9,  47}, new byte[] { 18,  10,  50}, new byte[] { 19,  10,  52},
+            new byte[] { 20,  11,  54}, new byte[] { 22,  11,  57}, new byte[] { 23,  11,  59}, new byte[] { 25,  11,  62},
+            new byte[] { 26,  11,  64}, new byte[] { 28,  12,  67}, new byte[] { 29,  12,  69}, new byte[] { 31,  12,  71},
+            new byte[] { 32,  12,  74}, new byte[] { 34,  11,  76}, new byte[] { 36,  11,  78}, new byte[] { 38,  11,  80},
+            new byte[] { 39,  11,  82}, new byte[] { 41,  11,  84}, new byte[] { 43,  10,  86}, new byte[] { 45,  10,  88},
+            new byte[] { 46,  10,  90}, new byte[] { 48,  10,  92}, new byte[] { 50,   9,  93}, new byte[] { 52,   9,  95},
+            new byte[] { 53,   9,  96}, new byte[] { 55,   9,  97}, new byte[] { 57,   9,  98}, new byte[] { 59,   9, 100},
+            new byte[] { 60,   9, 101}, new byte[] { 62,   9, 102}, new byte[] { 64,   9, 102}, new byte[] { 65,   9, 103},
+            new byte[] { 67,  10, 104}, new byte[] { 69,  10, 105}, new byte[] { 70,  10, 105}, new byte[] { 72,  11, 106},
+            new byte[] { 74,  11, 106}, new byte[] { 75,  12, 107}, new byte[] { 77,  12, 107}, new byte[] { 79,  13, 108},
+            new byte[] { 80,  13, 108}, new byte[] { 82,  14, 108}, new byte[] { 83,  14, 109}, new byte[] { 85,  15, 109},
+            new byte[] { 87,  15, 109}, new byte[] { 88,  16, 109}, new byte[] { 90,  17, 109}, new byte[] { 91,  17, 110},
+            new byte[] { 93,  18, 110}, new byte[] { 95,  18, 110}, new byte[] { 96,  19, 110}, new byte[] { 98,  20, 110},
+            new byte[] { 99,  20, 110}, new byte[] {101,  21, 110}, new byte[] {102,  21, 110}, new byte[] {104,  22, 110},
+            new byte[] {106,  23, 110}, new byte[] {107,  23, 110}, new byte[] {109,  24, 110}, new byte[] {110,  24, 110},
+            new byte[] {112,  25, 110}, new byte[] {114,  25, 109}, new byte[] {115,  26, 109}, new byte[] {117,  27, 109},
+            new byte[] {118,  27, 109}, new byte[] {120,  28, 109}, new byte[] {122,  28, 109}, new byte[] {123,  29, 108},
+            new byte[] {125,  29, 108}, new byte[] {126,  30, 108}, new byte[] {128,  31, 107}, new byte[] {129,  31, 107},
+            new byte[] {131,  32, 107}, new byte[] {133,  32, 106}, new byte[] {134,  33, 106}, new byte[] {136,  33, 106},
+            new byte[] {137,  34, 105}, new byte[] {139,  34, 105}, new byte[] {141,  35, 105}, new byte[] {142,  36, 104},
+            new byte[] {144,  36, 104}, new byte[] {145,  37, 103}, new byte[] {147,  37, 103}, new byte[] {149,  38, 102},
+            new byte[] {150,  38, 102}, new byte[] {152,  39, 101}, new byte[] {153,  40, 100}, new byte[] {155,  40, 100},
+            new byte[] {156,  41,  99}, new byte[] {158,  41,  99}, new byte[] {160,  42,  98}, new byte[] {161,  43,  97},
+            new byte[] {163,  43,  97}, new byte[] {164,  44,  96}, new byte[] {166,  44,  95}, new byte[] {167,  45,  95},
+            new byte[] {169,  46,  94}, new byte[] {171,  46,  93}, new byte[] {172,  47,  92}, new byte[] {174,  48,  91},
+            new byte[] {175,  49,  91}, new byte[] {177,  49,  90}, new byte[] {178,  50,  89}, new byte[] {180,  51,  88},
+            new byte[] {181,  51,  87}, new byte[] {183,  52,  86}, new byte[] {184,  53,  86}, new byte[] {186,  54,  85},
+            new byte[] {187,  55,  84}, new byte[] {189,  55,  83}, new byte[] {190,  56,  82}, new byte[] {191,  57,  81},
+            new byte[] {193,  58,  80}, new byte[] {194,  59,  79}, new byte[] {196,  60,  78}, new byte[] {197,  61,  77},
+            new byte[] {199,  62,  76}, new byte[] {200,  62,  75}, new byte[] {201,  63,  74}, new byte[] {203,  64,  73},
+            new byte[] {204,  65,  72}, new byte[] {205,  66,  71}, new byte[] {207,  68,  70}, new byte[] {208,  69,  68},
+            new byte[] {209,  70,  67}, new byte[] {210,  71,  66}, new byte[] {212,  72,  65}, new byte[] {213,  73,  64},
+            new byte[] {214,  74,  63}, new byte[] {215,  75,  62}, new byte[] {217,  77,  61}, new byte[] {218,  78,  59},
+            new byte[] {219,  79,  58}, new byte[] {220,  80,  57}, new byte[] {221,  82,  56}, new byte[] {222,  83,  55},
+            new byte[] {223,  84,  54}, new byte[] {224,  86,  52}, new byte[] {226,  87,  51}, new byte[] {227,  88,  50},
+            new byte[] {228,  90,  49}, new byte[] {229,  91,  48}, new byte[] {230,  92,  46}, new byte[] {230,  94,  45},
+            new byte[] {231,  95,  44}, new byte[] {232,  97,  43}, new byte[] {233,  98,  42}, new byte[] {234, 100,  40},
+            new byte[] {235, 101,  39}, new byte[] {236, 103,  38}, new byte[] {237, 104,  37}, new byte[] {237, 106,  35},
+            new byte[] {238, 108,  34}, new byte[] {239, 109,  33}, new byte[] {240, 111,  31}, new byte[] {240, 112,  30},
+            new byte[] {241, 114,  29}, new byte[] {242, 116,  28}, new byte[] {242, 117,  26}, new byte[] {243, 119,  25},
+            new byte[] {243, 121,  24}, new byte[] {244, 122,  22}, new byte[] {245, 124,  21}, new byte[] {245, 126,  20},
+            new byte[] {246, 128,  18}, new byte[] {246, 129,  17}, new byte[] {247, 131,  16}, new byte[] {247, 133,  14},
+            new byte[] {248, 135,  13}, new byte[] {248, 136,  12}, new byte[] {248, 138,  11}, new byte[] {249, 140,   9},
+            new byte[] {249, 142,   8}, new byte[] {249, 144,   8}, new byte[] {250, 145,   7}, new byte[] {250, 147,   6},
+            new byte[] {250, 149,   6}, new byte[] {250, 151,   6}, new byte[] {251, 153,   6}, new byte[] {251, 155,   6},
+            new byte[] {251, 157,   6}, new byte[] {251, 158,   7}, new byte[] {251, 160,   7}, new byte[] {251, 162,   8},
+            new byte[] {251, 164,  10}, new byte[] {251, 166,  11}, new byte[] {251, 168,  13}, new byte[] {251, 170,  14},
+            new byte[] {251, 172,  16}, new byte[] {251, 174,  18}, new byte[] {251, 176,  20}, new byte[] {251, 177,  22},
+            new byte[] {251, 179,  24}, new byte[] {251, 181,  26}, new byte[] {251, 183,  28}, new byte[] {251, 185,  30},
+            new byte[] {250, 187,  33}, new byte[] {250, 189,  35}, new byte[] {250, 191,  37}, new byte[] {250, 193,  40},
+            new byte[] {249, 195,  42}, new byte[] {249, 197,  44}, new byte[] {249, 199,  47}, new byte[] {248, 201,  49},
+            new byte[] {248, 203,  52}, new byte[] {248, 205,  55}, new byte[] {247, 207,  58}, new byte[] {247, 209,  60},
+            new byte[] {246, 211,  63}, new byte[] {246, 213,  66}, new byte[] {245, 215,  69}, new byte[] {245, 217,  72},
+            new byte[] {244, 219,  75}, new byte[] {244, 220,  79}, new byte[] {243, 222,  82}, new byte[] {243, 224,  86},
+            new byte[] {243, 226,  89}, new byte[] {242, 228,  93}, new byte[] {242, 230,  96}, new byte[] {241, 232, 100},
+            new byte[] {241, 233, 104}, new byte[] {241, 235, 108}, new byte[] {241, 237, 112}, new byte[] {241, 238, 116},
+            new byte[] {241, 240, 121}, new byte[] {241, 242, 125}, new byte[] {242, 243, 129}, new byte[] {242, 244, 133},
+            new byte[] {243, 246, 137}, new byte[] {244, 247, 141}, new byte[] {245, 248, 145}, new byte[] {246, 250, 149},
+            new byte[] {247, 251, 153}, new byte[] {249, 252, 157}, new byte[] {250, 253, 160}, new byte[] {252, 254, 164}
+        };
+
+        /// <summary>
+        /// Colormap "terrain" taken from matplotlib
+        /// </summary>
+        public static readonly byte[][] Terrain = new byte[][]
+        {
+            new byte[] { 51,  51, 153}, new byte[] { 49,  53, 155}, new byte[] { 48,  56, 158}, new byte[] { 47,  59, 161},
+            new byte[] { 45,  61, 163}, new byte[] { 44,  64, 166}, new byte[] { 43,  67, 169}, new byte[] { 41,  69, 171},
+            new byte[] { 40,  72, 174}, new byte[] { 39,  75, 177}, new byte[] { 37,  77, 179}, new byte[] { 36,  80, 182},
+            new byte[] { 35,  83, 185}, new byte[] { 33,  85, 187}, new byte[] { 32,  88, 190}, new byte[] { 31,  91, 193},
+            new byte[] { 29,  93, 195}, new byte[] { 28,  96, 198}, new byte[] { 27,  98, 201}, new byte[] { 25, 101, 203},
+            new byte[] { 24, 104, 206}, new byte[] { 23, 107, 209}, new byte[] { 21, 109, 211}, new byte[] { 20, 112, 214},
+            new byte[] { 19, 115, 217}, new byte[] { 17, 117, 219}, new byte[] { 16, 120, 222}, new byte[] { 14, 123, 225},
+            new byte[] { 13, 125, 227}, new byte[] { 12, 128, 230}, new byte[] { 11, 131, 233}, new byte[] {  9, 133, 235},
+            new byte[] {  8, 136, 238}, new byte[] {  7, 138, 241}, new byte[] {  5, 141, 243}, new byte[] {  4, 144, 246},
+            new byte[] {  3, 147, 249}, new byte[] {  1, 149, 251}, new byte[] {  0, 152, 254}, new byte[] {  0, 154, 250},
+            new byte[] {  0, 156, 244}, new byte[] {  0, 158, 238}, new byte[] {  0, 160, 232}, new byte[] {  0, 162, 226},
+            new byte[] {  0, 164, 220}, new byte[] {  0, 166, 214}, new byte[] {  0, 168, 208}, new byte[] {  0, 170, 202},
+            new byte[] {  0, 172, 196}, new byte[] {  0, 174, 190}, new byte[] {  0, 176, 184}, new byte[] {  0, 178, 178},
+            new byte[] {  0, 180, 172}, new byte[] {  0, 182, 166}, new byte[] {  0, 184, 160}, new byte[] {  0, 186, 154},
+            new byte[] {  0, 188, 148}, new byte[] {  0, 190, 142}, new byte[] {  0, 192, 136}, new byte[] {  0, 194, 130},
+            new byte[] {  0, 196, 124}, new byte[] {  0, 198, 118}, new byte[] {  0, 200, 112}, new byte[] {  0, 202, 106},
+            new byte[] {  1, 204, 102}, new byte[] {  5, 205, 103}, new byte[] {  8, 205, 103}, new byte[] { 13, 206, 104},
+            new byte[] { 17, 207, 105}, new byte[] { 21, 208, 106}, new byte[] { 25, 209, 107}, new byte[] { 29, 209, 107},
+            new byte[] { 33, 210, 108}, new byte[] { 37, 211, 109}, new byte[] { 40, 212, 110}, new byte[] { 45, 213, 111},
+            new byte[] { 49, 213, 111}, new byte[] { 53, 214, 112}, new byte[] { 57, 215, 113}, new byte[] { 61, 216, 114},
+            new byte[] { 65, 217, 115}, new byte[] { 69, 217, 115}, new byte[] { 72, 218, 116}, new byte[] { 77, 219, 117},
+            new byte[] { 81, 220, 118}, new byte[] { 85, 221, 119}, new byte[] { 89, 221, 119}, new byte[] { 93, 222, 120},
+            new byte[] { 97, 223, 121}, new byte[] {101, 224, 122}, new byte[] {104, 225, 122}, new byte[] {109, 225, 123},
+            new byte[] {113, 226, 124}, new byte[] {117, 227, 125}, new byte[] {121, 228, 126}, new byte[] {125, 229, 127},
+            new byte[] {129, 229, 127}, new byte[] {133, 230, 128}, new byte[] {136, 231, 129}, new byte[] {141, 232, 130},
+            new byte[] {145, 233, 131}, new byte[] {149, 233, 131}, new byte[] {153, 234, 132}, new byte[] {157, 235, 133},
+            new byte[] {161, 236, 134}, new byte[] {165, 237, 135}, new byte[] {168, 237, 135}, new byte[] {173, 238, 136},
+            new byte[] {177, 239, 137}, new byte[] {181, 240, 138}, new byte[] {185, 241, 139}, new byte[] {189, 241, 139},
+            new byte[] {193, 242, 140}, new byte[] {197, 243, 141}, new byte[] {200, 244, 142}, new byte[] {205, 245, 143},
+            new byte[] {209, 245, 143}, new byte[] {213, 246, 144}, new byte[] {217, 247, 145}, new byte[] {221, 248, 146},
+            new byte[] {225, 249, 147}, new byte[] {229, 249, 147}, new byte[] {232, 250, 148}, new byte[] {237, 251, 149},
+            new byte[] {241, 252, 150}, new byte[] {245, 253, 151}, new byte[] {249, 253, 151}, new byte[] {253, 254, 152},
+            new byte[] {254, 253, 152}, new byte[] {252, 251, 151}, new byte[] {250, 248, 150}, new byte[] {248, 246, 149},
+            new byte[] {246, 243, 148}, new byte[] {244, 240, 147}, new byte[] {242, 238, 145}, new byte[] {240, 235, 144},
+            new byte[] {238, 233, 143}, new byte[] {236, 230, 142}, new byte[] {234, 228, 141}, new byte[] {232, 225, 140},
+            new byte[] {230, 223, 139}, new byte[] {228, 220, 138}, new byte[] {226, 217, 137}, new byte[] {224, 215, 136},
+            new byte[] {222, 212, 135}, new byte[] {220, 210, 134}, new byte[] {218, 207, 133}, new byte[] {216, 205, 131},
+            new byte[] {214, 202, 130}, new byte[] {211, 199, 129}, new byte[] {210, 197, 128}, new byte[] {208, 194, 127},
+            new byte[] {206, 192, 126}, new byte[] {204, 189, 125}, new byte[] {202, 187, 124}, new byte[] {200, 184, 123},
+            new byte[] {198, 182, 122}, new byte[] {195, 179, 121}, new byte[] {194, 176, 120}, new byte[] {192, 174, 118},
+            new byte[] {190, 171, 117}, new byte[] {188, 169, 116}, new byte[] {186, 166, 115}, new byte[] {184, 164, 114},
+            new byte[] {182, 161, 113}, new byte[] {179, 159, 112}, new byte[] {178, 156, 111}, new byte[] {176, 153, 110},
+            new byte[] {174, 151, 109}, new byte[] {172, 148, 108}, new byte[] {170, 146, 107}, new byte[] {168, 143, 106},
+            new byte[] {166, 141, 104}, new byte[] {163, 138, 103}, new byte[] {162, 135, 102}, new byte[] {160, 133, 101},
+            new byte[] {158, 130, 100}, new byte[] {156, 128,  99}, new byte[] {154, 125,  98}, new byte[] {152, 123,  97},
+            new byte[] {150, 120,  96}, new byte[] {147, 118,  95}, new byte[] {146, 115,  94}, new byte[] {144, 112,  93},
+            new byte[] {142, 110,  91}, new byte[] {140, 107,  90}, new byte[] {138, 105,  89}, new byte[] {136, 102,  88},
+            new byte[] {134, 100,  87}, new byte[] {131,  97,  86}, new byte[] {130,  95,  85}, new byte[] {128,  92,  84},
+            new byte[] {129,  93,  86}, new byte[] {131,  96,  88}, new byte[] {133,  98,  91}, new byte[] {135, 101,  94},
+            new byte[] {136, 103,  96}, new byte[] {139, 106,  99}, new byte[] {141, 109, 102}, new byte[] {143, 111, 104},
+            new byte[] {145, 114, 107}, new byte[] {147, 116, 110}, new byte[] {149, 119, 112}, new byte[] {151, 121, 115},
+            new byte[] {153, 124, 118}, new byte[] {155, 127, 121}, new byte[] {157, 129, 123}, new byte[] {159, 132, 126},
+            new byte[] {161, 134, 129}, new byte[] {163, 137, 131}, new byte[] {165, 139, 134}, new byte[] {167, 142, 137},
+            new byte[] {168, 144, 139}, new byte[] {171, 147, 142}, new byte[] {173, 150, 145}, new byte[] {175, 152, 147},
+            new byte[] {177, 155, 150}, new byte[] {179, 157, 153}, new byte[] {181, 160, 155}, new byte[] {183, 162, 158},
+            new byte[] {185, 165, 161}, new byte[] {187, 167, 163}, new byte[] {189, 170, 166}, new byte[] {191, 173, 169},
+            new byte[] {193, 175, 171}, new byte[] {195, 178, 174}, new byte[] {196, 180, 177}, new byte[] {199, 183, 179},
+            new byte[] {200, 185, 182}, new byte[] {203, 188, 185}, new byte[] {205, 191, 187}, new byte[] {207, 193, 190},
+            new byte[] {209, 196, 193}, new byte[] {211, 198, 196}, new byte[] {212, 201, 198}, new byte[] {215, 203, 201},
+            new byte[] {217, 206, 204}, new byte[] {219, 208, 206}, new byte[] {221, 211, 209}, new byte[] {223, 214, 212},
+            new byte[] {225, 216, 214}, new byte[] {227, 219, 217}, new byte[] {228, 221, 220}, new byte[] {231, 224, 222},
+            new byte[] {232, 226, 225}, new byte[] {235, 229, 228}, new byte[] {237, 231, 230}, new byte[] {239, 234, 233},
+            new byte[] {241, 237, 236}, new byte[] {243, 239, 238}, new byte[] {244, 242, 241}, new byte[] {247, 244, 244},
+            new byte[] {249, 247, 246}, new byte[] {251, 249, 249}, new byte[] {253, 252, 252}, new byte[] {255, 255, 255}
+        };
+
+        /// <summary>
+        /// Colormap "viridis" taken from matplotlib
+        /// </summary>
+        public static readonly byte[][] Viridis = new byte[][]
+        {
+            new byte[] { 68,   1,  84}, new byte[] { 68,   2,  85}, new byte[] { 68,   3,  87}, new byte[] { 69,   5,  88},
+            new byte[] { 69,   6,  90}, new byte[] { 69,   8,  91}, new byte[] { 70,   9,  92}, new byte[] { 70,  11,  94},
+            new byte[] { 70,  12,  95}, new byte[] { 70,  14,  97}, new byte[] { 71,  15,  98}, new byte[] { 71,  17,  99},
+            new byte[] { 71,  18, 101}, new byte[] { 71,  20, 102}, new byte[] { 71,  21, 103}, new byte[] { 71,  22, 105},
+            new byte[] { 71,  24, 106}, new byte[] { 72,  25, 107}, new byte[] { 72,  26, 108}, new byte[] { 72,  28, 110},
+            new byte[] { 72,  29, 111}, new byte[] { 72,  30, 112}, new byte[] { 72,  32, 113}, new byte[] { 72,  33, 114},
+            new byte[] { 72,  34, 115}, new byte[] { 72,  35, 116}, new byte[] { 71,  37, 117}, new byte[] { 71,  38, 118},
+            new byte[] { 71,  39, 119}, new byte[] { 71,  40, 120}, new byte[] { 71,  42, 121}, new byte[] { 71,  43, 122},
+            new byte[] { 71,  44, 123}, new byte[] { 70,  45, 124}, new byte[] { 70,  47, 124}, new byte[] { 70,  48, 125},
+            new byte[] { 70,  49, 126}, new byte[] { 69,  50, 127}, new byte[] { 69,  52, 127}, new byte[] { 69,  53, 128},
+            new byte[] { 69,  54, 129}, new byte[] { 68,  55, 129}, new byte[] { 68,  57, 130}, new byte[] { 67,  58, 131},
+            new byte[] { 67,  59, 131}, new byte[] { 67,  60, 132}, new byte[] { 66,  61, 132}, new byte[] { 66,  62, 133},
+            new byte[] { 66,  64, 133}, new byte[] { 65,  65, 134}, new byte[] { 65,  66, 134}, new byte[] { 64,  67, 135},
+            new byte[] { 64,  68, 135}, new byte[] { 63,  69, 135}, new byte[] { 63,  71, 136}, new byte[] { 62,  72, 136},
+            new byte[] { 62,  73, 137}, new byte[] { 61,  74, 137}, new byte[] { 61,  75, 137}, new byte[] { 61,  76, 137},
+            new byte[] { 60,  77, 138}, new byte[] { 60,  78, 138}, new byte[] { 59,  80, 138}, new byte[] { 59,  81, 138},
+            new byte[] { 58,  82, 139}, new byte[] { 58,  83, 139}, new byte[] { 57,  84, 139}, new byte[] { 57,  85, 139},
+            new byte[] { 56,  86, 139}, new byte[] { 56,  87, 140}, new byte[] { 55,  88, 140}, new byte[] { 55,  89, 140},
+            new byte[] { 54,  90, 140}, new byte[] { 54,  91, 140}, new byte[] { 53,  92, 140}, new byte[] { 53,  93, 140},
+            new byte[] { 52,  94, 141}, new byte[] { 52,  95, 141}, new byte[] { 51,  96, 141}, new byte[] { 51,  97, 141},
+            new byte[] { 50,  98, 141}, new byte[] { 50,  99, 141}, new byte[] { 49, 100, 141}, new byte[] { 49, 101, 141},
+            new byte[] { 49, 102, 141}, new byte[] { 48, 103, 141}, new byte[] { 48, 104, 141}, new byte[] { 47, 105, 141},
+            new byte[] { 47, 106, 141}, new byte[] { 46, 107, 142}, new byte[] { 46, 108, 142}, new byte[] { 46, 109, 142},
+            new byte[] { 45, 110, 142}, new byte[] { 45, 111, 142}, new byte[] { 44, 112, 142}, new byte[] { 44, 113, 142},
+            new byte[] { 44, 114, 142}, new byte[] { 43, 115, 142}, new byte[] { 43, 116, 142}, new byte[] { 42, 117, 142},
+            new byte[] { 42, 118, 142}, new byte[] { 42, 119, 142}, new byte[] { 41, 120, 142}, new byte[] { 41, 121, 142},
+            new byte[] { 40, 122, 142}, new byte[] { 40, 122, 142}, new byte[] { 40, 123, 142}, new byte[] { 39, 124, 142},
+            new byte[] { 39, 125, 142}, new byte[] { 39, 126, 142}, new byte[] { 38, 127, 142}, new byte[] { 38, 128, 142},
+            new byte[] { 38, 129, 142}, new byte[] { 37, 130, 142}, new byte[] { 37, 131, 141}, new byte[] { 36, 132, 141},
+            new byte[] { 36, 133, 141}, new byte[] { 36, 134, 141}, new byte[] { 35, 135, 141}, new byte[] { 35, 136, 141},
+            new byte[] { 35, 137, 141}, new byte[] { 34, 137, 141}, new byte[] { 34, 138, 141}, new byte[] { 34, 139, 141},
+            new byte[] { 33, 140, 141}, new byte[] { 33, 141, 140}, new byte[] { 33, 142, 140}, new byte[] { 32, 143, 140},
+            new byte[] { 32, 144, 140}, new byte[] { 32, 145, 140}, new byte[] { 31, 146, 140}, new byte[] { 31, 147, 139},
+            new byte[] { 31, 148, 139}, new byte[] { 31, 149, 139}, new byte[] { 31, 150, 139}, new byte[] { 30, 151, 138},
+            new byte[] { 30, 152, 138}, new byte[] { 30, 153, 138}, new byte[] { 30, 153, 138}, new byte[] { 30, 154, 137},
+            new byte[] { 30, 155, 137}, new byte[] { 30, 156, 137}, new byte[] { 30, 157, 136}, new byte[] { 30, 158, 136},
+            new byte[] { 30, 159, 136}, new byte[] { 30, 160, 135}, new byte[] { 31, 161, 135}, new byte[] { 31, 162, 134},
+            new byte[] { 31, 163, 134}, new byte[] { 32, 164, 133}, new byte[] { 32, 165, 133}, new byte[] { 33, 166, 133},
+            new byte[] { 33, 167, 132}, new byte[] { 34, 167, 132}, new byte[] { 35, 168, 131}, new byte[] { 35, 169, 130},
+            new byte[] { 36, 170, 130}, new byte[] { 37, 171, 129}, new byte[] { 38, 172, 129}, new byte[] { 39, 173, 128},
+            new byte[] { 40, 174, 127}, new byte[] { 41, 175, 127}, new byte[] { 42, 176, 126}, new byte[] { 43, 177, 125},
+            new byte[] { 44, 177, 125}, new byte[] { 46, 178, 124}, new byte[] { 47, 179, 123}, new byte[] { 48, 180, 122},
+            new byte[] { 50, 181, 122}, new byte[] { 51, 182, 121}, new byte[] { 53, 183, 120}, new byte[] { 54, 184, 119},
+            new byte[] { 56, 185, 118}, new byte[] { 57, 185, 118}, new byte[] { 59, 186, 117}, new byte[] { 61, 187, 116},
+            new byte[] { 62, 188, 115}, new byte[] { 64, 189, 114}, new byte[] { 66, 190, 113}, new byte[] { 68, 190, 112},
+            new byte[] { 69, 191, 111}, new byte[] { 71, 192, 110}, new byte[] { 73, 193, 109}, new byte[] { 75, 194, 108},
+            new byte[] { 77, 194, 107}, new byte[] { 79, 195, 105}, new byte[] { 81, 196, 104}, new byte[] { 83, 197, 103},
+            new byte[] { 85, 198, 102}, new byte[] { 87, 198, 101}, new byte[] { 89, 199, 100}, new byte[] { 91, 200,  98},
+            new byte[] { 94, 201,  97}, new byte[] { 96, 201,  96}, new byte[] { 98, 202,  95}, new byte[] {100, 203,  93},
+            new byte[] {103, 204,  92}, new byte[] {105, 204,  91}, new byte[] {107, 205,  89}, new byte[] {109, 206,  88},
+            new byte[] {112, 206,  86}, new byte[] {114, 207,  85}, new byte[] {116, 208,  84}, new byte[] {119, 208,  82},
+            new byte[] {121, 209,  81}, new byte[] {124, 210,  79}, new byte[] {126, 210,  78}, new byte[] {129, 211,  76},
+            new byte[] {131, 211,  75}, new byte[] {134, 212,  73}, new byte[] {136, 213,  71}, new byte[] {139, 213,  70},
+            new byte[] {141, 214,  68}, new byte[] {144, 214,  67}, new byte[] {146, 215,  65}, new byte[] {149, 215,  63},
+            new byte[] {151, 216,  62}, new byte[] {154, 216,  60}, new byte[] {157, 217,  58}, new byte[] {159, 217,  56},
+            new byte[] {162, 218,  55}, new byte[] {165, 218,  53}, new byte[] {167, 219,  51}, new byte[] {170, 219,  50},
+            new byte[] {173, 220,  48}, new byte[] {175, 220,  46}, new byte[] {178, 221,  44}, new byte[] {181, 221,  43},
+            new byte[] {183, 221,  41}, new byte[] {186, 222,  39}, new byte[] {189, 222,  38}, new byte[] {191, 223,  36},
+            new byte[] {194, 223,  34}, new byte[] {197, 223,  33}, new byte[] {199, 224,  31}, new byte[] {202, 224,  30},
+            new byte[] {205, 224,  29}, new byte[] {207, 225,  28}, new byte[] {210, 225,  27}, new byte[] {212, 225,  26},
+            new byte[] {215, 226,  25}, new byte[] {218, 226,  24}, new byte[] {220, 226,  24}, new byte[] {223, 227,  24},
+            new byte[] {225, 227,  24}, new byte[] {228, 227,  24}, new byte[] {231, 228,  25}, new byte[] {233, 228,  25},
+            new byte[] {236, 228,  26}, new byte[] {238, 229,  27}, new byte[] {241, 229,  28}, new byte[] {243, 229,  30},
+            new byte[] {246, 230,  31}, new byte[] {248, 230,  33}, new byte[] {250, 230,  34}, new byte[] {253, 231,  36}
+        };
+
+        /// <summary>
+        /// Convenient dictionary for mapping palette names onto palette byte arrays
+        /// </summary>
+        public static readonly Dictionary<string, byte[][]> ByName = new Dictionary<string, byte[][]>
+        {
+            { "afmhot", Afmhot },
+            { "gist_earth", GistEarth },
+            { "inferno", Inferno },
+            { "terrain", Terrain },
+            { "viridis", Viridis }
+        };
+
+#else
+        /// <summary>
+        /// Colormap "afmhot" taken from matplotlib
+        /// </summary>
         public static readonly byte[,] Afmhot = new byte[,]
         {
             {  0,   0,   0}, {  2,   0,   0}, {  4,   0,   0}, {  6,   0,   0},
@@ -75,6 +458,9 @@ namespace SciColorMaps
             {255, 255, 249}, {255, 255, 251}, {255, 255, 253}, {255, 255, 255}
         };
 
+        /// <summary>
+        /// Colormap "gist_earth" taken from matplotlib
+        /// </summary>
         public static readonly byte[,] GistEarth = new byte[,]
         {
             {  0,   0,   0}, {  0,   0,  43}, {  1,   0,  56}, {  1,   0,  67},
@@ -143,6 +529,9 @@ namespace SciColorMaps
             {249, 242, 241}, {250, 245, 244}, {251, 248, 247}, {253, 250, 250}
         };
 
+        /// <summary>
+        /// Colormap "inferno" taken from matplotlib
+        /// </summary>
         public static readonly byte[,] Inferno = new byte[,]
         {
             {  0,   0,   3}, {  0,   0,   4}, {  0,   0,   6}, {  1,   0,   7},
@@ -211,6 +600,9 @@ namespace SciColorMaps
             {247, 251, 153}, {249, 252, 157}, {250, 253, 160}, {252, 254, 164}
         };
         
+        /// <summary>
+        /// Colormap "terrain" taken from matplotlib
+        /// </summary>
         public static readonly byte[,] Terrain = new byte[,]
         {
             { 51,  51, 153}, { 49,  53, 155}, { 48,  56, 158}, { 47,  59, 161},
@@ -279,6 +671,9 @@ namespace SciColorMaps
             {249, 247, 246}, {251, 249, 249}, {253, 252, 252}, {255, 255, 255}
         };
 
+        /// <summary>
+        /// Colormap "viridis" taken from matplotlib
+        /// </summary>
         public static readonly byte[,] Viridis = new byte[,]
         {
             { 68,   1,  84}, { 68,   2,  85}, { 68,   3,  87}, { 69,   5,  88},
@@ -358,5 +753,6 @@ namespace SciColorMaps
             { "terrain", Terrain },
             { "viridis", Viridis }
         };
+#endif
     }
 }
