@@ -37,15 +37,15 @@ namespace SciColorMaps
 
         /// <summary>
         /// Range of values corresponding to one color in the colormap
-        /// (it is calculated in the constructor based on given parameters)
+        /// (is calculated in the constructor based on given parameters)
         /// </summary>
-        private float _step;
+        private float _colorRange;
 
         /// <summary>
         /// Number of palette colors corresponding to one color in the colormap
-        /// (it is calculated in the constructor based on given parameters)
+        /// (is calculated in the constructor based on given parameters)
         /// </summary>
-        private float _colorStep;
+        private float _colorBinSize;
 
         /// <summary>
         /// Palette name ("viridis", "terrain", etc.)
@@ -88,8 +88,8 @@ namespace SciColorMaps
             _colorCount = colorCount;
             _lower = lower;
             _upper = upper;
-            _step = (_upper - _lower) / _colorCount;
-            _colorStep = Palette.Resolution / _colorCount;
+            _colorRange = (_upper - _lower) / _colorCount;
+            _colorBinSize = (float)Palette.Resolution / _colorCount;
 
             // setting palette by name:
 
@@ -106,12 +106,12 @@ namespace SciColorMaps
                 PaletteName = "viridis";
             }
         }
-        
+
         /// <summary>
-        /// 
+        /// Get the color corresponding to a given domain value
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">Particular domain value</param>
+        /// <returns>Corresponding color</returns>
         public Color GetColor(float value)
         {
             var rgb = this[value];
@@ -120,22 +120,22 @@ namespace SciColorMaps
         }
 
         /// <summary>
-        /// 
+        /// Get the color by its ordinal number in palette/colormap
         /// </summary>
-        /// <param name="no"></param>
-        /// <returns></returns>
+        /// <param name="no">Color ordinal number</param>
+        /// <returns>Corresponding color</returns>
         public Color GetColorByNumber(int no)
         {
-            var value = _lower + no * _step;
+            var value = _lower + no * _colorRange;
 
             return GetColor(value);
         }
 
         /// <summary>
-        /// 
+        /// Get RGB values corresponding to a given domain value 
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">Particular domain value</param>
+        /// <returns>Array of 3 bytes (R, G, B)</returns>
         public byte[] this[float value]
         {
 #if !RECTANGULAR
@@ -152,10 +152,10 @@ namespace SciColorMaps
                 }
 
                 // get the closest color with current resolution
-                value -= (value % _colorStep);
+                value -= (value % _colorBinSize);
 
                 // get the index of this color in palette
-                int idx = (int)((value - _lower) / _step * _colorStep);
+                int idx = (int)((value - _lower) / _colorRange * _colorBinSize);
 
                 return _palette[idx];
             }
