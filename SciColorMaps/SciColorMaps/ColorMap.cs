@@ -14,8 +14,12 @@ namespace SciColorMaps
         /// <summary>
         /// Color palette is an array of predefined RGB values
         /// </summary>
+#if !RECTANGULAR
         private byte[][] _palette;
-        
+#else
+        private byte[,] _palette;
+#endif
+
         /// <summary>
         /// Number of colors in colormap
         /// </summary>
@@ -63,17 +67,17 @@ namespace SciColorMaps
         public ColorMap(string name,
                         float lower = 0.0f,
                         float upper = 1.0f,
-                        int colorCount = Palettes.Resolution)
+                        int colorCount = Palette.Resolution)
         {
             if (name == null)
             {
                 throw new ArgumentException("Palette name should not be null!");
             }
 
-            if (colorCount <= 1 || colorCount > Palettes.Resolution)
+            if (colorCount <= 1 || colorCount > Palette.Resolution)
             {
                 throw new ArgumentException(string.Format(
-                    "Number of colors should be in range [2, {0}]!", Palettes.Resolution));
+                    "Number of colors should be in range [2, {0}]!", Palette.Resolution));
             }
 
             if (lower >= upper)
@@ -85,53 +89,24 @@ namespace SciColorMaps
             _lower = lower;
             _upper = upper;
             _step = (_upper - _lower) / _colorCount;
-            _colorStep = Palettes.Resolution / _colorCount;
+            _colorStep = Palette.Resolution / _colorCount;
 
             // setting palette by name:
 
             string keyName = name.ToLower();
 
-            if (Palettes.ByName.ContainsKey(keyName))
+            if (Palette.ByName.ContainsKey(keyName))
             {
-                _palette = Palettes.ByName[keyName];
+                _palette = Palette.ByName[keyName].Value;
                 PaletteName = keyName;
             }
             else
             {
-                _palette = Palettes.Viridis;
+                _palette = Palette.Viridis.Value;
                 PaletteName = "viridis";
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public byte[] this[float value]
-        {
-            get
-            {
-                if (value <= _lower)
-                {
-                    return _palette[0];
-                }
-
-                if (value >= _upper)
-                {
-                    return _palette[Palettes.Resolution - 1];
-                }
-
-                // get the closest color with current resolution
-                value -= (value % _colorStep);
-
-                // get the index of this color in palette
-                int idx = (int)((value - _lower) / _step * _colorStep);
-
-                return _palette[idx];
-            }
-        }
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -154,6 +129,69 @@ namespace SciColorMaps
             var value = _lower + no * _step;
 
             return GetColor(value);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public byte[] this[float value]
+        {
+#if !RECTANGULAR
+            get
+            {
+                if (value <= _lower)
+                {
+                    return _palette[0];
+                }
+
+                if (value >= _upper)
+                {
+                    return _palette[Palette.Resolution - 1];
+                }
+
+                // get the closest color with current resolution
+                value -= (value % _colorStep);
+
+                // get the index of this color in palette
+                int idx = (int)((value - _lower) / _step * _colorStep);
+
+                return _palette[idx];
+            }
+#else
+            get
+            {
+                if (value <= _lower)
+                {
+                    return new byte[] 
+                    {
+                        _palette[0, 0], _palette[0, 1], _palette[0, 2]
+                    };
+                }
+
+                if (value >= _upper)
+                {
+                    return new byte[]
+                    {
+                        _palette[Palette.Resolution - 1, 0],
+                        _palette[Palette.Resolution - 1, 1],
+                        _palette[Palette.Resolution - 1, 2]
+                    };
+                }
+
+                // get the closest color with current resolution
+                value -= (value % _colorStep);
+
+                // get the index of this color in palette
+                int idx = (int)((value - _lower) / _step * _colorStep);
+
+                return new byte[]
+                {
+                    _palette[idx, 0], _palette[idx, 1], _palette[idx, 2]
+                };
+            }
+#endif
         }
     }
 }

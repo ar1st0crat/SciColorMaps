@@ -8,7 +8,7 @@ namespace SciColorMaps.WinForms
 {
     public partial class SciColorMapsForm : Form
     {
-        private int _colorCount = Palettes.Resolution;
+        private int _colorCount = Palette.Resolution;
 
         private ColorMap _cmap;
 

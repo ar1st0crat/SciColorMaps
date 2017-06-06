@@ -1,30 +1,45 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SciColorMaps
 {
+#if !RECTANGULAR
+
     /// <summary>
-    /// Class containing colormaps imported from matplotlib
+    /// Class containing colormaps (palettes) imported from matplotlib
+    /// 
+    /// =========================== IMPORTANT NOTES! ==========================
+    /// 
+    /// 1)
+    /// Accessing elements in jagged arrays is significantly faster(up to 40%)
+    /// compared to rectangular arrays, so the following code is compiled by default.
+    /// If an efficient memory management is of more importance then compile
+    /// with the 'RECTANGULAR' conditional symbol.
+    /// 
+    /// 2)
+    /// Palette arrays are instantiated LAZILY in the calling code, e.g.:
+    ///      var palette = Palette.Afmhot.Value;
+    /// 
+    /// 3)
+    /// All palettes are READONLY arrays. That means they are NOT consts
+    /// and can be modified by calling code. It is AGAINST the contract,
+    /// however for the sake of performance there are currently no 
+    /// additional checks or converting to ReadOnlyCollection in the code.
+    /// 
     /// </summary>
-    public static class Palettes
+    public static class Palette
     {
+        /// <summary>
+        /// Number of base colors in palette
+        /// </summary>
         public const int Resolution = 256;
 
-        /* =============================== NOTE! =================================
-         * 
-         * Accessing elements in jagged arrays is significantly faster (up to 40%)
-         * compared to rectangular arrays
-         * so the following code is compiled by default.
-         *
-         * If an efficient memory management is of more importance then compile
-         * with the 'RECTANGULAR' conditional symbol.
-         * 
-         * ======================================================================= */ 
+    #region palettes
 
-#if !RECTANGULAR
         /// <summary>
         /// Colormap "afmhot" taken from matplotlib
         /// </summary>
-        public static readonly byte[][] Afmhot = new byte[][]
+        public static readonly Lazy<byte[][]> Afmhot = new Lazy<byte[][]>(() => new byte[][]
         {
             new byte[] {  0,   0,   0}, new byte[] {  2,   0,   0}, new byte[] {  4,   0,   0}, new byte[] {  6,   0,   0},
             new byte[] {  8,   0,   0}, new byte[] { 10,   0,   0}, new byte[] { 12,   0,   0}, new byte[] { 14,   0,   0},
@@ -90,12 +105,12 @@ namespace SciColorMaps
             new byte[] {255, 255, 232}, new byte[] {255, 255, 235}, new byte[] {255, 255, 237}, new byte[] {255, 255, 239},
             new byte[] {255, 255, 241}, new byte[] {255, 255, 243}, new byte[] {255, 255, 244}, new byte[] {255, 255, 246},
             new byte[] {255, 255, 249}, new byte[] {255, 255, 251}, new byte[] {255, 255, 253}, new byte[] {255, 255, 255}
-        };
+        });
 
         /// <summary>
         /// Colormap "gist_earth" taken from matplotlib
         /// </summary>
-        public static readonly byte[][] GistEarth = new byte[][]
+        public static readonly Lazy<byte[][]> GistEarth = new Lazy<byte[][]>(() => new byte[][]
         {
             new byte[] {  0,   0,   0}, new byte[] {  0,   0,  43}, new byte[] {  1,   0,  56}, new byte[] {  1,   0,  67},
             new byte[] {  2,   0,  78}, new byte[] {  3,   0,  88}, new byte[] {  3,   0,  99}, new byte[] {  4,   0, 110},
@@ -161,12 +176,12 @@ namespace SciColorMaps
             new byte[] {240, 220, 217}, new byte[] {241, 222, 220}, new byte[] {242, 224, 223}, new byte[] {244, 227, 226},
             new byte[] {245, 230, 229}, new byte[] {246, 233, 232}, new byte[] {247, 236, 235}, new byte[] {248, 239, 238},
             new byte[] {249, 242, 241}, new byte[] {250, 245, 244}, new byte[] {251, 248, 247}, new byte[] {253, 250, 250}
-        };
+        });
 
         /// <summary>
         /// Colormap "inferno" taken from matplotlib
         /// </summary>
-        public static readonly byte[][] Inferno = new byte[][]
+        public static readonly Lazy<byte[][]> Inferno = new Lazy<byte[][]>(() => new byte[][]
         {
             new byte[] {  0,   0,   3}, new byte[] {  0,   0,   4}, new byte[] {  0,   0,   6}, new byte[] {  1,   0,   7},
             new byte[] {  1,   1,   9}, new byte[] {  1,   1,  11}, new byte[] {  2,   1,  14}, new byte[] {  2,   2,  16},
@@ -232,12 +247,12 @@ namespace SciColorMaps
             new byte[] {241, 240, 121}, new byte[] {241, 242, 125}, new byte[] {242, 243, 129}, new byte[] {242, 244, 133},
             new byte[] {243, 246, 137}, new byte[] {244, 247, 141}, new byte[] {245, 248, 145}, new byte[] {246, 250, 149},
             new byte[] {247, 251, 153}, new byte[] {249, 252, 157}, new byte[] {250, 253, 160}, new byte[] {252, 254, 164}
-        };
+        });
 
         /// <summary>
         /// Colormap "terrain" taken from matplotlib
         /// </summary>
-        public static readonly byte[][] Terrain = new byte[][]
+        public static readonly Lazy<byte[][]> Terrain = new Lazy<byte[][]>(() => new byte[][]
         {
             new byte[] { 51,  51, 153}, new byte[] { 49,  53, 155}, new byte[] { 48,  56, 158}, new byte[] { 47,  59, 161},
             new byte[] { 45,  61, 163}, new byte[] { 44,  64, 166}, new byte[] { 43,  67, 169}, new byte[] { 41,  69, 171},
@@ -303,12 +318,12 @@ namespace SciColorMaps
             new byte[] {232, 226, 225}, new byte[] {235, 229, 228}, new byte[] {237, 231, 230}, new byte[] {239, 234, 233},
             new byte[] {241, 237, 236}, new byte[] {243, 239, 238}, new byte[] {244, 242, 241}, new byte[] {247, 244, 244},
             new byte[] {249, 247, 246}, new byte[] {251, 249, 249}, new byte[] {253, 252, 252}, new byte[] {255, 255, 255}
-        };
+        });
 
         /// <summary>
         /// Colormap "viridis" taken from matplotlib
         /// </summary>
-        public static readonly byte[][] Viridis = new byte[][]
+        public static readonly Lazy<byte[][]> Viridis = new Lazy<byte[][]>(() => new byte[][]
         {
             new byte[] { 68,   1,  84}, new byte[] { 68,   2,  85}, new byte[] { 68,   3,  87}, new byte[] { 69,   5,  88},
             new byte[] { 69,   6,  90}, new byte[] { 69,   8,  91}, new byte[] { 70,   9,  92}, new byte[] { 70,  11,  94},
@@ -374,12 +389,15 @@ namespace SciColorMaps
             new byte[] {225, 227,  24}, new byte[] {228, 227,  24}, new byte[] {231, 228,  25}, new byte[] {233, 228,  25},
             new byte[] {236, 228,  26}, new byte[] {238, 229,  27}, new byte[] {241, 229,  28}, new byte[] {243, 229,  30},
             new byte[] {246, 230,  31}, new byte[] {248, 230,  33}, new byte[] {250, 230,  34}, new byte[] {253, 231,  36}
-        };
+        });
+
+    #endregion
 
         /// <summary>
         /// Convenient dictionary for mapping palette names onto palette byte arrays
         /// </summary>
-        public static readonly Dictionary<string, byte[][]> ByName = new Dictionary<string, byte[][]>
+        public static readonly Dictionary<string, Lazy<byte[][]>>
+            ByName = new Dictionary<string, Lazy<byte[][]>>
         {
             { "afmhot", Afmhot },
             { "gist_earth", GistEarth },
@@ -388,11 +406,29 @@ namespace SciColorMaps
             { "viridis", Viridis }
         };
 
+        /// <summary>
+        /// Enumerate all available palettes / colormaps
+        /// </summary>
+        public static IEnumerable<string> Names
+        {
+            get { return ByName.Keys; }
+        }
+    }
+
 #else
+    public static class Palette
+    {
+        /// <summary>
+        /// Number of base colors in palette
+        /// </summary>
+        public const int Resolution = 256;
+
+        #region palettes
+
         /// <summary>
         /// Colormap "afmhot" taken from matplotlib
         /// </summary>
-        public static readonly byte[,] Afmhot = new byte[,]
+        public static readonly Lazy<byte[,]> Afmhot = new Lazy<byte[,]>(() => new byte[,]
         {
             {  0,   0,   0}, {  2,   0,   0}, {  4,   0,   0}, {  6,   0,   0},
             {  8,   0,   0}, { 10,   0,   0}, { 12,   0,   0}, { 14,   0,   0},
@@ -458,12 +494,12 @@ namespace SciColorMaps
             {255, 255, 232}, {255, 255, 235}, {255, 255, 237}, {255, 255, 239},
             {255, 255, 241}, {255, 255, 243}, {255, 255, 244}, {255, 255, 246},
             {255, 255, 249}, {255, 255, 251}, {255, 255, 253}, {255, 255, 255}
-        };
+        });
 
         /// <summary>
         /// Colormap "gist_earth" taken from matplotlib
         /// </summary>
-        public static readonly byte[,] GistEarth = new byte[,]
+        public static readonly Lazy<byte[,]> GistEarth = new Lazy<byte[,]>(() => new byte[,]
         {
             {  0,   0,   0}, {  0,   0,  43}, {  1,   0,  56}, {  1,   0,  67},
             {  2,   0,  78}, {  3,   0,  88}, {  3,   0,  99}, {  4,   0, 110},
@@ -529,12 +565,12 @@ namespace SciColorMaps
             {240, 220, 217}, {241, 222, 220}, {242, 224, 223}, {244, 227, 226},
             {245, 230, 229}, {246, 233, 232}, {247, 236, 235}, {248, 239, 238},
             {249, 242, 241}, {250, 245, 244}, {251, 248, 247}, {253, 250, 250}
-        };
+        });
 
         /// <summary>
         /// Colormap "inferno" taken from matplotlib
         /// </summary>
-        public static readonly byte[,] Inferno = new byte[,]
+        public static readonly Lazy<byte[,]> Inferno = new Lazy<byte[,]>(() => new byte[,]
         {
             {  0,   0,   3}, {  0,   0,   4}, {  0,   0,   6}, {  1,   0,   7},
             {  1,   1,   9}, {  1,   1,  11}, {  2,   1,  14}, {  2,   2,  16},
@@ -600,12 +636,12 @@ namespace SciColorMaps
             {241, 240, 121}, {241, 242, 125}, {242, 243, 129}, {242, 244, 133},
             {243, 246, 137}, {244, 247, 141}, {245, 248, 145}, {246, 250, 149},
             {247, 251, 153}, {249, 252, 157}, {250, 253, 160}, {252, 254, 164}
-        };
-        
+        });
+
         /// <summary>
         /// Colormap "terrain" taken from matplotlib
         /// </summary>
-        public static readonly byte[,] Terrain = new byte[,]
+        public static readonly Lazy<byte[,]> Terrain = new Lazy<byte[,]>(() => new byte[,]
         {
             { 51,  51, 153}, { 49,  53, 155}, { 48,  56, 158}, { 47,  59, 161},
             { 45,  61, 163}, { 44,  64, 166}, { 43,  67, 169}, { 41,  69, 171},
@@ -671,12 +707,12 @@ namespace SciColorMaps
             {232, 226, 225}, {235, 229, 228}, {237, 231, 230}, {239, 234, 233},
             {241, 237, 236}, {243, 239, 238}, {244, 242, 241}, {247, 244, 244},
             {249, 247, 246}, {251, 249, 249}, {253, 252, 252}, {255, 255, 255}
-        };
+        });
 
         /// <summary>
         /// Colormap "viridis" taken from matplotlib
         /// </summary>
-        public static readonly byte[,] Viridis = new byte[,]
+        public static readonly Lazy<byte[,]> Viridis = new Lazy<byte[,]>(() => new byte[,]
         {
             { 68,   1,  84}, { 68,   2,  85}, { 68,   3,  87}, { 69,   5,  88},
             { 69,   6,  90}, { 69,   8,  91}, { 70,   9,  92}, { 70,  11,  94},
@@ -742,12 +778,15 @@ namespace SciColorMaps
             {225, 227,  24}, {228, 227,  24}, {231, 228,  25}, {233, 228,  25},
             {236, 228,  26}, {238, 229,  27}, {241, 229,  28}, {243, 229,  30},
             {246, 230,  31}, {248, 230,  33}, {250, 230,  34}, {253, 231,  36}
-        };
+        });
+
+        #endregion
 
         /// <summary>
         /// Convenient dictionary for mapping palette names onto palette byte arrays
         /// </summary>
-        public static readonly Dictionary<string, byte[,]> ByName = new Dictionary<string, byte[,]>
+        public static readonly Dictionary<string, Lazy<byte[,]>>
+            ByName = new Dictionary<string, Lazy<byte[,]>>
         {
             { "afmhot", Afmhot },
             { "gist_earth", GistEarth },
@@ -755,6 +794,15 @@ namespace SciColorMaps
             { "terrain", Terrain },
             { "viridis", Viridis }
         };
-#endif
+
+        /// <summary>
+        /// Enumerate all available palettes / colormaps
+        /// </summary>
+        public static IEnumerable<string> Names
+        {
+            get { return ByName.Keys; }
+        }
     }
+#endif
+
 }
