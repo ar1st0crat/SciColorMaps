@@ -28,24 +28,24 @@ namespace SciColorMaps
         /// <summary>
         /// Lower bound of the colormap range
         /// </summary>
-        private float _lower;
+        private double _lower;
 
         /// <summary>
         /// Upper bound of the colormap range
         /// </summary>
-        private float _upper;
+        private double _upper;
 
         /// <summary>
         /// Range of values corresponding to one color in the colormap
         /// (is calculated in the constructor based on given parameters)
         /// </summary>
-        private float _colorRange;
+        private double _colorRange;
 
         /// <summary>
         /// Number of palette colors corresponding to one color in the colormap
         /// (is calculated in the constructor based on given parameters)
         /// </summary>
-        private float _colorBinSize;
+        private double _colorBinSize;
 
         /// <summary>
         /// Palette name ("viridis", "terrain", etc.)
@@ -65,8 +65,8 @@ namespace SciColorMaps
         /// 3) Lower bound is greater than the upper one
         /// </exception>
         public ColorMap(string name,
-                        float lower = 0.0f,
-                        float upper = 1.0f,
+                        double lower = 0.0f,
+                        double upper = 1.0f,
                         int colorCount = Palette.Resolution)
         {
             if (name == null)
@@ -89,7 +89,7 @@ namespace SciColorMaps
             _lower = lower;
             _upper = upper;
             _colorRange = (_upper - _lower) / _colorCount;
-            _colorBinSize = (float)Palette.Resolution / _colorCount;
+            _colorBinSize = (double)Palette.Resolution / _colorCount;
 
             // setting palette by name:
 
@@ -112,7 +112,7 @@ namespace SciColorMaps
         /// </summary>
         /// <param name="value">Particular domain value</param>
         /// <returns>Corresponding color</returns>
-        public Color GetColor(float value)
+        public Color GetColor(double value)
         {
             var rgb = this[value];
 
@@ -136,7 +136,7 @@ namespace SciColorMaps
         /// </summary>
         /// <param name="value">Particular domain value</param>
         /// <returns>Array of 3 bytes (R, G, B)</returns>
-        public byte[] this[float value]
+        public byte[] this[double value]
         {
 #if !RECTANGULAR
             get

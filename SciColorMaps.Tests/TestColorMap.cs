@@ -13,14 +13,14 @@ namespace SciColorMaps.Tests
         public void TestWrongRange()
         {
             Assert.Throws<ArgumentException>(
-                () => { var cmap = new ColorMap(DefaultPalette, 1.0f, 1.0f, 256); });
+                () => { var cmap = new ColorMap(DefaultPalette, 1.0, 1.0, 256); });
         }
 
         [Test]
         public void TestWrongNumberOfBins()
         {
             Assert.Throws<ArgumentException>(
-                () => { var cmap = new ColorMap(DefaultPalette, 0.0f, 1.0f, 0); });
+                () => { var cmap = new ColorMap(DefaultPalette, 0.0, 1.0, 0); });
         }
 
         [Test]

@@ -12,6 +12,24 @@ namespace SciColorMaps.WinForms
 
         private ColorMap _cmap;
 
+        private static readonly Rectangle SurfaceRect = new Rectangle(-100, -70, 200, 140);
+
+        private const int AngleX = 45;//deg
+        private const int AngleY = 45;//deg
+        private const int AngleZ = 55;//deg
+
+        /// <summary>
+        /// Interpolation stride used for plotting 3d surface
+        /// </summary>
+        private const double Stride = 0.25;
+
+        /// <summary>
+        /// Relative coordinates of the center (3d plot)
+        /// </summary>
+        private const int CenterX = 150;
+        private const int CenterY = 150;
+
+
         public SciColorMapsForm()
         {
             InitializeComponent();
@@ -19,12 +37,12 @@ namespace SciColorMaps.WinForms
 
         #region rotation functions
 
-        private float[] RotateX(float x, float y, float z, float theta)
+        private double[] RotateX(double x, double y, double z, double theta)
         {
-            float sinTheta = (float)Math.Sin(Math.PI * theta / 180);
-            float cosTheta = (float)Math.Cos(Math.PI * theta / 180);
+            var sinTheta = Math.Sin(Math.PI * theta / 180);
+            var cosTheta = Math.Cos(Math.PI * theta / 180);
 
-            float[] coord = new float[3];
+            var coord = new double[3];
             coord[0] = x;
             coord[1] = y * cosTheta - z * sinTheta;
             coord[2] = z * cosTheta + y * sinTheta;
@@ -32,12 +50,12 @@ namespace SciColorMaps.WinForms
             return coord;
         }
 
-        private float[] RotateY(float x, float y, float z, float theta)
+        private double[] RotateY(double x, double y, double z, double theta)
         {
-            float sinTheta = (float)Math.Sin(Math.PI * theta / 180);
-            float cosTheta = (float)Math.Cos(Math.PI * theta / 180);
+            var sinTheta = Math.Sin(Math.PI * theta / 180);
+            var cosTheta = Math.Cos(Math.PI * theta / 180);
 
-            float[] coord = new float[3];
+            var coord = new double[3];
             coord[0] = x * cosTheta - z * sinTheta;
             coord[1] = y;
             coord[2] = z * cosTheta + x * sinTheta;
@@ -45,12 +63,12 @@ namespace SciColorMaps.WinForms
             return coord;
         }
 
-        private float[] RotateZ(float x, float y, float z, float theta)
+        private double[] RotateZ(double x, double y, double z, double theta)
         {
-            float sinTheta = (float)Math.Sin(Math.PI * theta / 180);
-            float cosTheta = (float)Math.Cos(Math.PI * theta / 180);
+            var sinTheta = Math.Sin(Math.PI * theta / 180);
+            var cosTheta = Math.Cos(Math.PI * theta / 180);
 
-            float[] coord = new float[3];
+            var coord = new double[3];
             coord[0] = x * cosTheta - y * sinTheta;
             coord[1] = y * cosTheta + x * sinTheta;
             coord[2] = z;
@@ -62,14 +80,14 @@ namespace SciColorMaps.WinForms
 
         private void CreateColorMap(Func<double, double, double> function)
         {
-            float min = float.MaxValue;
-            float max = float.MinValue;
+            var min = double.MaxValue;
+            var max = double.MinValue;
             
-            for (int x = -100; x < 100; x++)
+            for (int x = SurfaceRect.Left; x < SurfaceRect.Right; x++)
             {
-                for (int y = -70; y < 70; y++)
+                for (int y = SurfaceRect.Top; y < SurfaceRect.Bottom; y++)
                 {
-                    float z = (float)function(x, y);
+                    var z = function(x, y);
 
                     if (z > max)
                     {
@@ -108,14 +126,14 @@ namespace SciColorMaps.WinForms
         
         private void ShowSurface2D(Func<double, double, double> function)
         {
-            var bmp = new Bitmap(200, 140);
-            
-            for (int x = -100; x < 100; x++)
+            var bmp = new Bitmap(SurfaceRect.Width, SurfaceRect.Height);
+
+            for (int x = SurfaceRect.Left; x < SurfaceRect.Right; x++)
             {
-                for (int y = -70; y < 70; y++)
+                for (int y = SurfaceRect.Top; y < SurfaceRect.Bottom; y++)
                 {
-                    float z = (float)function(x, y);
-                    bmp.SetPixel(x + 100, y + 70, _cmap.GetColor(z));
+                    var z = function(x, y);
+                    bmp.SetPixel(x - SurfaceRect.Left, y - SurfaceRect.Top, _cmap.GetColor(z));
                 }
             }
 
@@ -124,47 +142,54 @@ namespace SciColorMaps.WinForms
 
         private void ShowSurface3D(Func<double, double, double> function)
         {
-            var bmp3d = new Bitmap(300, 300);
+            var bmp3d = new Bitmap(2 * CenterX, 2 * CenterY);
 
-            for (float i = -80; i < 80; i += 0.5f)
+            // draw axis
+
+            var axisRangeBegin = -80;
+            var axisRangeEnd = 80;
+
+            for (double i = axisRangeBegin; i < axisRangeEnd; i += Stride)
             {
-                float[] coords = RotateY(i + 80, 0, 0, 45);
-                coords = RotateX(coords[0], coords[1], coords[2], 45);
-                coords = RotateZ(coords[0], coords[1], coords[2], 55);
+                var coords = RotateY(i - axisRangeBegin, 0, 0, AngleY);
+                coords = RotateX(coords[0], coords[1], coords[2], AngleX);
+                coords = RotateZ(coords[0], coords[1], coords[2], AngleZ);
 
-                bmp3d.SetPixel((int)coords[0] + 150,
-                               (int)coords[1] + 150,
+                bmp3d.SetPixel((int)coords[0] + CenterX,
+                               (int)coords[1] + CenterY,
                                Color.DarkGray);
 
-                coords = RotateY(0, i + 80, 0, 45);
-                coords = RotateX(coords[0], coords[1], coords[2], 45);
-                coords = RotateZ(coords[0], coords[1], coords[2], 55);
+                coords = RotateY(0, i - axisRangeBegin, 0, AngleY);
+                coords = RotateX(coords[0], coords[1], coords[2], AngleX);
+                coords = RotateZ(coords[0], coords[1], coords[2], AngleZ);
 
-                bmp3d.SetPixel((int)coords[0] + 150,
-                               (int)coords[1] + 150,
+                bmp3d.SetPixel((int)coords[0] + CenterX,
+                               (int)coords[1] + CenterY,
                                Color.DarkGray);
 
-                coords = RotateY(0, 0, i + 80, 45);
-                coords = RotateX(coords[0], coords[1], coords[2], 45);
-                coords = RotateZ(coords[0], coords[1], coords[2], 55);
+                coords = RotateY(0, 0, i - axisRangeBegin, AngleY);
+                coords = RotateX(coords[0], coords[1], coords[2], AngleX);
+                coords = RotateZ(coords[0], coords[1], coords[2], AngleZ);
 
-                bmp3d.SetPixel((int)coords[0] + 150,
-                               (int)coords[1] + 150,
+                bmp3d.SetPixel((int)coords[0] + CenterX,
+                               (int)coords[1] + CenterY,
                                Color.DarkGray);
             }
 
-            for (float x = -100; x < 100; x += 0.25f)
+            // draw surface
+
+            for (double x = SurfaceRect.Left; x < SurfaceRect.Right; x += Stride)
             {
-                for (float y = -70; y < 70; y += 0.25f)
+                for (double y = SurfaceRect.Top; y < SurfaceRect.Bottom; y += Stride)
                 {
-                    float z = (float)function(x, y);
+                    var z = function(x, y);
 
-                    float[] coords = RotateY(x, y, z, 45);
-                    coords = RotateX(coords[0], coords[1], coords[2], 45);
-                    coords = RotateZ(coords[0], coords[1], coords[2], 55);
+                    var coords = RotateY(x, y, z, AngleY);
+                    coords = RotateX(coords[0], coords[1], coords[2], AngleX);
+                    coords = RotateZ(coords[0], coords[1], coords[2], AngleZ);
 
-                    bmp3d.SetPixel((int)coords[0] + 150,
-                                   (int)coords[1] + 150,
+                    bmp3d.SetPixel((int)coords[0] + CenterX,
+                                   (int)coords[1] + CenterY,
                                    _cmap.GetColor(z));
                 }
             }

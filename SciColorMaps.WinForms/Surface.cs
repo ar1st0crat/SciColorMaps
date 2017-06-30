@@ -12,7 +12,7 @@ namespace SciColorMaps.WinForms
             x /= 60;
             y /= 90;
 
-            double z = x * x + y * y;
+            var z = x * x + y * y;
             return 70 * Math.Exp(-z) * Math.Sin(2 * Math.PI * x * y);
         }
 
@@ -25,7 +25,7 @@ namespace SciColorMaps.WinForms
 
         public static double EllipticParaboloid(double x, double y)
         {
-            float a = 6, b = 7, p = 2;
+            double a = 6, b = 7, p = 2;
 
             return ((x * x) / (a * a) + (y * y) / (b * b)) / (2 * p);
         }
