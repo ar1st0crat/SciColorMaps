@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace SciColorMaps
@@ -48,9 +49,23 @@ namespace SciColorMaps
         private double _colorBinSize;
 
         /// <summary>
-        /// Palette name ("viridis", "terrain", etc.)
+        /// Palette name ("jet", "viridis", "terrain", etc.)
         /// </summary>
         public string PaletteName { get; private set; }
+
+        /// <summary>
+        /// Return the number of predefined base colors in palettes
+        /// (i.e. 256, but it can be made customizable)
+        /// </summary>
+        public const int PaletteColors = Palette.Resolution;
+
+        /// <summary>
+        /// Return collection of available palettes
+        /// </summary>
+        public static IEnumerable<string> Palettes
+        {
+            get { return Palette.Names; }
+        }
 
         /// <summary>
         /// Construct new colormap
@@ -102,8 +117,8 @@ namespace SciColorMaps
             }
             else
             {
-                _palette = Palette.Viridis.Value;
-                PaletteName = "viridis";
+                _palette = Palette.Jet.Value;
+                PaletteName = "jet";
             }
         }
 

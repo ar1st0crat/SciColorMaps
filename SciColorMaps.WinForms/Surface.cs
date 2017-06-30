@@ -18,7 +18,7 @@ namespace SciColorMaps.WinForms
 
         public static double HyperbolicParaboloid(double x, double y)
         {
-            float a = 6, b = 5, p = 2;
+            double a = 6, b = 5, p = 2;
 
             return ((x * x) / (a * a) - (y * y) / (b * b)) / (2 * p);
         }

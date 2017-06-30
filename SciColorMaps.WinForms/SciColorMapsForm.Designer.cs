@@ -55,13 +55,13 @@ namespace SciColorMaps.WinForms
             // _colorMapsList
             // 
             this._colorMapsList.FormattingEnabled = true;
-            this._colorMapsList.Items.AddRange(Palette.Names.ToArray());
+            this._colorMapsList.Items.AddRange(ColorMap.Palettes.ToArray());
             this._colorMapsList.Location = new System.Drawing.Point(13, 42);
             this._colorMapsList.Name = "_colorMapsList";
             this._colorMapsList.Size = new System.Drawing.Size(150, 24);
             this._colorMapsList.Sorted = true;
             this._colorMapsList.TabIndex = 1;
-            this._colorMapsList.Text = Palette.Names.FirstOrDefault();
+            this._colorMapsList.Text = ColorMap.Palettes.FirstOrDefault();
             // 
             // _labelColorMapsList
             // 
