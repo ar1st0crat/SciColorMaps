@@ -16,9 +16,9 @@ namespace SciColorMaps
         /// Color palette is an array of predefined RGB values
         /// </summary>
 #if !RECTANGULAR
-        private byte[][] _palette;
+        protected byte[][] _palette;
 #else
-        private byte[,] _palette;
+        protected byte[,] _palette;
 #endif
 
         /// <summary>
@@ -67,6 +67,27 @@ namespace SciColorMaps
             get { return Palette.Names; }
         }
 
+        private const string DefaultPalette = "jet";
+
+
+        /// <summary>
+        /// Default constructor creates Jet colormap
+        /// </summary>
+        public ColorMap() : this(DefaultPalette)
+        {
+        }
+
+        /// <summary>
+        /// Copy constructor
+        /// </summary>
+        /// <param name="colorMap">Copied colormap</param>
+        public ColorMap(ColorMap colorMap) : 
+            this(colorMap.PaletteName, colorMap._lower, colorMap._upper, colorMap._colorCount)
+        {
+            _colorRange = colorMap._colorRange;
+            _colorBinSize = colorMap._colorBinSize;
+        }
+
         /// <summary>
         /// Construct new colormap
         /// </summary>
@@ -112,14 +133,14 @@ namespace SciColorMaps
 
             if (Palette.ByName.ContainsKey(keyName))
             {
-                _palette = Palette.ByName[keyName].Value;
                 PaletteName = keyName;
             }
             else
             {
-                _palette = Palette.Jet.Value;
-                PaletteName = "jet";
+                PaletteName = DefaultPalette;
             }
+
+            _palette = Palette.ByName[PaletteName].Value;
         }
 
         /// <summary>
@@ -166,11 +187,11 @@ namespace SciColorMaps
                     return _palette[Palette.Resolution - 1];
                 }
 
-                // get the closest color with current resolution
-                value -= (value % _colorBinSize);
+                // get position of the closest color with current resolution
+                var pos = (int)((value - _lower) / _colorRange);
 
                 // get the index of this color in palette
-                int idx = (int)((value - _lower) / _colorRange * _colorBinSize);
+                int idx = (int)(pos * _colorBinSize);
 
                 return _palette[idx];
             }
@@ -195,11 +216,11 @@ namespace SciColorMaps
                     };
                 }
 
-                // get the closest color with current resolution
-                value -= (value % _colorStep);
+                // get position of the closest color with current resolution
+                var pos = (int)((value - _lower) / _colorRange);
 
                 // get the index of this color in palette
-                int idx = (int)((value - _lower) / _step * _colorStep);
+                int idx = (int)(pos * _colorBinSize);
 
                 return new byte[]
                 {

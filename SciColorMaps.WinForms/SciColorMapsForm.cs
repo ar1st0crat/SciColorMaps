@@ -101,6 +101,11 @@ namespace SciColorMaps.WinForms
             }
 
             _cmap = new ColorMap(_colorMapsList.Text, min, max, _colorCount);
+
+            // if you wanna play around with gayscale colormaps uncomment this:
+
+            //_cmap = new GrayColorMap(new ColorMap(_colorMapsList.Text, min, max, _colorCount));
+            //_cmap = new GrayColorMap(new ColorMap("gnuplot2", min, max));
         }
 
         private void ShowColormap()
@@ -109,15 +114,15 @@ namespace SciColorMaps.WinForms
                 _colorMapPanel.ClientRectangle, Color.White, Color.White, 0, false);
 
             var blend = new ColorBlend();
-            
+
             blend.Positions = Enumerable.Range(0, _colorCount + 1)
                                         .Select(pos => (float)pos / _colorCount)
                                         .ToArray();
-            
+
             blend.Colors = Enumerable.Range(0, _colorCount + 1)
                                      .Select(i => _cmap.GetColorByNumber(i))
                                      .ToArray();
-            
+
             brush.InterpolationColors = blend;
 
             _colorMapPanel.CreateGraphics()
