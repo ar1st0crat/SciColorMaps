@@ -125,11 +125,11 @@ namespace SciColorMaps
             _lower = lower;
             _upper = upper;
             _colorRange = (_upper - _lower) / _colorCount;
-            _colorBinSize = (double)Palette.Resolution / _colorCount;
+            _colorBinSize = Palette.Resolution / (_colorCount + 0.5);
 
             // setting palette by name:
 
-            string keyName = name.ToLower();
+            var keyName = name.ToLower();
 
             if (Palette.ByName.ContainsKey(keyName))
             {
@@ -191,7 +191,7 @@ namespace SciColorMaps
                 var pos = (int)((value - _lower) / _colorRange);
 
                 // get the index of this color in palette
-                int idx = (int)(pos * _colorBinSize);
+                var idx = (int)(pos * _colorBinSize);
 
                 return _palette[idx];
             }
@@ -220,7 +220,7 @@ namespace SciColorMaps
                 var pos = (int)((value - _lower) / _colorRange);
 
                 // get the index of this color in palette
-                int idx = (int)(pos * _colorBinSize);
+                var idx = (int)(pos * _colorBinSize);
 
                 return new byte[]
                 {

@@ -1,6 +1,6 @@
 ﻿using System;
-using NUnit.Framework;
 using System.Linq;
+using NUnit.Framework;
 
 namespace SciColorMaps.Tests
 {
@@ -22,12 +22,6 @@ namespace SciColorMaps.Tests
         {
             Assert.Throws<ArgumentException>(
                 () => { var cmap = new ColorMap(DefaultPalette, 0.0, 1.0, 0); });
-        }
-
-        [Test]
-        public void TestNullPaletteName()
-        {
-            Assert.Throws<ArgumentException>(() => { var cmap = new ColorMap(null); });
         }
 
         [Test]
@@ -76,6 +70,17 @@ namespace SciColorMaps.Tests
 
             Assert.That(cmap[1.0], Is.EqualTo(cmap[3.0]));
             Assert.That(cmap[1.0], Is.Not.EqualTo(cmap[9.0]));
+        }
+
+        [Test]
+        public void TestAllColorsAreRetrievedByNumberWithoutExceptions()
+        {
+            var cmap = new ColorMap(DefaultPalette, -30, 30, 78);
+
+            for (var i = 0; i < 78; i++)
+            {
+                Assert.DoesNotThrow(() => { var color = cmap.GetColorByNumber(i); });
+            }
         }
     }
 }
