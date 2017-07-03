@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -11,6 +12,12 @@ namespace SciColorMaps.WinForms
         private int _colorCount = ColorMap.PaletteColors;
 
         private ColorMap _cmap;
+
+        /// <summary>
+        /// Data for user-defined colormaps
+        /// </summary>
+        private List<Color> _colors = new List<Color>();
+        private List<float> _positions = new List<float>();
 
         private static readonly Rectangle SurfaceRect = new Rectangle(-100, -70, 200, 140);
 
@@ -33,6 +40,11 @@ namespace SciColorMaps.WinForms
         public SciColorMapsForm()
         {
             InitializeComponent();
+
+            _colors.Add(Color.Black);
+            _colors.Add(Color.White);
+            _positions.Add(0.0f);
+            _positions.Add(1.0f);
         }
 
         #region rotation functions
@@ -102,12 +114,14 @@ namespace SciColorMaps.WinForms
 
             _colorCount = (int)_colorCountUpDown.Value;
 
-            _cmap = new ColorMap(_colorMapsList.Text, min, max, _colorCount);
-
-            // if you wanna play around with gayscale colormaps uncomment this:
-
-            //_cmap = new GrayColorMap(new ColorMap(_colorMapsList.Text, min, max, _colorCount));
-            //_cmap = new GrayColorMap(new ColorMap("gnuplot2", min, max));
+            if (_colorMapsList.Text == "user")
+            {
+                _cmap = ColorMap.CreateFromColors(_colors, _positions, min, max, _colorCount);
+            }
+            else
+            {
+                _cmap = new ColorMap(_colorMapsList.Text, min, max, _colorCount);
+            }
         }
 
         private void ShowColormap()
@@ -127,8 +141,7 @@ namespace SciColorMaps.WinForms
 
             brush.InterpolationColors = blend;
 
-            _colorMapPanel.CreateGraphics()
-                          .FillRectangle(brush, _colorMapPanel.ClientRectangle);
+            _colorMapPanel.CreateGraphics().FillRectangle(brush, _colorMapPanel.ClientRectangle);
         }
         
         private void ShowSurface2D(Func<double, double, double> function)
@@ -224,20 +237,42 @@ namespace SciColorMaps.WinForms
 
             if (e.Button == MouseButtons.Left)
             {
-                CreateColorMap(surface);
-
                 _cmap = new MirrorColorMap(_cmap);      // decoratin'
 
                 UpdatePanels(surface);
             }
             else if (e.Button == MouseButtons.Right)
             {
-                CreateColorMap(surface);
-
                 _cmap = new GrayColorMap(_cmap);        // decoratin'
 
                 UpdatePanels(surface);
             }
+        }
+
+        private void _colorMapPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (_colorMapsList.Text != "user")
+            {
+                MessageBox.Show("Please choose the 'user' colormap in combobox");
+                return;
+            }
+
+            var colorSetupForm = new ColorSetupForm();
+
+            colorSetupForm.Colors = _colors;
+            colorSetupForm.Positions = _positions;
+
+            if (colorSetupForm.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            _colors = colorSetupForm.Colors;
+            _positions = colorSetupForm.Positions;
+
+            var surface = GetSurface();
+            CreateColorMap(surface);
+            UpdatePanels(surface);
         }
 
         private void UpdatePanels(Func<double, double, double> surface)

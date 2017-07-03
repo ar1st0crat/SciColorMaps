@@ -1,14 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace SciColorMaps
 {
     /// <summary>
     /// Color map 
-    /// 1) uses particular color palette,
+    /// 1) uses particular color palette (standard or user-defined),
     /// 2) automatically calculates color by value and range,
-    /// 3) can work with any number of colors
+    /// 3) can work with any number of colors in range [2, Palette resolution (currently 256)]
+    /// 
+    /// Usage example:
+    /// 
+    ///     var cmap = new ColorMap("coolwarm", -0.5, 0.5));
+    ///     ...
+    ///     var color = cmap[0.3];
+    ///     
+    ///     var viridis = new ColorMap();
+    ///     
+    ///     var cm = new ColorMap("ocean", 10, 100, 32 /*colors*/)
+    ///     
+    ///     
+    /// Several standard matplotlib palettes are available:
+    ///     bone, cool, coolwarm, gist_earth, gnuplot, gnuplot2, hot, inferno,
+    ///     jet, ocean, rainbow, seismic, spectral, terrain, viridis (default)
+    ///     
+    /// Users can create their own palettes, like this:
+    /// 
+    ///     var colors = new Color[] { Color.Black, Color.Blue, Color.White };
+    ///     var positions = new float[] { 0, 0.4f, 1 };
+    ///     
+    ///     // 1) static factory method with default colormap parameters:
+    ///     var cmap1 = ColorMap.CreateFromColors(colors, positions);
+    ///     
+    ///     // 2) static factory method, full set of parameters:
+    ///     var cmap2 = ColorMap.CreateFromColors(colors, positions, 10, 100, 32);
+    ///     
+    ///     // 3) from colors specified in byte arrays:
+    ///     var rgbs = new byte[][] { 
+    ///                               new byte[] {0, 0, 0},
+    ///                               new byte[] {192, 0, 0},
+    ///                               new byte[] {255, 224, 255}
+    ///                             };
+    ///     var cmap3 = ColorMap.CreateFromColors(rgbs, positions);
+    ///     
+    ///     // 4) ColorMap constructor:
+    ///     var cmap4 = new ColorMap("my_own_colormap", 10, 100, 32, colors, positions);
+    ///     
+    ///     // Option 4 allows user to set the name of the custom colormap
+    ///     // Otherwise the name is set by default: "user"
+    ///     
     /// </summary>
     public class ColorMap
     {
@@ -71,7 +113,7 @@ namespace SciColorMaps
 
 
         /// <summary>
-        /// Default constructor creates Jet colormap
+        /// Default constructor creates Viridis colormap
         /// </summary>
         public ColorMap() : this(DefaultPalette)
         {
@@ -81,9 +123,13 @@ namespace SciColorMaps
         /// Copy constructor
         /// </summary>
         /// <param name="colorMap">Copied colormap</param>
-        public ColorMap(ColorMap colorMap) : 
-            this(colorMap.PaletteName, colorMap._lower, colorMap._upper, colorMap._colorCount)
+        public ColorMap(ColorMap colorMap)
         {
+            PaletteName = colorMap.PaletteName;
+            _palette = colorMap._palette;
+            _lower = colorMap._lower;
+            _upper = colorMap._upper;
+            _colorCount = colorMap._colorCount;
             _colorRange = colorMap._colorRange;
             _colorBinSize = colorMap._colorBinSize;
         }
@@ -92,28 +138,32 @@ namespace SciColorMaps
         /// Construct new colormap
         /// </summary>
         /// <param name="name">Palette name</param>
-        /// <param name="lower">Lower bound of the colormap range</param>
-        /// <param name="upper">Upper bound of the colormap range</param>
-        /// <param name="colorCount">Number of colors in colormap</param>
+        /// <param name="lower">Lower bound of the colormap range (optional)</param>
+        /// <param name="upper">Upper bound of the colormap range (optional)</param>
+        /// <param name="colorCount">Number of colors in colormap (optional)</param>
+        /// <param name="colors">User-defined collection of colors (optional)</param>
+        /// <param name="positions">User-defined collection of color positions in palette (optional)</param>
         /// <exception cref="ArgumentException">Thrown if:
         /// 1) Palette name is null
         /// 2) Number of colors is less than 2 or greater than number of colors in palette
         /// 3) Lower bound is greater than the upper one
         /// </exception>
         public ColorMap(string name,
-                        double lower = 0.0f,
-                        double upper = 1.0f,
-                        int colorCount = Palette.Resolution)
+                        double lower = 0.0,
+                        double upper = 1.0,
+                        int colorCount = PaletteColors,
+                        IEnumerable<Color> colors = null,
+                        IEnumerable<float> positions = null)
         {
             if (name == null)
             {
                 throw new ArgumentException("Palette name should not be null!");
             }
 
-            if (colorCount <= 1 || colorCount > Palette.Resolution)
+            if (colorCount <= 1 || colorCount > PaletteColors)
             {
                 throw new ArgumentException(string.Format(
-                    "Number of colors should be in range [2, {0}]!", Palette.Resolution));
+                    "Number of colors should be in range [2, {0}]!", PaletteColors));
             }
 
             if (lower >= upper)
@@ -125,22 +175,138 @@ namespace SciColorMaps
             _lower = lower;
             _upper = upper;
             _colorRange = (_upper - _lower) / _colorCount;
-            _colorBinSize = Palette.Resolution / (_colorCount + 0.5);
+            _colorBinSize = PaletteColors / (_colorCount + 0.5);
 
-            // setting palette by name:
+            // setting palette:
 
-            var keyName = name.ToLower();
+            PaletteName = name.ToLower();
 
-            if (Palette.ByName.ContainsKey(keyName))
+            if (Palette.ByName.ContainsKey(PaletteName))
             {
-                PaletteName = keyName;
+                _palette = Palette.ByName[PaletteName].Value;
+            }
+            else if (colors == null)
+            {
+                PaletteName = DefaultPalette;
+                _palette = Palette.ByName[PaletteName].Value;
             }
             else
             {
-                PaletteName = DefaultPalette;
+                CreatePalette(colors, positions);
+            }
+        }
+
+        /// <summary>
+        /// Static factory method for creating user-defined palette
+        /// </summary>
+        /// <param name="colors">Collection of colors as Color objects</param>
+        /// <returns>ColorMap object</returns>
+        public static ColorMap CreateFromColors(IEnumerable<Color> colors,
+                                                IEnumerable<float> positions,
+                                                double lower = 0.0,
+                                                double upper = 1.0,
+                                                int colorCount = PaletteColors)
+        {
+            return new ColorMap("user", lower, upper, colorCount, colors, positions);
+        }
+
+        /// <summary>
+        /// Static factory method for creating user-defined palette
+        /// </summary>
+        /// <param name="colors">Collection of colors as byte[3] arrays</param>
+        /// <returns>ColorMap object</returns>
+        public static ColorMap CreateFromColors(IEnumerable<byte[]> colors,
+                                                IEnumerable<float> positions,
+                                                double lower = 0.0,
+                                                double upper = 1.0,
+                                                int colorCount = PaletteColors)
+        {
+            var rgbs = colors.Select(color => Color.FromArgb(color[0], color[1], color[2]));
+
+            return new ColorMap("user", lower, upper, colorCount, rgbs, positions);
+        }
+
+        /// <summary>
+        /// Method performs a simple RGB color interpolation for creating user-defined palette
+        /// </summary>
+        /// <param name="colors">Collection of colors</param>
+        /// <param name="positions">Collection of color positions</param>
+        /// <exception cref="ArgumentException">Thrown if:
+        /// 1) Collection of colors or color positions is null
+        /// 2) Number of colors is not the same as the number of color positions
+        /// 3) Number of colors is not in the range [2, PaletteColors]
+        /// 4) First color position is not 0.0f or last position is not 1.0f
+        /// </exception>
+        private void CreatePalette(IEnumerable<Color> colors, IEnumerable<float> positions)
+        {
+            if (colors == null || positions == null)
+            {
+                throw new ArgumentException("Collections of colors and positions should not be null!");
             }
 
-            _palette = Palette.ByName[PaletteName].Value;
+            if (colors.Count() != positions.Count())
+            {
+                throw new ArgumentException("Number of colors should be the same as the number of color positions!");
+            }
+
+            if (colors.Count() <= 1 || colors.Count() > PaletteColors)
+            {
+                throw new ArgumentException(string.Format(
+                    "Number of colors should be in range [2, {0}]!", PaletteColors));
+            }
+
+            if (positions.First() != 0 || positions.Last() != 1)
+            {
+                throw new ArgumentException("First color position should be 0.0f and last position should be 1.0f!");
+            }
+
+#if !RECTANGULAR
+            _palette = new byte[PaletteColors][];
+
+            var groups = positions.Select(pos => (int)(pos * PaletteColors)).ToList();
+
+            var i = 0;
+            for (var group = 0; group < groups.Count - 1; group++)
+            {
+                var color1 = colors.ElementAt(group);
+                var color2 = colors.ElementAt(group + 1);
+
+                var groupSize = groups[group + 1] - groups[group];
+
+                for (var j = 0; j < groupSize; j++)
+                {
+                    _palette[i] = new byte[3];
+
+                    _palette[i][0] = (byte)(color1.R + (double)(color2.R - color1.R) * j / groupSize);
+                    _palette[i][1] = (byte)(color1.G + (double)(color2.G - color1.G) * j / groupSize);
+                    _palette[i][2] = (byte)(color1.B + (double)(color2.B - color1.B) * j / groupSize);
+
+                    i++;
+                }
+            }
+#else
+            _palette = new byte[PaletteColors, 3];
+
+            var groups = positions.Select(pos => (int)(pos * PaletteColors)).ToList();
+
+            var i = 0;
+            for (var group = 0; group < groups.Count - 1; group++)
+            {
+                var color1 = colors.ElementAt(group);
+                var color2 = colors.ElementAt(group + 1);
+
+                var groupSize = groups[group + 1] - groups[group];
+
+                for (var j = 0; j < groupSize; j++)
+                {
+                    _palette[i, 0] = (byte)(color1.R + (double)(color2.R - color1.R) * j / groupSize);
+                    _palette[i, 1] = (byte)(color1.G + (double)(color2.G - color1.G) * j / groupSize);
+                    _palette[i, 2] = (byte)(color1.B + (double)(color2.B - color1.B) * j / groupSize);
+
+                    i++;
+                }
+            }
+#endif
         }
 
         /// <summary>
@@ -184,7 +350,7 @@ namespace SciColorMaps
 
                 if (value >= _upper)
                 {
-                    return _palette[Palette.Resolution - 1];
+                    return _palette[PaletteColors - 1];
                 }
 
                 // get position of the closest color with current resolution
@@ -210,9 +376,9 @@ namespace SciColorMaps
                 {
                     return new byte[]
                     {
-                        _palette[Palette.Resolution - 1, 0],
-                        _palette[Palette.Resolution - 1, 1],
-                        _palette[Palette.Resolution - 1, 2]
+                        _palette[PaletteColors - 1, 0],
+                        _palette[PaletteColors - 1, 1],
+                        _palette[PaletteColors - 1, 2]
                     };
                 }
 

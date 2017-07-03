@@ -38,7 +38,7 @@ namespace SciColorMaps
             var _prevPalette = _palette;
 
             // important: create new array for palette
-            _palette = new byte[Palette.Resolution][];
+            _palette = new byte[PaletteColors][];
 
             Func<byte[], byte> convertToGray;
 
@@ -66,7 +66,7 @@ namespace SciColorMaps
             var _prevPalette = _palette;
 
             // important: create new array for palette
-            _palette = new byte[Palette.Resolution, 3];
+            _palette = new byte[PaletteColors, 3];
 
             Func<byte, byte, byte, byte> convertToGray;
 

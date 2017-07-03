@@ -10,6 +10,22 @@ namespace SciColorMaps.Tests
         private const string DefaultPalette = "viridis";
         private const string DefaultPaletteDifferentCase = "Viridis";
 
+        private byte[][] colors;
+        private float[] positions;
+
+        [OneTimeSetUp]
+        public void PrepareUserColors()
+        {
+            colors = new byte[][]
+            {
+                new byte[] { 0, 0, 0 },
+                new byte[] { 255, 0, 0 },
+                new byte[] { 128, 255, 192 }
+            };
+
+            positions = new float[] { 0, 0.35f, 1 };
+        }
+
         [Test]
         public void TestWrongRange()
         {
@@ -30,6 +46,12 @@ namespace SciColorMaps.Tests
             var cmap = new ColorMap("unknown");
 
             Assert.That(cmap.PaletteName, Is.EqualTo(DefaultPalette));
+        }
+
+        [Test]
+        public void TestNullPaletteName()
+        {
+            Assert.Throws<ArgumentException>(() => { var cmap = new ColorMap(null, 10, 100); });
         }
 
         [Test]
@@ -81,6 +103,64 @@ namespace SciColorMaps.Tests
             {
                 Assert.DoesNotThrow(() => { var color = cmap.GetColorByNumber(i); });
             }
+        }
+
+        [Test]
+        public void TestUserDefinedColorPositionsNotNull()
+        {
+            Assert.Throws<ArgumentException>(() => {
+                var cmap = ColorMap.CreateFromColors(colors, null, -30, 30, 78);
+            });
+        }
+
+        [Test]
+        public void TestUserDefinedColorsInconsistentWithPositions()
+        {
+            Assert.Throws<ArgumentException>(() => {
+                var cmap = ColorMap.CreateFromColors(colors, new float[] { 0, 1 }, -30, 30, 78);
+            });
+        }
+
+        [Test]
+        public void TestAtLeastTwoUserDefinedColors()
+        {
+            Assert.Throws<ArgumentException>(() => {
+                var cmap = ColorMap.CreateFromColors(
+                    new byte[][] { new byte[] { 0, 0, 0 } }, new float[] { 0 }, -30, 30, 78);
+            });
+        }
+
+        [Test]
+        public void TestAllColorsAreRetrievedWithoutExceptionsInUserDefinedColormaps()
+        {
+            var cmap = ColorMap.CreateFromColors(colors, positions, -30, 30, 78);
+
+            for (var i = 0; i < 78; i++)
+            {
+                Assert.DoesNotThrow(() => { var color = cmap.GetColorByNumber(i); });
+            }
+        }
+
+        [Test]
+        public void TestIncorrectRGBFormatOfUserDefinedColors()
+        {
+            Assert.Throws<IndexOutOfRangeException>(() => {
+                var cmap = ColorMap.CreateFromColors(
+                    new byte[][] {
+                        new byte[] { 0, 0, 0 },
+                        new byte[] { 0, 0 }         // error here
+                    }, 
+                    new float[] { 0, 1 },
+                    -30, 30, 78);
+            });
+        }
+
+        [Test]
+        public void TestWrongColorPositions()
+        {
+            Assert.Throws<ArgumentException>(() => {
+                var cmap = ColorMap.CreateFromColors(colors, new float[] { 0, 0.5f, 1.2f }, -30, 30, 78);
+            });
         }
     }
 }

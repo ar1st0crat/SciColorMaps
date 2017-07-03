@@ -18,7 +18,7 @@ namespace SciColorMaps
     /// 
     /// 2)
     /// Palette arrays are instantiated LAZILY in the calling code, e.g.:
-    ///      var palette = Palette.Afmhot.Value;
+    ///      var palette = Palette.GnuPlot.Value;
     /// 
     /// 3)
     /// All palettes are READONLY arrays. That means they are NOT consts
