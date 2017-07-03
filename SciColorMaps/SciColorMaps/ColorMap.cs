@@ -67,7 +67,7 @@ namespace SciColorMaps
             get { return Palette.Names; }
         }
 
-        private const string DefaultPalette = "jet";
+        private const string DefaultPalette = "viridis";
 
 
         /// <summary>

@@ -5,6 +5,9 @@
 
 Custom .NET color maps (user-defined or imported from matplotlib) for scientific visualization
 
+
+## Base ColorMap class
+
 Usage example:
 
 ```
@@ -52,7 +55,10 @@ foreach (var palette in ColorMap.Palettes)
 
 ![pic2](https://github.com/ar1st0crat/SciColorMaps/blob/master/Screenshots/WinForms2.png)
 
-SciColorMaps also provides the ```GrayColorMap``` class. This class gently substitutes base palette with its grayscale analog during construction.
+
+## Grayscale colormaps
+
+SciColorMaps provides the ```GrayColorMap``` decorator class. This class gently substitutes base palette with its grayscale analog during construction.
 
 Usage example:
 
@@ -79,3 +85,16 @@ var cmap2 = new GrayColorMap(new ColorMap("gnuplot2", min, max), GrayScaleOption
 ```
 
 ![Grayscale](https://github.com/ar1st0crat/SciColorMaps/blob/master/Screenshots/WinFormsGray.png)
+
+
+## Mirrored colormaps
+
+SciColorMaps also provides the ```MirrorColorMap``` decorator class. This class substitutes base palette with its reversed analog during construction.
+
+Usage example:
+
+```
+// upper sreenshot
+var cmap = new MirrorColorMap(new ColorMap("ocean"));
+
+```

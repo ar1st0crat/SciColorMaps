@@ -37,6 +37,7 @@
     <Compile Include="ColorMap.cs" />
     <Compile Include="GrayColorMap.cs" />
     <Compile Include="GrayScaleOptions.cs" />
+    <Compile Include="MirrorColorMap.cs" />
     <Compile Include="Palette.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

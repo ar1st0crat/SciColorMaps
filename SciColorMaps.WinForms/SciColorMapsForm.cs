@@ -100,6 +100,8 @@ namespace SciColorMaps.WinForms
                 }
             }
 
+            _colorCount = (int)_colorCountUpDown.Value;
+
             _cmap = new ColorMap(_colorMapsList.Text, min, max, _colorCount);
 
             // if you wanna play around with gayscale colormaps uncomment this:
@@ -204,27 +206,59 @@ namespace SciColorMaps.WinForms
 
         private void _buttonShow_Click(object sender, EventArgs e)
         {
-            Func<double, double, double> surface;
-            switch (_surfacesList.SelectedIndex)
-            {
-                case 0:
-                    surface = Surface.HyperbolicParaboloid;
-                    break;
-                case 1:
-                    surface = Surface.EllipticParaboloid;
-                    break;
-                case 2:
-                default:
-                    surface = Surface.FancySurface;
-                    break;
-            }
-
-            _colorCount = (int)_colorCountUpDown.Value;
-
+            var surface = GetSurface();
             CreateColorMap(surface);
+            UpdatePanels(surface);
+        }
+
+        /// <summary>
+        /// 
+        /// Left button click: color map changes to mirrored 
+        /// 
+        /// Right button click: color map becomes grayscale
+        /// 
+        /// </summary>
+        private void _surfacePanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            var surface = GetSurface();
+
+            if (e.Button == MouseButtons.Left)
+            {
+                CreateColorMap(surface);
+
+                _cmap = new MirrorColorMap(_cmap);      // decoratin'
+
+                UpdatePanels(surface);
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                CreateColorMap(surface);
+
+                _cmap = new GrayColorMap(_cmap);        // decoratin'
+
+                UpdatePanels(surface);
+            }
+        }
+
+        private void UpdatePanels(Func<double, double, double> surface)
+        {
             ShowColormap();
             ShowSurface2D(surface);
             ShowSurface3D(surface);
+        }
+
+        private Func<double, double, double> GetSurface()
+        {
+            switch (_surfacesList.SelectedIndex)
+            {
+                case 0:
+                    return Surface.HyperbolicParaboloid;
+                case 1:
+                    return Surface.EllipticParaboloid;
+                case 2:
+                default:
+                    return Surface.FancySurface;
+            }
         }
     }
 }

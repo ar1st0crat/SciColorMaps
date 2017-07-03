@@ -58,7 +58,7 @@ namespace SciColorMaps
 
             for (var i = 0; i < PaletteColors; i++)
             {
-                byte gray = convertToGray(_prevPalette[i]);
+                var gray = convertToGray(_prevPalette[i]);
 
                 _palette[i] = new byte[3] { gray, gray, gray };
             }
@@ -90,7 +90,7 @@ namespace SciColorMaps
                 var g = _prevPalette[i, 1];
                 var b = _prevPalette[i, 2];
 
-                byte gray = convertToGray(r, g, b);
+                var gray = convertToGray(r, g, b);
 
                 _palette[i, 0] = gray;
                 _palette[i, 1] = gray;

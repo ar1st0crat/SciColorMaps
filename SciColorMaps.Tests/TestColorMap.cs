@@ -7,8 +7,8 @@ namespace SciColorMaps.Tests
     [TestFixture]
     public class TestColorMap
     {
-        private const string DefaultPalette = "jet";
-        private const string DefaultPaletteDifferentCase = "Jet";
+        private const string DefaultPalette = "viridis";
+        private const string DefaultPaletteDifferentCase = "Viridis";
 
         [Test]
         public void TestWrongRange()

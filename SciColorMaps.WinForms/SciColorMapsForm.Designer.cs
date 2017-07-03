@@ -104,6 +104,7 @@ namespace SciColorMaps.WinForms
             this._surfacePanel.Name = "_surfacePanel";
             this._surfacePanel.Size = new System.Drawing.Size(434, 267);
             this._surfacePanel.TabIndex = 1;
+            this._surfacePanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this._surfacePanel_MouseClick);
             // 
             // _labelSurfacesList
             // 
