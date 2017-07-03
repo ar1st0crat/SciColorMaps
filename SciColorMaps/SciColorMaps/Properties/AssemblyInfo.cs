@@ -1,17 +1,15 @@
 ﻿using System.Resources;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SciColorMaps")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A simple library providing custom color maps (user-defined or imported from matplotlib) for scientific visualization")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("ar1st0crat")]
 [assembly: AssemblyProduct("SciColorMaps")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCopyright("Copyright © ar1st0crat 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]

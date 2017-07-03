@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ar1st0crat.SciColorMaps</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>ar1st0crat</authors>
+    <owners>ar1st0crat</owners>
+    <licenseUrl>https://github.com/ar1st0crat/SciColorMaps/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/ar1st0crat/SciColorMaps</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A simple library providing custom color maps (user-defined or imported from matplotlib) for scientific visualization</description>
+    <releaseNotes>First release</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>colormap matplotlib charts color science visualization</tags>
+  </metadata>
+</package>
