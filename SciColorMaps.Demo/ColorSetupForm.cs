@@ -11,7 +11,7 @@ namespace SciColorMaps.WinForms
         public List<Color> Colors { get; set; }
         public List<float> Positions { get; set; }
 
-        private List<Panel> _panels = new List<Panel>();
+        private readonly List<Panel> _panels = new List<Panel>();
         
 
         public ColorSetupForm()
@@ -96,9 +96,11 @@ namespace SciColorMaps.WinForms
             LinearGradientBrush brush = new LinearGradientBrush(
                 _colorPanel.ClientRectangle, Color.White, Color.White, 0, false);
 
-            var blend = new ColorBlend();
-            blend.Positions = Positions.ToArray();
-            blend.Colors = Colors.ToArray();
+            var blend = new ColorBlend
+            {
+                Positions = Positions.ToArray(),
+                Colors = Colors.ToArray()
+            };
 
             brush.InterpolationColors = blend;
 

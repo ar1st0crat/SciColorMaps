@@ -10,20 +10,20 @@ namespace SciColorMaps.Tests
         private const string DefaultPalette = "viridis";
         private const string DefaultPaletteDifferentCase = "Viridis";
 
-        private byte[][] colors;
-        private float[] positions;
+        private byte[][] _colors;
+        private float[] _positions;
 
         [OneTimeSetUp]
         public void PrepareUserColors()
         {
-            colors = new byte[][]
+            _colors = new[]
             {
                 new byte[] { 0, 0, 0 },
                 new byte[] { 255, 0, 0 },
                 new byte[] { 128, 255, 192 }
             };
 
-            positions = new float[] { 0, 0.35f, 1 };
+            _positions = new[] { 0, 0.35f, 1 };
         }
 
         [Test]
@@ -95,13 +95,13 @@ namespace SciColorMaps.Tests
         }
 
         [Test]
-        public void TestAllColorsAreRetrievedByNumberWithoutExceptions()
+        public void TestAllColorsAreRetrievedWithoutExceptions()
         {
             var cmap = new ColorMap(DefaultPalette, -30, 30, 78);
 
             for (var i = 0; i < 78; i++)
             {
-                Assert.DoesNotThrow(() => { var color = cmap.GetColorByNumber(i); });
+                Assert.DoesNotThrow(() => { var colors = cmap.Colors().ToList(); });
             }
         }
 
@@ -109,7 +109,7 @@ namespace SciColorMaps.Tests
         public void TestUserDefinedColorPositionsNotNull()
         {
             Assert.Throws<ArgumentException>(() => {
-                var cmap = ColorMap.CreateFromColors(colors, null, -30, 30, 78);
+                var cmap = ColorMap.CreateFromColors(_colors, null, -30, 30, 78);
             });
         }
 
@@ -117,7 +117,7 @@ namespace SciColorMaps.Tests
         public void TestUserDefinedColorsInconsistentWithPositions()
         {
             Assert.Throws<ArgumentException>(() => {
-                var cmap = ColorMap.CreateFromColors(colors, new float[] { 0, 1 }, -30, 30, 78);
+                var cmap = ColorMap.CreateFromColors(_colors, new [] { 0, 1.0f }, -30, 30, 78);
             });
         }
 
@@ -126,31 +126,31 @@ namespace SciColorMaps.Tests
         {
             Assert.Throws<ArgumentException>(() => {
                 var cmap = ColorMap.CreateFromColors(
-                    new byte[][] { new byte[] { 0, 0, 0 } }, new float[] { 0 }, -30, 30, 78);
+                    new [] { new byte[] { 0, 0, 0 } }, new [] { 0.0f }, -30, 30, 78);
             });
         }
 
         [Test]
         public void TestAllColorsAreRetrievedWithoutExceptionsInUserDefinedColormaps()
         {
-            var cmap = ColorMap.CreateFromColors(colors, positions, -30, 30, 78);
+            var cmap = ColorMap.CreateFromColors(_colors, _positions, -30, 30, 78);
 
             for (var i = 0; i < 78; i++)
             {
-                Assert.DoesNotThrow(() => { var color = cmap.GetColorByNumber(i); });
+                Assert.DoesNotThrow(() => { var colors = cmap.Colors().ToList(); });
             }
         }
 
         [Test]
-        public void TestIncorrectRGBFormatOfUserDefinedColors()
+        public void TestIncorrectRgbFormatOfUserDefinedColors()
         {
-            Assert.Throws<IndexOutOfRangeException>(() => {
+            Assert.Throws<ArgumentException>(() => {
                 var cmap = ColorMap.CreateFromColors(
-                    new byte[][] {
+                    new [] {
                         new byte[] { 0, 0, 0 },
                         new byte[] { 0, 0 }         // error here
                     }, 
-                    new float[] { 0, 1 },
+                    new [] { 0, 1.0f },
                     -30, 30, 78);
             });
         }
@@ -159,7 +159,7 @@ namespace SciColorMaps.Tests
         public void TestWrongColorPositions()
         {
             Assert.Throws<ArgumentException>(() => {
-                var cmap = ColorMap.CreateFromColors(colors, new float[] { 0, 0.5f, 1.2f }, -30, 30, 78);
+                var cmap = ColorMap.CreateFromColors(_colors, new [] { 0, 0.5f, 1.2f }, -30, 30, 78);
             });
         }
     }

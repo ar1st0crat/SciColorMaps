@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SciColorMaps
+namespace SciColorMaps.Portable
 {
 #if !RECTANGULAR
 
@@ -1140,7 +1140,7 @@ namespace SciColorMaps
         /// </summary>
         public const int Resolution = 256;
 
-    #region palettes
+        #region palettes
 
         /// <summary>
         /// Colormap "bone" taken from matplotlib
@@ -2207,7 +2207,7 @@ namespace SciColorMaps
             {246, 230,  31}, {248, 230,  33}, {250, 230,  34}, {253, 231,  36}
         });
 
-    #endregion
+        #endregion
 
         /// <summary>
         /// Convenient dictionary for mapping palette names onto palette byte arrays
@@ -2238,4 +2238,5 @@ namespace SciColorMaps
         public static IEnumerable<string> Names => ByName.Keys;
     }
 #endif
+
 }

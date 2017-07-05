@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 
-namespace SciColorMaps
+namespace SciColorMaps.Portable
 {
     /// <summary>
     /// Color map 
@@ -28,8 +27,12 @@ namespace SciColorMaps
     ///     
     /// Users can create their own palettes, like this:
     /// 
-    ///     var colors = new Color[] { Color.Black, Color.Blue, Color.White };
-    ///     var positions = new float[] { 0, 0.4f, 1 };
+    ///     var colors = new [] { 
+    ///                            new byte[] {0, 0, 0},
+    ///                            new byte[] {192, 0, 0},
+    ///                            new byte[] {255, 224, 255}
+    ///                          };
+    ///     var positions = new [] { 0, 0.4f, 1 };
     ///     
     ///     // 1) static factory method with default colormap parameters:
     ///     var cmap1 = ColorMap.CreateFromColors(colors, positions);
@@ -37,19 +40,10 @@ namespace SciColorMaps
     ///     // 2) static factory method, full set of parameters:
     ///     var cmap2 = ColorMap.CreateFromColors(colors, positions, 10, 100, 32);
     ///     
-    ///     // 3) from colors specified in byte arrays:
-    ///     var rgbs = new byte[][] { 
-    ///                               new byte[] {0, 0, 0},
-    ///                               new byte[] {192, 0, 0},
-    ///                               new byte[] {255, 224, 255}
-    ///                             };
-    ///     var cmap3 = ColorMap.CreateFromColors(rgbs, positions);
+    ///     // 3) ColorMap constructor:
+    ///     var cmap3 = new ColorMap("my_own_colormap", 10, 100, 32, colors, positions);
     ///     
-    ///     // 4) ColorMap constructor:
-    ///     var cmap4 = new ColorMap("my_own_colormap", 10, 100, 32, colors, positions);
-    ///     var cmap5 = new ColorMap("another_one", 10, 100, 32, rgbs, positions);
-    ///     
-    ///     // Option 4 allows user to set the name of the custom colormap.
+    ///     // Option 3 allows user to set the name of the custom colormap
     ///     // Otherwise the name is set by default: "user"
     ///     
     /// </summary>
@@ -147,11 +141,11 @@ namespace SciColorMaps
         /// 3) Lower bound is greater than the upper one
         /// </exception>
         public ColorMap(string name,
-                        double lower,
-                        double upper,
-                        int colorCount,
-                        IEnumerable<byte[]> colors,
-                        IEnumerable<float> positions)
+                        double lower = 0.0,
+                        double upper = 1.0,
+                        int colorCount = PaletteColors,
+                        IEnumerable<byte[]> colors = null,
+                        IEnumerable<float> positions = null)
         {
             if (name == null)
             {
@@ -195,39 +189,6 @@ namespace SciColorMaps
         }
 
         /// <summary>
-        /// Parameterized constructor similar to previous one.
-        /// The only difference is that it accepts Colors instead of arrays of bytes
-        /// </summary>
-        public ColorMap(string name,
-                double lower = 0.0,
-                double upper = 1.0,
-                int colorCount = PaletteColors,
-                IEnumerable<Color> colors = null,
-                IEnumerable<float> positions = null
-            ) 
-            : this(name, lower, upper, colorCount, 
-                   colors?.Select(color => new[] { color.R, color.G, color.B }),
-                   positions)
-        {
-        }
-        
-        /// <summary>
-        /// Static factory method for creating user-defined palette
-        /// </summary>
-        /// <param name="colors">Collection of colors as Color objects</param>
-        /// <returns>ColorMap object</returns>
-        public static ColorMap CreateFromColors(IEnumerable<Color> colors,
-                                                IEnumerable<float> positions,
-                                                double lower = 0.0,
-                                                double upper = 1.0,
-                                                int colorCount = PaletteColors)
-        {
-            var rgbs = colors.Select(color => new [] { color.R, color.G, color.B });
-
-            return new ColorMap("user", lower, upper, colorCount, rgbs, positions);
-        }
-
-        /// <summary>
         /// Static factory method for creating user-defined palette
         /// </summary>
         /// <param name="colors">Collection of colors as byte[3] arrays</param>
@@ -251,6 +212,7 @@ namespace SciColorMaps
         /// 2) Number of colors is not the same as the number of color positions
         /// 3) Number of colors is not in the range [2, PaletteColors]
         /// 4) First color position is not 0.0f or last position is not 1.0f
+        /// 5) There's a color that's not represented with exactly 3 bytes
         /// </exception>
         private void CreatePalette(IEnumerable<byte[]> colors, IEnumerable<float> positions)
         {
@@ -331,40 +293,28 @@ namespace SciColorMaps
 
         /// <summary>
         /// Method returns colorCount-sized collection of base colors covering entire palette
-        /// (The last color in palette is always included to this collection as well)
         /// </summary>
         /// <returns>Collection of colors</returns>
-        public IEnumerable<Color> Colors()
+        public IEnumerable<byte[]> Colors()
         {
 #if !RECTANGULAR
             for (var i = 0; i < _colorCount; i++)
             {
                 var idx = (int)(i * _colorBinSize);
-                yield return Color.FromArgb(_palette[idx][0],
-                                            _palette[idx][1],
-                                            _palette[idx][2]);
+                yield return _palette[idx];
             }
 #else
             for (var i = 0; i < _colorCount; i++)
             {
-                var idx = (int) (i * _colorBinSize);
-                yield return Color.FromArgb(_palette[idx, 0],
-                                            _palette[idx, 1],
-                                            _palette[idx, 2]);
+                var idx = (int)(i * _colorBinSize);
+                yield return new []
+                {
+                    _palette[idx, 0],
+                    _palette[idx, 1],
+                    _palette[idx, 2]
+                };
             }
 #endif
-        }
-
-        /// <summary>
-        /// Get the color corresponding to a given domain value
-        /// </summary>
-        /// <param name="value">Particular domain value</param>
-        /// <returns>Corresponding color</returns>
-        public Color GetColor(double value)
-        {
-            var rgb = this[value];
-
-            return Color.FromArgb(rgb[0], rgb[1], rgb[2]);
         }
 
         /// <summary>
@@ -402,7 +352,9 @@ namespace SciColorMaps
                 {
                     return new [] 
                     {
-                        _palette[0, 0], _palette[0, 1], _palette[0, 2]
+                        _palette[0, 0],
+                        _palette[0, 1],
+                        _palette[0, 2]
                     };
                 }
 

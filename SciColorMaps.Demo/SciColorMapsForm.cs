@@ -95,9 +95,9 @@ namespace SciColorMaps.WinForms
             var min = double.MaxValue;
             var max = double.MinValue;
             
-            for (int x = SurfaceRect.Left; x < SurfaceRect.Right; x++)
+            for (var x = SurfaceRect.Left; x < SurfaceRect.Right; x++)
             {
-                for (int y = SurfaceRect.Top; y < SurfaceRect.Bottom; y++)
+                for (var y = SurfaceRect.Top; y < SurfaceRect.Bottom; y++)
                 {
                     var z = function(x, y);
 
@@ -126,31 +126,30 @@ namespace SciColorMaps.WinForms
 
         private void ShowColormap()
         {
-            LinearGradientBrush brush = new LinearGradientBrush(
+            var brush = new LinearGradientBrush(
                 _colorMapPanel.ClientRectangle, Color.White, Color.White, 0, false);
 
-            var blend = new ColorBlend();
-
-            blend.Positions = Enumerable.Range(0, _colorCount + 1)
-                                        .Select(pos => (float)pos / _colorCount)
-                                        .ToArray();
-
-            blend.Colors = Enumerable.Range(0, _colorCount + 1)
-                                     .Select(i => _cmap.GetColorByNumber(i))
-                                     .ToArray();
+            var blend = new ColorBlend
+            {
+                Colors = _cmap.Colors().ToArray(),
+                Positions = Enumerable.Range(0, _colorCount)
+                                      .Select(pos => (float)pos / (_colorCount - 1))
+                                      .ToArray()
+            };
 
             brush.InterpolationColors = blend;
 
-            _colorMapPanel.CreateGraphics().FillRectangle(brush, _colorMapPanel.ClientRectangle);
+            _colorMapPanel.CreateGraphics()
+                          .FillRectangle(brush, _colorMapPanel.ClientRectangle);
         }
         
         private void ShowSurface2D(Func<double, double, double> function)
         {
             var bmp = new Bitmap(SurfaceRect.Width, SurfaceRect.Height);
 
-            for (int x = SurfaceRect.Left; x < SurfaceRect.Right; x++)
+            for (var x = SurfaceRect.Left; x < SurfaceRect.Right; x++)
             {
-                for (int y = SurfaceRect.Top; y < SurfaceRect.Bottom; y++)
+                for (var y = SurfaceRect.Top; y < SurfaceRect.Bottom; y++)
                 {
                     var z = function(x, y);
                     bmp.SetPixel(x - SurfaceRect.Left, y - SurfaceRect.Top, _cmap.GetColor(z));
@@ -162,12 +161,12 @@ namespace SciColorMaps.WinForms
 
         private void ShowSurface3D(Func<double, double, double> function)
         {
-            var bmp3d = new Bitmap(2 * CenterX, 2 * CenterY);
+            var bmp3D = new Bitmap(2 * CenterX, 2 * CenterY);
 
             // draw axis
 
-            var axisRangeBegin = -80;
-            var axisRangeEnd = 80;
+            const int axisRangeBegin = -80;
+            const int axisRangeEnd = 80;
 
             for (double i = axisRangeBegin; i < axisRangeEnd; i += Stride)
             {
@@ -175,7 +174,7 @@ namespace SciColorMaps.WinForms
                 coords = RotateX(coords[0], coords[1], coords[2], AngleX);
                 coords = RotateZ(coords[0], coords[1], coords[2], AngleZ);
 
-                bmp3d.SetPixel((int)coords[0] + CenterX,
+                bmp3D.SetPixel((int)coords[0] + CenterX,
                                (int)coords[1] + CenterY,
                                Color.DarkGray);
 
@@ -183,7 +182,7 @@ namespace SciColorMaps.WinForms
                 coords = RotateX(coords[0], coords[1], coords[2], AngleX);
                 coords = RotateZ(coords[0], coords[1], coords[2], AngleZ);
 
-                bmp3d.SetPixel((int)coords[0] + CenterX,
+                bmp3D.SetPixel((int)coords[0] + CenterX,
                                (int)coords[1] + CenterY,
                                Color.DarkGray);
 
@@ -191,7 +190,7 @@ namespace SciColorMaps.WinForms
                 coords = RotateX(coords[0], coords[1], coords[2], AngleX);
                 coords = RotateZ(coords[0], coords[1], coords[2], AngleZ);
 
-                bmp3d.SetPixel((int)coords[0] + CenterX,
+                bmp3D.SetPixel((int)coords[0] + CenterX,
                                (int)coords[1] + CenterY,
                                Color.DarkGray);
             }
@@ -208,13 +207,13 @@ namespace SciColorMaps.WinForms
                     coords = RotateX(coords[0], coords[1], coords[2], AngleX);
                     coords = RotateZ(coords[0], coords[1], coords[2], AngleZ);
 
-                    bmp3d.SetPixel((int)coords[0] + CenterX,
+                    bmp3D.SetPixel((int)coords[0] + CenterX,
                                    (int)coords[1] + CenterY,
                                    _cmap.GetColor(z));
                 }
             }
 
-            _surface3dPanel.BackgroundImage = bmp3d;
+            _surface3dPanel.BackgroundImage = bmp3D;
         }
 
         private void _buttonShow_Click(object sender, EventArgs e)
@@ -235,17 +234,16 @@ namespace SciColorMaps.WinForms
         {
             var surface = GetSurface();
 
-            if (e.Button == MouseButtons.Left)
+            switch (e.Button)
             {
-                _cmap = new MirrorColorMap(_cmap);      // decoratin'
-
-                UpdatePanels(surface);
-            }
-            else if (e.Button == MouseButtons.Right)
-            {
-                _cmap = new GrayColorMap(_cmap);        // decoratin'
-
-                UpdatePanels(surface);
+                case MouseButtons.Left:
+                    _cmap = new MirrorColorMap(_cmap);      // decoratin'
+                    UpdatePanels(surface);
+                    break;
+                case MouseButtons.Right:
+                    _cmap = new GrayColorMap(_cmap);        // decoratin'
+                    UpdatePanels(surface);
+                    break;
             }
         }
 
@@ -257,11 +255,12 @@ namespace SciColorMaps.WinForms
                 return;
             }
 
-            var colorSetupForm = new ColorSetupForm();
-
-            colorSetupForm.Colors = _colors;
-            colorSetupForm.Positions = _positions;
-
+            var colorSetupForm = new ColorSetupForm
+            {
+                Colors = _colors,
+                Positions = _positions
+            };
+            
             if (colorSetupForm.ShowDialog() != DialogResult.OK)
             {
                 return;
@@ -290,7 +289,6 @@ namespace SciColorMaps.WinForms
                     return Surface.HyperbolicParaboloid;
                 case 1:
                     return Surface.EllipticParaboloid;
-                case 2:
                 default:
                     return Surface.FancySurface;
             }

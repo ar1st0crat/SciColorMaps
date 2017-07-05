@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace SciColorMaps
+namespace SciColorMaps.Portable
 {
     /// <summary>
     /// ColorMap decorator that converts all colors of decorated colormap to grayscale

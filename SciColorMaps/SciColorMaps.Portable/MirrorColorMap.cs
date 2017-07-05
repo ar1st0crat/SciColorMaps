@@ -1,4 +1,4 @@
-﻿namespace SciColorMaps
+﻿namespace SciColorMaps.Portable
 {
     /// <summary>
     /// ColorMap decorator that mirrors colors of decorated colormap
