@@ -175,7 +175,13 @@ var cmap = new MirrorColorMap(new ColorMap("ocean"));
 
 ## Compiling SciColorMaps
 
-1) Accessing elements in jagged arrays is significantly faster (up to 40%) compared to rectangular arrays, hence the jagged arrays are used and compiled by default. If an efficient memory management is of more importance then compile SciColorMaps with the 'RECTANGULAR' conditional symbol.
+1) Accessing elements in jagged arrays is significantly faster (up to **40%**) compared to rectangular arrays, hence the jagged arrays are used and compiled by default. If an efficient memory management is of more importance then compile SciColorMaps with the 'RECTANGULAR' conditional symbol.
+
+| compilation   | dll size |
+----------------|-----------
+| default       | ~259kb   |
+| RECTANGULAR   | ~27kb    |
+
 
 2) If you want to save some bytes you can remove any standard color map - just comment out all declarations you don't need in file ```Palette.cs```.
 
@@ -199,7 +205,5 @@ Left button click on colormap strip -> open dialog for constructing your own pal
 ## WPF demo app
 
 Shows how to use SciColorMaps.Portable.
-
-```
 
 ![WPF](https://github.com/ar1st0crat/SciColorMaps/blob/master/Screenshots/Wpf.png)

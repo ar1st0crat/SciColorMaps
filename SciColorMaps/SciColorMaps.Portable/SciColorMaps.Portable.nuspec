@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>ar1st0crat.SciColorMaps</id>
+    <id>ar1st0crat.SciColorMaps.Portable</id>
     <version>1.0.1</version>
     <title>$title$</title>
     <authors>ar1st0crat</authors>
@@ -9,8 +9,8 @@
     <licenseUrl>https://github.com/ar1st0crat/SciColorMaps/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/ar1st0crat/SciColorMaps</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A simple GDI+ based library providing custom color maps (user-defined or imported from matplotlib) for scientific visualization</description>
-    <releaseNotes>Second release. Please check out also SciColorMaps.Portable version.</releaseNotes>
+    <description>A simple portable library providing custom color maps (user-defined or imported from matplotlib) for scientific visualization</description>
+    <releaseNotes>This is the portable version of SciColorMaps library. It does not rely on any framework-dependent color structure (like System.Drawing.Color or System.Windows.Media.Color). It operates with pure byte arrays, so it can be used in any .NET project.</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>colormap charts color science visualization</tags>
   </metadata>
