@@ -1,0 +1,95 @@
+using System;
+using System.Collections.Generic;
+
+namespace SciColorMaps{%PORTABLE%}
+{
+#if !RECTANGULAR
+
+    /// <summary>
+    /// Class containing colormaps (palettes) imported from matplotlib
+    /// 
+    /// =========================== IMPORTANT NOTES! ==========================
+    /// 
+    /// 1)
+    /// Accessing elements in jagged arrays is significantly faster(up to 40%)
+    /// compared to rectangular arrays, so the following code is compiled by default.
+    /// If an efficient memory management is of more importance then compile
+    /// with the 'RECTANGULAR' conditional symbol.
+    /// 
+    /// 2)
+    /// Palette arrays are instantiated LAZILY in the calling code, e.g.:
+    ///      var palette = Palette.GnuPlot.Value;
+    /// 
+    /// 3)
+    /// All palettes are READONLY arrays. That means they are NOT consts
+    /// and can be modified by calling code. It is AGAINST the contract,
+    /// however for the sake of performance there are currently no 
+    /// additional checks or converting to ReadOnlyCollection in the code.
+    /// 
+    /// </summary>
+    static class Palette
+    {
+        /// <summary>
+        /// Number of base colors in palette
+        /// </summary>
+        public const int Resolution = {%RESOLUTION%};
+
+    #region palettes
+        {%COLORMAP%}
+        /// <summary>
+        /// Colormap "{%COLORMAP_NAME%}" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> {%COLORMAP_NAME_TITLE%} = new Lazy<byte[][]>(() => new []
+        {
+            {%BYTE[][]%}
+        });{%COLORMAP%}
+    #endregion
+
+        /// <summary>
+        /// Convenient dictionary for mapping palette names onto palette byte arrays
+        /// </summary>
+        public static readonly Dictionary<string, Lazy<byte[][]>>
+            ByName = new Dictionary<string, Lazy<byte[][]>>
+        {{%COLORMAP_PAIRS%}
+        };
+
+        /// <summary>
+        /// Enumerate all available palettes / colormaps
+        /// </summary>
+        public static IEnumerable<string> Names => ByName.Keys;
+    }
+
+#else
+    public static class Palette
+    {
+        /// <summary>
+        /// Number of base colors in palette
+        /// </summary>
+        public const int Resolution = {%RESOLUTION%};
+
+    #region palettes
+        {%COLORMAP%}
+        /// <summary>
+        /// Colormap "{%COLORMAP_NAME%}" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> {%COLORMAP_NAME_TITLE%} = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {%BYTE[,]%}
+        });{%COLORMAP%}
+    #endregion
+
+        /// <summary>
+        /// Convenient dictionary for mapping palette names onto palette byte arrays
+        /// </summary>
+        public static readonly Dictionary<string, Lazy<byte[,]>>
+            ByName = new Dictionary<string, Lazy<byte[,]>>
+        {{%COLORMAP_PAIRS%}
+        };
+
+        /// <summary>
+        /// Enumerate all available palettes / colormaps
+        /// </summary>
+        public static IEnumerable<string> Names => ByName.Keys;
+    }
+#endif
+}

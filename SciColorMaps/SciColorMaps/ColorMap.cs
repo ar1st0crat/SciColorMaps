@@ -7,9 +7,9 @@ namespace SciColorMaps
 {
     /// <summary>
     /// Color map 
-    /// 1) uses particular color palette (standard or user-defined),
+    /// 1) uses particular color palette (as in matplotlib or user-defined),
     /// 2) automatically calculates color by value and range,
-    /// 3) can work with any number of colors in range [2, Palette resolution (currently 256)]
+    /// 3) can work with any number of colors in range [2, 256]
     /// 
     /// Usage example:
     /// 
@@ -22,9 +22,9 @@ namespace SciColorMaps
     ///     var cm = new ColorMap("ocean", 10, 100, 32 /*colors*/)
     ///     
     ///     
-    /// Several standard matplotlib palettes are available:
+    /// All standard matplotlib palettes are available including:
     ///     bone, cool, coolwarm, gist_earth, gnuplot, gnuplot2, hot, inferno,
-    ///     jet, ocean, rainbow, seismic, spectral, terrain, viridis (default)
+    ///     jet, ocean, rainbow, seismic, spectral, terrain, viridis (default), etc.
     ///     
     /// Users can create their own palettes, like this:
     /// 
@@ -38,18 +38,18 @@ namespace SciColorMaps
     ///     var cmap2 = ColorMap.CreateFromColors(colors, positions, 10, 100, 32);
     ///     
     ///     // 3) from colors specified in byte arrays:
-    ///     var rgbs = new byte[][] { 
-    ///                               new byte[] {0, 0, 0},
-    ///                               new byte[] {192, 0, 0},
-    ///                               new byte[] {255, 224, 255}
-    ///                             };
+    ///     var rgbs = new [] { 
+    ///                          new byte[] {0, 0, 0},
+    ///                          new byte[] {192, 0, 0},
+    ///                          new byte[] {255, 224, 255}
+    ///                       };
     ///     var cmap3 = ColorMap.CreateFromColors(rgbs, positions);
     ///     
     ///     // 4) ColorMap constructor:
     ///     var cmap4 = new ColorMap("my_own_colormap", 10, 100, 32, colors, positions);
     ///     var cmap5 = new ColorMap("another_one", 10, 100, 32, rgbs, positions);
     ///     
-    ///     // Option 4 allows user to set the name of the custom colormap.
+    ///     // Option 4 allows user setting the name of the custom colormap.
     ///     // Otherwise the name is set by default: "user"
     ///     
     /// </summary>
@@ -97,10 +97,10 @@ namespace SciColorMaps
         public string PaletteName { get; private set; }
 
         /// <summary>
-        /// Return the number of predefined base colors in palettes
-        /// (i.e. 256, but it can be made customizable)
+        /// The number of interpolated colors in palettes (full palette)
+        /// (currently 256, but it is customizable)
         /// </summary>
-        public const int PaletteColors = Palette.Resolution;
+        public const int PaletteColors = 256;
 
         /// <summary>
         /// Return collection of available palettes
@@ -143,7 +143,7 @@ namespace SciColorMaps
         /// <param name="positions">User-defined collection of color positions in palette (optional)</param>
         /// <exception cref="ArgumentException">Thrown if:
         /// 1) Palette name is null
-        /// 2) Number of colors is less than 2 or greater than number of colors in palette
+        /// 2) Number of colors is less than 2 or greater than PaletteColors
         /// 3) Lower bound is greater than the upper one
         /// </exception>
         public ColorMap(string name,
@@ -175,22 +175,42 @@ namespace SciColorMaps
             _colorRange = (_upper - _lower) / _colorCount;
             _colorBinSize = PaletteColors / (_colorCount - 1 + 1.0 / PaletteColors);
 
-            // setting palette:
-
-            PaletteName = name.ToLower();
-
-            if (Palette.ByName.ContainsKey(PaletteName))
+            // create colormap from a predefined palette:
+            if (colors == null)
             {
-                _palette = Palette.ByName[PaletteName].Value;
+                PaletteName = name.ToLower();
+
+                if (!Palette.ByName.ContainsKey(PaletteName))
+                {
+                    PaletteName = DefaultPalette;
+                }
+
+                positions = Enumerable.Range(0, Palette.Resolution)
+                        .Select(pos => (float)pos / (Palette.Resolution - 1))
+                        .ToArray();
+
+                CreatePalette(Palette.ByName[PaletteName].Value, positions);
             }
-            else if (colors == null)
-            {
-                PaletteName = DefaultPalette;
-                _palette = Palette.ByName[PaletteName].Value;
-            }
+            // create colormap from user-defined colors:
             else
             {
+#if !RECTANGULAR
                 CreatePalette(colors, positions);
+#else
+                // convert collection of byte[] to rectangular array
+                var colors2D = new byte[colors.Count(), 3];
+
+                var i = 0;
+                foreach (var color in colors)
+                {
+                    colors2D[i, 0] = color[0];
+                    colors2D[i, 1] = color[1];
+                    colors2D[i, 2] = color[2];
+                    i++;
+                }
+
+                CreatePalette(colors2D, positions);
+#endif
             }
         }
 
@@ -252,6 +272,7 @@ namespace SciColorMaps
         /// 3) Number of colors is not in the range [2, PaletteColors]
         /// 4) First color position is not 0.0f or last position is not 1.0f
         /// </exception>
+#if !RECTANGULAR
         private void CreatePalette(IEnumerable<byte[]> colors, IEnumerable<float> positions)
         {
             if (colors == null || positions == null)
@@ -270,7 +291,7 @@ namespace SciColorMaps
                     "Number of colors should be in range [2, {0}]!", PaletteColors));
             }
 
-            if (positions.First() != 0 || positions.Last() != 1)
+            if (positions.First().CompareTo(0) != 0 || positions.Last().CompareTo(1) != 0)
             {
                 throw new ArgumentException("First color position should be 0.0f and last position should be 1.0f!");
             }
@@ -280,7 +301,6 @@ namespace SciColorMaps
                 throw new ArgumentException("Each color should be an array of 3 bytes!");
             }
 
-#if !RECTANGULAR
             _palette = new byte[PaletteColors][];
 
             var groups = positions.Select(pos => (int)(pos * PaletteColors)).ToList();
@@ -304,30 +324,61 @@ namespace SciColorMaps
                     i++;
                 }
             }
+        }
 #else
+        private void CreatePalette(byte[,] colors, IEnumerable<float> positions)
+        {
+            var colorCount = colors.GetLength(0);
+
+            if (colors == null || positions == null)
+            {
+                throw new ArgumentException("Collections of colors and positions should not be null!");
+            }
+
+            if (colorCount != positions.Count())
+            {
+                throw new ArgumentException("Number of colors should be the same as the number of color positions!");
+            }
+
+            if (colorCount <= 1 || colorCount > PaletteColors)
+            {
+                throw new ArgumentException(string.Format(
+                    "Number of colors should be in range [2, {0}]!", PaletteColors));
+            }
+
+            if (positions.First().CompareTo(0) != 0 || positions.Last().CompareTo(1) != 0)
+            {
+                throw new ArgumentException("First color position should be 0.0f and last position should be 1.0f!");
+            }
+
+            if (colors.GetLength(1) != 3)
+            {
+                throw new ArgumentException("Each color should be an array of 3 bytes!");
+            }
+
             _palette = new byte[PaletteColors, 3];
 
-            var groups = positions.Select(pos => (int)(pos * PaletteColors)).ToList();
+            var groups = positions.Select(pos => (int) (pos*PaletteColors)).ToList();
 
             var i = 0;
             for (var group = 0; group < groups.Count - 1; group++)
             {
-                var color1 = colors.ElementAt(group);
-                var color2 = colors.ElementAt(group + 1);
-
                 var groupSize = groups[group + 1] - groups[group];
 
                 for (var j = 0; j < groupSize; j++)
                 {
-                    _palette[i, 0] = (byte)(color1[0] + (double)(color2[0] - color1[0]) * j / groupSize);
-                    _palette[i, 1] = (byte)(color1[1] + (double)(color2[1] - color1[1]) * j / groupSize);
-                    _palette[i, 2] = (byte)(color1[2] + (double)(color2[2] - color1[2]) * j / groupSize);
+                    _palette[i, 0] =
+                        (byte) (colors[group, 0] + (double) (colors[group + 1, 0] - colors[group, 0]) * j / groupSize);
+                    _palette[i, 1] =
+                        (byte) (colors[group, 1] + (double) (colors[group + 1, 1] - colors[group, 1]) * j / groupSize);
+                    _palette[i, 2] =
+                        (byte) (colors[group, 2] + (double) (colors[group + 1, 2] - colors[group, 2]) * j / groupSize);
 
                     i++;
                 }
             }
-#endif
         }
+#endif
 
         /// <summary>
         /// Method returns colorCount-sized collection of base colors covering entire palette
@@ -353,18 +404,6 @@ namespace SciColorMaps
                                             _palette[idx, 2]);
             }
 #endif
-        }
-
-        /// <summary>
-        /// Get the color corresponding to a given domain value
-        /// </summary>
-        /// <param name="value">Particular domain value</param>
-        /// <returns>Corresponding color</returns>
-        public Color GetColor(double value)
-        {
-            var rgb = this[value];
-
-            return Color.FromArgb(rgb[0], rgb[1], rgb[2]);
         }
 
         /// <summary>
@@ -431,5 +470,18 @@ namespace SciColorMaps
             }
 #endif
         }
+
+        /// <summary>
+        /// Get the color corresponding to a given domain value
+        /// </summary>
+        /// <param name="value">Particular domain value</param>
+        /// <returns>Corresponding color</returns>
+        public Color GetColor(double value)
+        {
+            var rgb = this[value];
+
+            return Color.FromArgb(rgb[0], rgb[1], rgb[2]);
+        }
+
     }
 }

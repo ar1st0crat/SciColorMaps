@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace SciColorMaps
@@ -32,79 +32,284 @@ namespace SciColorMaps
         /// <summary>
         /// Number of base colors in palette
         /// </summary>
-        public const int Resolution = 256;
+        public const int Resolution = 16;
 
     #region palettes
+        
+        /// <summary>
+        /// Colormap "accent" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Accent = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {127, 201, 127},
+            new byte[] {154, 189, 164},
+            new byte[] {182, 177, 201},
+            new byte[] {210, 179, 187},
+            new byte[] {237, 187, 152},
+            new byte[] {253, 204, 137},
+            new byte[] {254, 232, 146},
+            new byte[] {240, 244, 154},
+            new byte[] {152, 179, 164},
+            new byte[] { 65, 114, 174},
+            new byte[] {128,  66, 156},
+            new byte[] {208,  19, 135},
+            new byte[] {226,  26,  98},
+            new byte[] {205,  65,  53},
+            new byte[] {177,  92,  34},
+            new byte[] {102, 102, 102}
+        });
+
+        /// <summary>
+        /// Colormap "afmhot" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Afmhot = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {  0,   0,   0},
+            new byte[] { 32,   0,   0},
+            new byte[] { 64,   0,   0},
+            new byte[] { 96,   0,   0},
+            new byte[] {128,   0,   0},
+            new byte[] {160,  32,   0},
+            new byte[] {192,  64,   0},
+            new byte[] {224,  96,   0},
+            new byte[] {255, 128,   0},
+            new byte[] {255, 160,  32},
+            new byte[] {255, 192,  65},
+            new byte[] {255, 224,  97},
+            new byte[] {255, 255, 129},
+            new byte[] {255, 255, 161},
+            new byte[] {255, 255, 193},
+            new byte[] {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "autumn" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Autumn = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255,   0,   0},
+            new byte[] {255,  16,   0},
+            new byte[] {255,  32,   0},
+            new byte[] {255,  48,   0},
+            new byte[] {255,  64,   0},
+            new byte[] {255,  80,   0},
+            new byte[] {255,  96,   0},
+            new byte[] {255, 112,   0},
+            new byte[] {255, 128,   0},
+            new byte[] {255, 144,   0},
+            new byte[] {255, 160,   0},
+            new byte[] {255, 176,   0},
+            new byte[] {255, 192,   0},
+            new byte[] {255, 208,   0},
+            new byte[] {255, 224,   0},
+            new byte[] {255, 255,   0}
+        });
+
+        /// <summary>
+        /// Colormap "binary" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Binary = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255, 255, 255},
+            new byte[] {239, 239, 239},
+            new byte[] {223, 223, 223},
+            new byte[] {207, 207, 207},
+            new byte[] {191, 191, 191},
+            new byte[] {175, 175, 175},
+            new byte[] {159, 159, 159},
+            new byte[] {143, 143, 143},
+            new byte[] {127, 127, 127},
+            new byte[] {111, 111, 111},
+            new byte[] { 95,  95,  95},
+            new byte[] { 79,  79,  79},
+            new byte[] { 63,  63,  63},
+            new byte[] { 47,  47,  47},
+            new byte[] { 31,  31,  31},
+            new byte[] {  0,   0,   0}
+        });
+
+        /// <summary>
+        /// Colormap "blues" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Blues = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {247, 251, 255},
+            new byte[] {234, 242, 250},
+            new byte[] {221, 234, 246},
+            new byte[] {209, 226, 242},
+            new byte[] {197, 218, 238},
+            new byte[] {177, 210, 231},
+            new byte[] {157, 201, 224},
+            new byte[] {131, 187, 219},
+            new byte[] {106, 173, 213},
+            new byte[] { 85, 159, 205},
+            new byte[] { 65, 145, 197},
+            new byte[] { 48, 128, 189},
+            new byte[] { 32, 112, 180},
+            new byte[] { 19,  96, 167},
+            new byte[] {  8,  80, 154},
+            new byte[] {  8,  48, 107}
+        });
 
         /// <summary>
         /// Colormap "bone" taken from matplotlib
         /// </summary>
         public static readonly Lazy<byte[][]> Bone = new Lazy<byte[][]>(() => new []
         {
-            new byte[] {  0,   0,   0}, new byte[] {  0,   0,   1}, new byte[] {  1,   1,   2}, new byte[] {  2,   2,   3},
-            new byte[] {  3,   3,   4}, new byte[] {  4,   4,   6}, new byte[] {  5,   5,   7}, new byte[] {  6,   6,   8},
-            new byte[] {  7,   6,   9}, new byte[] {  7,   7,  10}, new byte[] {  8,   8,  12}, new byte[] {  9,   9,  13},
-            new byte[] { 10,  10,  14}, new byte[] { 11,  11,  15}, new byte[] { 12,  12,  17}, new byte[] { 13,  13,  18},
-            new byte[] { 14,  13,  19}, new byte[] { 14,  14,  20}, new byte[] { 15,  15,  21}, new byte[] { 16,  16,  23},
-            new byte[] { 17,  17,  24}, new byte[] { 18,  18,  25}, new byte[] { 19,  19,  26}, new byte[] { 20,  20,  28},
-            new byte[] { 21,  20,  29}, new byte[] { 21,  21,  30}, new byte[] { 22,  22,  31}, new byte[] { 23,  23,  32},
-            new byte[] { 24,  24,  34}, new byte[] { 25,  25,  35}, new byte[] { 26,  26,  36}, new byte[] { 27,  27,  37},
-            new byte[] { 28,  27,  38}, new byte[] { 28,  28,  40}, new byte[] { 29,  29,  41}, new byte[] { 30,  30,  42},
-            new byte[] { 31,  31,  43}, new byte[] { 32,  32,  45}, new byte[] { 33,  33,  46}, new byte[] { 34,  34,  47},
-            new byte[] { 35,  34,  48}, new byte[] { 35,  35,  49}, new byte[] { 36,  36,  51}, new byte[] { 37,  37,  52},
-            new byte[] { 38,  38,  53}, new byte[] { 39,  39,  54}, new byte[] { 40,  40,  56}, new byte[] { 41,  41,  57},
-            new byte[] { 42,  41,  58}, new byte[] { 42,  42,  59}, new byte[] { 43,  43,  60}, new byte[] { 44,  44,  62},
-            new byte[] { 45,  45,  63}, new byte[] { 46,  46,  64}, new byte[] { 47,  47,  65}, new byte[] { 48,  48,  66},
-            new byte[] { 49,  48,  68}, new byte[] { 49,  49,  69}, new byte[] { 50,  50,  70}, new byte[] { 51,  51,  71},
-            new byte[] { 52,  52,  73}, new byte[] { 53,  53,  74}, new byte[] { 54,  54,  75}, new byte[] { 55,  55,  76},
-            new byte[] { 56,  55,  77}, new byte[] { 56,  56,  79}, new byte[] { 57,  57,  80}, new byte[] { 58,  58,  81},
-            new byte[] { 59,  59,  82}, new byte[] { 60,  60,  84}, new byte[] { 61,  61,  85}, new byte[] { 62,  62,  86},
-            new byte[] { 63,  62,  87}, new byte[] { 63,  63,  88}, new byte[] { 64,  64,  90}, new byte[] { 65,  65,  91},
-            new byte[] { 66,  66,  92}, new byte[] { 67,  67,  93}, new byte[] { 68,  68,  94}, new byte[] { 69,  69,  96},
-            new byte[] { 70,  69,  97}, new byte[] { 70,  70,  98}, new byte[] { 71,  71,  99}, new byte[] { 72,  72, 101},
-            new byte[] { 73,  73, 102}, new byte[] { 74,  74, 103}, new byte[] { 75,  75, 104}, new byte[] { 76,  76, 105},
-            new byte[] { 77,  76, 107}, new byte[] { 77,  77, 108}, new byte[] { 78,  78, 109}, new byte[] { 79,  79, 110},
-            new byte[] { 80,  80, 112}, new byte[] { 81,  81, 113}, new byte[] { 82,  82, 114}, new byte[] { 83,  83, 114},
-            new byte[] { 84,  84, 115}, new byte[] { 84,  86, 116}, new byte[] { 85,  87, 117}, new byte[] { 86,  88, 118},
-            new byte[] { 87,  89, 119}, new byte[] { 88,  90, 120}, new byte[] { 89,  92, 121}, new byte[] { 90,  93, 121},
-            new byte[] { 91,  94, 122}, new byte[] { 91,  95, 123}, new byte[] { 92,  96, 124}, new byte[] { 93,  98, 125},
-            new byte[] { 94,  99, 126}, new byte[] { 95, 100, 127}, new byte[] { 96, 101, 128}, new byte[] { 97, 102, 128},
-            new byte[] { 98, 104, 129}, new byte[] { 98, 105, 130}, new byte[] { 99, 106, 131}, new byte[] {100, 107, 132},
-            new byte[] {101, 109, 133}, new byte[] {102, 110, 134}, new byte[] {103, 111, 135}, new byte[] {104, 112, 135},
-            new byte[] {105, 113, 136}, new byte[] {105, 115, 137}, new byte[] {106, 116, 138}, new byte[] {107, 117, 139},
-            new byte[] {108, 118, 140}, new byte[] {109, 119, 141}, new byte[] {110, 121, 142}, new byte[] {111, 122, 142},
-            new byte[] {112, 123, 143}, new byte[] {112, 124, 144}, new byte[] {113, 125, 145}, new byte[] {114, 127, 146},
-            new byte[] {115, 128, 147}, new byte[] {116, 129, 148}, new byte[] {117, 130, 149}, new byte[] {118, 131, 149},
-            new byte[] {119, 133, 150}, new byte[] {119, 134, 151}, new byte[] {120, 135, 152}, new byte[] {121, 136, 153},
-            new byte[] {122, 137, 154}, new byte[] {123, 139, 155}, new byte[] {124, 140, 156}, new byte[] {125, 141, 156},
-            new byte[] {126, 142, 157}, new byte[] {126, 143, 158}, new byte[] {127, 145, 159}, new byte[] {128, 146, 160},
-            new byte[] {129, 147, 161}, new byte[] {130, 148, 162}, new byte[] {131, 149, 163}, new byte[] {132, 151, 163},
-            new byte[] {133, 152, 164}, new byte[] {133, 153, 165}, new byte[] {134, 154, 166}, new byte[] {135, 155, 167},
-            new byte[] {136, 157, 168}, new byte[] {137, 158, 169}, new byte[] {138, 159, 170}, new byte[] {139, 160, 170},
-            new byte[] {140, 161, 171}, new byte[] {140, 163, 172}, new byte[] {141, 164, 173}, new byte[] {142, 165, 174},
-            new byte[] {143, 166, 175}, new byte[] {144, 167, 176}, new byte[] {145, 169, 177}, new byte[] {146, 170, 177},
-            new byte[] {147, 171, 178}, new byte[] {147, 172, 179}, new byte[] {148, 173, 180}, new byte[] {149, 175, 181},
-            new byte[] {150, 176, 182}, new byte[] {151, 177, 183}, new byte[] {152, 178, 184}, new byte[] {153, 179, 184},
-            new byte[] {154, 181, 185}, new byte[] {154, 182, 186}, new byte[] {155, 183, 187}, new byte[] {156, 184, 188},
-            new byte[] {157, 186, 189}, new byte[] {158, 187, 190}, new byte[] {159, 188, 191}, new byte[] {160, 189, 191},
-            new byte[] {161, 190, 192}, new byte[] {161, 192, 193}, new byte[] {162, 193, 194}, new byte[] {163, 194, 195},
-            new byte[] {164, 195, 196}, new byte[] {165, 196, 197}, new byte[] {166, 198, 198}, new byte[] {167, 199, 198},
-            new byte[] {168, 199, 199}, new byte[] {170, 200, 200}, new byte[] {171, 201, 201}, new byte[] {172, 202, 202},
-            new byte[] {174, 203, 203}, new byte[] {175, 204, 204}, new byte[] {177, 205, 205}, new byte[] {178, 206, 205},
-            new byte[] {179, 206, 206}, new byte[] {181, 207, 207}, new byte[] {182, 208, 208}, new byte[] {183, 209, 209},
-            new byte[] {185, 210, 210}, new byte[] {186, 211, 211}, new byte[] {188, 212, 212}, new byte[] {189, 213, 212},
-            new byte[] {190, 213, 213}, new byte[] {192, 214, 214}, new byte[] {193, 215, 215}, new byte[] {194, 216, 216},
-            new byte[] {196, 217, 217}, new byte[] {197, 218, 218}, new byte[] {198, 219, 219}, new byte[] {200, 220, 219},
-            new byte[] {201, 220, 220}, new byte[] {203, 221, 221}, new byte[] {204, 222, 222}, new byte[] {205, 223, 223},
-            new byte[] {207, 224, 224}, new byte[] {208, 225, 225}, new byte[] {209, 226, 226}, new byte[] {211, 227, 226},
-            new byte[] {212, 227, 227}, new byte[] {213, 228, 228}, new byte[] {215, 229, 229}, new byte[] {216, 230, 230},
-            new byte[] {218, 231, 231}, new byte[] {219, 232, 232}, new byte[] {220, 233, 233}, new byte[] {222, 234, 233},
-            new byte[] {223, 234, 234}, new byte[] {224, 235, 235}, new byte[] {226, 236, 236}, new byte[] {227, 237, 237},
-            new byte[] {229, 238, 238}, new byte[] {230, 239, 239}, new byte[] {231, 240, 240}, new byte[] {233, 241, 240},
-            new byte[] {234, 241, 241}, new byte[] {235, 242, 242}, new byte[] {237, 243, 243}, new byte[] {238, 244, 244},
-            new byte[] {239, 245, 245}, new byte[] {241, 246, 246}, new byte[] {242, 247, 247}, new byte[] {244, 248, 247},
-            new byte[] {245, 248, 248}, new byte[] {246, 249, 249}, new byte[] {248, 250, 250}, new byte[] {249, 251, 251},
-            new byte[] {250, 252, 252}, new byte[] {252, 253, 253}, new byte[] {253, 254, 254}, new byte[] {255, 255, 255}
+            new byte[] {  0,   0,   0},
+            new byte[] { 14,  13,  19},
+            new byte[] { 28,  27,  38},
+            new byte[] { 42,  41,  58},
+            new byte[] { 56,  55,  77},
+            new byte[] { 70,  69,  97},
+            new byte[] { 84,  84, 115},
+            new byte[] { 98, 104, 129},
+            new byte[] {112, 123, 143},
+            new byte[] {126, 142, 157},
+            new byte[] {140, 161, 171},
+            new byte[] {154, 181, 185},
+            new byte[] {168, 199, 199},
+            new byte[] {190, 213, 213},
+            new byte[] {212, 227, 227},
+            new byte[] {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "brbg" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Brbg = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] { 84,  48,   5},
+            new byte[] {119,  68,   8},
+            new byte[] {153,  93,  18},
+            new byte[] {185, 123,  40},
+            new byte[] {207, 162,  85},
+            new byte[] {226, 199, 134},
+            new byte[] {240, 223, 178},
+            new byte[] {245, 237, 214},
+            new byte[] {244, 244, 244},
+            new byte[] {215, 237, 234},
+            new byte[] {179, 226, 219},
+            new byte[] {134, 207, 196},
+            new byte[] { 88, 176, 166},
+            new byte[] { 44, 143, 135},
+            new byte[] { 12, 112, 104},
+            new byte[] {  0,  60,  48}
+        });
+
+        /// <summary>
+        /// Colormap "brg" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Brg = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {  0,   0, 255},
+            new byte[] { 32,   0, 223},
+            new byte[] { 64,   0, 191},
+            new byte[] { 96,   0, 159},
+            new byte[] {128,   0, 127},
+            new byte[] {160,   0,  95},
+            new byte[] {192,   0,  63},
+            new byte[] {224,   0,  31},
+            new byte[] {254,   1,   0},
+            new byte[] {222,  33,   0},
+            new byte[] {190,  65,   0},
+            new byte[] {158,  97,   0},
+            new byte[] {126, 129,   0},
+            new byte[] { 94, 161,   0},
+            new byte[] { 62, 193,   0},
+            new byte[] {  0, 255,   0}
+        });
+
+        /// <summary>
+        /// Colormap "bugn" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Bugn = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {247, 252, 253},
+            new byte[] {237, 248, 250},
+            new byte[] {228, 244, 248},
+            new byte[] {216, 240, 239},
+            new byte[] {203, 235, 229},
+            new byte[] {178, 225, 215},
+            new byte[] {152, 215, 200},
+            new byte[] {126, 204, 181},
+            new byte[] {101, 193, 163},
+            new byte[] { 82, 183, 140},
+            new byte[] { 64, 173, 117},
+            new byte[] { 49, 155,  92},
+            new byte[] { 34, 138,  68},
+            new byte[] { 16, 123,  55},
+            new byte[] {  0, 107,  43},
+            new byte[] {  0,  68,  27}
+        });
+
+        /// <summary>
+        /// Colormap "bupu" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Bupu = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {247, 252, 253},
+            new byte[] {235, 243, 248},
+            new byte[] {223, 235, 243},
+            new byte[] {207, 223, 236},
+            new byte[] {190, 210, 229},
+            new byte[] {174, 199, 223},
+            new byte[] {157, 187, 217},
+            new byte[] {148, 168, 207},
+            new byte[] {140, 149, 197},
+            new byte[] {140, 127, 187},
+            new byte[] {139, 106, 176},
+            new byte[] {137,  85, 166},
+            new byte[] {135,  63, 156},
+            new byte[] {132,  38, 139},
+            new byte[] {127,  14, 122},
+            new byte[] { 77,   0,  75}
+        });
+
+        /// <summary>
+        /// Colormap "bwr" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Bwr = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {  0,   0, 255},
+            new byte[] { 32,  32, 255},
+            new byte[] { 64,  64, 255},
+            new byte[] { 96,  96, 255},
+            new byte[] {128, 128, 255},
+            new byte[] {160, 160, 255},
+            new byte[] {192, 192, 255},
+            new byte[] {224, 224, 255},
+            new byte[] {255, 254, 254},
+            new byte[] {255, 222, 222},
+            new byte[] {255, 190, 190},
+            new byte[] {255, 158, 158},
+            new byte[] {255, 126, 126},
+            new byte[] {255,  94,  94},
+            new byte[] {255,  62,  62},
+            new byte[] {255,   0,   0}
+        });
+
+        /// <summary>
+        /// Colormap "cmrmap" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Cmrmap = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {  0,   0,   0},
+            new byte[] { 19,  19,  64},
+            new byte[] { 38,  38, 127},
+            new byte[] { 57,  38, 159},
+            new byte[] { 77,  38, 190},
+            new byte[] {115,  44, 158},
+            new byte[] {154,  51, 126},
+            new byte[] {205,  57,  81},
+            new byte[] {254,  64,  37},
+            new byte[] {241,  96,  18},
+            new byte[] {229, 128,   0},
+            new byte[] {229, 160,  13},
+            new byte[] {229, 192,  27},
+            new byte[] {229, 211,  79},
+            new byte[] {230, 230, 131},
+            new byte[] {255, 255, 255}
         });
 
         /// <summary>
@@ -112,354 +317,436 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[][]> Cool = new Lazy<byte[][]>(() => new []
         {
-            new byte[] {  0, 255, 255}, new byte[] {  1, 254, 255}, new byte[] {  2, 253, 255}, new byte[] {  3, 252, 255},
-            new byte[] {  4, 251, 255}, new byte[] {  5, 250, 255}, new byte[] {  6, 249, 255}, new byte[] {  7, 248, 255},
-            new byte[] {  8, 247, 255}, new byte[] {  9, 246, 255}, new byte[] { 10, 245, 255}, new byte[] { 11, 244, 255},
-            new byte[] { 12, 243, 255}, new byte[] { 13, 242, 255}, new byte[] { 14, 241, 255}, new byte[] { 15, 240, 255},
-            new byte[] { 16, 239, 255}, new byte[] { 17, 238, 255}, new byte[] { 18, 237, 255}, new byte[] { 19, 236, 255},
-            new byte[] { 20, 235, 255}, new byte[] { 21, 234, 255}, new byte[] { 22, 233, 255}, new byte[] { 23, 232, 255},
-            new byte[] { 24, 231, 255}, new byte[] { 25, 230, 255}, new byte[] { 26, 229, 255}, new byte[] { 27, 228, 255},
-            new byte[] { 28, 227, 255}, new byte[] { 29, 226, 255}, new byte[] { 30, 225, 255}, new byte[] { 31, 224, 255},
-            new byte[] { 32, 223, 255}, new byte[] { 32, 222, 255}, new byte[] { 34, 221, 255}, new byte[] { 35, 220, 255},
-            new byte[] { 36, 219, 255}, new byte[] { 36, 218, 255}, new byte[] { 38, 217, 255}, new byte[] { 39, 216, 255},
-            new byte[] { 40, 215, 255}, new byte[] { 40, 214, 255}, new byte[] { 42, 213, 255}, new byte[] { 43, 211, 255},
-            new byte[] { 44, 211, 255}, new byte[] { 44, 210, 255}, new byte[] { 46, 209, 255}, new byte[] { 47, 208, 255},
-            new byte[] { 48, 207, 255}, new byte[] { 48, 206, 255}, new byte[] { 50, 205, 255}, new byte[] { 51, 204, 255},
-            new byte[] { 52, 203, 255}, new byte[] { 52, 202, 255}, new byte[] { 54, 201, 255}, new byte[] { 55, 200, 255},
-            new byte[] { 56, 199, 255}, new byte[] { 56, 198, 255}, new byte[] { 58, 197, 255}, new byte[] { 59, 195, 255},
-            new byte[] { 60, 195, 255}, new byte[] { 60, 194, 255}, new byte[] { 62, 193, 255}, new byte[] { 63, 192, 255},
-            new byte[] { 64, 191, 255}, new byte[] { 65, 190, 255}, new byte[] { 65, 189, 255}, new byte[] { 67, 188, 255},
-            new byte[] { 68, 187, 255}, new byte[] { 69, 186, 255}, new byte[] { 70, 185, 255}, new byte[] { 71, 184, 255},
-            new byte[] { 72, 183, 255}, new byte[] { 73, 182, 255}, new byte[] { 73, 181, 255}, new byte[] { 75, 179, 255},
-            new byte[] { 76, 179, 255}, new byte[] { 77, 178, 255}, new byte[] { 78, 177, 255}, new byte[] { 79, 176, 255},
-            new byte[] { 80, 175, 255}, new byte[] { 81, 174, 255}, new byte[] { 81, 173, 255}, new byte[] { 83, 172, 255},
-            new byte[] { 84, 171, 255}, new byte[] { 85, 170, 255}, new byte[] { 86, 169, 255}, new byte[] { 87, 168, 255},
-            new byte[] { 88, 167, 255}, new byte[] { 89, 166, 255}, new byte[] { 89, 165, 255}, new byte[] { 91, 163, 255},
-            new byte[] { 92, 163, 255}, new byte[] { 93, 162, 255}, new byte[] { 94, 161, 255}, new byte[] { 95, 160, 255},
-            new byte[] { 96, 159, 255}, new byte[] { 97, 158, 255}, new byte[] { 97, 157, 255}, new byte[] { 99, 156, 255},
-            new byte[] {100, 155, 255}, new byte[] {101, 154, 255}, new byte[] {102, 153, 255}, new byte[] {103, 152, 255},
-            new byte[] {104, 151, 255}, new byte[] {105, 150, 255}, new byte[] {105, 149, 255}, new byte[] {107, 147, 255},
-            new byte[] {108, 147, 255}, new byte[] {109, 146, 255}, new byte[] {110, 145, 255}, new byte[] {111, 144, 255},
-            new byte[] {112, 143, 255}, new byte[] {113, 142, 255}, new byte[] {113, 141, 255}, new byte[] {115, 140, 255},
-            new byte[] {116, 139, 255}, new byte[] {117, 138, 255}, new byte[] {118, 137, 255}, new byte[] {119, 136, 255},
-            new byte[] {120, 135, 255}, new byte[] {121, 134, 255}, new byte[] {121, 133, 255}, new byte[] {123, 131, 255},
-            new byte[] {124, 131, 255}, new byte[] {125, 130, 255}, new byte[] {126, 129, 255}, new byte[] {127, 128, 255},
-            new byte[] {128, 127, 255}, new byte[] {129, 126, 255}, new byte[] {130, 125, 255}, new byte[] {131, 124, 255},
-            new byte[] {131, 123, 255}, new byte[] {133, 121, 255}, new byte[] {134, 121, 255}, new byte[] {135, 120, 255},
-            new byte[] {136, 119, 255}, new byte[] {137, 118, 255}, new byte[] {138, 117, 255}, new byte[] {139, 116, 255},
-            new byte[] {140, 114, 255}, new byte[] {141, 113, 255}, new byte[] {142, 113, 255}, new byte[] {143, 112, 255},
-            new byte[] {144, 111, 255}, new byte[] {145, 110, 255}, new byte[] {146, 109, 255}, new byte[] {147, 108, 255},
-            new byte[] {147, 107, 255}, new byte[] {149, 105, 255}, new byte[] {150, 105, 255}, new byte[] {151, 104, 255},
-            new byte[] {152, 103, 255}, new byte[] {153, 102, 255}, new byte[] {154, 101, 255}, new byte[] {155, 100, 255},
-            new byte[] {156,  98, 255}, new byte[] {157,  97, 255}, new byte[] {158,  97, 255}, new byte[] {159,  96, 255},
-            new byte[] {160,  95, 255}, new byte[] {161,  94, 255}, new byte[] {162,  93, 255}, new byte[] {163,  92, 255},
-            new byte[] {163,  91, 255}, new byte[] {165,  89, 255}, new byte[] {166,  89, 255}, new byte[] {167,  88, 255},
-            new byte[] {168,  87, 255}, new byte[] {169,  86, 255}, new byte[] {170,  85, 255}, new byte[] {171,  84, 255},
-            new byte[] {172,  82, 255}, new byte[] {173,  81, 255}, new byte[] {174,  81, 255}, new byte[] {175,  80, 255},
-            new byte[] {176,  79, 255}, new byte[] {177,  78, 255}, new byte[] {178,  77, 255}, new byte[] {179,  76, 255},
-            new byte[] {179,  75, 255}, new byte[] {181,  73, 255}, new byte[] {182,  73, 255}, new byte[] {183,  72, 255},
-            new byte[] {184,  71, 255}, new byte[] {185,  70, 255}, new byte[] {186,  69, 255}, new byte[] {187,  68, 255},
-            new byte[] {188,  66, 255}, new byte[] {189,  65, 255}, new byte[] {190,  65, 255}, new byte[] {191,  64, 255},
-            new byte[] {192,  63, 255}, new byte[] {193,  62, 255}, new byte[] {194,  61, 255}, new byte[] {195,  60, 255},
-            new byte[] {195,  59, 255}, new byte[] {197,  57, 255}, new byte[] {198,  56, 255}, new byte[] {199,  56, 255},
-            new byte[] {200,  55, 255}, new byte[] {201,  54, 255}, new byte[] {202,  53, 255}, new byte[] {203,  52, 255},
-            new byte[] {204,  50, 255}, new byte[] {205,  49, 255}, new byte[] {206,  48, 255}, new byte[] {207,  48, 255},
-            new byte[] {208,  47, 255}, new byte[] {209,  46, 255}, new byte[] {210,  45, 255}, new byte[] {211,  44, 255},
-            new byte[] {211,  43, 255}, new byte[] {213,  41, 255}, new byte[] {214,  40, 255}, new byte[] {215,  40, 255},
-            new byte[] {216,  39, 255}, new byte[] {217,  38, 255}, new byte[] {218,  37, 255}, new byte[] {219,  36, 255},
-            new byte[] {220,  34, 255}, new byte[] {221,  33, 255}, new byte[] {222,  32, 255}, new byte[] {223,  32, 255},
-            new byte[] {224,  31, 255}, new byte[] {225,  30, 255}, new byte[] {226,  29, 255}, new byte[] {227,  28, 255},
-            new byte[] {227,  27, 255}, new byte[] {229,  25, 255}, new byte[] {230,  24, 255}, new byte[] {231,  24, 255},
-            new byte[] {232,  23, 255}, new byte[] {233,  22, 255}, new byte[] {234,  21, 255}, new byte[] {235,  20, 255},
-            new byte[] {236,  18, 255}, new byte[] {237,  17, 255}, new byte[] {238,  16, 255}, new byte[] {239,  16, 255},
-            new byte[] {240,  15, 255}, new byte[] {241,  14, 255}, new byte[] {242,  13, 255}, new byte[] {243,  12, 255},
-            new byte[] {243,  11, 255}, new byte[] {245,   9, 255}, new byte[] {246,   8, 255}, new byte[] {247,   8, 255},
-            new byte[] {248,   7, 255}, new byte[] {249,   6, 255}, new byte[] {250,   5, 255}, new byte[] {251,   4, 255},
-            new byte[] {252,   2, 255}, new byte[] {253,   1, 255}, new byte[] {254,   0, 255}, new byte[] {255,   0, 255}
+            new byte[] {  0, 255, 255},
+            new byte[] { 16, 239, 255},
+            new byte[] { 32, 223, 255},
+            new byte[] { 48, 207, 255},
+            new byte[] { 64, 191, 255},
+            new byte[] { 80, 175, 255},
+            new byte[] { 96, 159, 255},
+            new byte[] {112, 143, 255},
+            new byte[] {128, 127, 255},
+            new byte[] {144, 111, 255},
+            new byte[] {160,  95, 255},
+            new byte[] {176,  79, 255},
+            new byte[] {192,  63, 255},
+            new byte[] {208,  47, 255},
+            new byte[] {224,  31, 255},
+            new byte[] {255,   0, 255}
         });
 
         /// <summary>
         /// Colormap "coolwarm" taken from matplotlib
         /// </summary>
-        public static readonly Lazy<byte[][]> CoolWarm = new Lazy<byte[][]>(() => new []
+        public static readonly Lazy<byte[][]> Coolwarm = new Lazy<byte[][]>(() => new []
         {
-            new byte[] { 58,  76, 192}, new byte[] { 59,  77, 193}, new byte[] { 60,  79, 195}, new byte[] { 62,  81, 196},
-            new byte[] { 63,  83, 198}, new byte[] { 64,  84, 199}, new byte[] { 65,  86, 201}, new byte[] { 66,  88, 202},
-            new byte[] { 67,  90, 204}, new byte[] { 69,  91, 205}, new byte[] { 70,  93, 207}, new byte[] { 71,  95, 208},
-            new byte[] { 72,  96, 209}, new byte[] { 73,  98, 211}, new byte[] { 75, 100, 212}, new byte[] { 76, 102, 214},
-            new byte[] { 77, 103, 215}, new byte[] { 78, 105, 216}, new byte[] { 80, 107, 218}, new byte[] { 81, 108, 219},
-            new byte[] { 82, 110, 220}, new byte[] { 83, 112, 221}, new byte[] { 85, 113, 222}, new byte[] { 86, 115, 224},
-            new byte[] { 87, 117, 225}, new byte[] { 88, 118, 226}, new byte[] { 90, 120, 227}, new byte[] { 91, 121, 228},
-            new byte[] { 92, 123, 229}, new byte[] { 93, 125, 230}, new byte[] { 95, 126, 231}, new byte[] { 96, 128, 232},
-            new byte[] { 97, 130, 234}, new byte[] { 99, 131, 234}, new byte[] {100, 133, 235}, new byte[] {101, 134, 236},
-            new byte[] {103, 136, 237}, new byte[] {104, 137, 238}, new byte[] {105, 139, 239}, new byte[] {107, 141, 240},
-            new byte[] {108, 142, 241}, new byte[] {109, 144, 241}, new byte[] {111, 145, 242}, new byte[] {112, 147, 243},
-            new byte[] {113, 148, 244}, new byte[] {115, 149, 244}, new byte[] {116, 151, 245}, new byte[] {117, 152, 246},
-            new byte[] {119, 154, 246}, new byte[] {120, 155, 247}, new byte[] {122, 157, 248}, new byte[] {123, 158, 248},
-            new byte[] {124, 160, 249}, new byte[] {126, 161, 249}, new byte[] {127, 162, 250}, new byte[] {128, 164, 250},
-            new byte[] {130, 165, 251}, new byte[] {131, 166, 251}, new byte[] {133, 168, 251}, new byte[] {134, 169, 252},
-            new byte[] {135, 170, 252}, new byte[] {137, 172, 252}, new byte[] {138, 173, 253}, new byte[] {139, 174, 253},
-            new byte[] {141, 175, 253}, new byte[] {142, 177, 253}, new byte[] {144, 178, 254}, new byte[] {145, 179, 254},
-            new byte[] {146, 180, 254}, new byte[] {148, 181, 254}, new byte[] {149, 183, 254}, new byte[] {151, 184, 254},
-            new byte[] {152, 185, 254}, new byte[] {153, 186, 254}, new byte[] {155, 187, 254}, new byte[] {156, 188, 254},
-            new byte[] {157, 189, 254}, new byte[] {159, 190, 254}, new byte[] {160, 191, 254}, new byte[] {162, 192, 254},
-            new byte[] {163, 193, 254}, new byte[] {164, 194, 254}, new byte[] {166, 195, 253}, new byte[] {167, 196, 253},
-            new byte[] {168, 197, 253}, new byte[] {170, 198, 253}, new byte[] {171, 199, 252}, new byte[] {172, 200, 252},
-            new byte[] {174, 201, 252}, new byte[] {175, 202, 251}, new byte[] {176, 203, 251}, new byte[] {178, 203, 251},
-            new byte[] {179, 204, 250}, new byte[] {180, 205, 250}, new byte[] {182, 206, 249}, new byte[] {183, 207, 249},
-            new byte[] {184, 207, 248}, new byte[] {185, 208, 248}, new byte[] {187, 209, 247}, new byte[] {188, 209, 246},
-            new byte[] {189, 210, 246}, new byte[] {190, 211, 245}, new byte[] {192, 211, 245}, new byte[] {193, 212, 244},
-            new byte[] {194, 212, 243}, new byte[] {195, 213, 242}, new byte[] {197, 213, 242}, new byte[] {198, 214, 241},
-            new byte[] {199, 214, 240}, new byte[] {200, 215, 239}, new byte[] {201, 215, 238}, new byte[] {202, 216, 238},
-            new byte[] {204, 216, 237}, new byte[] {205, 217, 236}, new byte[] {206, 217, 235}, new byte[] {207, 217, 234},
-            new byte[] {208, 218, 233}, new byte[] {209, 218, 232}, new byte[] {210, 218, 231}, new byte[] {211, 219, 230},
-            new byte[] {213, 219, 229}, new byte[] {214, 219, 228}, new byte[] {215, 219, 226}, new byte[] {216, 219, 225},
-            new byte[] {217, 220, 224}, new byte[] {218, 220, 223}, new byte[] {219, 220, 222}, new byte[] {220, 220, 221},
-            new byte[] {221, 220, 219}, new byte[] {222, 219, 218}, new byte[] {223, 219, 217}, new byte[] {224, 218, 215},
-            new byte[] {225, 218, 214}, new byte[] {226, 217, 212}, new byte[] {227, 217, 211}, new byte[] {228, 216, 209},
-            new byte[] {229, 216, 208}, new byte[] {230, 215, 207}, new byte[] {231, 214, 205}, new byte[] {231, 214, 204},
-            new byte[] {232, 213, 202}, new byte[] {233, 212, 201}, new byte[] {234, 211, 199}, new byte[] {235, 211, 198},
-            new byte[] {236, 210, 196}, new byte[] {236, 209, 195}, new byte[] {237, 208, 193}, new byte[] {237, 207, 192},
-            new byte[] {238, 207, 190}, new byte[] {239, 206, 188}, new byte[] {239, 205, 187}, new byte[] {240, 204, 185},
-            new byte[] {241, 203, 184}, new byte[] {241, 202, 182}, new byte[] {242, 201, 181}, new byte[] {242, 200, 179},
-            new byte[] {242, 199, 178}, new byte[] {243, 198, 176}, new byte[] {243, 197, 175}, new byte[] {244, 196, 173},
-            new byte[] {244, 195, 171}, new byte[] {244, 194, 170}, new byte[] {245, 193, 168}, new byte[] {245, 192, 167},
-            new byte[] {245, 191, 165}, new byte[] {246, 189, 164}, new byte[] {246, 188, 162}, new byte[] {246, 187, 160},
-            new byte[] {246, 186, 159}, new byte[] {246, 185, 157}, new byte[] {246, 183, 156}, new byte[] {246, 182, 154},
-            new byte[] {247, 181, 152}, new byte[] {247, 179, 151}, new byte[] {247, 178, 149}, new byte[] {247, 177, 148},
-            new byte[] {247, 176, 146}, new byte[] {247, 174, 145}, new byte[] {247, 173, 143}, new byte[] {246, 171, 141},
-            new byte[] {246, 170, 140}, new byte[] {246, 169, 138}, new byte[] {246, 167, 137}, new byte[] {246, 166, 135},
-            new byte[] {246, 164, 134}, new byte[] {246, 163, 132}, new byte[] {245, 161, 130}, new byte[] {245, 160, 129},
-            new byte[] {245, 158, 127}, new byte[] {244, 157, 126}, new byte[] {244, 155, 124}, new byte[] {244, 154, 123},
-            new byte[] {243, 152, 121}, new byte[] {243, 150, 120}, new byte[] {243, 149, 118}, new byte[] {242, 147, 117},
-            new byte[] {242, 145, 115}, new byte[] {241, 144, 114}, new byte[] {241, 142, 112}, new byte[] {240, 141, 111},
-            new byte[] {240, 139, 109}, new byte[] {239, 137, 108}, new byte[] {238, 135, 106}, new byte[] {238, 134, 105},
-            new byte[] {237, 132, 103}, new byte[] {236, 130, 102}, new byte[] {236, 128, 100}, new byte[] {235, 127,  99},
-            new byte[] {234, 125,  97}, new byte[] {234, 123,  96}, new byte[] {233, 121,  94}, new byte[] {232, 119,  93},
-            new byte[] {231, 117,  92}, new byte[] {230, 116,  90}, new byte[] {230, 114,  89}, new byte[] {229, 112,  87},
-            new byte[] {228, 110,  86}, new byte[] {227, 108,  84}, new byte[] {226, 106,  83}, new byte[] {225, 104,  82},
-            new byte[] {224, 102,  80}, new byte[] {223, 100,  79}, new byte[] {222,  98,  78}, new byte[] {221,  96,  76},
-            new byte[] {220,  94,  75}, new byte[] {219,  92,  74}, new byte[] {218,  90,  72}, new byte[] {217,  88,  71},
-            new byte[] {216,  86,  70}, new byte[] {215,  84,  68}, new byte[] {214,  82,  67}, new byte[] {212,  79,  66},
-            new byte[] {211,  77,  64}, new byte[] {210,  75,  63}, new byte[] {209,  73,  62}, new byte[] {207,  70,  61},
-            new byte[] {206,  68,  60}, new byte[] {205,  66,  58}, new byte[] {204,  63,  57}, new byte[] {202,  61,  56},
-            new byte[] {201,  59,  55}, new byte[] {200,  56,  53}, new byte[] {198,  53,  52}, new byte[] {197,  50,  51},
-            new byte[] {196,  48,  50}, new byte[] {194,  45,  49}, new byte[] {193,  42,  48}, new byte[] {191,  40,  46},
-            new byte[] {190,  35,  45}, new byte[] {188,  31,  44}, new byte[] {187,  26,  43}, new byte[] {185,  22,  42},
-            new byte[] {184,  17,  41}, new byte[] {182,  13,  40}, new byte[] {181,   8,  39}, new byte[] {179,   3,  38}
+            new byte[] { 58,  76, 192},
+            new byte[] { 77, 103, 215},
+            new byte[] { 97, 130, 234},
+            new byte[] {119, 154, 246},
+            new byte[] {141, 175, 253},
+            new byte[] {163, 193, 254},
+            new byte[] {184, 207, 248},
+            new byte[] {204, 216, 237},
+            new byte[] {221, 220, 219},
+            new byte[] {236, 210, 196},
+            new byte[] {244, 195, 171},
+            new byte[] {247, 176, 146},
+            new byte[] {243, 152, 121},
+            new byte[] {234, 125,  97},
+            new byte[] {220,  94,  75},
+            new byte[] {179,   3,  38}
+        });
+
+        /// <summary>
+        /// Colormap "copper" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Copper = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {  0,   0,   0},
+            new byte[] { 19,  12,   7},
+            new byte[] { 39,  24,  15},
+            new byte[] { 59,  37,  23},
+            new byte[] { 79,  49,  31},
+            new byte[] { 98,  62,  39},
+            new byte[] {118,  74,  47},
+            new byte[] {138,  87,  55},
+            new byte[] {158,  99,  63},
+            new byte[] {177, 112,  71},
+            new byte[] {197, 124,  79},
+            new byte[] {217, 137,  87},
+            new byte[] {237, 149,  95},
+            new byte[] {255, 162, 103},
+            new byte[] {255, 174, 111},
+            new byte[] {255, 199, 126}
+        });
+
+        /// <summary>
+        /// Colormap "cubehelix" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Cubehelix = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {  0,   0,   0},
+            new byte[] { 20,  11,  29},
+            new byte[] { 26,  29,  59},
+            new byte[] { 22,  55,  76},
+            new byte[] { 21,  83,  75},
+            new byte[] { 35, 106,  61},
+            new byte[] { 67, 119,  48},
+            new byte[] {113, 122,  50},
+            new byte[] {161, 121,  74},
+            new byte[] {196, 122, 117},
+            new byte[] {211, 131, 169},
+            new byte[] {208, 152, 212},
+            new byte[] {198, 180, 237},
+            new byte[] {193, 208, 243},
+            new byte[] {203, 231, 239},
+            new byte[] {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "dark2" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Dark2 = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] { 27, 158, 119},
+            new byte[] {110, 130,  67},
+            new byte[] {193, 102,  16},
+            new byte[] {185, 100,  58},
+            new byte[] {141, 107, 135},
+            new byte[] {139,  98, 170},
+            new byte[] {189,  66, 152},
+            new byte[] {221,  50, 129},
+            new byte[] {164, 105,  82},
+            new byte[] {108, 160,  35},
+            new byte[] {152, 167,  19},
+            new byte[] {208, 170,   6},
+            new byte[] {212, 156,   9},
+            new byte[] {184, 133,  21},
+            new byte[] {156, 115,  39},
+            new byte[] {102, 102, 102}
+        });
+
+        /// <summary>
+        /// Colormap "flag" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Flag = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255,   0,   0},
+            new byte[] {252,   0,   0},
+            new byte[] {241,   0,   0},
+            new byte[] {229,   0,   0},
+            new byte[] {217,   0,   0},
+            new byte[] {204,   0,   0},
+            new byte[] {191,   0,   0},
+            new byte[] {178,   0,   0},
+            new byte[] {164,   0,   0},
+            new byte[] {150,   0,   0},
+            new byte[] {136,   0,   0},
+            new byte[] {122,   0,   0},
+            new byte[] {108,   0,   0},
+            new byte[] { 94,   0,   0},
+            new byte[] { 80,   0,   0},
+            new byte[] {  0,   0,   0}
         });
 
         /// <summary>
         /// Colormap "gist_earth" taken from matplotlib
         /// </summary>
-        public static readonly Lazy<byte[][]> GistEarth = new Lazy<byte[][]>(() => new []
+        public static readonly Lazy<byte[][]> Gist_Earth = new Lazy<byte[][]>(() => new []
         {
-            new byte[] {  0,   0,   0}, new byte[] {  0,   0,  43}, new byte[] {  1,   0,  56}, new byte[] {  1,   0,  67},
-            new byte[] {  2,   0,  78}, new byte[] {  3,   0,  88}, new byte[] {  3,   0,  99}, new byte[] {  4,   0, 110},
-            new byte[] {  5,   2, 115}, new byte[] {  5,   4, 116}, new byte[] {  6,   6, 116}, new byte[] {  7,   9, 116},
-            new byte[] {  7,  11, 116}, new byte[] {  8,  13, 116}, new byte[] {  9,  16, 117}, new byte[] {  9,  18, 117},
-            new byte[] { 10,  20, 117}, new byte[] { 11,  22, 117}, new byte[] { 11,  25, 117}, new byte[] { 12,  27, 117},
-            new byte[] { 13,  29, 118}, new byte[] { 13,  32, 118}, new byte[] { 14,  34, 118}, new byte[] { 15,  36, 118},
-            new byte[] { 15,  39, 118}, new byte[] { 16,  41, 119}, new byte[] { 17,  43, 119}, new byte[] { 17,  45, 119},
-            new byte[] { 18,  48, 119}, new byte[] { 19,  50, 119}, new byte[] { 19,  52, 119}, new byte[] { 20,  54, 120},
-            new byte[] { 21,  56, 120}, new byte[] { 21,  58, 120}, new byte[] { 22,  60, 120}, new byte[] { 23,  62, 120},
-            new byte[] { 23,  64, 121}, new byte[] { 24,  66, 121}, new byte[] { 25,  69, 121}, new byte[] { 25,  71, 121},
-            new byte[] { 26,  73, 121}, new byte[] { 27,  75, 121}, new byte[] { 27,  77, 122}, new byte[] { 28,  79, 122},
-            new byte[] { 29,  81, 122}, new byte[] { 29,  83, 122}, new byte[] { 30,  84, 122}, new byte[] { 31,  86, 123},
-            new byte[] { 31,  88, 123}, new byte[] { 32,  90, 123}, new byte[] { 33,  92, 123}, new byte[] { 33,  94, 123},
-            new byte[] { 34,  96, 123}, new byte[] { 35,  97, 124}, new byte[] { 35,  99, 124}, new byte[] { 36, 101, 124},
-            new byte[] { 37, 102, 124}, new byte[] { 37, 104, 124}, new byte[] { 38, 105, 125}, new byte[] { 39, 107, 125},
-            new byte[] { 39, 109, 125}, new byte[] { 40, 110, 125}, new byte[] { 41, 112, 125}, new byte[] { 41, 113, 125},
-            new byte[] { 42, 115, 126}, new byte[] { 43, 116, 126}, new byte[] { 43, 118, 126}, new byte[] { 44, 120, 126},
-            new byte[] { 45, 121, 126}, new byte[] { 45, 123, 127}, new byte[] { 46, 124, 127}, new byte[] { 47, 126, 127},
-            new byte[] { 47, 127, 127}, new byte[] { 48, 128, 126}, new byte[] { 48, 129, 125}, new byte[] { 49, 129, 123},
-            new byte[] { 49, 130, 122}, new byte[] { 50, 130, 121}, new byte[] { 50, 131, 120}, new byte[] { 51, 132, 119},
-            new byte[] { 51, 132, 117}, new byte[] { 52, 133, 116}, new byte[] { 52, 133, 115}, new byte[] { 53, 134, 114},
-            new byte[] { 53, 134, 112}, new byte[] { 54, 135, 111}, new byte[] { 54, 136, 110}, new byte[] { 55, 136, 109},
-            new byte[] { 55, 137, 108}, new byte[] { 56, 137, 106}, new byte[] { 56, 138, 105}, new byte[] { 56, 138, 104},
-            new byte[] { 57, 139, 103}, new byte[] { 57, 140, 101}, new byte[] { 58, 140, 100}, new byte[] { 58, 141,  99},
-            new byte[] { 59, 141,  98}, new byte[] { 59, 142,  97}, new byte[] { 60, 142,  95}, new byte[] { 60, 143,  94},
-            new byte[] { 61, 144,  93}, new byte[] { 61, 144,  92}, new byte[] { 62, 145,  90}, new byte[] { 62, 145,  89},
-            new byte[] { 63, 146,  88}, new byte[] { 63, 147,  87}, new byte[] { 64, 147,  85}, new byte[] { 64, 148,  84},
-            new byte[] { 64, 148,  83}, new byte[] { 65, 149,  82}, new byte[] { 65, 149,  81}, new byte[] { 66, 150,  79},
-            new byte[] { 66, 151,  78}, new byte[] { 67, 151,  77}, new byte[] { 67, 152,  76}, new byte[] { 68, 152,  74},
-            new byte[] { 68, 153,  73}, new byte[] { 69, 153,  72}, new byte[] { 71, 154,  71}, new byte[] { 73, 155,  70},
-            new byte[] { 75, 155,  70}, new byte[] { 78, 156,  71}, new byte[] { 80, 156,  71}, new byte[] { 82, 157,  72},
-            new byte[] { 84, 157,  72}, new byte[] { 87, 158,  73}, new byte[] { 89, 159,  74}, new byte[] { 91, 159,  74},
-            new byte[] { 93, 160,  75}, new byte[] { 95, 160,  75}, new byte[] { 98, 161,  76}, new byte[] {100, 161,  77},
-            new byte[] {102, 162,  77}, new byte[] {104, 163,  78}, new byte[] {107, 163,  78}, new byte[] {109, 163,  79},
-            new byte[] {111, 164,  79}, new byte[] {113, 164,  80}, new byte[] {115, 165,  81}, new byte[] {118, 165,  81},
-            new byte[] {120, 166,  82}, new byte[] {121, 166,  82}, new byte[] {123, 167,  82}, new byte[] {125, 167,  82},
-            new byte[] {126, 167,  83}, new byte[] {128, 168,  83}, new byte[] {130, 168,  83}, new byte[] {131, 169,  84},
-            new byte[] {133, 169,  84}, new byte[] {135, 170,  84}, new byte[] {136, 170,  85}, new byte[] {138, 171,  85},
-            new byte[] {140, 171,  85}, new byte[] {141, 171,  86}, new byte[] {143, 172,  86}, new byte[] {145, 172,  86},
-            new byte[] {146, 173,  87}, new byte[] {148, 173,  87}, new byte[] {150, 174,  87}, new byte[] {151, 174,  88},
-            new byte[] {153, 174,  88}, new byte[] {154, 175,  88}, new byte[] {156, 175,  88}, new byte[] {158, 176,  89},
-            new byte[] {159, 176,  89}, new byte[] {161, 177,  89}, new byte[] {163, 177,  90}, new byte[] {164, 178,  90},
-            new byte[] {166, 178,  90}, new byte[] {168, 178,  91}, new byte[] {169, 179,  91}, new byte[] {171, 179,  91},
-            new byte[] {173, 180,  92}, new byte[] {174, 180,  92}, new byte[] {176, 181,  92}, new byte[] {178, 181,  93},
-            new byte[] {179, 181,  93}, new byte[] {181, 182,  93}, new byte[] {182, 182,  94}, new byte[] {183, 181,  94},
-            new byte[] {183, 181,  94}, new byte[] {184, 180,  95}, new byte[] {184, 179,  95}, new byte[] {185, 178,  95},
-            new byte[] {185, 177,  95}, new byte[] {185, 176,  96}, new byte[] {186, 175,  96}, new byte[] {186, 175,  96},
-            new byte[] {187, 174,  97}, new byte[] {187, 173,  97}, new byte[] {188, 172,  97}, new byte[] {188, 171,  98},
-            new byte[] {188, 170,  98}, new byte[] {189, 169,  98}, new byte[] {189, 169,  99}, new byte[] {190, 168,  99},
-            new byte[] {190, 167,  99}, new byte[] {190, 166, 100}, new byte[] {191, 165, 100}, new byte[] {191, 164, 100},
-            new byte[] {192, 163, 101}, new byte[] {192, 163, 103}, new byte[] {193, 163, 105}, new byte[] {194, 163, 108},
-            new byte[] {195, 164, 110}, new byte[] {197, 164, 113}, new byte[] {198, 165, 115}, new byte[] {199, 166, 118},
-            new byte[] {200, 166, 120}, new byte[] {201, 167, 123}, new byte[] {202, 168, 125}, new byte[] {203, 169, 127},
-            new byte[] {204, 170, 130}, new byte[] {206, 171, 132}, new byte[] {207, 172, 135}, new byte[] {208, 173, 137},
-            new byte[] {209, 173, 140}, new byte[] {210, 174, 142}, new byte[] {211, 175, 145}, new byte[] {212, 176, 147},
-            new byte[] {213, 177, 150}, new byte[] {214, 178, 152}, new byte[] {216, 179, 154}, new byte[] {217, 181, 157},
-            new byte[] {218, 182, 159}, new byte[] {219, 183, 162}, new byte[] {220, 185, 164}, new byte[] {221, 186, 167},
-            new byte[] {222, 188, 169}, new byte[] {223, 189, 172}, new byte[] {225, 191, 175}, new byte[] {226, 193, 178},
-            new byte[] {227, 195, 181}, new byte[] {228, 197, 184}, new byte[] {229, 199, 187}, new byte[] {230, 201, 190},
-            new byte[] {231, 203, 193}, new byte[] {232, 205, 196}, new byte[] {233, 207, 199}, new byte[] {235, 209, 202},
-            new byte[] {236, 211, 205}, new byte[] {237, 213, 208}, new byte[] {238, 215, 211}, new byte[] {239, 217, 214},
-            new byte[] {240, 220, 217}, new byte[] {241, 222, 220}, new byte[] {242, 224, 223}, new byte[] {244, 227, 226},
-            new byte[] {245, 230, 229}, new byte[] {246, 233, 232}, new byte[] {247, 236, 235}, new byte[] {248, 239, 238},
-            new byte[] {249, 242, 241}, new byte[] {250, 245, 244}, new byte[] {251, 248, 247}, new byte[] {253, 250, 250}
+            new byte[] {  0,   0,   0},
+            new byte[] { 10,  20, 117},
+            new byte[] { 21,  56, 120},
+            new byte[] { 31,  88, 123},
+            new byte[] { 42, 115, 126},
+            new byte[] { 51, 132, 117},
+            new byte[] { 59, 141,  98},
+            new byte[] { 66, 151,  78},
+            new byte[] { 93, 160,  75},
+            new byte[] {126, 167,  83},
+            new byte[] {153, 174,  88},
+            new byte[] {179, 181,  93},
+            new byte[] {188, 170,  98},
+            new byte[] {200, 166, 120},
+            new byte[] {218, 182, 159},
+            new byte[] {253, 250, 250}
+        });
+
+        /// <summary>
+        /// Colormap "gist_gray" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Gist_Gray = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {  0,   0,   0},
+            new byte[] { 16,  16,  16},
+            new byte[] { 32,  32,  32},
+            new byte[] { 48,  48,  48},
+            new byte[] { 64,  64,  64},
+            new byte[] { 80,  80,  80},
+            new byte[] { 96,  96,  96},
+            new byte[] {112, 112, 112},
+            new byte[] {128, 128, 128},
+            new byte[] {144, 144, 144},
+            new byte[] {160, 160, 160},
+            new byte[] {176, 176, 176},
+            new byte[] {192, 192, 192},
+            new byte[] {208, 208, 208},
+            new byte[] {224, 224, 224},
+            new byte[] {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "gist_heat" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Gist_Heat = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {  0,   0,   0},
+            new byte[] { 24,   0,   0},
+            new byte[] { 48,   0,   0},
+            new byte[] { 72,   0,   0},
+            new byte[] { 96,   0,   0},
+            new byte[] {120,   0,   0},
+            new byte[] {144,   0,   0},
+            new byte[] {168,   0,   0},
+            new byte[] {192,   0,   0},
+            new byte[] {216,  32,   0},
+            new byte[] {240,  65,   0},
+            new byte[] {255,  97,   0},
+            new byte[] {255, 129,   2},
+            new byte[] {255, 161,  66},
+            new byte[] {255, 193, 131},
+            new byte[] {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "gist_ncar" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Gist_Ncar = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {  0,   0, 128},
+            new byte[] {  0,  74,  55},
+            new byte[] {  0,  70, 255},
+            new byte[] {  0, 224, 255},
+            new byte[] {  0, 250, 176},
+            new byte[] {  6, 254,  20},
+            new byte[] {103, 212,   0},
+            new byte[] {145, 255,  23},
+            new byte[] {218, 255,  31},
+            new byte[] {255, 227,   0},
+            new byte[] {255, 188,  12},
+            new byte[] {255,  66,   0},
+            new byte[] {255,   0,  70},
+            new byte[] {213,  20, 255},
+            new byte[] {205,  97, 244},
+            new byte[] {254, 247, 254}
+        });
+
+        /// <summary>
+        /// Colormap "gist_rainbow" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Gist_Rainbow = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255,   0,  40},
+            new byte[] {255,  45,   0},
+            new byte[] {255, 131,   0},
+            new byte[] {255, 218,   0},
+            new byte[] {205, 255,   0},
+            new byte[] {118, 255,   0},
+            new byte[] { 32, 255,   0},
+            new byte[] {  0, 255,  53},
+            new byte[] {  0, 255, 139},
+            new byte[] {  0, 255, 225},
+            new byte[] {  0, 197, 255},
+            new byte[] {  0, 110, 255},
+            new byte[] {  0,  23, 255},
+            new byte[] { 63,   0, 255},
+            new byte[] {150,   0, 255},
+            new byte[] {255,   0, 191}
+        });
+
+        /// <summary>
+        /// Colormap "gist_stern" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Gist_Stern = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {  0,   0,   0},
+            new byte[] {244,  16,  32},
+            new byte[] {165,  32,  64},
+            new byte[] { 85,  48,  96},
+            new byte[] { 64,  64, 128},
+            new byte[] { 80,  80, 160},
+            new byte[] { 96,  96, 192},
+            new byte[] {112, 112, 224},
+            new byte[] {128, 128, 252},
+            new byte[] {144, 144, 184},
+            new byte[] {160, 160, 116},
+            new byte[] {176, 176,  48},
+            new byte[] {192, 192,  17},
+            new byte[] {208, 208,  77},
+            new byte[] {224, 224, 138},
+            new byte[] {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "gist_yarg" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Gist_Yarg = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255, 255, 255},
+            new byte[] {239, 239, 239},
+            new byte[] {223, 223, 223},
+            new byte[] {207, 207, 207},
+            new byte[] {191, 191, 191},
+            new byte[] {175, 175, 175},
+            new byte[] {159, 159, 159},
+            new byte[] {143, 143, 143},
+            new byte[] {127, 127, 127},
+            new byte[] {111, 111, 111},
+            new byte[] { 95,  95,  95},
+            new byte[] { 79,  79,  79},
+            new byte[] { 63,  63,  63},
+            new byte[] { 47,  47,  47},
+            new byte[] { 31,  31,  31},
+            new byte[] {  0,   0,   0}
+        });
+
+        /// <summary>
+        /// Colormap "gnbu" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Gnbu = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {247, 252, 240},
+            new byte[] {235, 247, 229},
+            new byte[] {223, 242, 218},
+            new byte[] {213, 238, 207},
+            new byte[] {203, 234, 196},
+            new byte[] {185, 227, 188},
+            new byte[] {167, 220, 181},
+            new byte[] {144, 212, 188},
+            new byte[] {122, 203, 196},
+            new byte[] { 99, 191, 203},
+            new byte[] { 77, 178, 210},
+            new byte[] { 59, 158, 200},
+            new byte[] { 42, 139, 189},
+            new byte[] { 24, 121, 180},
+            new byte[] {  8, 102, 170},
+            new byte[] {  8,  64, 129}
         });
 
         /// <summary>
         /// Colormap "gnuplot" taken from matplotlib
         /// </summary>
-        public static readonly Lazy<byte[][]> GnuPlot = new Lazy<byte[][]>(() => new []
+        public static readonly Lazy<byte[][]> Gnuplot = new Lazy<byte[][]>(() => new []
         {
-            new byte[] {  0,   0,   0}, new byte[] { 15,   0,   6}, new byte[] { 22,   0,  12}, new byte[] { 27,   0,  18},
-            new byte[] { 31,   0,  25}, new byte[] { 35,   0,  31}, new byte[] { 39,   0,  37}, new byte[] { 42,   0,  43},
-            new byte[] { 45,   0,  49}, new byte[] { 47,   0,  56}, new byte[] { 50,   0,  62}, new byte[] { 52,   0,  68},
-            new byte[] { 55,   0,  74}, new byte[] { 57,   0,  80}, new byte[] { 59,   0,  86}, new byte[] { 61,   0,  92},
-            new byte[] { 63,   0,  97}, new byte[] { 65,   0, 103}, new byte[] { 67,   0, 109}, new byte[] { 69,   0, 115},
-            new byte[] { 71,   0, 120}, new byte[] { 73,   0, 126}, new byte[] { 74,   0, 131}, new byte[] { 76,   0, 136},
-            new byte[] { 78,   0, 142}, new byte[] { 79,   0, 147}, new byte[] { 81,   0, 152}, new byte[] { 82,   0, 157},
-            new byte[] { 84,   0, 162}, new byte[] { 85,   0, 167}, new byte[] { 87,   0, 171}, new byte[] { 88,   0, 176},
-            new byte[] { 90,   0, 180}, new byte[] { 91,   0, 185}, new byte[] { 93,   0, 189}, new byte[] { 94,   0, 193},
-            new byte[] { 95,   0, 197}, new byte[] { 97,   0, 201}, new byte[] { 98,   0, 205}, new byte[] { 99,   0, 209},
-            new byte[] {100,   0, 212}, new byte[] {102,   1, 215}, new byte[] {103,   1, 219}, new byte[] {104,   1, 222},
-            new byte[] {105,   1, 225}, new byte[] {107,   1, 228}, new byte[] {108,   1, 230}, new byte[] {109,   1, 233},
-            new byte[] {110,   1, 236}, new byte[] {111,   1, 238}, new byte[] {112,   1, 240}, new byte[] {114,   2, 242},
-            new byte[] {115,   2, 244}, new byte[] {116,   2, 246}, new byte[] {117,   2, 247}, new byte[] {118,   2, 249},
-            new byte[] {119,   2, 250}, new byte[] {120,   2, 251}, new byte[] {121,   3, 252}, new byte[] {122,   3, 253},
-            new byte[] {123,   3, 253}, new byte[] {124,   3, 254}, new byte[] {125,   3, 254}, new byte[] {126,   3, 254},
-            new byte[] {127,   4, 254}, new byte[] {128,   4, 254}, new byte[] {129,   4, 254}, new byte[] {130,   4, 254},
-            new byte[] {131,   4, 253}, new byte[] {132,   5, 252}, new byte[] {133,   5, 251}, new byte[] {134,   5, 250},
-            new byte[] {135,   5, 249}, new byte[] {136,   5, 248}, new byte[] {137,   6, 246}, new byte[] {138,   6, 245},
-            new byte[] {139,   6, 243}, new byte[] {140,   7, 241}, new byte[] {141,   7, 239}, new byte[] {141,   7, 237},
-            new byte[] {142,   7, 234}, new byte[] {143,   8, 232}, new byte[] {144,   8, 229}, new byte[] {145,   8, 226},
-            new byte[] {146,   9, 223}, new byte[] {147,   9, 220}, new byte[] {148,   9, 217}, new byte[] {148,  10, 214},
-            new byte[] {149,  10, 210}, new byte[] {150,  10, 207}, new byte[] {151,  11, 203}, new byte[] {152,  11, 199},
-            new byte[] {153,  11, 195}, new byte[] {153,  12, 191}, new byte[] {154,  12, 187}, new byte[] {155,  13, 183},
-            new byte[] {156,  13, 178}, new byte[] {157,  14, 174}, new byte[] {158,  14, 169}, new byte[] {158,  14, 164},
-            new byte[] {159,  15, 159}, new byte[] {160,  15, 154}, new byte[] {161,  16, 149}, new byte[] {162,  16, 144},
-            new byte[] {162,  17, 139}, new byte[] {163,  17, 134}, new byte[] {164,  18, 128}, new byte[] {165,  18, 123},
-            new byte[] {165,  19, 117}, new byte[] {166,  19, 112}, new byte[] {167,  20, 106}, new byte[] {168,  21, 100},
-            new byte[] {168,  21,  95}, new byte[] {169,  22,  89}, new byte[] {170,  22,  83}, new byte[] {171,  23,  77},
-            new byte[] {171,  24,  71}, new byte[] {172,  24,  65}, new byte[] {173,  25,  59}, new byte[] {174,  25,  53},
-            new byte[] {174,  26,  46}, new byte[] {175,  27,  40}, new byte[] {176,  27,  34}, new byte[] {177,  28,  28},
-            new byte[] {177,  29,  21}, new byte[] {178,  30,  15}, new byte[] {179,  30,   9}, new byte[] {179,  31,   3},
-            new byte[] {180,  32,   0}, new byte[] {181,  33,   0}, new byte[] {182,  33,   0}, new byte[] {182,  34,   0},
-            new byte[] {183,  35,   0}, new byte[] {184,  36,   0}, new byte[] {184,  37,   0}, new byte[] {185,  37,   0},
-            new byte[] {186,  38,   0}, new byte[] {186,  39,   0}, new byte[] {187,  40,   0}, new byte[] {188,  41,   0},
-            new byte[] {188,  42,   0}, new byte[] {189,  43,   0}, new byte[] {190,  44,   0}, new byte[] {190,  44,   0},
-            new byte[] {191,  45,   0}, new byte[] {192,  46,   0}, new byte[] {192,  47,   0}, new byte[] {193,  48,   0},
-            new byte[] {194,  49,   0}, new byte[] {194,  50,   0}, new byte[] {195,  51,   0}, new byte[] {196,  52,   0},
-            new byte[] {196,  54,   0}, new byte[] {197,  55,   0}, new byte[] {198,  56,   0}, new byte[] {198,  57,   0},
-            new byte[] {199,  58,   0}, new byte[] {200,  59,   0}, new byte[] {200,  60,   0}, new byte[] {201,  61,   0},
-            new byte[] {201,  62,   0}, new byte[] {202,  64,   0}, new byte[] {203,  65,   0}, new byte[] {203,  66,   0},
-            new byte[] {204,  67,   0}, new byte[] {205,  69,   0}, new byte[] {205,  70,   0}, new byte[] {206,  71,   0},
-            new byte[] {206,  72,   0}, new byte[] {207,  74,   0}, new byte[] {208,  75,   0}, new byte[] {208,  76,   0},
-            new byte[] {209,  78,   0}, new byte[] {210,  79,   0}, new byte[] {210,  81,   0}, new byte[] {211,  82,   0},
-            new byte[] {211,  83,   0}, new byte[] {212,  85,   0}, new byte[] {213,  86,   0}, new byte[] {213,  88,   0},
-            new byte[] {214,  89,   0}, new byte[] {214,  91,   0}, new byte[] {215,  92,   0}, new byte[] {216,  94,   0},
-            new byte[] {216,  95,   0}, new byte[] {217,  97,   0}, new byte[] {217,  98,   0}, new byte[] {218, 100,   0},
-            new byte[] {218, 102,   0}, new byte[] {219, 103,   0}, new byte[] {220, 105,   0}, new byte[] {220, 107,   0},
-            new byte[] {221, 108,   0}, new byte[] {221, 110,   0}, new byte[] {222, 112,   0}, new byte[] {222, 114,   0},
-            new byte[] {223, 115,   0}, new byte[] {224, 117,   0}, new byte[] {224, 119,   0}, new byte[] {225, 121,   0},
-            new byte[] {225, 123,   0}, new byte[] {226, 124,   0}, new byte[] {226, 126,   0}, new byte[] {227, 128,   0},
-            new byte[] {228, 130,   0}, new byte[] {228, 132,   0}, new byte[] {229, 134,   0}, new byte[] {229, 136,   0},
-            new byte[] {230, 138,   0}, new byte[] {230, 140,   0}, new byte[] {231, 142,   0}, new byte[] {231, 144,   0},
-            new byte[] {232, 146,   0}, new byte[] {233, 148,   0}, new byte[] {233, 150,   0}, new byte[] {234, 152,   0},
-            new byte[] {234, 154,   0}, new byte[] {235, 157,   0}, new byte[] {235, 159,   0}, new byte[] {236, 161,   0},
-            new byte[] {236, 163,   0}, new byte[] {237, 165,   0}, new byte[] {237, 168,   0}, new byte[] {238, 170,   0},
-            new byte[] {238, 172,   0}, new byte[] {239, 175,   0}, new byte[] {240, 177,   0}, new byte[] {240, 179,   0},
-            new byte[] {241, 182,   0}, new byte[] {241, 184,   0}, new byte[] {242, 187,   0}, new byte[] {242, 189,   0},
-            new byte[] {243, 192,   0}, new byte[] {243, 194,   0}, new byte[] {244, 197,   0}, new byte[] {244, 199,   0},
-            new byte[] {245, 202,   0}, new byte[] {245, 204,   0}, new byte[] {246, 207,   0}, new byte[] {246, 209,   0},
-            new byte[] {247, 212,   0}, new byte[] {247, 215,   0}, new byte[] {248, 217,   0}, new byte[] {248, 220,   0},
-            new byte[] {249, 223,   0}, new byte[] {249, 226,   0}, new byte[] {250, 228,   0}, new byte[] {250, 231,   0},
-            new byte[] {251, 234,   0}, new byte[] {251, 237,   0}, new byte[] {252, 240,   0}, new byte[] {252, 243,   0},
-            new byte[] {253, 246,   0}, new byte[] {253, 249,   0}, new byte[] {254, 252,   0}, new byte[] {255, 255,   0}
+            new byte[] {  0,   0,   0},
+            new byte[] { 63,   0,  97},
+            new byte[] { 90,   0, 180},
+            new byte[] {110,   1, 236},
+            new byte[] {127,   4, 254},
+            new byte[] {142,   7, 234},
+            new byte[] {156,  13, 178},
+            new byte[] {168,  21,  95},
+            new byte[] {180,  32,   0},
+            new byte[] {191,  45,   0},
+            new byte[] {201,  62,   0},
+            new byte[] {211,  83,   0},
+            new byte[] {221, 108,   0},
+            new byte[] {230, 138,   0},
+            new byte[] {238, 172,   0},
+            new byte[] {255, 255,   0}
         });
 
         /// <summary>
         /// Colormap "gnuplot2" taken from matplotlib
         /// </summary>
-        public static readonly Lazy<byte[][]> GnuPlot2 = new Lazy<byte[][]>(() => new []
+        public static readonly Lazy<byte[][]> Gnuplot2 = new Lazy<byte[][]>(() => new []
         {
-            new byte[] {  0,   0,   0}, new byte[] {  0,   0,   4}, new byte[] {  0,   0,   8}, new byte[] {  0,   0,  12},
-            new byte[] {  0,   0,  16}, new byte[] {  0,   0,  20}, new byte[] {  0,   0,  24}, new byte[] {  0,   0,  28},
-            new byte[] {  0,   0,  32}, new byte[] {  0,   0,  36}, new byte[] {  0,   0,  40}, new byte[] {  0,   0,  44},
-            new byte[] {  0,   0,  48}, new byte[] {  0,   0,  52}, new byte[] {  0,   0,  56}, new byte[] {  0,   0,  60},
-            new byte[] {  0,   0,  64}, new byte[] {  0,   0,  68}, new byte[] {  0,   0,  72}, new byte[] {  0,   0,  76},
-            new byte[] {  0,   0,  80}, new byte[] {  0,   0,  84}, new byte[] {  0,   0,  88}, new byte[] {  0,   0,  92},
-            new byte[] {  0,   0,  96}, new byte[] {  0,   0, 100}, new byte[] {  0,   0, 104}, new byte[] {  0,   0, 108},
-            new byte[] {  0,   0, 112}, new byte[] {  0,   0, 116}, new byte[] {  0,   0, 120}, new byte[] {  0,   0, 124},
-            new byte[] {  0,   0, 128}, new byte[] {  0,   0, 131}, new byte[] {  0,   0, 136}, new byte[] {  0,   0, 140},
-            new byte[] {  0,   0, 144}, new byte[] {  0,   0, 147}, new byte[] {  0,   0, 152}, new byte[] {  0,   0, 156},
-            new byte[] {  0,   0, 160}, new byte[] {  0,   0, 163}, new byte[] {  0,   0, 168}, new byte[] {  0,   0, 172},
-            new byte[] {  0,   0, 176}, new byte[] {  0,   0, 179}, new byte[] {  0,   0, 184}, new byte[] {  0,   0, 188},
-            new byte[] {  0,   0, 192}, new byte[] {  0,   0, 195}, new byte[] {  0,   0, 200}, new byte[] {  0,   0, 204},
-            new byte[] {  0,   0, 208}, new byte[] {  0,   0, 211}, new byte[] {  0,   0, 216}, new byte[] {  0,   0, 220},
-            new byte[] {  0,   0, 224}, new byte[] {  0,   0, 227}, new byte[] {  0,   0, 232}, new byte[] {  0,   0, 236},
-            new byte[] {  0,   0, 240}, new byte[] {  0,   0, 243}, new byte[] {  0,   0, 248}, new byte[] {  0,   0, 252},
-            new byte[] {  0,   0, 255}, new byte[] {  3,   0, 255}, new byte[] {  7,   0, 255}, new byte[] { 10,   0, 255},
-            new byte[] { 13,   0, 255}, new byte[] { 16,   0, 255}, new byte[] { 19,   0, 255}, new byte[] { 22,   0, 255},
-            new byte[] { 25,   0, 255}, new byte[] { 28,   0, 255}, new byte[] { 32,   0, 255}, new byte[] { 35,   0, 255},
-            new byte[] { 38,   0, 255}, new byte[] { 41,   0, 255}, new byte[] { 44,   0, 255}, new byte[] { 47,   0, 255},
-            new byte[] { 50,   0, 255}, new byte[] { 53,   0, 255}, new byte[] { 57,   0, 255}, new byte[] { 60,   0, 255},
-            new byte[] { 63,   0, 255}, new byte[] { 66,   0, 255}, new byte[] { 69,   0, 255}, new byte[] { 72,   0, 255},
-            new byte[] { 75,   0, 255}, new byte[] { 78,   0, 255}, new byte[] { 82,   0, 255}, new byte[] { 85,   0, 255},
-            new byte[] { 88,   0, 255}, new byte[] { 91,   0, 255}, new byte[] { 94,   0, 255}, new byte[] { 97,   0, 255},
-            new byte[] {100,   0, 255}, new byte[] {103,   0, 255}, new byte[] {107,   0, 255}, new byte[] {110,   0, 255},
-            new byte[] {113,   0, 255}, new byte[] {116,   0, 255}, new byte[] {119,   0, 255}, new byte[] {122,   0, 255},
-            new byte[] {125,   0, 255}, new byte[] {128,   0, 255}, new byte[] {132,   0, 255}, new byte[] {135,   0, 255},
-            new byte[] {138,   1, 253}, new byte[] {141,   3, 251}, new byte[] {144,   5, 249}, new byte[] {147,   7, 247},
-            new byte[] {150,   9, 245}, new byte[] {153,  11, 243}, new byte[] {157,  13, 241}, new byte[] {160,  15, 239},
-            new byte[] {163,  17, 237}, new byte[] {166,  19, 235}, new byte[] {169,  21, 233}, new byte[] {172,  23, 231},
-            new byte[] {175,  25, 229}, new byte[] {178,  27, 227}, new byte[] {182,  29, 225}, new byte[] {185,  31, 223},
-            new byte[] {188,  33, 221}, new byte[] {191,  35, 219}, new byte[] {194,  37, 217}, new byte[] {197,  39, 215},
-            new byte[] {200,  41, 213}, new byte[] {203,  43, 211}, new byte[] {207,  45, 209}, new byte[] {210,  47, 207},
-            new byte[] {213,  49, 205}, new byte[] {216,  51, 203}, new byte[] {219,  53, 201}, new byte[] {222,  55, 199},
-            new byte[] {225,  57, 197}, new byte[] {228,  59, 195}, new byte[] {232,  61, 193}, new byte[] {235,  63, 191},
-            new byte[] {238,  65, 189}, new byte[] {241,  67, 187}, new byte[] {244,  69, 185}, new byte[] {247,  71, 183},
-            new byte[] {250,  73, 181}, new byte[] {253,  75, 179}, new byte[] {255,  77, 177}, new byte[] {255,  79, 175},
-            new byte[] {255,  81, 173}, new byte[] {255,  83, 171}, new byte[] {255,  85, 169}, new byte[] {255,  87, 167},
-            new byte[] {255,  89, 165}, new byte[] {255,  91, 163}, new byte[] {255,  93, 161}, new byte[] {255,  95, 159},
-            new byte[] {255,  97, 157}, new byte[] {255,  99, 155}, new byte[] {255, 101, 153}, new byte[] {255, 103, 151},
-            new byte[] {255, 105, 149}, new byte[] {255, 107, 147}, new byte[] {255, 109, 145}, new byte[] {255, 111, 143},
-            new byte[] {255, 113, 141}, new byte[] {255, 115, 139}, new byte[] {255, 117, 137}, new byte[] {255, 119, 135},
-            new byte[] {255, 121, 133}, new byte[] {255, 123, 131}, new byte[] {255, 125, 129}, new byte[] {255, 127, 127},
-            new byte[] {255, 129, 125}, new byte[] {255, 131, 123}, new byte[] {255, 133, 121}, new byte[] {255, 135, 119},
-            new byte[] {255, 137, 117}, new byte[] {255, 139, 115}, new byte[] {255, 141, 113}, new byte[] {255, 143, 111},
-            new byte[] {255, 145, 109}, new byte[] {255, 147, 107}, new byte[] {255, 149, 105}, new byte[] {255, 151, 103},
-            new byte[] {255, 153, 101}, new byte[] {255, 155,  99}, new byte[] {255, 157,  97}, new byte[] {255, 159,  95},
-            new byte[] {255, 161,  93}, new byte[] {255, 163,  91}, new byte[] {255, 165,  89}, new byte[] {255, 167,  87},
-            new byte[] {255, 169,  85}, new byte[] {255, 171,  83}, new byte[] {255, 173,  81}, new byte[] {255, 175,  79},
-            new byte[] {255, 177,  77}, new byte[] {255, 179,  75}, new byte[] {255, 181,  73}, new byte[] {255, 183,  71},
-            new byte[] {255, 185,  69}, new byte[] {255, 187,  67}, new byte[] {255, 189,  65}, new byte[] {255, 191,  63},
-            new byte[] {255, 193,  61}, new byte[] {255, 195,  59}, new byte[] {255, 197,  57}, new byte[] {255, 199,  55},
-            new byte[] {255, 201,  53}, new byte[] {255, 203,  51}, new byte[] {255, 205,  49}, new byte[] {255, 207,  47},
-            new byte[] {255, 209,  45}, new byte[] {255, 211,  43}, new byte[] {255, 213,  41}, new byte[] {255, 215,  39},
-            new byte[] {255, 217,  37}, new byte[] {255, 219,  35}, new byte[] {255, 221,  33}, new byte[] {255, 223,  31},
-            new byte[] {255, 225,  29}, new byte[] {255, 227,  27}, new byte[] {255, 229,  25}, new byte[] {255, 231,  23},
-            new byte[] {255, 233,  21}, new byte[] {255, 235,  19}, new byte[] {255, 237,  17}, new byte[] {255, 239,  15},
-            new byte[] {255, 241,  13}, new byte[] {255, 243,  11}, new byte[] {255, 245,   9}, new byte[] {255, 247,   7},
-            new byte[] {255, 249,   5}, new byte[] {255, 251,   3}, new byte[] {255, 253,   1}, new byte[] {255, 255,   4},
-            new byte[] {255, 255,  17}, new byte[] {255, 255,  29}, new byte[] {255, 255,  42}, new byte[] {255, 255,  54},
-            new byte[] {255, 255,  67}, new byte[] {255, 255,  79}, new byte[] {255, 255,  92}, new byte[] {255, 255, 104},
-            new byte[] {255, 255, 117}, new byte[] {255, 255, 130}, new byte[] {255, 255, 142}, new byte[] {255, 255, 154},
-            new byte[] {255, 255, 167}, new byte[] {255, 255, 179}, new byte[] {255, 255, 192}, new byte[] {255, 255, 204},
-            new byte[] {255, 255, 217}, new byte[] {255, 255, 230}, new byte[] {255, 255, 242}, new byte[] {255, 255, 255}
+            new byte[] {  0,   0,   0},
+            new byte[] {  0,   0,  64},
+            new byte[] {  0,   0, 128},
+            new byte[] {  0,   0, 192},
+            new byte[] {  0,   0, 255},
+            new byte[] { 50,   0, 255},
+            new byte[] {100,   0, 255},
+            new byte[] {150,   9, 245},
+            new byte[] {200,  41, 213},
+            new byte[] {250,  73, 181},
+            new byte[] {255, 105, 149},
+            new byte[] {255, 137, 117},
+            new byte[] {255, 169,  85},
+            new byte[] {255, 201,  53},
+            new byte[] {255, 233,  21},
+            new byte[] {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "gray" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Gray = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {  0,   0,   0},
+            new byte[] { 16,  16,  16},
+            new byte[] { 32,  32,  32},
+            new byte[] { 48,  48,  48},
+            new byte[] { 64,  64,  64},
+            new byte[] { 80,  80,  80},
+            new byte[] { 96,  96,  96},
+            new byte[] {112, 112, 112},
+            new byte[] {128, 128, 128},
+            new byte[] {144, 144, 144},
+            new byte[] {160, 160, 160},
+            new byte[] {176, 176, 176},
+            new byte[] {192, 192, 192},
+            new byte[] {208, 208, 208},
+            new byte[] {224, 224, 224},
+            new byte[] {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "greens" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Greens = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {247, 252, 245},
+            new byte[] {237, 248, 234},
+            new byte[] {228, 244, 223},
+            new byte[] {213, 238, 207},
+            new byte[] {198, 232, 191},
+            new byte[] {179, 224, 173},
+            new byte[] {160, 216, 154},
+            new byte[] {137, 206, 135},
+            new byte[] {115, 195, 117},
+            new byte[] { 89, 183, 105},
+            new byte[] { 64, 170,  92},
+            new byte[] { 49, 154,  80},
+            new byte[] { 34, 138,  68},
+            new byte[] { 16, 123,  55},
+            new byte[] {  0, 107,  43},
+            new byte[] {  0,  68,  27}
+        });
+
+        /// <summary>
+        /// Colormap "greys" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Greys = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255, 255, 255},
+            new byte[] {247, 247, 247},
+            new byte[] {239, 239, 239},
+            new byte[] {228, 228, 228},
+            new byte[] {216, 216, 216},
+            new byte[] {202, 202, 202},
+            new byte[] {188, 188, 188},
+            new byte[] {168, 168, 168},
+            new byte[] {149, 149, 149},
+            new byte[] {131, 131, 131},
+            new byte[] {114, 114, 114},
+            new byte[] { 97,  97,  97},
+            new byte[] { 80,  80,  80},
+            new byte[] { 58,  58,  58},
+            new byte[] { 35,  35,  35},
+            new byte[] {  0,   0,   0}
         });
 
         /// <summary>
@@ -467,70 +754,45 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[][]> Hot = new Lazy<byte[][]>(() => new []
         {
-            new byte[] { 10,   0,   0}, new byte[] { 13,   0,   0}, new byte[] { 15,   0,   0}, new byte[] { 18,   0,   0},
-            new byte[] { 21,   0,   0}, new byte[] { 23,   0,   0}, new byte[] { 26,   0,   0}, new byte[] { 28,   0,   0},
-            new byte[] { 31,   0,   0}, new byte[] { 34,   0,   0}, new byte[] { 36,   0,   0}, new byte[] { 39,   0,   0},
-            new byte[] { 42,   0,   0}, new byte[] { 44,   0,   0}, new byte[] { 47,   0,   0}, new byte[] { 49,   0,   0},
-            new byte[] { 52,   0,   0}, new byte[] { 55,   0,   0}, new byte[] { 57,   0,   0}, new byte[] { 60,   0,   0},
-            new byte[] { 63,   0,   0}, new byte[] { 65,   0,   0}, new byte[] { 68,   0,   0}, new byte[] { 70,   0,   0},
-            new byte[] { 73,   0,   0}, new byte[] { 76,   0,   0}, new byte[] { 78,   0,   0}, new byte[] { 81,   0,   0},
-            new byte[] { 84,   0,   0}, new byte[] { 86,   0,   0}, new byte[] { 89,   0,   0}, new byte[] { 91,   0,   0},
-            new byte[] { 94,   0,   0}, new byte[] { 97,   0,   0}, new byte[] { 99,   0,   0}, new byte[] {102,   0,   0},
-            new byte[] {105,   0,   0}, new byte[] {107,   0,   0}, new byte[] {110,   0,   0}, new byte[] {112,   0,   0},
-            new byte[] {115,   0,   0}, new byte[] {118,   0,   0}, new byte[] {120,   0,   0}, new byte[] {123,   0,   0},
-            new byte[] {126,   0,   0}, new byte[] {128,   0,   0}, new byte[] {131,   0,   0}, new byte[] {133,   0,   0},
-            new byte[] {136,   0,   0}, new byte[] {139,   0,   0}, new byte[] {141,   0,   0}, new byte[] {144,   0,   0},
-            new byte[] {147,   0,   0}, new byte[] {149,   0,   0}, new byte[] {152,   0,   0}, new byte[] {154,   0,   0},
-            new byte[] {157,   0,   0}, new byte[] {160,   0,   0}, new byte[] {162,   0,   0}, new byte[] {165,   0,   0},
-            new byte[] {168,   0,   0}, new byte[] {170,   0,   0}, new byte[] {173,   0,   0}, new byte[] {175,   0,   0},
-            new byte[] {178,   0,   0}, new byte[] {181,   0,   0}, new byte[] {183,   0,   0}, new byte[] {186,   0,   0},
-            new byte[] {189,   0,   0}, new byte[] {191,   0,   0}, new byte[] {194,   0,   0}, new byte[] {196,   0,   0},
-            new byte[] {199,   0,   0}, new byte[] {202,   0,   0}, new byte[] {204,   0,   0}, new byte[] {207,   0,   0},
-            new byte[] {210,   0,   0}, new byte[] {212,   0,   0}, new byte[] {215,   0,   0}, new byte[] {217,   0,   0},
-            new byte[] {220,   0,   0}, new byte[] {223,   0,   0}, new byte[] {225,   0,   0}, new byte[] {228,   0,   0},
-            new byte[] {231,   0,   0}, new byte[] {233,   0,   0}, new byte[] {236,   0,   0}, new byte[] {238,   0,   0},
-            new byte[] {241,   0,   0}, new byte[] {244,   0,   0}, new byte[] {246,   0,   0}, new byte[] {249,   0,   0},
-            new byte[] {252,   0,   0}, new byte[] {254,   0,   0}, new byte[] {255,   2,   0}, new byte[] {255,   5,   0},
-            new byte[] {255,   7,   0}, new byte[] {255,  10,   0}, new byte[] {255,  12,   0}, new byte[] {255,  15,   0},
-            new byte[] {255,  18,   0}, new byte[] {255,  20,   0}, new byte[] {255,  23,   0}, new byte[] {255,  26,   0},
-            new byte[] {255,  28,   0}, new byte[] {255,  31,   0}, new byte[] {255,  33,   0}, new byte[] {255,  36,   0},
-            new byte[] {255,  39,   0}, new byte[] {255,  41,   0}, new byte[] {255,  44,   0}, new byte[] {255,  47,   0},
-            new byte[] {255,  49,   0}, new byte[] {255,  52,   0}, new byte[] {255,  54,   0}, new byte[] {255,  57,   0},
-            new byte[] {255,  60,   0}, new byte[] {255,  62,   0}, new byte[] {255,  65,   0}, new byte[] {255,  68,   0},
-            new byte[] {255,  70,   0}, new byte[] {255,  73,   0}, new byte[] {255,  75,   0}, new byte[] {255,  78,   0},
-            new byte[] {255,  81,   0}, new byte[] {255,  83,   0}, new byte[] {255,  86,   0}, new byte[] {255,  89,   0},
-            new byte[] {255,  91,   0}, new byte[] {255,  94,   0}, new byte[] {255,  96,   0}, new byte[] {255,  99,   0},
-            new byte[] {255, 102,   0}, new byte[] {255, 104,   0}, new byte[] {255, 107,   0}, new byte[] {255, 110,   0},
-            new byte[] {255, 112,   0}, new byte[] {255, 115,   0}, new byte[] {255, 117,   0}, new byte[] {255, 120,   0},
-            new byte[] {255, 123,   0}, new byte[] {255, 125,   0}, new byte[] {255, 128,   0}, new byte[] {255, 131,   0},
-            new byte[] {255, 133,   0}, new byte[] {255, 136,   0}, new byte[] {255, 138,   0}, new byte[] {255, 141,   0},
-            new byte[] {255, 144,   0}, new byte[] {255, 146,   0}, new byte[] {255, 149,   0}, new byte[] {255, 151,   0},
-            new byte[] {255, 154,   0}, new byte[] {255, 157,   0}, new byte[] {255, 159,   0}, new byte[] {255, 162,   0},
-            new byte[] {255, 165,   0}, new byte[] {255, 167,   0}, new byte[] {255, 170,   0}, new byte[] {255, 172,   0},
-            new byte[] {255, 175,   0}, new byte[] {255, 178,   0}, new byte[] {255, 180,   0}, new byte[] {255, 183,   0},
-            new byte[] {255, 186,   0}, new byte[] {255, 188,   0}, new byte[] {255, 191,   0}, new byte[] {255, 193,   0},
-            new byte[] {255, 196,   0}, new byte[] {255, 199,   0}, new byte[] {255, 201,   0}, new byte[] {255, 204,   0},
-            new byte[] {255, 207,   0}, new byte[] {255, 209,   0}, new byte[] {255, 212,   0}, new byte[] {255, 214,   0},
-            new byte[] {255, 217,   0}, new byte[] {255, 220,   0}, new byte[] {255, 222,   0}, new byte[] {255, 225,   0},
-            new byte[] {255, 228,   0}, new byte[] {255, 230,   0}, new byte[] {255, 233,   0}, new byte[] {255, 235,   0},
-            new byte[] {255, 238,   0}, new byte[] {255, 241,   0}, new byte[] {255, 243,   0}, new byte[] {255, 246,   0},
-            new byte[] {255, 249,   0}, new byte[] {255, 251,   0}, new byte[] {255, 254,   0}, new byte[] {255, 255,   2},
-            new byte[] {255, 255,   6}, new byte[] {255, 255,  10}, new byte[] {255, 255,  14}, new byte[] {255, 255,  18},
-            new byte[] {255, 255,  22}, new byte[] {255, 255,  26}, new byte[] {255, 255,  30}, new byte[] {255, 255,  34},
-            new byte[] {255, 255,  38}, new byte[] {255, 255,  42}, new byte[] {255, 255,  46}, new byte[] {255, 255,  50},
-            new byte[] {255, 255,  54}, new byte[] {255, 255,  58}, new byte[] {255, 255,  62}, new byte[] {255, 255,  65},
-            new byte[] {255, 255,  69}, new byte[] {255, 255,  73}, new byte[] {255, 255,  77}, new byte[] {255, 255,  81},
-            new byte[] {255, 255,  85}, new byte[] {255, 255,  89}, new byte[] {255, 255,  93}, new byte[] {255, 255,  97},
-            new byte[] {255, 255, 101}, new byte[] {255, 255, 105}, new byte[] {255, 255, 109}, new byte[] {255, 255, 113},
-            new byte[] {255, 255, 117}, new byte[] {255, 255, 121}, new byte[] {255, 255, 125}, new byte[] {255, 255, 128},
-            new byte[] {255, 255, 132}, new byte[] {255, 255, 136}, new byte[] {255, 255, 140}, new byte[] {255, 255, 144},
-            new byte[] {255, 255, 148}, new byte[] {255, 255, 152}, new byte[] {255, 255, 156}, new byte[] {255, 255, 160},
-            new byte[] {255, 255, 164}, new byte[] {255, 255, 168}, new byte[] {255, 255, 172}, new byte[] {255, 255, 176},
-            new byte[] {255, 255, 180}, new byte[] {255, 255, 184}, new byte[] {255, 255, 188}, new byte[] {255, 255, 191},
-            new byte[] {255, 255, 195}, new byte[] {255, 255, 199}, new byte[] {255, 255, 203}, new byte[] {255, 255, 207},
-            new byte[] {255, 255, 211}, new byte[] {255, 255, 215}, new byte[] {255, 255, 219}, new byte[] {255, 255, 223},
-            new byte[] {255, 255, 227}, new byte[] {255, 255, 231}, new byte[] {255, 255, 235}, new byte[] {255, 255, 239},
-            new byte[] {255, 255, 243}, new byte[] {255, 255, 247}, new byte[] {255, 255, 251}, new byte[] {255, 255, 255}
+            new byte[] { 10,   0,   0},
+            new byte[] { 52,   0,   0},
+            new byte[] { 94,   0,   0},
+            new byte[] {136,   0,   0},
+            new byte[] {178,   0,   0},
+            new byte[] {220,   0,   0},
+            new byte[] {255,   7,   0},
+            new byte[] {255,  49,   0},
+            new byte[] {255,  91,   0},
+            new byte[] {255, 133,   0},
+            new byte[] {255, 175,   0},
+            new byte[] {255, 217,   0},
+            new byte[] {255, 255,   6},
+            new byte[] {255, 255,  69},
+            new byte[] {255, 255, 132},
+            new byte[] {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "hsv" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Hsv = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255,   0,   0},
+            new byte[] {255,  94,   0},
+            new byte[] {255, 189,   0},
+            new byte[] {226, 255,   0},
+            new byte[] {131, 255,   0},
+            new byte[] { 37, 255,   0},
+            new byte[] {  0, 255,  57},
+            new byte[] {  0, 255, 151},
+            new byte[] {  0, 255, 245},
+            new byte[] {  0, 169, 255},
+            new byte[] {  0,  75, 255},
+            new byte[] { 19,   0, 255},
+            new byte[] {113,   0, 255},
+            new byte[] {208,   0, 255},
+            new byte[] {255,   0, 207},
+            new byte[] {255,   0,  23}
         });
 
         /// <summary>
@@ -538,70 +800,22 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[][]> Inferno = new Lazy<byte[][]>(() => new []
         {
-            new byte[] {  0,   0,   3}, new byte[] {  0,   0,   4}, new byte[] {  0,   0,   6}, new byte[] {  1,   0,   7},
-            new byte[] {  1,   1,   9}, new byte[] {  1,   1,  11}, new byte[] {  2,   1,  14}, new byte[] {  2,   2,  16},
-            new byte[] {  3,   2,  18}, new byte[] {  4,   3,  20}, new byte[] {  4,   3,  22}, new byte[] {  5,   4,  24},
-            new byte[] {  6,   4,  27}, new byte[] {  7,   5,  29}, new byte[] {  8,   6,  31}, new byte[] {  9,   6,  33},
-            new byte[] { 10,   7,  35}, new byte[] { 11,   7,  38}, new byte[] { 13,   8,  40}, new byte[] { 14,   8,  42},
-            new byte[] { 15,   9,  45}, new byte[] { 16,   9,  47}, new byte[] { 18,  10,  50}, new byte[] { 19,  10,  52},
-            new byte[] { 20,  11,  54}, new byte[] { 22,  11,  57}, new byte[] { 23,  11,  59}, new byte[] { 25,  11,  62},
-            new byte[] { 26,  11,  64}, new byte[] { 28,  12,  67}, new byte[] { 29,  12,  69}, new byte[] { 31,  12,  71},
-            new byte[] { 32,  12,  74}, new byte[] { 34,  11,  76}, new byte[] { 36,  11,  78}, new byte[] { 38,  11,  80},
-            new byte[] { 39,  11,  82}, new byte[] { 41,  11,  84}, new byte[] { 43,  10,  86}, new byte[] { 45,  10,  88},
-            new byte[] { 46,  10,  90}, new byte[] { 48,  10,  92}, new byte[] { 50,   9,  93}, new byte[] { 52,   9,  95},
-            new byte[] { 53,   9,  96}, new byte[] { 55,   9,  97}, new byte[] { 57,   9,  98}, new byte[] { 59,   9, 100},
-            new byte[] { 60,   9, 101}, new byte[] { 62,   9, 102}, new byte[] { 64,   9, 102}, new byte[] { 65,   9, 103},
-            new byte[] { 67,  10, 104}, new byte[] { 69,  10, 105}, new byte[] { 70,  10, 105}, new byte[] { 72,  11, 106},
-            new byte[] { 74,  11, 106}, new byte[] { 75,  12, 107}, new byte[] { 77,  12, 107}, new byte[] { 79,  13, 108},
-            new byte[] { 80,  13, 108}, new byte[] { 82,  14, 108}, new byte[] { 83,  14, 109}, new byte[] { 85,  15, 109},
-            new byte[] { 87,  15, 109}, new byte[] { 88,  16, 109}, new byte[] { 90,  17, 109}, new byte[] { 91,  17, 110},
-            new byte[] { 93,  18, 110}, new byte[] { 95,  18, 110}, new byte[] { 96,  19, 110}, new byte[] { 98,  20, 110},
-            new byte[] { 99,  20, 110}, new byte[] {101,  21, 110}, new byte[] {102,  21, 110}, new byte[] {104,  22, 110},
-            new byte[] {106,  23, 110}, new byte[] {107,  23, 110}, new byte[] {109,  24, 110}, new byte[] {110,  24, 110},
-            new byte[] {112,  25, 110}, new byte[] {114,  25, 109}, new byte[] {115,  26, 109}, new byte[] {117,  27, 109},
-            new byte[] {118,  27, 109}, new byte[] {120,  28, 109}, new byte[] {122,  28, 109}, new byte[] {123,  29, 108},
-            new byte[] {125,  29, 108}, new byte[] {126,  30, 108}, new byte[] {128,  31, 107}, new byte[] {129,  31, 107},
-            new byte[] {131,  32, 107}, new byte[] {133,  32, 106}, new byte[] {134,  33, 106}, new byte[] {136,  33, 106},
-            new byte[] {137,  34, 105}, new byte[] {139,  34, 105}, new byte[] {141,  35, 105}, new byte[] {142,  36, 104},
-            new byte[] {144,  36, 104}, new byte[] {145,  37, 103}, new byte[] {147,  37, 103}, new byte[] {149,  38, 102},
-            new byte[] {150,  38, 102}, new byte[] {152,  39, 101}, new byte[] {153,  40, 100}, new byte[] {155,  40, 100},
-            new byte[] {156,  41,  99}, new byte[] {158,  41,  99}, new byte[] {160,  42,  98}, new byte[] {161,  43,  97},
-            new byte[] {163,  43,  97}, new byte[] {164,  44,  96}, new byte[] {166,  44,  95}, new byte[] {167,  45,  95},
-            new byte[] {169,  46,  94}, new byte[] {171,  46,  93}, new byte[] {172,  47,  92}, new byte[] {174,  48,  91},
-            new byte[] {175,  49,  91}, new byte[] {177,  49,  90}, new byte[] {178,  50,  89}, new byte[] {180,  51,  88},
-            new byte[] {181,  51,  87}, new byte[] {183,  52,  86}, new byte[] {184,  53,  86}, new byte[] {186,  54,  85},
-            new byte[] {187,  55,  84}, new byte[] {189,  55,  83}, new byte[] {190,  56,  82}, new byte[] {191,  57,  81},
-            new byte[] {193,  58,  80}, new byte[] {194,  59,  79}, new byte[] {196,  60,  78}, new byte[] {197,  61,  77},
-            new byte[] {199,  62,  76}, new byte[] {200,  62,  75}, new byte[] {201,  63,  74}, new byte[] {203,  64,  73},
-            new byte[] {204,  65,  72}, new byte[] {205,  66,  71}, new byte[] {207,  68,  70}, new byte[] {208,  69,  68},
-            new byte[] {209,  70,  67}, new byte[] {210,  71,  66}, new byte[] {212,  72,  65}, new byte[] {213,  73,  64},
-            new byte[] {214,  74,  63}, new byte[] {215,  75,  62}, new byte[] {217,  77,  61}, new byte[] {218,  78,  59},
-            new byte[] {219,  79,  58}, new byte[] {220,  80,  57}, new byte[] {221,  82,  56}, new byte[] {222,  83,  55},
-            new byte[] {223,  84,  54}, new byte[] {224,  86,  52}, new byte[] {226,  87,  51}, new byte[] {227,  88,  50},
-            new byte[] {228,  90,  49}, new byte[] {229,  91,  48}, new byte[] {230,  92,  46}, new byte[] {230,  94,  45},
-            new byte[] {231,  95,  44}, new byte[] {232,  97,  43}, new byte[] {233,  98,  42}, new byte[] {234, 100,  40},
-            new byte[] {235, 101,  39}, new byte[] {236, 103,  38}, new byte[] {237, 104,  37}, new byte[] {237, 106,  35},
-            new byte[] {238, 108,  34}, new byte[] {239, 109,  33}, new byte[] {240, 111,  31}, new byte[] {240, 112,  30},
-            new byte[] {241, 114,  29}, new byte[] {242, 116,  28}, new byte[] {242, 117,  26}, new byte[] {243, 119,  25},
-            new byte[] {243, 121,  24}, new byte[] {244, 122,  22}, new byte[] {245, 124,  21}, new byte[] {245, 126,  20},
-            new byte[] {246, 128,  18}, new byte[] {246, 129,  17}, new byte[] {247, 131,  16}, new byte[] {247, 133,  14},
-            new byte[] {248, 135,  13}, new byte[] {248, 136,  12}, new byte[] {248, 138,  11}, new byte[] {249, 140,   9},
-            new byte[] {249, 142,   8}, new byte[] {249, 144,   8}, new byte[] {250, 145,   7}, new byte[] {250, 147,   6},
-            new byte[] {250, 149,   6}, new byte[] {250, 151,   6}, new byte[] {251, 153,   6}, new byte[] {251, 155,   6},
-            new byte[] {251, 157,   6}, new byte[] {251, 158,   7}, new byte[] {251, 160,   7}, new byte[] {251, 162,   8},
-            new byte[] {251, 164,  10}, new byte[] {251, 166,  11}, new byte[] {251, 168,  13}, new byte[] {251, 170,  14},
-            new byte[] {251, 172,  16}, new byte[] {251, 174,  18}, new byte[] {251, 176,  20}, new byte[] {251, 177,  22},
-            new byte[] {251, 179,  24}, new byte[] {251, 181,  26}, new byte[] {251, 183,  28}, new byte[] {251, 185,  30},
-            new byte[] {250, 187,  33}, new byte[] {250, 189,  35}, new byte[] {250, 191,  37}, new byte[] {250, 193,  40},
-            new byte[] {249, 195,  42}, new byte[] {249, 197,  44}, new byte[] {249, 199,  47}, new byte[] {248, 201,  49},
-            new byte[] {248, 203,  52}, new byte[] {248, 205,  55}, new byte[] {247, 207,  58}, new byte[] {247, 209,  60},
-            new byte[] {246, 211,  63}, new byte[] {246, 213,  66}, new byte[] {245, 215,  69}, new byte[] {245, 217,  72},
-            new byte[] {244, 219,  75}, new byte[] {244, 220,  79}, new byte[] {243, 222,  82}, new byte[] {243, 224,  86},
-            new byte[] {243, 226,  89}, new byte[] {242, 228,  93}, new byte[] {242, 230,  96}, new byte[] {241, 232, 100},
-            new byte[] {241, 233, 104}, new byte[] {241, 235, 108}, new byte[] {241, 237, 112}, new byte[] {241, 238, 116},
-            new byte[] {241, 240, 121}, new byte[] {241, 242, 125}, new byte[] {242, 243, 129}, new byte[] {242, 244, 133},
-            new byte[] {243, 246, 137}, new byte[] {244, 247, 141}, new byte[] {245, 248, 145}, new byte[] {246, 250, 149},
-            new byte[] {247, 251, 153}, new byte[] {249, 252, 157}, new byte[] {250, 253, 160}, new byte[] {252, 254, 164}
+            new byte[] {  0,   0,   3},
+            new byte[] { 10,   7,  35},
+            new byte[] { 32,  12,  74},
+            new byte[] { 60,   9, 101},
+            new byte[] { 87,  15, 109},
+            new byte[] {112,  25, 110},
+            new byte[] {137,  34, 105},
+            new byte[] {163,  43,  97},
+            new byte[] {187,  55,  84},
+            new byte[] {209,  70,  67},
+            new byte[] {228,  90,  49},
+            new byte[] {241, 114,  29},
+            new byte[] {249, 142,   8},
+            new byte[] {251, 172,  16},
+            new byte[] {248, 203,  52},
+            new byte[] {252, 254, 164}
         });
 
         /// <summary>
@@ -609,70 +823,68 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[][]> Jet = new Lazy<byte[][]>(() => new []
         {
-            new byte[] {  0,   0, 127}, new byte[] {  0,   0, 132}, new byte[] {  0,   0, 136}, new byte[] {  0,   0, 141},
-            new byte[] {  0,   0, 145}, new byte[] {  0,   0, 150}, new byte[] {  0,   0, 154}, new byte[] {  0,   0, 159},
-            new byte[] {  0,   0, 163}, new byte[] {  0,   0, 168}, new byte[] {  0,   0, 172}, new byte[] {  0,   0, 177},
-            new byte[] {  0,   0, 182}, new byte[] {  0,   0, 186}, new byte[] {  0,   0, 191}, new byte[] {  0,   0, 195},
-            new byte[] {  0,   0, 200}, new byte[] {  0,   0, 204}, new byte[] {  0,   0, 209}, new byte[] {  0,   0, 213},
-            new byte[] {  0,   0, 218}, new byte[] {  0,   0, 222}, new byte[] {  0,   0, 227}, new byte[] {  0,   0, 232},
-            new byte[] {  0,   0, 236}, new byte[] {  0,   0, 241}, new byte[] {  0,   0, 245}, new byte[] {  0,   0, 250},
-            new byte[] {  0,   0, 254}, new byte[] {  0,   0, 255}, new byte[] {  0,   0, 255}, new byte[] {  0,   0, 255},
-            new byte[] {  0,   0, 255}, new byte[] {  0,   4, 255}, new byte[] {  0,   8, 255}, new byte[] {  0,  12, 255},
-            new byte[] {  0,  16, 255}, new byte[] {  0,  20, 255}, new byte[] {  0,  24, 255}, new byte[] {  0,  28, 255},
-            new byte[] {  0,  32, 255}, new byte[] {  0,  36, 255}, new byte[] {  0,  40, 255}, new byte[] {  0,  44, 255},
-            new byte[] {  0,  48, 255}, new byte[] {  0,  52, 255}, new byte[] {  0,  56, 255}, new byte[] {  0,  60, 255},
-            new byte[] {  0,  64, 255}, new byte[] {  0,  68, 255}, new byte[] {  0,  72, 255}, new byte[] {  0,  76, 255},
-            new byte[] {  0,  80, 255}, new byte[] {  0,  84, 255}, new byte[] {  0,  88, 255}, new byte[] {  0,  92, 255},
-            new byte[] {  0,  96, 255}, new byte[] {  0, 100, 255}, new byte[] {  0, 104, 255}, new byte[] {  0, 108, 255},
-            new byte[] {  0, 112, 255}, new byte[] {  0, 116, 255}, new byte[] {  0, 120, 255}, new byte[] {  0, 124, 255},
-            new byte[] {  0, 128, 255}, new byte[] {  0, 132, 255}, new byte[] {  0, 136, 255}, new byte[] {  0, 140, 255},
-            new byte[] {  0, 144, 255}, new byte[] {  0, 148, 255}, new byte[] {  0, 152, 255}, new byte[] {  0, 156, 255},
-            new byte[] {  0, 160, 255}, new byte[] {  0, 164, 255}, new byte[] {  0, 168, 255}, new byte[] {  0, 172, 255},
-            new byte[] {  0, 176, 255}, new byte[] {  0, 180, 255}, new byte[] {  0, 184, 255}, new byte[] {  0, 188, 255},
-            new byte[] {  0, 192, 255}, new byte[] {  0, 196, 255}, new byte[] {  0, 200, 255}, new byte[] {  0, 204, 255},
-            new byte[] {  0, 208, 255}, new byte[] {  0, 212, 255}, new byte[] {  0, 216, 255}, new byte[] {  0, 220, 254},
-            new byte[] {  0, 224, 250}, new byte[] {  0, 228, 247}, new byte[] {  2, 232, 244}, new byte[] {  5, 236, 241},
-            new byte[] {  8, 240, 237}, new byte[] { 12, 244, 234}, new byte[] { 15, 248, 231}, new byte[] { 18, 252, 228},
-            new byte[] { 21, 255, 225}, new byte[] { 24, 255, 221}, new byte[] { 28, 255, 218}, new byte[] { 31, 255, 215},
-            new byte[] { 34, 255, 212}, new byte[] { 37, 255, 208}, new byte[] { 41, 255, 205}, new byte[] { 44, 255, 202},
-            new byte[] { 47, 255, 199}, new byte[] { 50, 255, 195}, new byte[] { 54, 255, 192}, new byte[] { 57, 255, 189},
-            new byte[] { 60, 255, 186}, new byte[] { 63, 255, 183}, new byte[] { 66, 255, 179}, new byte[] { 70, 255, 176},
-            new byte[] { 73, 255, 173}, new byte[] { 76, 255, 170}, new byte[] { 79, 255, 166}, new byte[] { 83, 255, 163},
-            new byte[] { 86, 255, 160}, new byte[] { 89, 255, 157}, new byte[] { 92, 255, 154}, new byte[] { 95, 255, 150},
-            new byte[] { 99, 255, 147}, new byte[] {102, 255, 144}, new byte[] {105, 255, 141}, new byte[] {108, 255, 137},
-            new byte[] {112, 255, 134}, new byte[] {115, 255, 131}, new byte[] {118, 255, 128}, new byte[] {121, 255, 125},
-            new byte[] {124, 255, 121}, new byte[] {128, 255, 118}, new byte[] {131, 255, 115}, new byte[] {134, 255, 112},
-            new byte[] {137, 255, 108}, new byte[] {141, 255, 105}, new byte[] {144, 255, 102}, new byte[] {147, 255,  99},
-            new byte[] {150, 255,  95}, new byte[] {154, 255,  92}, new byte[] {157, 255,  89}, new byte[] {160, 255,  86},
-            new byte[] {163, 255,  83}, new byte[] {166, 255,  79}, new byte[] {170, 255,  76}, new byte[] {173, 255,  73},
-            new byte[] {176, 255,  70}, new byte[] {179, 255,  66}, new byte[] {183, 255,  63}, new byte[] {186, 255,  60},
-            new byte[] {189, 255,  57}, new byte[] {192, 255,  54}, new byte[] {195, 255,  50}, new byte[] {199, 255,  47},
-            new byte[] {202, 255,  44}, new byte[] {205, 255,  41}, new byte[] {208, 255,  37}, new byte[] {212, 255,  34},
-            new byte[] {215, 255,  31}, new byte[] {218, 255,  28}, new byte[] {221, 255,  24}, new byte[] {224, 255,  21},
-            new byte[] {228, 255,  18}, new byte[] {231, 255,  15}, new byte[] {234, 255,  12}, new byte[] {237, 255,   8},
-            new byte[] {241, 252,   5}, new byte[] {244, 248,   2}, new byte[] {247, 244,   0}, new byte[] {250, 240,   0},
-            new byte[] {254, 237,   0}, new byte[] {255, 233,   0}, new byte[] {255, 229,   0}, new byte[] {255, 226,   0},
-            new byte[] {255, 222,   0}, new byte[] {255, 218,   0}, new byte[] {255, 215,   0}, new byte[] {255, 211,   0},
-            new byte[] {255, 207,   0}, new byte[] {255, 203,   0}, new byte[] {255, 200,   0}, new byte[] {255, 196,   0},
-            new byte[] {255, 192,   0}, new byte[] {255, 189,   0}, new byte[] {255, 185,   0}, new byte[] {255, 181,   0},
-            new byte[] {255, 177,   0}, new byte[] {255, 174,   0}, new byte[] {255, 170,   0}, new byte[] {255, 166,   0},
-            new byte[] {255, 163,   0}, new byte[] {255, 159,   0}, new byte[] {255, 155,   0}, new byte[] {255, 152,   0},
-            new byte[] {255, 148,   0}, new byte[] {255, 144,   0}, new byte[] {255, 140,   0}, new byte[] {255, 137,   0},
-            new byte[] {255, 133,   0}, new byte[] {255, 129,   0}, new byte[] {255, 126,   0}, new byte[] {255, 122,   0},
-            new byte[] {255, 118,   0}, new byte[] {255, 115,   0}, new byte[] {255, 111,   0}, new byte[] {255, 107,   0},
-            new byte[] {255, 103,   0}, new byte[] {255, 100,   0}, new byte[] {255,  96,   0}, new byte[] {255,  92,   0},
-            new byte[] {255,  89,   0}, new byte[] {255,  85,   0}, new byte[] {255,  81,   0}, new byte[] {255,  77,   0},
-            new byte[] {255,  74,   0}, new byte[] {255,  70,   0}, new byte[] {255,  66,   0}, new byte[] {255,  63,   0},
-            new byte[] {255,  59,   0}, new byte[] {255,  55,   0}, new byte[] {255,  52,   0}, new byte[] {255,  48,   0},
-            new byte[] {255,  44,   0}, new byte[] {255,  40,   0}, new byte[] {255,  37,   0}, new byte[] {255,  33,   0},
-            new byte[] {255,  29,   0}, new byte[] {255,  26,   0}, new byte[] {255,  22,   0}, new byte[] {254,  18,   0},
-            new byte[] {250,  15,   0}, new byte[] {245,  11,   0}, new byte[] {241,   7,   0}, new byte[] {236,   3,   0},
-            new byte[] {232,   0,   0}, new byte[] {227,   0,   0}, new byte[] {222,   0,   0}, new byte[] {218,   0,   0},
-            new byte[] {213,   0,   0}, new byte[] {209,   0,   0}, new byte[] {204,   0,   0}, new byte[] {200,   0,   0},
-            new byte[] {195,   0,   0}, new byte[] {191,   0,   0}, new byte[] {186,   0,   0}, new byte[] {182,   0,   0},
-            new byte[] {177,   0,   0}, new byte[] {172,   0,   0}, new byte[] {168,   0,   0}, new byte[] {163,   0,   0},
-            new byte[] {159,   0,   0}, new byte[] {154,   0,   0}, new byte[] {150,   0,   0}, new byte[] {145,   0,   0},
-            new byte[] {141,   0,   0}, new byte[] {136,   0,   0}, new byte[] {132,   0,   0}, new byte[] {127,   0,   0}
+            new byte[] {  0,   0, 127},
+            new byte[] {  0,   0, 200},
+            new byte[] {  0,   0, 255},
+            new byte[] {  0,  64, 255},
+            new byte[] {  0, 128, 255},
+            new byte[] {  0, 192, 255},
+            new byte[] { 21, 255, 225},
+            new byte[] { 73, 255, 173},
+            new byte[] {124, 255, 121},
+            new byte[] {176, 255,  70},
+            new byte[] {228, 255,  18},
+            new byte[] {255, 207,   0},
+            new byte[] {255, 148,   0},
+            new byte[] {255,  89,   0},
+            new byte[] {255,  29,   0},
+            new byte[] {127,   0,   0}
+        });
+
+        /// <summary>
+        /// Colormap "magma" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Magma = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {  0,   0,   3},
+            new byte[] { 10,   7,  34},
+            new byte[] { 28,  16,  70},
+            new byte[] { 53,  15, 106},
+            new byte[] { 80,  18, 123},
+            new byte[] {105,  28, 128},
+            new byte[] {130,  37, 129},
+            new byte[] {156,  46, 127},
+            new byte[] {182,  54, 121},
+            new byte[] {208,  65, 111},
+            new byte[] {230,  81,  98},
+            new byte[] {245, 106,  91},
+            new byte[] {251, 136,  97},
+            new byte[] {254, 166, 113},
+            new byte[] {254, 196, 136},
+            new byte[] {251, 252, 191}
+        });
+
+        /// <summary>
+        /// Colormap "nipy_spectral" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Nipy_Spectral = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {  0,   0,   0},
+            new byte[] {123,   0, 140},
+            new byte[] { 66,   0, 161},
+            new byte[] {  0,   0, 209},
+            new byte[] {  0, 119, 221},
+            new byte[] {  0, 157, 207},
+            new byte[] {  0, 170, 151},
+            new byte[] {  0, 156,  29},
+            new byte[] {  0, 188,   0},
+            new byte[] {  0, 231,   0},
+            new byte[] {102, 255,   0},
+            new byte[] {227, 241,   0},
+            new byte[] {255, 201,   0},
+            new byte[] {255, 105,   0},
+            new byte[] {235,   0,   0},
+            new byte[] {204, 204, 204}
         });
 
         /// <summary>
@@ -680,70 +892,367 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[][]> Ocean = new Lazy<byte[][]>(() => new []
         {
-            new byte[] {  0, 127,   0}, new byte[] {  0, 126,   1}, new byte[] {  0, 124,   2}, new byte[] {  0, 123,   3},
-            new byte[] {  0, 121,   4}, new byte[] {  0, 120,   5}, new byte[] {  0, 118,   6}, new byte[] {  0, 117,   7},
-            new byte[] {  0, 115,   8}, new byte[] {  0, 114,   9}, new byte[] {  0, 112,  10}, new byte[] {  0, 111,  11},
-            new byte[] {  0, 109,  12}, new byte[] {  0, 108,  13}, new byte[] {  0, 106,  14}, new byte[] {  0, 105,  15},
-            new byte[] {  0, 103,  16}, new byte[] {  0, 102,  17}, new byte[] {  0, 100,  18}, new byte[] {  0,  99,  19},
-            new byte[] {  0,  97,  20}, new byte[] {  0,  96,  21}, new byte[] {  0,  94,  22}, new byte[] {  0,  93,  23},
-            new byte[] {  0,  91,  24}, new byte[] {  0,  89,  25}, new byte[] {  0,  88,  26}, new byte[] {  0,  87,  27},
-            new byte[] {  0,  85,  28}, new byte[] {  0,  84,  29}, new byte[] {  0,  82,  30}, new byte[] {  0,  81,  31},
-            new byte[] {  0,  79,  32}, new byte[] {  0,  78,  32}, new byte[] {  0,  76,  34}, new byte[] {  0,  74,  35},
-            new byte[] {  0,  73,  36}, new byte[] {  0,  72,  36}, new byte[] {  0,  70,  38}, new byte[] {  0,  69,  39},
-            new byte[] {  0,  67,  40}, new byte[] {  0,  66,  40}, new byte[] {  0,  64,  42}, new byte[] {  0,  63,  43},
-            new byte[] {  0,  61,  44}, new byte[] {  0,  60,  44}, new byte[] {  0,  58,  46}, new byte[] {  0,  56,  47},
-            new byte[] {  0,  55,  48}, new byte[] {  0,  54,  48}, new byte[] {  0,  52,  50}, new byte[] {  0,  50,  51},
-            new byte[] {  0,  49,  52}, new byte[] {  0,  48,  52}, new byte[] {  0,  46,  54}, new byte[] {  0,  44,  55},
-            new byte[] {  0,  43,  56}, new byte[] {  0,  42,  56}, new byte[] {  0,  40,  58}, new byte[] {  0,  39,  59},
-            new byte[] {  0,  37,  60}, new byte[] {  0,  36,  60}, new byte[] {  0,  34,  62}, new byte[] {  0,  32,  63},
-            new byte[] {  0,  31,  64}, new byte[] {  0,  30,  65}, new byte[] {  0,  28,  65}, new byte[] {  0,  26,  67},
-            new byte[] {  0,  25,  68}, new byte[] {  0,  24,  69}, new byte[] {  0,  22,  70}, new byte[] {  0,  20,  71},
-            new byte[] {  0,  19,  72}, new byte[] {  0,  18,  73}, new byte[] {  0,  16,  73}, new byte[] {  0,  15,  75},
-            new byte[] {  0,  13,  76}, new byte[] {  0,  12,  77}, new byte[] {  0,  10,  78}, new byte[] {  0,   8,  79},
-            new byte[] {  0,   7,  80}, new byte[] {  0,   6,  81}, new byte[] {  0,   4,  81}, new byte[] {  0,   2,  83},
-            new byte[] {  0,   1,  84}, new byte[] {  0,   0,  85}, new byte[] {  0,   1,  86}, new byte[] {  0,   2,  87},
-            new byte[] {  0,   4,  88}, new byte[] {  0,   5,  89}, new byte[] {  0,   7,  89}, new byte[] {  0,   8,  91},
-            new byte[] {  0,  10,  92}, new byte[] {  0,  11,  93}, new byte[] {  0,  13,  94}, new byte[] {  0,  15,  95},
-            new byte[] {  0,  16,  96}, new byte[] {  0,  17,  97}, new byte[] {  0,  19,  97}, new byte[] {  0,  21,  99},
-            new byte[] {  0,  22, 100}, new byte[] {  0,  24, 101}, new byte[] {  0,  25, 102}, new byte[] {  0,  27, 103},
-            new byte[] {  0,  28, 104}, new byte[] {  0,  30, 105}, new byte[] {  0,  31, 105}, new byte[] {  0,  32, 107},
-            new byte[] {  0,  34, 108}, new byte[] {  0,  35, 109}, new byte[] {  0,  37, 110}, new byte[] {  0,  39, 111},
-            new byte[] {  0,  40, 112}, new byte[] {  0,  41, 113}, new byte[] {  0,  43, 113}, new byte[] {  0,  45, 115},
-            new byte[] {  0,  46, 116}, new byte[] {  0,  48, 117}, new byte[] {  0,  49, 118}, new byte[] {  0,  50, 119},
-            new byte[] {  0,  52, 120}, new byte[] {  0,  53, 121}, new byte[] {  0,  55, 121}, new byte[] {  0,  56, 123},
-            new byte[] {  0,  58, 124}, new byte[] {  0,  59, 125}, new byte[] {  0,  61, 126}, new byte[] {  0,  63, 127},
-            new byte[] {  0,  64, 128}, new byte[] {  0,  65, 129}, new byte[] {  0,  67, 130}, new byte[] {  0,  68, 131},
-            new byte[] {  0,  70, 131}, new byte[] {  0,  72, 133}, new byte[] {  0,  73, 134}, new byte[] {  0,  75, 135},
-            new byte[] {  0,  76, 136}, new byte[] {  0,  78, 137}, new byte[] {  0,  79, 138}, new byte[] {  0,  81, 139},
-            new byte[] {  0,  82, 140}, new byte[] {  0,  84, 141}, new byte[] {  0,  85, 142}, new byte[] {  0,  87, 143},
-            new byte[] {  0,  88, 144}, new byte[] {  0,  89, 145}, new byte[] {  0,  91, 146}, new byte[] {  0,  92, 147},
-            new byte[] {  0,  94, 147}, new byte[] {  0,  96, 149}, new byte[] {  0,  97, 150}, new byte[] {  0,  98, 151},
-            new byte[] {  0, 100, 152}, new byte[] {  0, 101, 153}, new byte[] {  0, 103, 154}, new byte[] {  0, 104, 155},
-            new byte[] {  0, 106, 156}, new byte[] {  0, 108, 157}, new byte[] {  0, 109, 158}, new byte[] {  0, 111, 159},
-            new byte[] {  0, 112, 160}, new byte[] {  0, 113, 161}, new byte[] {  0, 115, 162}, new byte[] {  0, 116, 163},
-            new byte[] {  0, 118, 163}, new byte[] {  0, 120, 165}, new byte[] {  0, 121, 166}, new byte[] {  0, 123, 167},
-            new byte[] {  0, 124, 168}, new byte[] {  0, 126, 169}, new byte[] {  0, 127, 170}, new byte[] {  2, 129, 171},
-            new byte[] {  5, 130, 172}, new byte[] {  8, 131, 173}, new byte[] { 11, 133, 174}, new byte[] { 14, 134, 175},
-            new byte[] { 17, 136, 176}, new byte[] { 20, 137, 177}, new byte[] { 23, 139, 178}, new byte[] { 26, 140, 179},
-            new byte[] { 29, 142, 179}, new byte[] { 32, 144, 181}, new byte[] { 35, 145, 182}, new byte[] { 38, 147, 183},
-            new byte[] { 41, 148, 184}, new byte[] { 44, 149, 185}, new byte[] { 47, 151, 186}, new byte[] { 50, 152, 187},
-            new byte[] { 54, 154, 188}, new byte[] { 57, 156, 189}, new byte[] { 60, 157, 190}, new byte[] { 63, 159, 191},
-            new byte[] { 65, 160, 192}, new byte[] { 68, 162, 193}, new byte[] { 71, 163, 194}, new byte[] { 74, 164, 195},
-            new byte[] { 77, 166, 195}, new byte[] { 81, 168, 197}, new byte[] { 84, 169, 198}, new byte[] { 87, 171, 199},
-            new byte[] { 90, 172, 200}, new byte[] { 93, 174, 201}, new byte[] { 96, 175, 202}, new byte[] { 98, 177, 203},
-            new byte[] {102, 178, 204}, new byte[] {105, 180, 205}, new byte[] {108, 181, 206}, new byte[] {111, 183, 207},
-            new byte[] {114, 184, 208}, new byte[] {117, 186, 209}, new byte[] {120, 187, 210}, new byte[] {123, 189, 211},
-            new byte[] {126, 190, 211}, new byte[] {129, 192, 213}, new byte[] {131, 193, 214}, new byte[] {134, 195, 215},
-            new byte[] {137, 196, 216}, new byte[] {140, 197, 217}, new byte[] {143, 199, 218}, new byte[] {146, 200, 219},
-            new byte[] {150, 202, 220}, new byte[] {153, 204, 221}, new byte[] {156, 205, 222}, new byte[] {159, 207, 223},
-            new byte[] {162, 208, 224}, new byte[] {164, 210, 225}, new byte[] {167, 211, 226}, new byte[] {170, 212, 227},
-            new byte[] {173, 214, 227}, new byte[] {177, 216, 229}, new byte[] {180, 217, 230}, new byte[] {183, 219, 231},
-            new byte[] {186, 220, 232}, new byte[] {189, 222, 233}, new byte[] {192, 223, 234}, new byte[] {195, 225, 235},
-            new byte[] {197, 226, 236}, new byte[] {200, 227, 237}, new byte[] {203, 229, 238}, new byte[] {206, 230, 239},
-            new byte[] {209, 232, 240}, new byte[] {212, 233, 241}, new byte[] {215, 235, 242}, new byte[] {218, 236, 243},
-            new byte[] {221, 238, 243}, new byte[] {225, 240, 245}, new byte[] {227, 241, 246}, new byte[] {230, 243, 247},
-            new byte[] {233, 244, 248}, new byte[] {236, 245, 249}, new byte[] {239, 247, 250}, new byte[] {242, 248, 251},
-            new byte[] {246, 250, 252}, new byte[] {249, 252, 253}, new byte[] {252, 253, 254}, new byte[] {255, 255, 255}
+            new byte[] {  0, 127,   0},
+            new byte[] {  0, 103,  16},
+            new byte[] {  0,  79,  32},
+            new byte[] {  0,  55,  48},
+            new byte[] {  0,  31,  64},
+            new byte[] {  0,   7,  80},
+            new byte[] {  0,  16,  96},
+            new byte[] {  0,  40, 112},
+            new byte[] {  0,  64, 128},
+            new byte[] {  0,  88, 144},
+            new byte[] {  0, 112, 160},
+            new byte[] { 17, 136, 176},
+            new byte[] { 65, 160, 192},
+            new byte[] {114, 184, 208},
+            new byte[] {162, 208, 224},
+            new byte[] {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "oranges" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Oranges = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255, 245, 235},
+            new byte[] {254, 237, 220},
+            new byte[] {253, 229, 205},
+            new byte[] {253, 218, 183},
+            new byte[] {253, 207, 161},
+            new byte[] {253, 190, 133},
+            new byte[] {253, 173, 106},
+            new byte[] {253, 157,  82},
+            new byte[] {252, 140,  59},
+            new byte[] {246, 122,  38},
+            new byte[] {240, 104,  18},
+            new byte[] {228,  87,   9},
+            new byte[] {215,  71,   1},
+            new byte[] {190,  62,   2},
+            new byte[] {164,  53,   3},
+            new byte[] {127,  39,   4}
+        });
+
+        /// <summary>
+        /// Colormap "orrd" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Orrd = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255, 247, 236},
+            new byte[] {254, 239, 217},
+            new byte[] {253, 231, 199},
+            new byte[] {253, 221, 178},
+            new byte[] {253, 211, 157},
+            new byte[] {253, 199, 144},
+            new byte[] {252, 186, 131},
+            new byte[] {252, 163, 109},
+            new byte[] {251, 140,  88},
+            new byte[] {245, 120,  80},
+            new byte[] {238,  99,  71},
+            new byte[] {226,  73,  50},
+            new byte[] {214,  46,  30},
+            new byte[] {196,  22,  14},
+            new byte[] {177,   0,   0},
+            new byte[] {127,   0,   0}
+        });
+
+        /// <summary>
+        /// Colormap "paired" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Paired = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {166, 206, 227},
+            new byte[] { 72, 146, 194},
+            new byte[] { 86, 159, 164},
+            new byte[] {169, 218, 131},
+            new byte[] { 81, 175,  66},
+            new byte[] {141, 157,  93},
+            new byte[] {247, 135, 135},
+            new byte[] {231,  47,  49},
+            new byte[] {240, 112,  71},
+            new byte[] {253, 177,  87},
+            new byte[] {254, 133,  10},
+            new byte[] {223, 157, 126},
+            new byte[] {174, 144, 197},
+            new byte[] {108,  64, 155},
+            new byte[] {204, 189, 153},
+            new byte[] {177,  89,  40}
+        });
+
+        /// <summary>
+        /// Colormap "pastel1" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Pastel1 = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {251, 180, 174},
+            new byte[] {214, 192, 200},
+            new byte[] {179, 205, 226},
+            new byte[] {191, 220, 211},
+            new byte[] {204, 234, 197},
+            new byte[] {213, 218, 212},
+            new byte[] {222, 203, 227},
+            new byte[] {238, 210, 196},
+            new byte[] {254, 217, 166},
+            new byte[] {254, 236, 185},
+            new byte[] {254, 254, 203},
+            new byte[] {241, 234, 196},
+            new byte[] {229, 216, 190},
+            new byte[] {241, 217, 213},
+            new byte[] {252, 218, 236},
+            new byte[] {242, 242, 242}
+        });
+
+        /// <summary>
+        /// Colormap "pastel2" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Pastel2 = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {179, 226, 205},
+            new byte[] {211, 216, 190},
+            new byte[] {244, 207, 176},
+            new byte[] {237, 207, 191},
+            new byte[] {215, 211, 217},
+            new byte[] {211, 210, 231},
+            new byte[] {229, 206, 229},
+            new byte[] {242, 205, 225},
+            new byte[] {236, 224, 214},
+            new byte[] {230, 242, 202},
+            new byte[] {239, 243, 190},
+            new byte[] {250, 242, 178},
+            new byte[] {251, 237, 182},
+            new byte[] {245, 230, 195},
+            new byte[] {235, 222, 204},
+            new byte[] {204, 204, 204}
+        });
+
+        /// <summary>
+        /// Colormap "pink" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Pink = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] { 30,   0,   0},
+            new byte[] { 84,  52,  52},
+            new byte[] {116,  73,  73},
+            new byte[] {140,  90,  90},
+            new byte[] {161, 104, 104},
+            new byte[] {179, 116, 116},
+            new byte[] {194, 130, 127},
+            new byte[] {201, 152, 137},
+            new byte[] {208, 171, 147},
+            new byte[] {214, 189, 156},
+            new byte[] {221, 205, 164},
+            new byte[] {227, 220, 172},
+            new byte[] {233, 233, 182},
+            new byte[] {238, 238, 203},
+            new byte[] {244, 244, 222},
+            new byte[] {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "piyg" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Piyg = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {142,   1,  82},
+            new byte[] {176,  17, 108},
+            new byte[] {203,  50, 137},
+            new byte[] {219, 108, 168},
+            new byte[] {231, 151, 196},
+            new byte[] {242, 187, 220},
+            new byte[] {250, 214, 234},
+            new byte[] {250, 233, 242},
+            new byte[] {246, 246, 246},
+            new byte[] {236, 245, 221},
+            new byte[] {217, 239, 187},
+            new byte[] {188, 226, 141},
+            new byte[] {153, 205,  97},
+            new byte[] {119, 181,  59},
+            new byte[] { 87, 155,  39},
+            new byte[] { 39, 100,  25}
+        });
+
+        /// <summary>
+        /// Colormap "plasma" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Plasma = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] { 12,   7, 134},
+            new byte[] { 49,   4, 150},
+            new byte[] { 76,   2, 161},
+            new byte[] {101,   0, 167},
+            new byte[] {126,   3, 167},
+            new byte[] {149,  17, 161},
+            new byte[] {169,  35, 149},
+            new byte[] {187,  53, 134},
+            new byte[] {203,  71, 119},
+            new byte[] {217,  89, 105},
+            new byte[] {229, 108,  91},
+            new byte[] {240, 128,  77},
+            new byte[] {248, 149,  64},
+            new byte[] {252, 172,  50},
+            new byte[] {253, 196,  39},
+            new byte[] {239, 248,  33}
+        });
+
+        /// <summary>
+        /// Colormap "prgn" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Prgn = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] { 64,   0,  75},
+            new byte[] { 97,  26, 110},
+            new byte[] {126,  59, 141},
+            new byte[] {148, 103, 166},
+            new byte[] {173, 139, 189},
+            new byte[] {199, 171, 210},
+            new byte[] {222, 200, 226},
+            new byte[] {237, 225, 237},
+            new byte[] {246, 246, 246},
+            new byte[] {227, 242, 223},
+            new byte[] {203, 234, 197},
+            new byte[] {171, 221, 165},
+            new byte[] {125, 195, 126},
+            new byte[] { 80, 165,  90},
+            new byte[] { 40, 131,  64},
+            new byte[] {  0,  68,  27}
+        });
+
+        /// <summary>
+        /// Colormap "prism" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Prism = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255,   0,   0},
+            new byte[] {  0,  47, 232},
+            new byte[] {245, 255,   0},
+            new byte[] {255,   0,  57},
+            new byte[] {  0,  86, 195},
+            new byte[] {255, 241,   0},
+            new byte[] {240,   0, 112},
+            new byte[] {  0, 126, 150},
+            new byte[] {255, 215,   0},
+            new byte[] {202,   0, 163},
+            new byte[] {  0, 163,  98},
+            new byte[] {255, 184,   0},
+            new byte[] {162,   0, 206},
+            new byte[] { 16, 197,  42},
+            new byte[] {255, 148,   0},
+            new byte[] { 84, 254,   0}
+        });
+
+        /// <summary>
+        /// Colormap "pubu" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Pubu = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255, 247, 251},
+            new byte[] {245, 238, 246},
+            new byte[] {235, 230, 241},
+            new byte[] {221, 219, 235},
+            new byte[] {207, 208, 229},
+            new byte[] {186, 198, 224},
+            new byte[] {165, 188, 218},
+            new byte[] {140, 178, 212},
+            new byte[] {115, 168, 206},
+            new byte[] { 83, 156, 199},
+            new byte[] { 53, 143, 191},
+            new byte[] { 28, 127, 183},
+            new byte[] {  4, 111, 175},
+            new byte[] {  4, 100, 157},
+            new byte[] {  3,  89, 139},
+            new byte[] {  2,  56,  88}
+        });
+
+        /// <summary>
+        /// Colormap "pubugn" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Pubugn = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255, 247, 251},
+            new byte[] {245, 236, 245},
+            new byte[] {235, 225, 239},
+            new byte[] {221, 217, 234},
+            new byte[] {207, 208, 229},
+            new byte[] {186, 198, 224},
+            new byte[] {165, 188, 218},
+            new byte[] {133, 178, 212},
+            new byte[] {102, 168, 206},
+            new byte[] { 77, 156, 199},
+            new byte[] { 52, 143, 190},
+            new byte[] { 26, 136, 163},
+            new byte[] {  1, 128, 136},
+            new byte[] {  1, 117, 112},
+            new byte[] {  1, 106,  88},
+            new byte[] {  1,  70,  54}
+        });
+
+        /// <summary>
+        /// Colormap "puor" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Puor = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {127,  59,   8},
+            new byte[] {159,  77,   6},
+            new byte[] {190,  98,   9},
+            new byte[] {218, 125,  18},
+            new byte[] {238, 157,  60},
+            new byte[] {253, 189, 110},
+            new byte[] {253, 214, 162},
+            new byte[] {251, 233, 207},
+            new byte[] {246, 246, 246},
+            new byte[] {226, 228, 239},
+            new byte[] {205, 205, 228},
+            new byte[] {181, 175, 212},
+            new byte[] {151, 141, 189},
+            new byte[] {121, 103, 166},
+            new byte[] { 93,  55, 143},
+            new byte[] { 45,   0,  75}
+        });
+
+        /// <summary>
+        /// Colormap "purd" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Purd = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {247, 244, 249},
+            new byte[] {238, 234, 243},
+            new byte[] {230, 224, 238},
+            new byte[] {221, 204, 228},
+            new byte[] {211, 184, 217},
+            new byte[] {206, 166, 208},
+            new byte[] {201, 147, 198},
+            new byte[] {212, 123, 187},
+            new byte[] {223, 100, 175},
+            new byte[] {227,  69, 156},
+            new byte[] {230,  40, 136},
+            new byte[] {217,  29, 110},
+            new byte[] {204,  17,  85},
+            new byte[] {177,   8,  76},
+            new byte[] {150,   0,  66},
+            new byte[] {103,   0,  31}
+        });
+
+        /// <summary>
+        /// Colormap "purples" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Purples = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {252, 251, 253},
+            new byte[] {245, 243, 248},
+            new byte[] {238, 236, 244},
+            new byte[] {228, 227, 239},
+            new byte[] {217, 217, 234},
+            new byte[] {202, 203, 227},
+            new byte[] {187, 188, 219},
+            new byte[] {172, 171, 209},
+            new byte[] {157, 153, 199},
+            new byte[] {142, 138, 192},
+            new byte[] {127, 124, 185},
+            new byte[] {116, 102, 174},
+            new byte[] {105,  80, 162},
+            new byte[] { 94,  58, 152},
+            new byte[] { 83,  37, 142},
+            new byte[] { 63,   0, 125}
         });
 
         /// <summary>
@@ -751,70 +1260,160 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[][]> Rainbow = new Lazy<byte[][]>(() => new []
         {
-            new byte[] {127,   0, 255}, new byte[] {125,   3, 254}, new byte[] {123,   6, 254}, new byte[] {121,   9, 254},
-            new byte[] {119,  12, 254}, new byte[] {117,  15, 254}, new byte[] {115,  18, 254}, new byte[] {113,  21, 254},
-            new byte[] {111,  25, 254}, new byte[] {109,  28, 254}, new byte[] {107,  31, 254}, new byte[] {105,  34, 254},
-            new byte[] {103,  37, 254}, new byte[] {101,  40, 254}, new byte[] { 99,  43, 254}, new byte[] { 97,  46, 253},
-            new byte[] { 95,  49, 253}, new byte[] { 93,  53, 253}, new byte[] { 91,  56, 253}, new byte[] { 89,  59, 253},
-            new byte[] { 87,  62, 253}, new byte[] { 85,  65, 252}, new byte[] { 83,  68, 252}, new byte[] { 81,  71, 252},
-            new byte[] { 79,  74, 252}, new byte[] { 77,  77, 251}, new byte[] { 75,  80, 251}, new byte[] { 73,  83, 251},
-            new byte[] { 71,  86, 251}, new byte[] { 69,  89, 250}, new byte[] { 67,  92, 250}, new byte[] { 65,  95, 250},
-            new byte[] { 63,  97, 250}, new byte[] { 61, 100, 249}, new byte[] { 59, 103, 249}, new byte[] { 57, 106, 249},
-            new byte[] { 55, 109, 248}, new byte[] { 53, 112, 248}, new byte[] { 51, 115, 248}, new byte[] { 49, 117, 247},
-            new byte[] { 47, 120, 247}, new byte[] { 45, 123, 246}, new byte[] { 43, 126, 246}, new byte[] { 41, 128, 246},
-            new byte[] { 39, 131, 245}, new byte[] { 37, 134, 245}, new byte[] { 35, 136, 244}, new byte[] { 33, 139, 244},
-            new byte[] { 31, 142, 243}, new byte[] { 29, 144, 243}, new byte[] { 27, 147, 243}, new byte[] { 25, 149, 242},
-            new byte[] { 23, 152, 242}, new byte[] { 21, 154, 241}, new byte[] { 19, 157, 241}, new byte[] { 17, 159, 240},
-            new byte[] { 15, 162, 239}, new byte[] { 13, 164, 239}, new byte[] { 11, 167, 238}, new byte[] {  9, 169, 238},
-            new byte[] {  7, 171, 237}, new byte[] {  5, 174, 237}, new byte[] {  3, 176, 236}, new byte[] {  1, 178, 236},
-            new byte[] {  0, 180, 235}, new byte[] {  2, 183, 234}, new byte[] {  4, 185, 234}, new byte[] {  6, 187, 233},
-            new byte[] {  8, 189, 232}, new byte[] { 10, 191, 232}, new byte[] { 12, 193, 231}, new byte[] { 14, 195, 230},
-            new byte[] { 16, 197, 230}, new byte[] { 18, 199, 229}, new byte[] { 20, 201, 228}, new byte[] { 22, 203, 228},
-            new byte[] { 24, 205, 227}, new byte[] { 26, 207, 226}, new byte[] { 28, 209, 226}, new byte[] { 30, 210, 225},
-            new byte[] { 32, 212, 224}, new byte[] { 34, 214, 223}, new byte[] { 36, 215, 223}, new byte[] { 38, 217, 222},
-            new byte[] { 40, 219, 221}, new byte[] { 42, 220, 220}, new byte[] { 44, 222, 220}, new byte[] { 46, 223, 219},
-            new byte[] { 48, 225, 218}, new byte[] { 50, 226, 217}, new byte[] { 52, 228, 216}, new byte[] { 54, 229, 215},
-            new byte[] { 56, 230, 215}, new byte[] { 58, 232, 214}, new byte[] { 60, 233, 213}, new byte[] { 62, 234, 212},
-            new byte[] { 64, 236, 211}, new byte[] { 66, 237, 210}, new byte[] { 68, 238, 209}, new byte[] { 70, 239, 209},
-            new byte[] { 72, 240, 208}, new byte[] { 74, 241, 207}, new byte[] { 76, 242, 206}, new byte[] { 78, 243, 205},
-            new byte[] { 80, 244, 204}, new byte[] { 82, 245, 203}, new byte[] { 84, 246, 202}, new byte[] { 86, 246, 201},
-            new byte[] { 88, 247, 200}, new byte[] { 90, 248, 199}, new byte[] { 92, 249, 198}, new byte[] { 94, 249, 197},
-            new byte[] { 96, 250, 196}, new byte[] { 98, 250, 195}, new byte[] {100, 251, 194}, new byte[] {102, 251, 193},
-            new byte[] {104, 252, 192}, new byte[] {106, 252, 191}, new byte[] {108, 253, 190}, new byte[] {110, 253, 189},
-            new byte[] {112, 253, 188}, new byte[] {114, 254, 187}, new byte[] {116, 254, 186}, new byte[] {118, 254, 185},
-            new byte[] {120, 254, 184}, new byte[] {122, 254, 183}, new byte[] {124, 254, 181}, new byte[] {126, 254, 180},
-            new byte[] {128, 254, 179}, new byte[] {130, 254, 178}, new byte[] {132, 254, 177}, new byte[] {134, 254, 176},
-            new byte[] {136, 254, 175}, new byte[] {138, 254, 174}, new byte[] {140, 254, 172}, new byte[] {142, 253, 171},
-            new byte[] {144, 253, 170}, new byte[] {146, 253, 169}, new byte[] {148, 252, 168}, new byte[] {150, 252, 167},
-            new byte[] {152, 251, 165}, new byte[] {154, 251, 164}, new byte[] {156, 250, 163}, new byte[] {158, 250, 162},
-            new byte[] {160, 249, 161}, new byte[] {162, 249, 159}, new byte[] {164, 248, 158}, new byte[] {166, 247, 157},
-            new byte[] {168, 246, 156}, new byte[] {170, 246, 154}, new byte[] {172, 245, 153}, new byte[] {174, 244, 152},
-            new byte[] {176, 243, 151}, new byte[] {178, 242, 149}, new byte[] {180, 241, 148}, new byte[] {182, 240, 147},
-            new byte[] {184, 239, 146}, new byte[] {186, 238, 144}, new byte[] {188, 237, 143}, new byte[] {190, 236, 142},
-            new byte[] {192, 234, 140}, new byte[] {194, 233, 139}, new byte[] {196, 232, 138}, new byte[] {198, 230, 136},
-            new byte[] {200, 229, 135}, new byte[] {202, 228, 134}, new byte[] {204, 226, 132}, new byte[] {206, 225, 131},
-            new byte[] {208, 223, 130}, new byte[] {210, 222, 128}, new byte[] {212, 220, 127}, new byte[] {214, 219, 126},
-            new byte[] {216, 217, 124}, new byte[] {218, 215, 123}, new byte[] {220, 214, 122}, new byte[] {222, 212, 120},
-            new byte[] {224, 210, 119}, new byte[] {226, 209, 117}, new byte[] {228, 207, 116}, new byte[] {230, 205, 115},
-            new byte[] {232, 203, 113}, new byte[] {234, 201, 112}, new byte[] {236, 199, 110}, new byte[] {238, 197, 109},
-            new byte[] {240, 195, 108}, new byte[] {242, 193, 106}, new byte[] {244, 191, 105}, new byte[] {246, 189, 103},
-            new byte[] {248, 187, 102}, new byte[] {250, 185, 100}, new byte[] {252, 183,  99}, new byte[] {254, 180,  97},
-            new byte[] {255, 178,  96}, new byte[] {255, 176,  95}, new byte[] {255, 174,  93}, new byte[] {255, 171,  92},
-            new byte[] {255, 169,  90}, new byte[] {255, 167,  89}, new byte[] {255, 164,  87}, new byte[] {255, 162,  86},
-            new byte[] {255, 159,  84}, new byte[] {255, 157,  83}, new byte[] {255, 154,  81}, new byte[] {255, 152,  80},
-            new byte[] {255, 149,  78}, new byte[] {255, 147,  77}, new byte[] {255, 144,  75}, new byte[] {255, 142,  74},
-            new byte[] {255, 139,  72}, new byte[] {255, 136,  71}, new byte[] {255, 134,  69}, new byte[] {255, 131,  68},
-            new byte[] {255, 128,  66}, new byte[] {255, 126,  65}, new byte[] {255, 123,  63}, new byte[] {255, 120,  62},
-            new byte[] {255, 117,  60}, new byte[] {255, 115,  59}, new byte[] {255, 112,  57}, new byte[] {255, 109,  56},
-            new byte[] {255, 106,  54}, new byte[] {255, 103,  53}, new byte[] {255, 100,  51}, new byte[] {255,  97,  49},
-            new byte[] {255,  95,  48}, new byte[] {255,  92,  46}, new byte[] {255,  89,  45}, new byte[] {255,  86,  43},
-            new byte[] {255,  83,  42}, new byte[] {255,  80,  40}, new byte[] {255,  77,  39}, new byte[] {255,  74,  37},
-            new byte[] {255,  71,  36}, new byte[] {255,  68,  34}, new byte[] {255,  65,  32}, new byte[] {255,  62,  31},
-            new byte[] {255,  59,  29}, new byte[] {255,  56,  28}, new byte[] {255,  53,  26}, new byte[] {255,  49,  25},
-            new byte[] {255,  46,  23}, new byte[] {255,  43,  21}, new byte[] {255,  40,  20}, new byte[] {255,  37,  18},
-            new byte[] {255,  34,  17}, new byte[] {255,  31,  15}, new byte[] {255,  28,  14}, new byte[] {255,  25,  12},
-            new byte[] {255,  21,  10}, new byte[] {255,  18,   9}, new byte[] {255,  15,   7}, new byte[] {255,  12,   6},
-            new byte[] {255,   9,   4}, new byte[] {255,   6,   3}, new byte[] {255,   3,   1}, new byte[] {255,   0,   0}
+            new byte[] {127,   0, 255},
+            new byte[] { 95,  49, 253},
+            new byte[] { 63,  97, 250},
+            new byte[] { 31, 142, 243},
+            new byte[] {  0, 180, 235},
+            new byte[] { 32, 212, 224},
+            new byte[] { 64, 236, 211},
+            new byte[] { 96, 250, 196},
+            new byte[] {128, 254, 179},
+            new byte[] {160, 249, 161},
+            new byte[] {192, 234, 140},
+            new byte[] {224, 210, 119},
+            new byte[] {255, 178,  96},
+            new byte[] {255, 139,  72},
+            new byte[] {255,  95,  48},
+            new byte[] {255,   0,   0}
+        });
+
+        /// <summary>
+        /// Colormap "rdbu" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Rdbu = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {103,   0,  31},
+            new byte[] {150,  15,  38},
+            new byte[] {187,  42,  51},
+            new byte[] {209,  87,  73},
+            new byte[] {229, 131, 104},
+            new byte[] {245, 172, 139},
+            new byte[] {250, 206, 182},
+            new byte[] {250, 229, 217},
+            new byte[] {246, 246, 246},
+            new byte[] {222, 235, 242},
+            new byte[] {191, 220, 235},
+            new byte[] {152, 200, 223},
+            new byte[] {104, 170, 207},
+            new byte[] { 61, 139, 191},
+            new byte[] { 40, 111, 176},
+            new byte[] {  5,  48,  97}
+        });
+
+        /// <summary>
+        /// Colormap "rdgy" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Rdgy = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {103,   0,  31},
+            new byte[] {150,  15,  38},
+            new byte[] {187,  42,  51},
+            new byte[] {209,  87,  73},
+            new byte[] {229, 131, 104},
+            new byte[] {245, 172, 139},
+            new byte[] {250, 206, 182},
+            new byte[] {253, 233, 220},
+            new byte[] {254, 254, 254},
+            new byte[] {234, 234, 234},
+            new byte[] {213, 213, 213},
+            new byte[] {189, 189, 189},
+            new byte[] {159, 159, 159},
+            new byte[] {125, 125, 125},
+            new byte[] { 89,  89,  89},
+            new byte[] { 26,  26,  26}
+        });
+
+        /// <summary>
+        /// Colormap "rdpu" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Rdpu = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255, 247, 243},
+            new byte[] {253, 235, 231},
+            new byte[] {252, 223, 220},
+            new byte[] {252, 210, 206},
+            new byte[] {251, 196, 191},
+            new byte[] {250, 177, 186},
+            new byte[] {249, 158, 180},
+            new byte[] {248, 130, 170},
+            new byte[] {246, 103, 160},
+            new byte[] {233,  77, 155},
+            new byte[] {220,  51, 150},
+            new byte[] {196,  25, 137},
+            new byte[] {172,   1, 125},
+            new byte[] {146,   1, 122},
+            new byte[] {120,   0, 118},
+            new byte[] { 73,   0, 106}
+        });
+
+        /// <summary>
+        /// Colormap "rdylbu" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Rdylbu = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {165,   0,  38},
+            new byte[] {196,  30,  38},
+            new byte[] {222,  63,  46},
+            new byte[] {240, 101,  63},
+            new byte[] {248, 142,  82},
+            new byte[] {253, 180, 103},
+            new byte[] {253, 212, 132},
+            new byte[] {254, 236, 162},
+            new byte[] {254, 254, 192},
+            new byte[] {234, 247, 227},
+            new byte[] {209, 235, 243},
+            new byte[] {176, 219, 234},
+            new byte[] {141, 193, 220},
+            new byte[] {108, 164, 204},
+            new byte[] { 79, 129, 186},
+            new byte[] { 49,  54, 149}
+        });
+
+        /// <summary>
+        /// Colormap "rdylgn" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Rdylgn = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {165,   0,  38},
+            new byte[] {196,  30,  38},
+            new byte[] {222,  63,  46},
+            new byte[] {240, 101,  63},
+            new byte[] {248, 142,  82},
+            new byte[] {253, 180, 102},
+            new byte[] {253, 212, 129},
+            new byte[] {254, 236, 159},
+            new byte[] {254, 254, 189},
+            new byte[] {230, 244, 157},
+            new byte[] {203, 232, 129},
+            new byte[] {171, 219, 109},
+            new byte[] {132, 202, 102},
+            new byte[] { 90, 183,  96},
+            new byte[] { 42, 159,  84},
+            new byte[] {  0, 104,  55}
+        });
+
+        /// <summary>
+        /// Colormap "reds" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Reds = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255, 245, 240},
+            new byte[] {254, 234, 224},
+            new byte[] {253, 223, 209},
+            new byte[] {252, 205, 185},
+            new byte[] {252, 186, 160},
+            new byte[] {252, 166, 137},
+            new byte[] {251, 145, 113},
+            new byte[] {251, 125,  93},
+            new byte[] {250, 105,  73},
+            new byte[] {244,  81,  58},
+            new byte[] {238,  58,  43},
+            new byte[] {220,  40,  36},
+            new byte[] {202,  23,  28},
+            new byte[] {183,  19,  24},
+            new byte[] {163,  14,  20},
+            new byte[] {103,   0,  13}
         });
 
         /// <summary>
@@ -822,70 +1421,91 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[][]> Seismic = new Lazy<byte[][]>(() => new []
         {
-            new byte[] {  0,   0,  76}, new byte[] {  0,   0,  79}, new byte[] {  0,   0,  82}, new byte[] {  0,   0,  84},
-            new byte[] {  0,   0,  87}, new byte[] {  0,   0,  90}, new byte[] {  0,   0,  93}, new byte[] {  0,   0,  96},
-            new byte[] {  0,   0,  98}, new byte[] {  0,   0, 101}, new byte[] {  0,   0, 104}, new byte[] {  0,   0, 107},
-            new byte[] {  0,   0, 110}, new byte[] {  0,   0, 112}, new byte[] {  0,   0, 115}, new byte[] {  0,   0, 118},
-            new byte[] {  0,   0, 121}, new byte[] {  0,   0, 124}, new byte[] {  0,   0, 126}, new byte[] {  0,   0, 129},
-            new byte[] {  0,   0, 132}, new byte[] {  0,   0, 135}, new byte[] {  0,   0, 138}, new byte[] {  0,   0, 140},
-            new byte[] {  0,   0, 143}, new byte[] {  0,   0, 146}, new byte[] {  0,   0, 149}, new byte[] {  0,   0, 152},
-            new byte[] {  0,   0, 154}, new byte[] {  0,   0, 157}, new byte[] {  0,   0, 160}, new byte[] {  0,   0, 163},
-            new byte[] {  0,   0, 166}, new byte[] {  0,   0, 168}, new byte[] {  0,   0, 171}, new byte[] {  0,   0, 174},
-            new byte[] {  0,   0, 177}, new byte[] {  0,   0, 180}, new byte[] {  0,   0, 182}, new byte[] {  0,   0, 185},
-            new byte[] {  0,   0, 188}, new byte[] {  0,   0, 191}, new byte[] {  0,   0, 194}, new byte[] {  0,   0, 196},
-            new byte[] {  0,   0, 199}, new byte[] {  0,   0, 202}, new byte[] {  0,   0, 205}, new byte[] {  0,   0, 208},
-            new byte[] {  0,   0, 210}, new byte[] {  0,   0, 213}, new byte[] {  0,   0, 216}, new byte[] {  0,   0, 219},
-            new byte[] {  0,   0, 222}, new byte[] {  0,   0, 224}, new byte[] {  0,   0, 227}, new byte[] {  0,   0, 230},
-            new byte[] {  0,   0, 233}, new byte[] {  0,   0, 236}, new byte[] {  0,   0, 238}, new byte[] {  0,   0, 241},
-            new byte[] {  0,   0, 244}, new byte[] {  0,   0, 247}, new byte[] {  0,   0, 250}, new byte[] {  0,   0, 252},
-            new byte[] {  1,   1, 255}, new byte[] {  5,   5, 255}, new byte[] {  8,   8, 255}, new byte[] { 13,  13, 255},
-            new byte[] { 17,  17, 255}, new byte[] { 21,  21, 255}, new byte[] { 25,  25, 255}, new byte[] { 29,  29, 255},
-            new byte[] { 33,  33, 255}, new byte[] { 37,  37, 255}, new byte[] { 40,  40, 255}, new byte[] { 45,  45, 255},
-            new byte[] { 49,  49, 255}, new byte[] { 53,  53, 255}, new byte[] { 57,  57, 255}, new byte[] { 61,  61, 255},
-            new byte[] { 65,  65, 255}, new byte[] { 69,  69, 255}, new byte[] { 72,  72, 255}, new byte[] { 77,  77, 255},
-            new byte[] { 81,  81, 255}, new byte[] { 85,  85, 255}, new byte[] { 89,  89, 255}, new byte[] { 93,  93, 255},
-            new byte[] { 97,  97, 255}, new byte[] {101, 101, 255}, new byte[] {104, 104, 255}, new byte[] {109, 109, 255},
-            new byte[] {113, 113, 255}, new byte[] {117, 117, 255}, new byte[] {121, 121, 255}, new byte[] {125, 125, 255},
-            new byte[] {129, 129, 255}, new byte[] {133, 133, 255}, new byte[] {136, 136, 255}, new byte[] {141, 141, 255},
-            new byte[] {145, 145, 255}, new byte[] {149, 149, 255}, new byte[] {153, 153, 255}, new byte[] {157, 157, 255},
-            new byte[] {161, 161, 255}, new byte[] {165, 165, 255}, new byte[] {168, 168, 255}, new byte[] {173, 173, 255},
-            new byte[] {177, 177, 255}, new byte[] {181, 181, 255}, new byte[] {185, 185, 255}, new byte[] {189, 189, 255},
-            new byte[] {193, 193, 255}, new byte[] {197, 197, 255}, new byte[] {200, 200, 255}, new byte[] {205, 205, 255},
-            new byte[] {209, 209, 255}, new byte[] {213, 213, 255}, new byte[] {217, 217, 255}, new byte[] {221, 221, 255},
-            new byte[] {225, 225, 255}, new byte[] {229, 229, 255}, new byte[] {232, 232, 255}, new byte[] {237, 237, 255},
-            new byte[] {241, 241, 255}, new byte[] {245, 245, 255}, new byte[] {249, 249, 255}, new byte[] {253, 253, 255},
-            new byte[] {255, 253, 253}, new byte[] {255, 249, 249}, new byte[] {255, 245, 245}, new byte[] {255, 241, 241},
-            new byte[] {255, 237, 237}, new byte[] {255, 233, 233}, new byte[] {255, 229, 229}, new byte[] {255, 225, 225},
-            new byte[] {255, 221, 221}, new byte[] {255, 217, 217}, new byte[] {255, 213, 213}, new byte[] {255, 209, 209},
-            new byte[] {255, 205, 205}, new byte[] {255, 201, 201}, new byte[] {255, 197, 197}, new byte[] {255, 193, 193},
-            new byte[] {255, 189, 189}, new byte[] {255, 185, 185}, new byte[] {255, 180, 180}, new byte[] {255, 177, 177},
-            new byte[] {255, 173, 173}, new byte[] {255, 169, 169}, new byte[] {255, 164, 164}, new byte[] {255, 161, 161},
-            new byte[] {255, 157, 157}, new byte[] {255, 153, 153}, new byte[] {255, 148, 148}, new byte[] {255, 145, 145},
-            new byte[] {255, 141, 141}, new byte[] {255, 137, 137}, new byte[] {255, 132, 132}, new byte[] {255, 129, 129},
-            new byte[] {255, 125, 125}, new byte[] {255, 121, 121}, new byte[] {255, 117, 117}, new byte[] {255, 113, 113},
-            new byte[] {255, 109, 109}, new byte[] {255, 105, 105}, new byte[] {255, 101, 101}, new byte[] {255,  97,  97},
-            new byte[] {255,  93,  93}, new byte[] {255,  89,  89}, new byte[] {255,  85,  85}, new byte[] {255,  81,  81},
-            new byte[] {255,  77,  77}, new byte[] {255,  73,  73}, new byte[] {255,  69,  69}, new byte[] {255,  65,  65},
-            new byte[] {255,  61,  61}, new byte[] {255,  56,  56}, new byte[] {255,  53,  53}, new byte[] {255,  48,  48},
-            new byte[] {255,  45,  45}, new byte[] {255,  40,  40}, new byte[] {255,  37,  37}, new byte[] {255,  32,  32},
-            new byte[] {255,  29,  29}, new byte[] {255,  24,  24}, new byte[] {255,  21,  21}, new byte[] {255,  16,  16},
-            new byte[] {255,  13,  13}, new byte[] {255,   8,   8}, new byte[] {255,   5,   5}, new byte[] {255,   0,   0},
-            new byte[] {253,   0,   0}, new byte[] {251,   0,   0}, new byte[] {249,   0,   0}, new byte[] {247,   0,   0},
-            new byte[] {245,   0,   0}, new byte[] {243,   0,   0}, new byte[] {241,   0,   0}, new byte[] {239,   0,   0},
-            new byte[] {237,   0,   0}, new byte[] {235,   0,   0}, new byte[] {233,   0,   0}, new byte[] {231,   0,   0},
-            new byte[] {229,   0,   0}, new byte[] {227,   0,   0}, new byte[] {225,   0,   0}, new byte[] {223,   0,   0},
-            new byte[] {221,   0,   0}, new byte[] {219,   0,   0}, new byte[] {217,   0,   0}, new byte[] {215,   0,   0},
-            new byte[] {213,   0,   0}, new byte[] {211,   0,   0}, new byte[] {209,   0,   0}, new byte[] {207,   0,   0},
-            new byte[] {205,   0,   0}, new byte[] {203,   0,   0}, new byte[] {201,   0,   0}, new byte[] {199,   0,   0},
-            new byte[] {197,   0,   0}, new byte[] {195,   0,   0}, new byte[] {193,   0,   0}, new byte[] {191,   0,   0},
-            new byte[] {189,   0,   0}, new byte[] {187,   0,   0}, new byte[] {185,   0,   0}, new byte[] {183,   0,   0},
-            new byte[] {181,   0,   0}, new byte[] {179,   0,   0}, new byte[] {177,   0,   0}, new byte[] {175,   0,   0},
-            new byte[] {173,   0,   0}, new byte[] {171,   0,   0}, new byte[] {169,   0,   0}, new byte[] {167,   0,   0},
-            new byte[] {165,   0,   0}, new byte[] {163,   0,   0}, new byte[] {161,   0,   0}, new byte[] {159,   0,   0},
-            new byte[] {157,   0,   0}, new byte[] {155,   0,   0}, new byte[] {153,   0,   0}, new byte[] {151,   0,   0},
-            new byte[] {149,   0,   0}, new byte[] {147,   0,   0}, new byte[] {145,   0,   0}, new byte[] {143,   0,   0},
-            new byte[] {141,   0,   0}, new byte[] {139,   0,   0}, new byte[] {137,   0,   0}, new byte[] {135,   0,   0},
-            new byte[] {133,   0,   0}, new byte[] {131,   0,   0}, new byte[] {129,   0,   0}, new byte[] {127,   0,   0}
+            new byte[] {  0,   0,  76},
+            new byte[] {  0,   0, 121},
+            new byte[] {  0,   0, 166},
+            new byte[] {  0,   0, 210},
+            new byte[] {  1,   1, 255},
+            new byte[] { 65,  65, 255},
+            new byte[] {129, 129, 255},
+            new byte[] {193, 193, 255},
+            new byte[] {255, 253, 253},
+            new byte[] {255, 189, 189},
+            new byte[] {255, 125, 125},
+            new byte[] {255,  61,  61},
+            new byte[] {253,   0,   0},
+            new byte[] {221,   0,   0},
+            new byte[] {189,   0,   0},
+            new byte[] {127,   0,   0}
+        });
+
+        /// <summary>
+        /// Colormap "set1" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Set1 = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {228,  26,  28},
+            new byte[] {141,  76, 106},
+            new byte[] { 55, 126, 183},
+            new byte[] { 66, 150, 128},
+            new byte[] { 77, 174,  74},
+            new byte[] {115, 125, 119},
+            new byte[] {153,  78, 161},
+            new byte[] {204, 103,  79},
+            new byte[] {255, 129,   0},
+            new byte[] {255, 193,  26},
+            new byte[] {253, 251,  50},
+            new byte[] {208, 166,  45},
+            new byte[] {167,  87,  43},
+            new byte[] {208, 108, 119},
+            new byte[] {244, 129, 189},
+            new byte[] {153, 153, 153}
+        });
+
+        /// <summary>
+        /// Colormap "set2" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Set2 = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {102, 194, 165},
+            new byte[] {167, 170, 135},
+            new byte[] {233, 147, 106},
+            new byte[] {216, 147, 131},
+            new byte[] {167, 155, 177},
+            new byte[] {158, 155, 201},
+            new byte[] {198, 146, 197},
+            new byte[] {226, 143, 186},
+            new byte[] {197, 178, 137},
+            new byte[] {169, 212,  89},
+            new byte[] {200, 216,  69},
+            new byte[] {239, 216,  53},
+            new byte[] {247, 211,  74},
+            new byte[] {236, 202, 118},
+            new byte[] {221, 193, 152},
+            new byte[] {179, 179, 179}
+        });
+
+        /// <summary>
+        /// Colormap "set3" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Set3 = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {141, 211, 199},
+            new byte[] {219, 241, 185},
+            new byte[] {230, 228, 193},
+            new byte[] {194, 181, 210},
+            new byte[] {236, 141, 138},
+            new byte[] {195, 150, 157},
+            new byte[] {145, 177, 195},
+            new byte[] {231, 179, 117},
+            new byte[] {214, 201, 101},
+            new byte[] {194, 218, 131},
+            new byte[] {244, 206, 216},
+            new byte[] {231, 212, 221},
+            new byte[] {208, 191, 209},
+            new byte[] {188, 130, 189},
+            new byte[] {198, 198, 194},
+            new byte[] {255, 237, 111}
         });
 
         /// <summary>
@@ -893,70 +1513,68 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[][]> Spectral = new Lazy<byte[][]>(() => new []
         {
-            new byte[] {  0,   0,   0}, new byte[] {  9,   0,  10}, new byte[] { 18,   0,  21}, new byte[] { 28,   0,  31},
-            new byte[] { 37,   0,  42}, new byte[] { 46,   0,  53}, new byte[] { 56,   0,  63}, new byte[] { 65,   0,  74},
-            new byte[] { 74,   0,  85}, new byte[] { 84,   0,  95}, new byte[] { 93,   0, 106}, new byte[] {102,   0, 117},
-            new byte[] {112,   0, 127}, new byte[] {119,   0, 136}, new byte[] {120,   0, 137}, new byte[] {122,   0, 138},
-            new byte[] {123,   0, 140}, new byte[] {124,   0, 141}, new byte[] {126,   0, 142}, new byte[] {127,   0, 144},
-            new byte[] {128,   0, 145}, new byte[] {129,   0, 146}, new byte[] {131,   0, 148}, new byte[] {132,   0, 149},
-            new byte[] {133,   0, 150}, new byte[] {135,   0, 152}, new byte[] {130,   0, 153}, new byte[] {119,   0, 155},
-            new byte[] {109,   0, 156}, new byte[] { 98,   0, 157}, new byte[] { 87,   0, 159}, new byte[] { 77,   0, 160},
-            new byte[] { 66,   0, 161}, new byte[] { 55,   0, 163}, new byte[] { 45,   0, 164}, new byte[] { 34,   0, 165},
-            new byte[] { 23,   0, 167}, new byte[] { 13,   0, 168}, new byte[] {  2,   0, 169}, new byte[] {  0,   0, 173},
-            new byte[] {  0,   0, 177}, new byte[] {  0,   0, 181}, new byte[] {  0,   0, 185}, new byte[] {  0,   0, 189},
-            new byte[] {  0,   0, 193}, new byte[] {  0,   0, 197}, new byte[] {  0,   0, 201}, new byte[] {  0,   0, 205},
-            new byte[] {  0,   0, 209}, new byte[] {  0,   0, 213}, new byte[] {  0,   0, 217}, new byte[] {  0,   0, 221},
-            new byte[] {  0,   9, 221}, new byte[] {  0,  18, 221}, new byte[] {  0,  28, 221}, new byte[] {  0,  37, 221},
-            new byte[] {  0,  46, 221}, new byte[] {  0,  56, 221}, new byte[] {  0,  65, 221}, new byte[] {  0,  74, 221},
-            new byte[] {  0,  84, 221}, new byte[] {  0,  93, 221}, new byte[] {  0, 102, 221}, new byte[] {  0, 112, 221},
-            new byte[] {  0, 119, 221}, new byte[] {  0, 122, 221}, new byte[] {  0, 125, 221}, new byte[] {  0, 127, 221},
-            new byte[] {  0, 130, 221}, new byte[] {  0, 133, 221}, new byte[] {  0, 135, 221}, new byte[] {  0, 138, 221},
-            new byte[] {  0, 141, 221}, new byte[] {  0, 143, 221}, new byte[] {  0, 146, 221}, new byte[] {  0, 149, 221},
-            new byte[] {  0, 151, 221}, new byte[] {  0, 153, 219}, new byte[] {  0, 155, 215}, new byte[] {  0, 156, 211},
-            new byte[] {  0, 157, 207}, new byte[] {  0, 159, 203}, new byte[] {  0, 160, 199}, new byte[] {  0, 161, 195},
-            new byte[] {  0, 163, 191}, new byte[] {  0, 164, 187}, new byte[] {  0, 165, 183}, new byte[] {  0, 167, 179},
-            new byte[] {  0, 168, 175}, new byte[] {  0, 169, 171}, new byte[] {  0, 170, 168}, new byte[] {  0, 170, 165},
-            new byte[] {  0, 170, 162}, new byte[] {  0, 170, 160}, new byte[] {  0, 170, 157}, new byte[] {  0, 170, 154},
-            new byte[] {  0, 170, 151}, new byte[] {  0, 170, 149}, new byte[] {  0, 170, 146}, new byte[] {  0, 170, 143},
-            new byte[] {  0, 170, 141}, new byte[] {  0, 170, 138}, new byte[] {  0, 170, 135}, new byte[] {  0, 168, 125},
-            new byte[] {  0, 167, 114}, new byte[] {  0, 166, 103}, new byte[] {  0, 164,  93}, new byte[] {  0, 163,  82},
-            new byte[] {  0, 162,  71}, new byte[] {  0, 160,  61}, new byte[] {  0, 159,  50}, new byte[] {  0, 158,  39},
-            new byte[] {  0, 156,  29}, new byte[] {  0, 155,  18}, new byte[] {  0, 154,   7}, new byte[] {  0, 153,   0},
-            new byte[] {  0, 156,   0}, new byte[] {  0, 158,   0}, new byte[] {  0, 161,   0}, new byte[] {  0, 164,   0},
-            new byte[] {  0, 166,   0}, new byte[] {  0, 169,   0}, new byte[] {  0, 172,   0}, new byte[] {  0, 174,   0},
-            new byte[] {  0, 177,   0}, new byte[] {  0, 180,   0}, new byte[] {  0, 182,   0}, new byte[] {  0, 185,   0},
-            new byte[] {  0, 188,   0}, new byte[] {  0, 190,   0}, new byte[] {  0, 193,   0}, new byte[] {  0, 196,   0},
-            new byte[] {  0, 198,   0}, new byte[] {  0, 201,   0}, new byte[] {  0, 204,   0}, new byte[] {  0, 207,   0},
-            new byte[] {  0, 209,   0}, new byte[] {  0, 212,   0}, new byte[] {  0, 215,   0}, new byte[] {  0, 217,   0},
-            new byte[] {  0, 220,   0}, new byte[] {  0, 223,   0}, new byte[] {  0, 225,   0}, new byte[] {  0, 228,   0},
-            new byte[] {  0, 231,   0}, new byte[] {  0, 233,   0}, new byte[] {  0, 236,   0}, new byte[] {  0, 239,   0},
-            new byte[] {  0, 241,   0}, new byte[] {  0, 244,   0}, new byte[] {  0, 247,   0}, new byte[] {  0, 249,   0},
-            new byte[] {  0, 252,   0}, new byte[] {  0, 255,   0}, new byte[] { 14, 255,   0}, new byte[] { 29, 255,   0},
-            new byte[] { 43, 255,   0}, new byte[] { 58, 255,   0}, new byte[] { 73, 255,   0}, new byte[] { 87, 255,   0},
-            new byte[] {102, 255,   0}, new byte[] {117, 255,   0}, new byte[] {131, 255,   0}, new byte[] {146, 255,   0},
-            new byte[] {161, 255,   0}, new byte[] {175, 255,   0}, new byte[] {187, 254,   0}, new byte[] {191, 253,   0},
-            new byte[] {195, 251,   0}, new byte[] {199, 250,   0}, new byte[] {203, 249,   0}, new byte[] {207, 247,   0},
-            new byte[] {211, 246,   0}, new byte[] {215, 245,   0}, new byte[] {219, 243,   0}, new byte[] {223, 242,   0},
-            new byte[] {227, 241,   0}, new byte[] {231, 239,   0}, new byte[] {235, 238,   0}, new byte[] {238, 236,   0},
-            new byte[] {239, 233,   0}, new byte[] {241, 231,   0}, new byte[] {242, 228,   0}, new byte[] {243, 225,   0},
-            new byte[] {245, 223,   0}, new byte[] {246, 220,   0}, new byte[] {247, 217,   0}, new byte[] {249, 215,   0},
-            new byte[] {250, 212,   0}, new byte[] {251, 209,   0}, new byte[] {253, 207,   0}, new byte[] {254, 204,   0},
-            new byte[] {255, 201,   0}, new byte[] {255, 197,   0}, new byte[] {255, 193,   0}, new byte[] {255, 189,   0},
-            new byte[] {255, 185,   0}, new byte[] {255, 181,   0}, new byte[] {255, 177,   0}, new byte[] {255, 173,   0},
-            new byte[] {255, 169,   0}, new byte[] {255, 165,   0}, new byte[] {255, 161,   0}, new byte[] {255, 157,   0},
-            new byte[] {255, 153,   0}, new byte[] {255, 141,   0}, new byte[] {255, 129,   0}, new byte[] {255, 117,   0},
-            new byte[] {255, 105,   0}, new byte[] {255,  93,   0}, new byte[] {255,  81,   0}, new byte[] {255,  69,   0},
-            new byte[] {255,  57,   0}, new byte[] {255,  44,   0}, new byte[] {255,  32,   0}, new byte[] {255,  20,   0},
-            new byte[] {255,   8,   0}, new byte[] {254,   0,   0}, new byte[] {251,   0,   0}, new byte[] {249,   0,   0},
-            new byte[] {246,   0,   0}, new byte[] {243,   0,   0}, new byte[] {241,   0,   0}, new byte[] {238,   0,   0},
-            new byte[] {235,   0,   0}, new byte[] {233,   0,   0}, new byte[] {230,   0,   0}, new byte[] {227,   0,   0},
-            new byte[] {225,   0,   0}, new byte[] {222,   0,   0}, new byte[] {220,   0,   0}, new byte[] {219,   0,   0},
-            new byte[] {217,   0,   0}, new byte[] {216,   0,   0}, new byte[] {215,   0,   0}, new byte[] {213,   0,   0},
-            new byte[] {212,   0,   0}, new byte[] {211,   0,   0}, new byte[] {209,   0,   0}, new byte[] {208,   0,   0},
-            new byte[] {207,   0,   0}, new byte[] {205,   0,   0}, new byte[] {204,   0,   0}, new byte[] {204,  12,  12},
-            new byte[] {204,  27,  27}, new byte[] {204,  44,  44}, new byte[] {204,  60,  60}, new byte[] {204,  76,  76},
-            new byte[] {204,  92,  92}, new byte[] {204, 108, 108}, new byte[] {204, 124, 124}, new byte[] {204, 140, 140},
-            new byte[] {204, 156, 156}, new byte[] {204, 172, 172}, new byte[] {204, 188, 188}, new byte[] {204, 204, 204}
+            new byte[] {  0,   0,   0},
+            new byte[] {123,   0, 140},
+            new byte[] { 66,   0, 161},
+            new byte[] {  0,   0, 209},
+            new byte[] {  0, 119, 221},
+            new byte[] {  0, 157, 207},
+            new byte[] {  0, 170, 151},
+            new byte[] {  0, 156,  29},
+            new byte[] {  0, 188,   0},
+            new byte[] {  0, 231,   0},
+            new byte[] {102, 255,   0},
+            new byte[] {227, 241,   0},
+            new byte[] {255, 201,   0},
+            new byte[] {255, 105,   0},
+            new byte[] {235,   0,   0},
+            new byte[] {204, 204, 204}
+        });
+
+        /// <summary>
+        /// Colormap "spring" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Spring = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255,   0, 255},
+            new byte[] {255,  16, 239},
+            new byte[] {255,  32, 223},
+            new byte[] {255,  48, 207},
+            new byte[] {255,  64, 191},
+            new byte[] {255,  80, 175},
+            new byte[] {255,  96, 159},
+            new byte[] {255, 112, 143},
+            new byte[] {255, 128, 127},
+            new byte[] {255, 144, 111},
+            new byte[] {255, 160,  95},
+            new byte[] {255, 176,  79},
+            new byte[] {255, 192,  63},
+            new byte[] {255, 208,  47},
+            new byte[] {255, 224,  31},
+            new byte[] {255, 255,   0}
+        });
+
+        /// <summary>
+        /// Colormap "summer" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Summer = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {  0, 127, 102},
+            new byte[] { 16, 135, 102},
+            new byte[] { 32, 143, 102},
+            new byte[] { 48, 151, 102},
+            new byte[] { 64, 159, 102},
+            new byte[] { 80, 167, 102},
+            new byte[] { 96, 175, 102},
+            new byte[] {112, 183, 102},
+            new byte[] {128, 191, 102},
+            new byte[] {144, 199, 102},
+            new byte[] {160, 207, 102},
+            new byte[] {176, 215, 102},
+            new byte[] {192, 223, 102},
+            new byte[] {208, 231, 102},
+            new byte[] {224, 239, 102},
+            new byte[] {255, 255, 102}
         });
 
         /// <summary>
@@ -964,70 +1582,22 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[][]> Terrain = new Lazy<byte[][]>(() => new []
         {
-            new byte[] { 51,  51, 153}, new byte[] { 49,  53, 155}, new byte[] { 48,  56, 158}, new byte[] { 47,  59, 161},
-            new byte[] { 45,  61, 163}, new byte[] { 44,  64, 166}, new byte[] { 43,  67, 169}, new byte[] { 41,  69, 171},
-            new byte[] { 40,  72, 174}, new byte[] { 39,  75, 177}, new byte[] { 37,  77, 179}, new byte[] { 36,  80, 182},
-            new byte[] { 35,  83, 185}, new byte[] { 33,  85, 187}, new byte[] { 32,  88, 190}, new byte[] { 31,  91, 193},
-            new byte[] { 29,  93, 195}, new byte[] { 28,  96, 198}, new byte[] { 27,  98, 201}, new byte[] { 25, 101, 203},
-            new byte[] { 24, 104, 206}, new byte[] { 23, 107, 209}, new byte[] { 21, 109, 211}, new byte[] { 20, 112, 214},
-            new byte[] { 19, 115, 217}, new byte[] { 17, 117, 219}, new byte[] { 16, 120, 222}, new byte[] { 14, 123, 225},
-            new byte[] { 13, 125, 227}, new byte[] { 12, 128, 230}, new byte[] { 11, 131, 233}, new byte[] {  9, 133, 235},
-            new byte[] {  8, 136, 238}, new byte[] {  7, 138, 241}, new byte[] {  5, 141, 243}, new byte[] {  4, 144, 246},
-            new byte[] {  3, 147, 249}, new byte[] {  1, 149, 251}, new byte[] {  0, 152, 254}, new byte[] {  0, 154, 250},
-            new byte[] {  0, 156, 244}, new byte[] {  0, 158, 238}, new byte[] {  0, 160, 232}, new byte[] {  0, 162, 226},
-            new byte[] {  0, 164, 220}, new byte[] {  0, 166, 214}, new byte[] {  0, 168, 208}, new byte[] {  0, 170, 202},
-            new byte[] {  0, 172, 196}, new byte[] {  0, 174, 190}, new byte[] {  0, 176, 184}, new byte[] {  0, 178, 178},
-            new byte[] {  0, 180, 172}, new byte[] {  0, 182, 166}, new byte[] {  0, 184, 160}, new byte[] {  0, 186, 154},
-            new byte[] {  0, 188, 148}, new byte[] {  0, 190, 142}, new byte[] {  0, 192, 136}, new byte[] {  0, 194, 130},
-            new byte[] {  0, 196, 124}, new byte[] {  0, 198, 118}, new byte[] {  0, 200, 112}, new byte[] {  0, 202, 106},
-            new byte[] {  1, 204, 102}, new byte[] {  5, 205, 103}, new byte[] {  8, 205, 103}, new byte[] { 13, 206, 104},
-            new byte[] { 17, 207, 105}, new byte[] { 21, 208, 106}, new byte[] { 25, 209, 107}, new byte[] { 29, 209, 107},
-            new byte[] { 33, 210, 108}, new byte[] { 37, 211, 109}, new byte[] { 40, 212, 110}, new byte[] { 45, 213, 111},
-            new byte[] { 49, 213, 111}, new byte[] { 53, 214, 112}, new byte[] { 57, 215, 113}, new byte[] { 61, 216, 114},
-            new byte[] { 65, 217, 115}, new byte[] { 69, 217, 115}, new byte[] { 72, 218, 116}, new byte[] { 77, 219, 117},
-            new byte[] { 81, 220, 118}, new byte[] { 85, 221, 119}, new byte[] { 89, 221, 119}, new byte[] { 93, 222, 120},
-            new byte[] { 97, 223, 121}, new byte[] {101, 224, 122}, new byte[] {104, 225, 122}, new byte[] {109, 225, 123},
-            new byte[] {113, 226, 124}, new byte[] {117, 227, 125}, new byte[] {121, 228, 126}, new byte[] {125, 229, 127},
-            new byte[] {129, 229, 127}, new byte[] {133, 230, 128}, new byte[] {136, 231, 129}, new byte[] {141, 232, 130},
-            new byte[] {145, 233, 131}, new byte[] {149, 233, 131}, new byte[] {153, 234, 132}, new byte[] {157, 235, 133},
-            new byte[] {161, 236, 134}, new byte[] {165, 237, 135}, new byte[] {168, 237, 135}, new byte[] {173, 238, 136},
-            new byte[] {177, 239, 137}, new byte[] {181, 240, 138}, new byte[] {185, 241, 139}, new byte[] {189, 241, 139},
-            new byte[] {193, 242, 140}, new byte[] {197, 243, 141}, new byte[] {200, 244, 142}, new byte[] {205, 245, 143},
-            new byte[] {209, 245, 143}, new byte[] {213, 246, 144}, new byte[] {217, 247, 145}, new byte[] {221, 248, 146},
-            new byte[] {225, 249, 147}, new byte[] {229, 249, 147}, new byte[] {232, 250, 148}, new byte[] {237, 251, 149},
-            new byte[] {241, 252, 150}, new byte[] {245, 253, 151}, new byte[] {249, 253, 151}, new byte[] {253, 254, 152},
-            new byte[] {254, 253, 152}, new byte[] {252, 251, 151}, new byte[] {250, 248, 150}, new byte[] {248, 246, 149},
-            new byte[] {246, 243, 148}, new byte[] {244, 240, 147}, new byte[] {242, 238, 145}, new byte[] {240, 235, 144},
-            new byte[] {238, 233, 143}, new byte[] {236, 230, 142}, new byte[] {234, 228, 141}, new byte[] {232, 225, 140},
-            new byte[] {230, 223, 139}, new byte[] {228, 220, 138}, new byte[] {226, 217, 137}, new byte[] {224, 215, 136},
-            new byte[] {222, 212, 135}, new byte[] {220, 210, 134}, new byte[] {218, 207, 133}, new byte[] {216, 205, 131},
-            new byte[] {214, 202, 130}, new byte[] {211, 199, 129}, new byte[] {210, 197, 128}, new byte[] {208, 194, 127},
-            new byte[] {206, 192, 126}, new byte[] {204, 189, 125}, new byte[] {202, 187, 124}, new byte[] {200, 184, 123},
-            new byte[] {198, 182, 122}, new byte[] {195, 179, 121}, new byte[] {194, 176, 120}, new byte[] {192, 174, 118},
-            new byte[] {190, 171, 117}, new byte[] {188, 169, 116}, new byte[] {186, 166, 115}, new byte[] {184, 164, 114},
-            new byte[] {182, 161, 113}, new byte[] {179, 159, 112}, new byte[] {178, 156, 111}, new byte[] {176, 153, 110},
-            new byte[] {174, 151, 109}, new byte[] {172, 148, 108}, new byte[] {170, 146, 107}, new byte[] {168, 143, 106},
-            new byte[] {166, 141, 104}, new byte[] {163, 138, 103}, new byte[] {162, 135, 102}, new byte[] {160, 133, 101},
-            new byte[] {158, 130, 100}, new byte[] {156, 128,  99}, new byte[] {154, 125,  98}, new byte[] {152, 123,  97},
-            new byte[] {150, 120,  96}, new byte[] {147, 118,  95}, new byte[] {146, 115,  94}, new byte[] {144, 112,  93},
-            new byte[] {142, 110,  91}, new byte[] {140, 107,  90}, new byte[] {138, 105,  89}, new byte[] {136, 102,  88},
-            new byte[] {134, 100,  87}, new byte[] {131,  97,  86}, new byte[] {130,  95,  85}, new byte[] {128,  92,  84},
-            new byte[] {129,  93,  86}, new byte[] {131,  96,  88}, new byte[] {133,  98,  91}, new byte[] {135, 101,  94},
-            new byte[] {136, 103,  96}, new byte[] {139, 106,  99}, new byte[] {141, 109, 102}, new byte[] {143, 111, 104},
-            new byte[] {145, 114, 107}, new byte[] {147, 116, 110}, new byte[] {149, 119, 112}, new byte[] {151, 121, 115},
-            new byte[] {153, 124, 118}, new byte[] {155, 127, 121}, new byte[] {157, 129, 123}, new byte[] {159, 132, 126},
-            new byte[] {161, 134, 129}, new byte[] {163, 137, 131}, new byte[] {165, 139, 134}, new byte[] {167, 142, 137},
-            new byte[] {168, 144, 139}, new byte[] {171, 147, 142}, new byte[] {173, 150, 145}, new byte[] {175, 152, 147},
-            new byte[] {177, 155, 150}, new byte[] {179, 157, 153}, new byte[] {181, 160, 155}, new byte[] {183, 162, 158},
-            new byte[] {185, 165, 161}, new byte[] {187, 167, 163}, new byte[] {189, 170, 166}, new byte[] {191, 173, 169},
-            new byte[] {193, 175, 171}, new byte[] {195, 178, 174}, new byte[] {196, 180, 177}, new byte[] {199, 183, 179},
-            new byte[] {200, 185, 182}, new byte[] {203, 188, 185}, new byte[] {205, 191, 187}, new byte[] {207, 193, 190},
-            new byte[] {209, 196, 193}, new byte[] {211, 198, 196}, new byte[] {212, 201, 198}, new byte[] {215, 203, 201},
-            new byte[] {217, 206, 204}, new byte[] {219, 208, 206}, new byte[] {221, 211, 209}, new byte[] {223, 214, 212},
-            new byte[] {225, 216, 214}, new byte[] {227, 219, 217}, new byte[] {228, 221, 220}, new byte[] {231, 224, 222},
-            new byte[] {232, 226, 225}, new byte[] {235, 229, 228}, new byte[] {237, 231, 230}, new byte[] {239, 234, 233},
-            new byte[] {241, 237, 236}, new byte[] {243, 239, 238}, new byte[] {244, 242, 241}, new byte[] {247, 244, 244},
-            new byte[] {249, 247, 246}, new byte[] {251, 249, 249}, new byte[] {253, 252, 252}, new byte[] {255, 255, 255}
+            new byte[] { 51,  51, 153},
+            new byte[] { 29,  93, 195},
+            new byte[] {  8, 136, 238},
+            new byte[] {  0, 172, 196},
+            new byte[] {  1, 204, 102},
+            new byte[] { 65, 217, 115},
+            new byte[] {129, 229, 127},
+            new byte[] {193, 242, 140},
+            new byte[] {254, 253, 152},
+            new byte[] {222, 212, 135},
+            new byte[] {190, 171, 117},
+            new byte[] {158, 130, 100},
+            new byte[] {129,  93,  86},
+            new byte[] {161, 134, 129},
+            new byte[] {193, 175, 171},
+            new byte[] {255, 255, 255}
         });
 
         /// <summary>
@@ -1035,70 +1605,160 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[][]> Viridis = new Lazy<byte[][]>(() => new []
         {
-            new byte[] { 68,   1,  84}, new byte[] { 68,   2,  85}, new byte[] { 68,   3,  87}, new byte[] { 69,   5,  88},
-            new byte[] { 69,   6,  90}, new byte[] { 69,   8,  91}, new byte[] { 70,   9,  92}, new byte[] { 70,  11,  94},
-            new byte[] { 70,  12,  95}, new byte[] { 70,  14,  97}, new byte[] { 71,  15,  98}, new byte[] { 71,  17,  99},
-            new byte[] { 71,  18, 101}, new byte[] { 71,  20, 102}, new byte[] { 71,  21, 103}, new byte[] { 71,  22, 105},
-            new byte[] { 71,  24, 106}, new byte[] { 72,  25, 107}, new byte[] { 72,  26, 108}, new byte[] { 72,  28, 110},
-            new byte[] { 72,  29, 111}, new byte[] { 72,  30, 112}, new byte[] { 72,  32, 113}, new byte[] { 72,  33, 114},
-            new byte[] { 72,  34, 115}, new byte[] { 72,  35, 116}, new byte[] { 71,  37, 117}, new byte[] { 71,  38, 118},
-            new byte[] { 71,  39, 119}, new byte[] { 71,  40, 120}, new byte[] { 71,  42, 121}, new byte[] { 71,  43, 122},
-            new byte[] { 71,  44, 123}, new byte[] { 70,  45, 124}, new byte[] { 70,  47, 124}, new byte[] { 70,  48, 125},
-            new byte[] { 70,  49, 126}, new byte[] { 69,  50, 127}, new byte[] { 69,  52, 127}, new byte[] { 69,  53, 128},
-            new byte[] { 69,  54, 129}, new byte[] { 68,  55, 129}, new byte[] { 68,  57, 130}, new byte[] { 67,  58, 131},
-            new byte[] { 67,  59, 131}, new byte[] { 67,  60, 132}, new byte[] { 66,  61, 132}, new byte[] { 66,  62, 133},
-            new byte[] { 66,  64, 133}, new byte[] { 65,  65, 134}, new byte[] { 65,  66, 134}, new byte[] { 64,  67, 135},
-            new byte[] { 64,  68, 135}, new byte[] { 63,  69, 135}, new byte[] { 63,  71, 136}, new byte[] { 62,  72, 136},
-            new byte[] { 62,  73, 137}, new byte[] { 61,  74, 137}, new byte[] { 61,  75, 137}, new byte[] { 61,  76, 137},
-            new byte[] { 60,  77, 138}, new byte[] { 60,  78, 138}, new byte[] { 59,  80, 138}, new byte[] { 59,  81, 138},
-            new byte[] { 58,  82, 139}, new byte[] { 58,  83, 139}, new byte[] { 57,  84, 139}, new byte[] { 57,  85, 139},
-            new byte[] { 56,  86, 139}, new byte[] { 56,  87, 140}, new byte[] { 55,  88, 140}, new byte[] { 55,  89, 140},
-            new byte[] { 54,  90, 140}, new byte[] { 54,  91, 140}, new byte[] { 53,  92, 140}, new byte[] { 53,  93, 140},
-            new byte[] { 52,  94, 141}, new byte[] { 52,  95, 141}, new byte[] { 51,  96, 141}, new byte[] { 51,  97, 141},
-            new byte[] { 50,  98, 141}, new byte[] { 50,  99, 141}, new byte[] { 49, 100, 141}, new byte[] { 49, 101, 141},
-            new byte[] { 49, 102, 141}, new byte[] { 48, 103, 141}, new byte[] { 48, 104, 141}, new byte[] { 47, 105, 141},
-            new byte[] { 47, 106, 141}, new byte[] { 46, 107, 142}, new byte[] { 46, 108, 142}, new byte[] { 46, 109, 142},
-            new byte[] { 45, 110, 142}, new byte[] { 45, 111, 142}, new byte[] { 44, 112, 142}, new byte[] { 44, 113, 142},
-            new byte[] { 44, 114, 142}, new byte[] { 43, 115, 142}, new byte[] { 43, 116, 142}, new byte[] { 42, 117, 142},
-            new byte[] { 42, 118, 142}, new byte[] { 42, 119, 142}, new byte[] { 41, 120, 142}, new byte[] { 41, 121, 142},
-            new byte[] { 40, 122, 142}, new byte[] { 40, 122, 142}, new byte[] { 40, 123, 142}, new byte[] { 39, 124, 142},
-            new byte[] { 39, 125, 142}, new byte[] { 39, 126, 142}, new byte[] { 38, 127, 142}, new byte[] { 38, 128, 142},
-            new byte[] { 38, 129, 142}, new byte[] { 37, 130, 142}, new byte[] { 37, 131, 141}, new byte[] { 36, 132, 141},
-            new byte[] { 36, 133, 141}, new byte[] { 36, 134, 141}, new byte[] { 35, 135, 141}, new byte[] { 35, 136, 141},
-            new byte[] { 35, 137, 141}, new byte[] { 34, 137, 141}, new byte[] { 34, 138, 141}, new byte[] { 34, 139, 141},
-            new byte[] { 33, 140, 141}, new byte[] { 33, 141, 140}, new byte[] { 33, 142, 140}, new byte[] { 32, 143, 140},
-            new byte[] { 32, 144, 140}, new byte[] { 32, 145, 140}, new byte[] { 31, 146, 140}, new byte[] { 31, 147, 139},
-            new byte[] { 31, 148, 139}, new byte[] { 31, 149, 139}, new byte[] { 31, 150, 139}, new byte[] { 30, 151, 138},
-            new byte[] { 30, 152, 138}, new byte[] { 30, 153, 138}, new byte[] { 30, 153, 138}, new byte[] { 30, 154, 137},
-            new byte[] { 30, 155, 137}, new byte[] { 30, 156, 137}, new byte[] { 30, 157, 136}, new byte[] { 30, 158, 136},
-            new byte[] { 30, 159, 136}, new byte[] { 30, 160, 135}, new byte[] { 31, 161, 135}, new byte[] { 31, 162, 134},
-            new byte[] { 31, 163, 134}, new byte[] { 32, 164, 133}, new byte[] { 32, 165, 133}, new byte[] { 33, 166, 133},
-            new byte[] { 33, 167, 132}, new byte[] { 34, 167, 132}, new byte[] { 35, 168, 131}, new byte[] { 35, 169, 130},
-            new byte[] { 36, 170, 130}, new byte[] { 37, 171, 129}, new byte[] { 38, 172, 129}, new byte[] { 39, 173, 128},
-            new byte[] { 40, 174, 127}, new byte[] { 41, 175, 127}, new byte[] { 42, 176, 126}, new byte[] { 43, 177, 125},
-            new byte[] { 44, 177, 125}, new byte[] { 46, 178, 124}, new byte[] { 47, 179, 123}, new byte[] { 48, 180, 122},
-            new byte[] { 50, 181, 122}, new byte[] { 51, 182, 121}, new byte[] { 53, 183, 120}, new byte[] { 54, 184, 119},
-            new byte[] { 56, 185, 118}, new byte[] { 57, 185, 118}, new byte[] { 59, 186, 117}, new byte[] { 61, 187, 116},
-            new byte[] { 62, 188, 115}, new byte[] { 64, 189, 114}, new byte[] { 66, 190, 113}, new byte[] { 68, 190, 112},
-            new byte[] { 69, 191, 111}, new byte[] { 71, 192, 110}, new byte[] { 73, 193, 109}, new byte[] { 75, 194, 108},
-            new byte[] { 77, 194, 107}, new byte[] { 79, 195, 105}, new byte[] { 81, 196, 104}, new byte[] { 83, 197, 103},
-            new byte[] { 85, 198, 102}, new byte[] { 87, 198, 101}, new byte[] { 89, 199, 100}, new byte[] { 91, 200,  98},
-            new byte[] { 94, 201,  97}, new byte[] { 96, 201,  96}, new byte[] { 98, 202,  95}, new byte[] {100, 203,  93},
-            new byte[] {103, 204,  92}, new byte[] {105, 204,  91}, new byte[] {107, 205,  89}, new byte[] {109, 206,  88},
-            new byte[] {112, 206,  86}, new byte[] {114, 207,  85}, new byte[] {116, 208,  84}, new byte[] {119, 208,  82},
-            new byte[] {121, 209,  81}, new byte[] {124, 210,  79}, new byte[] {126, 210,  78}, new byte[] {129, 211,  76},
-            new byte[] {131, 211,  75}, new byte[] {134, 212,  73}, new byte[] {136, 213,  71}, new byte[] {139, 213,  70},
-            new byte[] {141, 214,  68}, new byte[] {144, 214,  67}, new byte[] {146, 215,  65}, new byte[] {149, 215,  63},
-            new byte[] {151, 216,  62}, new byte[] {154, 216,  60}, new byte[] {157, 217,  58}, new byte[] {159, 217,  56},
-            new byte[] {162, 218,  55}, new byte[] {165, 218,  53}, new byte[] {167, 219,  51}, new byte[] {170, 219,  50},
-            new byte[] {173, 220,  48}, new byte[] {175, 220,  46}, new byte[] {178, 221,  44}, new byte[] {181, 221,  43},
-            new byte[] {183, 221,  41}, new byte[] {186, 222,  39}, new byte[] {189, 222,  38}, new byte[] {191, 223,  36},
-            new byte[] {194, 223,  34}, new byte[] {197, 223,  33}, new byte[] {199, 224,  31}, new byte[] {202, 224,  30},
-            new byte[] {205, 224,  29}, new byte[] {207, 225,  28}, new byte[] {210, 225,  27}, new byte[] {212, 225,  26},
-            new byte[] {215, 226,  25}, new byte[] {218, 226,  24}, new byte[] {220, 226,  24}, new byte[] {223, 227,  24},
-            new byte[] {225, 227,  24}, new byte[] {228, 227,  24}, new byte[] {231, 228,  25}, new byte[] {233, 228,  25},
-            new byte[] {236, 228,  26}, new byte[] {238, 229,  27}, new byte[] {241, 229,  28}, new byte[] {243, 229,  30},
-            new byte[] {246, 230,  31}, new byte[] {248, 230,  33}, new byte[] {250, 230,  34}, new byte[] {253, 231,  36}
+            new byte[] { 68,   1,  84},
+            new byte[] { 71,  24, 106},
+            new byte[] { 71,  44, 123},
+            new byte[] { 66,  64, 133},
+            new byte[] { 58,  82, 139},
+            new byte[] { 50,  98, 141},
+            new byte[] { 44, 114, 142},
+            new byte[] { 38, 129, 142},
+            new byte[] { 32, 144, 140},
+            new byte[] { 30, 159, 136},
+            new byte[] { 40, 174, 127},
+            new byte[] { 62, 188, 115},
+            new byte[] { 94, 201,  97},
+            new byte[] {131, 211,  75},
+            new byte[] {173, 220,  48},
+            new byte[] {253, 231,  36}
+        });
+
+        /// <summary>
+        /// Colormap "winter" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Winter = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {  0,   0, 255},
+            new byte[] {  0,  16, 247},
+            new byte[] {  0,  32, 239},
+            new byte[] {  0,  48, 231},
+            new byte[] {  0,  64, 223},
+            new byte[] {  0,  80, 215},
+            new byte[] {  0,  96, 207},
+            new byte[] {  0, 112, 199},
+            new byte[] {  0, 128, 191},
+            new byte[] {  0, 144, 183},
+            new byte[] {  0, 160, 175},
+            new byte[] {  0, 176, 167},
+            new byte[] {  0, 192, 159},
+            new byte[] {  0, 208, 151},
+            new byte[] {  0, 224, 143},
+            new byte[] {  0, 255, 127}
+        });
+
+        /// <summary>
+        /// Colormap "wistia" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Wistia = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {228, 255, 122},
+            new byte[] {234, 249,  97},
+            new byte[] {241, 243,  73},
+            new byte[] {248, 237,  49},
+            new byte[] {255, 231,  25},
+            new byte[] {255, 221,  19},
+            new byte[] {255, 210,  12},
+            new byte[] {255, 199,   6},
+            new byte[] {255, 188,   0},
+            new byte[] {255, 181,   0},
+            new byte[] {255, 174,   0},
+            new byte[] {255, 166,   0},
+            new byte[] {254, 159,   0},
+            new byte[] {254, 151,   0},
+            new byte[] {253, 143,   0},
+            new byte[] {252, 127,   0}
+        });
+
+        /// <summary>
+        /// Colormap "ylgn" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Ylgn = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255, 255, 229},
+            new byte[] {250, 253, 206},
+            new byte[] {246, 251, 184},
+            new byte[] {231, 245, 173},
+            new byte[] {216, 239, 162},
+            new byte[] {194, 230, 152},
+            new byte[] {172, 220, 141},
+            new byte[] {145, 209, 131},
+            new byte[] {119, 197, 120},
+            new byte[] { 91, 184, 106},
+            new byte[] { 64, 170,  92},
+            new byte[] { 49, 150,  79},
+            new byte[] { 34, 131,  66},
+            new byte[] { 16, 117,  60},
+            new byte[] {  0, 103,  54},
+            new byte[] {  0,  69,  41}
+        });
+
+        /// <summary>
+        /// Colormap "ylgnbu" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Ylgnbu = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255, 255, 217},
+            new byte[] {245, 251, 196},
+            new byte[] {236, 247, 177},
+            new byte[] {217, 240, 178},
+            new byte[] {198, 232, 180},
+            new byte[] {162, 218, 183},
+            new byte[] {126, 204, 187},
+            new byte[] { 95, 193, 191},
+            new byte[] { 64, 181, 195},
+            new byte[] { 46, 162, 193},
+            new byte[] { 29, 144, 191},
+            new byte[] { 31, 118, 179},
+            new byte[] { 34,  93, 167},
+            new byte[] { 35,  71, 157},
+            new byte[] { 36,  51, 146},
+            new byte[] {  8,  29,  88}
+        });
+
+        /// <summary>
+        /// Colormap "ylorbr" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Ylorbr = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255, 255, 229},
+            new byte[] {255, 250, 208},
+            new byte[] {254, 246, 187},
+            new byte[] {254, 236, 166},
+            new byte[] {254, 226, 144},
+            new byte[] {254, 211, 111},
+            new byte[] {254, 195,  78},
+            new byte[] {254, 173,  59},
+            new byte[] {253, 152,  40},
+            new byte[] {244, 131,  30},
+            new byte[] {235, 111,  19},
+            new byte[] {219,  93,  10},
+            new byte[] {202,  75,   2},
+            new byte[] {177,  63,   3},
+            new byte[] {151,  51,   4},
+            new byte[] {102,  37,   6}
+        });
+
+        /// <summary>
+        /// Colormap "ylorrd" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[][]> Ylorrd = new Lazy<byte[][]>(() => new []
+        {
+            new byte[] {255, 255, 204},
+            new byte[] {255, 245, 181},
+            new byte[] {254, 236, 159},
+            new byte[] {254, 226, 138},
+            new byte[] {254, 216, 117},
+            new byte[] {254, 197,  96},
+            new byte[] {253, 177,  75},
+            new byte[] {253, 158,  67},
+            new byte[] {252, 140,  59},
+            new byte[] {252, 108,  50},
+            new byte[] {251,  76,  41},
+            new byte[] {238,  50,  34},
+            new byte[] {226,  25,  28},
+            new byte[] {207,  12,  33},
+            new byte[] {187,   0,  38},
+            new byte[] {128,   0,  38}
         });
 
     #endregion
@@ -1109,21 +1769,81 @@ namespace SciColorMaps
         public static readonly Dictionary<string, Lazy<byte[][]>>
             ByName = new Dictionary<string, Lazy<byte[][]>>
         {
-            { "bone", Bone },
-            { "cool", Cool },
-            { "coolwarm", CoolWarm },
-            { "gist_earth", GistEarth },
-            { "gnuplot", GnuPlot },
-            { "gnuplot2", GnuPlot2 },
-            { "hot", Hot },
-            { "inferno", Inferno },
-            { "jet", Jet },
-            { "ocean", Ocean },
-            { "rainbow", Rainbow },
-            { "seismic", Seismic },
-            { "spectral", Spectral },
-            { "terrain", Terrain },
-            { "viridis", Viridis }
+            {"accent", Accent},
+            {"afmhot", Afmhot},
+            {"autumn", Autumn},
+            {"binary", Binary},
+            {"blues", Blues},
+            {"bone", Bone},
+            {"brbg", Brbg},
+            {"brg", Brg},
+            {"bugn", Bugn},
+            {"bupu", Bupu},
+            {"bwr", Bwr},
+            {"cmrmap", Cmrmap},
+            {"cool", Cool},
+            {"coolwarm", Coolwarm},
+            {"copper", Copper},
+            {"cubehelix", Cubehelix},
+            {"dark2", Dark2},
+            {"flag", Flag},
+            {"gist_earth", Gist_Earth},
+            {"gist_gray", Gist_Gray},
+            {"gist_heat", Gist_Heat},
+            {"gist_ncar", Gist_Ncar},
+            {"gist_rainbow", Gist_Rainbow},
+            {"gist_stern", Gist_Stern},
+            {"gist_yarg", Gist_Yarg},
+            {"gnbu", Gnbu},
+            {"gnuplot", Gnuplot},
+            {"gnuplot2", Gnuplot2},
+            {"gray", Gray},
+            {"greens", Greens},
+            {"greys", Greys},
+            {"hot", Hot},
+            {"hsv", Hsv},
+            {"inferno", Inferno},
+            {"jet", Jet},
+            {"magma", Magma},
+            {"nipy_spectral", Nipy_Spectral},
+            {"ocean", Ocean},
+            {"oranges", Oranges},
+            {"orrd", Orrd},
+            {"paired", Paired},
+            {"pastel1", Pastel1},
+            {"pastel2", Pastel2},
+            {"pink", Pink},
+            {"piyg", Piyg},
+            {"plasma", Plasma},
+            {"prgn", Prgn},
+            {"prism", Prism},
+            {"pubu", Pubu},
+            {"pubugn", Pubugn},
+            {"puor", Puor},
+            {"purd", Purd},
+            {"purples", Purples},
+            {"rainbow", Rainbow},
+            {"rdbu", Rdbu},
+            {"rdgy", Rdgy},
+            {"rdpu", Rdpu},
+            {"rdylbu", Rdylbu},
+            {"rdylgn", Rdylgn},
+            {"reds", Reds},
+            {"seismic", Seismic},
+            {"set1", Set1},
+            {"set2", Set2},
+            {"set3", Set3},
+            {"spectral", Spectral},
+            {"spring", Spring},
+            {"summer", Summer},
+            {"terrain", Terrain},
+            {"viridis", Viridis},
+            {"winter", Winter},
+            {"wistia", Wistia},
+            {"ylgn", Ylgn},
+            {"ylgnbu", Ylgnbu},
+            {"ylorbr", Ylorbr},
+            {"ylorrd", Ylorrd}
         };
 
         /// <summary>
@@ -1138,79 +1858,284 @@ namespace SciColorMaps
         /// <summary>
         /// Number of base colors in palette
         /// </summary>
-        public const int Resolution = 256;
+        public const int Resolution = 16;
 
     #region palettes
+        
+        /// <summary>
+        /// Colormap "accent" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Accent = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {127, 201, 127},
+            {154, 189, 164},
+            {182, 177, 201},
+            {210, 179, 187},
+            {237, 187, 152},
+            {253, 204, 137},
+            {254, 232, 146},
+            {240, 244, 154},
+            {152, 179, 164},
+            { 65, 114, 174},
+            {128,  66, 156},
+            {208,  19, 135},
+            {226,  26,  98},
+            {205,  65,  53},
+            {177,  92,  34},
+            {102, 102, 102}
+        });
+
+        /// <summary>
+        /// Colormap "afmhot" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Afmhot = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {  0,   0,   0},
+            { 32,   0,   0},
+            { 64,   0,   0},
+            { 96,   0,   0},
+            {128,   0,   0},
+            {160,  32,   0},
+            {192,  64,   0},
+            {224,  96,   0},
+            {255, 128,   0},
+            {255, 160,  32},
+            {255, 192,  65},
+            {255, 224,  97},
+            {255, 255, 129},
+            {255, 255, 161},
+            {255, 255, 193},
+            {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "autumn" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Autumn = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255,   0,   0},
+            {255,  16,   0},
+            {255,  32,   0},
+            {255,  48,   0},
+            {255,  64,   0},
+            {255,  80,   0},
+            {255,  96,   0},
+            {255, 112,   0},
+            {255, 128,   0},
+            {255, 144,   0},
+            {255, 160,   0},
+            {255, 176,   0},
+            {255, 192,   0},
+            {255, 208,   0},
+            {255, 224,   0},
+            {255, 255,   0}
+        });
+
+        /// <summary>
+        /// Colormap "binary" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Binary = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255, 255, 255},
+            {239, 239, 239},
+            {223, 223, 223},
+            {207, 207, 207},
+            {191, 191, 191},
+            {175, 175, 175},
+            {159, 159, 159},
+            {143, 143, 143},
+            {127, 127, 127},
+            {111, 111, 111},
+            { 95,  95,  95},
+            { 79,  79,  79},
+            { 63,  63,  63},
+            { 47,  47,  47},
+            { 31,  31,  31},
+            {  0,   0,   0}
+        });
+
+        /// <summary>
+        /// Colormap "blues" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Blues = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {247, 251, 255},
+            {234, 242, 250},
+            {221, 234, 246},
+            {209, 226, 242},
+            {197, 218, 238},
+            {177, 210, 231},
+            {157, 201, 224},
+            {131, 187, 219},
+            {106, 173, 213},
+            { 85, 159, 205},
+            { 65, 145, 197},
+            { 48, 128, 189},
+            { 32, 112, 180},
+            { 19,  96, 167},
+            {  8,  80, 154},
+            {  8,  48, 107}
+        });
 
         /// <summary>
         /// Colormap "bone" taken from matplotlib
         /// </summary>
         public static readonly Lazy<byte[,]> Bone = new Lazy<byte[,]>(() => new byte[,]
         {
-            {  0,   0,   0}, {  0,   0,   1}, {  1,   1,   2}, {  2,   2,   3},
-            {  3,   3,   4}, {  4,   4,   6}, {  5,   5,   7}, {  6,   6,   8},
-            {  7,   6,   9}, {  7,   7,  10}, {  8,   8,  12}, {  9,   9,  13},
-            { 10,  10,  14}, { 11,  11,  15}, { 12,  12,  17}, { 13,  13,  18},
-            { 14,  13,  19}, { 14,  14,  20}, { 15,  15,  21}, { 16,  16,  23},
-            { 17,  17,  24}, { 18,  18,  25}, { 19,  19,  26}, { 20,  20,  28},
-            { 21,  20,  29}, { 21,  21,  30}, { 22,  22,  31}, { 23,  23,  32},
-            { 24,  24,  34}, { 25,  25,  35}, { 26,  26,  36}, { 27,  27,  37},
-            { 28,  27,  38}, { 28,  28,  40}, { 29,  29,  41}, { 30,  30,  42},
-            { 31,  31,  43}, { 32,  32,  45}, { 33,  33,  46}, { 34,  34,  47},
-            { 35,  34,  48}, { 35,  35,  49}, { 36,  36,  51}, { 37,  37,  52},
-            { 38,  38,  53}, { 39,  39,  54}, { 40,  40,  56}, { 41,  41,  57},
-            { 42,  41,  58}, { 42,  42,  59}, { 43,  43,  60}, { 44,  44,  62},
-            { 45,  45,  63}, { 46,  46,  64}, { 47,  47,  65}, { 48,  48,  66},
-            { 49,  48,  68}, { 49,  49,  69}, { 50,  50,  70}, { 51,  51,  71},
-            { 52,  52,  73}, { 53,  53,  74}, { 54,  54,  75}, { 55,  55,  76},
-            { 56,  55,  77}, { 56,  56,  79}, { 57,  57,  80}, { 58,  58,  81},
-            { 59,  59,  82}, { 60,  60,  84}, { 61,  61,  85}, { 62,  62,  86},
-            { 63,  62,  87}, { 63,  63,  88}, { 64,  64,  90}, { 65,  65,  91},
-            { 66,  66,  92}, { 67,  67,  93}, { 68,  68,  94}, { 69,  69,  96},
-            { 70,  69,  97}, { 70,  70,  98}, { 71,  71,  99}, { 72,  72, 101},
-            { 73,  73, 102}, { 74,  74, 103}, { 75,  75, 104}, { 76,  76, 105},
-            { 77,  76, 107}, { 77,  77, 108}, { 78,  78, 109}, { 79,  79, 110},
-            { 80,  80, 112}, { 81,  81, 113}, { 82,  82, 114}, { 83,  83, 114},
-            { 84,  84, 115}, { 84,  86, 116}, { 85,  87, 117}, { 86,  88, 118},
-            { 87,  89, 119}, { 88,  90, 120}, { 89,  92, 121}, { 90,  93, 121},
-            { 91,  94, 122}, { 91,  95, 123}, { 92,  96, 124}, { 93,  98, 125},
-            { 94,  99, 126}, { 95, 100, 127}, { 96, 101, 128}, { 97, 102, 128},
-            { 98, 104, 129}, { 98, 105, 130}, { 99, 106, 131}, {100, 107, 132},
-            {101, 109, 133}, {102, 110, 134}, {103, 111, 135}, {104, 112, 135},
-            {105, 113, 136}, {105, 115, 137}, {106, 116, 138}, {107, 117, 139},
-            {108, 118, 140}, {109, 119, 141}, {110, 121, 142}, {111, 122, 142},
-            {112, 123, 143}, {112, 124, 144}, {113, 125, 145}, {114, 127, 146},
-            {115, 128, 147}, {116, 129, 148}, {117, 130, 149}, {118, 131, 149},
-            {119, 133, 150}, {119, 134, 151}, {120, 135, 152}, {121, 136, 153},
-            {122, 137, 154}, {123, 139, 155}, {124, 140, 156}, {125, 141, 156},
-            {126, 142, 157}, {126, 143, 158}, {127, 145, 159}, {128, 146, 160},
-            {129, 147, 161}, {130, 148, 162}, {131, 149, 163}, {132, 151, 163},
-            {133, 152, 164}, {133, 153, 165}, {134, 154, 166}, {135, 155, 167},
-            {136, 157, 168}, {137, 158, 169}, {138, 159, 170}, {139, 160, 170},
-            {140, 161, 171}, {140, 163, 172}, {141, 164, 173}, {142, 165, 174},
-            {143, 166, 175}, {144, 167, 176}, {145, 169, 177}, {146, 170, 177},
-            {147, 171, 178}, {147, 172, 179}, {148, 173, 180}, {149, 175, 181},
-            {150, 176, 182}, {151, 177, 183}, {152, 178, 184}, {153, 179, 184},
-            {154, 181, 185}, {154, 182, 186}, {155, 183, 187}, {156, 184, 188},
-            {157, 186, 189}, {158, 187, 190}, {159, 188, 191}, {160, 189, 191},
-            {161, 190, 192}, {161, 192, 193}, {162, 193, 194}, {163, 194, 195},
-            {164, 195, 196}, {165, 196, 197}, {166, 198, 198}, {167, 199, 198},
-            {168, 199, 199}, {170, 200, 200}, {171, 201, 201}, {172, 202, 202},
-            {174, 203, 203}, {175, 204, 204}, {177, 205, 205}, {178, 206, 205},
-            {179, 206, 206}, {181, 207, 207}, {182, 208, 208}, {183, 209, 209},
-            {185, 210, 210}, {186, 211, 211}, {188, 212, 212}, {189, 213, 212},
-            {190, 213, 213}, {192, 214, 214}, {193, 215, 215}, {194, 216, 216},
-            {196, 217, 217}, {197, 218, 218}, {198, 219, 219}, {200, 220, 219},
-            {201, 220, 220}, {203, 221, 221}, {204, 222, 222}, {205, 223, 223},
-            {207, 224, 224}, {208, 225, 225}, {209, 226, 226}, {211, 227, 226},
-            {212, 227, 227}, {213, 228, 228}, {215, 229, 229}, {216, 230, 230},
-            {218, 231, 231}, {219, 232, 232}, {220, 233, 233}, {222, 234, 233},
-            {223, 234, 234}, {224, 235, 235}, {226, 236, 236}, {227, 237, 237},
-            {229, 238, 238}, {230, 239, 239}, {231, 240, 240}, {233, 241, 240},
-            {234, 241, 241}, {235, 242, 242}, {237, 243, 243}, {238, 244, 244},
-            {239, 245, 245}, {241, 246, 246}, {242, 247, 247}, {244, 248, 247},
-            {245, 248, 248}, {246, 249, 249}, {248, 250, 250}, {249, 251, 251},
-            {250, 252, 252}, {252, 253, 253}, {253, 254, 254}, {255, 255, 255}
+            {  0,   0,   0},
+            { 14,  13,  19},
+            { 28,  27,  38},
+            { 42,  41,  58},
+            { 56,  55,  77},
+            { 70,  69,  97},
+            { 84,  84, 115},
+            { 98, 104, 129},
+            {112, 123, 143},
+            {126, 142, 157},
+            {140, 161, 171},
+            {154, 181, 185},
+            {168, 199, 199},
+            {190, 213, 213},
+            {212, 227, 227},
+            {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "brbg" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Brbg = new Lazy<byte[,]>(() => new byte[,]
+        {
+            { 84,  48,   5},
+            {119,  68,   8},
+            {153,  93,  18},
+            {185, 123,  40},
+            {207, 162,  85},
+            {226, 199, 134},
+            {240, 223, 178},
+            {245, 237, 214},
+            {244, 244, 244},
+            {215, 237, 234},
+            {179, 226, 219},
+            {134, 207, 196},
+            { 88, 176, 166},
+            { 44, 143, 135},
+            { 12, 112, 104},
+            {  0,  60,  48}
+        });
+
+        /// <summary>
+        /// Colormap "brg" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Brg = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {  0,   0, 255},
+            { 32,   0, 223},
+            { 64,   0, 191},
+            { 96,   0, 159},
+            {128,   0, 127},
+            {160,   0,  95},
+            {192,   0,  63},
+            {224,   0,  31},
+            {254,   1,   0},
+            {222,  33,   0},
+            {190,  65,   0},
+            {158,  97,   0},
+            {126, 129,   0},
+            { 94, 161,   0},
+            { 62, 193,   0},
+            {  0, 255,   0}
+        });
+
+        /// <summary>
+        /// Colormap "bugn" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Bugn = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {247, 252, 253},
+            {237, 248, 250},
+            {228, 244, 248},
+            {216, 240, 239},
+            {203, 235, 229},
+            {178, 225, 215},
+            {152, 215, 200},
+            {126, 204, 181},
+            {101, 193, 163},
+            { 82, 183, 140},
+            { 64, 173, 117},
+            { 49, 155,  92},
+            { 34, 138,  68},
+            { 16, 123,  55},
+            {  0, 107,  43},
+            {  0,  68,  27}
+        });
+
+        /// <summary>
+        /// Colormap "bupu" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Bupu = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {247, 252, 253},
+            {235, 243, 248},
+            {223, 235, 243},
+            {207, 223, 236},
+            {190, 210, 229},
+            {174, 199, 223},
+            {157, 187, 217},
+            {148, 168, 207},
+            {140, 149, 197},
+            {140, 127, 187},
+            {139, 106, 176},
+            {137,  85, 166},
+            {135,  63, 156},
+            {132,  38, 139},
+            {127,  14, 122},
+            { 77,   0,  75}
+        });
+
+        /// <summary>
+        /// Colormap "bwr" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Bwr = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {  0,   0, 255},
+            { 32,  32, 255},
+            { 64,  64, 255},
+            { 96,  96, 255},
+            {128, 128, 255},
+            {160, 160, 255},
+            {192, 192, 255},
+            {224, 224, 255},
+            {255, 254, 254},
+            {255, 222, 222},
+            {255, 190, 190},
+            {255, 158, 158},
+            {255, 126, 126},
+            {255,  94,  94},
+            {255,  62,  62},
+            {255,   0,   0}
+        });
+
+        /// <summary>
+        /// Colormap "cmrmap" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Cmrmap = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {  0,   0,   0},
+            { 19,  19,  64},
+            { 38,  38, 127},
+            { 57,  38, 159},
+            { 77,  38, 190},
+            {115,  44, 158},
+            {154,  51, 126},
+            {205,  57,  81},
+            {254,  64,  37},
+            {241,  96,  18},
+            {229, 128,   0},
+            {229, 160,  13},
+            {229, 192,  27},
+            {229, 211,  79},
+            {230, 230, 131},
+            {255, 255, 255}
         });
 
         /// <summary>
@@ -1218,283 +2143,436 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[,]> Cool = new Lazy<byte[,]>(() => new byte[,]
         {
-            {  0, 255, 255}, {  1, 254, 255}, {  2, 253, 255}, {  3, 252, 255},
-            {  4, 251, 255}, {  5, 250, 255}, {  6, 249, 255}, {  7, 248, 255},
-            {  8, 247, 255}, {  9, 246, 255}, { 10, 245, 255}, { 11, 244, 255},
-            { 12, 243, 255}, { 13, 242, 255}, { 14, 241, 255}, { 15, 240, 255},
-            { 16, 239, 255}, { 17, 238, 255}, { 18, 237, 255}, { 19, 236, 255},
-            { 20, 235, 255}, { 21, 234, 255}, { 22, 233, 255}, { 23, 232, 255},
-            { 24, 231, 255}, { 25, 230, 255}, { 26, 229, 255}, { 27, 228, 255},
-            { 28, 227, 255}, { 29, 226, 255}, { 30, 225, 255}, { 31, 224, 255},
-            { 32, 223, 255}, { 32, 222, 255}, { 34, 221, 255}, { 35, 220, 255},
-            { 36, 219, 255}, { 36, 218, 255}, { 38, 217, 255}, { 39, 216, 255},
-            { 40, 215, 255}, { 40, 214, 255}, { 42, 213, 255}, { 43, 211, 255},
-            { 44, 211, 255}, { 44, 210, 255}, { 46, 209, 255}, { 47, 208, 255},
-            { 48, 207, 255}, { 48, 206, 255}, { 50, 205, 255}, { 51, 204, 255},
-            { 52, 203, 255}, { 52, 202, 255}, { 54, 201, 255}, { 55, 200, 255},
-            { 56, 199, 255}, { 56, 198, 255}, { 58, 197, 255}, { 59, 195, 255},
-            { 60, 195, 255}, { 60, 194, 255}, { 62, 193, 255}, { 63, 192, 255},
-            { 64, 191, 255}, { 65, 190, 255}, { 65, 189, 255}, { 67, 188, 255},
-            { 68, 187, 255}, { 69, 186, 255}, { 70, 185, 255}, { 71, 184, 255},
-            { 72, 183, 255}, { 73, 182, 255}, { 73, 181, 255}, { 75, 179, 255},
-            { 76, 179, 255}, { 77, 178, 255}, { 78, 177, 255}, { 79, 176, 255},
-            { 80, 175, 255}, { 81, 174, 255}, { 81, 173, 255}, { 83, 172, 255},
-            { 84, 171, 255}, { 85, 170, 255}, { 86, 169, 255}, { 87, 168, 255},
-            { 88, 167, 255}, { 89, 166, 255}, { 89, 165, 255}, { 91, 163, 255},
-            { 92, 163, 255}, { 93, 162, 255}, { 94, 161, 255}, { 95, 160, 255},
-            { 96, 159, 255}, { 97, 158, 255}, { 97, 157, 255}, { 99, 156, 255},
-            {100, 155, 255}, {101, 154, 255}, {102, 153, 255}, {103, 152, 255},
-            {104, 151, 255}, {105, 150, 255}, {105, 149, 255}, {107, 147, 255},
-            {108, 147, 255}, {109, 146, 255}, {110, 145, 255}, {111, 144, 255},
-            {112, 143, 255}, {113, 142, 255}, {113, 141, 255}, {115, 140, 255},
-            {116, 139, 255}, {117, 138, 255}, {118, 137, 255}, {119, 136, 255},
-            {120, 135, 255}, {121, 134, 255}, {121, 133, 255}, {123, 131, 255},
-            {124, 131, 255}, {125, 130, 255}, {126, 129, 255}, {127, 128, 255},
-            {128, 127, 255}, {129, 126, 255}, {130, 125, 255}, {131, 124, 255},
-            {131, 123, 255}, {133, 121, 255}, {134, 121, 255}, {135, 120, 255},
-            {136, 119, 255}, {137, 118, 255}, {138, 117, 255}, {139, 116, 255},
-            {140, 114, 255}, {141, 113, 255}, {142, 113, 255}, {143, 112, 255},
-            {144, 111, 255}, {145, 110, 255}, {146, 109, 255}, {147, 108, 255},
-            {147, 107, 255}, {149, 105, 255}, {150, 105, 255}, {151, 104, 255},
-            {152, 103, 255}, {153, 102, 255}, {154, 101, 255}, {155, 100, 255},
-            {156,  98, 255}, {157,  97, 255}, {158,  97, 255}, {159,  96, 255},
-            {160,  95, 255}, {161,  94, 255}, {162,  93, 255}, {163,  92, 255},
-            {163,  91, 255}, {165,  89, 255}, {166,  89, 255}, {167,  88, 255},
-            {168,  87, 255}, {169,  86, 255}, {170,  85, 255}, {171,  84, 255},
-            {172,  82, 255}, {173,  81, 255}, {174,  81, 255}, {175,  80, 255},
-            {176,  79, 255}, {177,  78, 255}, {178,  77, 255}, {179,  76, 255},
-            {179,  75, 255}, {181,  73, 255}, {182,  73, 255}, {183,  72, 255},
-            {184,  71, 255}, {185,  70, 255}, {186,  69, 255}, {187,  68, 255},
-            {188,  66, 255}, {189,  65, 255}, {190,  65, 255}, {191,  64, 255},
-            {192,  63, 255}, {193,  62, 255}, {194,  61, 255}, {195,  60, 255},
-            {195,  59, 255}, {197,  57, 255}, {198,  56, 255}, {199,  56, 255},
-            {200,  55, 255}, {201,  54, 255}, {202,  53, 255}, {203,  52, 255},
-            {204,  50, 255}, {205,  49, 255}, {206,  48, 255}, {207,  48, 255},
-            {208,  47, 255}, {209,  46, 255}, {210,  45, 255}, {211,  44, 255},
-            {211,  43, 255}, {213,  41, 255}, {214,  40, 255}, {215,  40, 255},
-            {216,  39, 255}, {217,  38, 255}, {218,  37, 255}, {219,  36, 255},
-            {220,  34, 255}, {221,  33, 255}, {222,  32, 255}, {223,  32, 255},
-            {224,  31, 255}, {225,  30, 255}, {226,  29, 255}, {227,  28, 255},
-            {227,  27, 255}, {229,  25, 255}, {230,  24, 255}, {231,  24, 255},
-            {232,  23, 255}, {233,  22, 255}, {234,  21, 255}, {235,  20, 255},
-            {236,  18, 255}, {237,  17, 255}, {238,  16, 255}, {239,  16, 255},
-            {240,  15, 255}, {241,  14, 255}, {242,  13, 255}, {243,  12, 255},
-            {243,  11, 255}, {245,   9, 255}, {246,   8, 255}, {247,   8, 255},
-            {248,   7, 255}, {249,   6, 255}, {250,   5, 255}, {251,   4, 255},
-            {252,   2, 255}, {253,   1, 255}, {254,   0, 255}, {255,   0, 255}
+            {  0, 255, 255},
+            { 16, 239, 255},
+            { 32, 223, 255},
+            { 48, 207, 255},
+            { 64, 191, 255},
+            { 80, 175, 255},
+            { 96, 159, 255},
+            {112, 143, 255},
+            {128, 127, 255},
+            {144, 111, 255},
+            {160,  95, 255},
+            {176,  79, 255},
+            {192,  63, 255},
+            {208,  47, 255},
+            {224,  31, 255},
+            {255,   0, 255}
         });
 
         /// <summary>
         /// Colormap "coolwarm" taken from matplotlib
         /// </summary>
-        public static readonly Lazy<byte[,]> CoolWarm = new Lazy<byte[,]>(() => new byte[,]
+        public static readonly Lazy<byte[,]> Coolwarm = new Lazy<byte[,]>(() => new byte[,]
         {
-            { 58,  76, 192}, { 59,  77, 193}, { 60,  79, 195}, { 62,  81, 196},
-            { 63,  83, 198}, { 64,  84, 199}, { 65,  86, 201}, { 66,  88, 202},
-            { 67,  90, 204}, { 69,  91, 205}, { 70,  93, 207}, { 71,  95, 208},
-            { 72,  96, 209}, { 73,  98, 211}, { 75, 100, 212}, { 76, 102, 214},
-            { 77, 103, 215}, { 78, 105, 216}, { 80, 107, 218}, { 81, 108, 219},
-            { 82, 110, 220}, { 83, 112, 221}, { 85, 113, 222}, { 86, 115, 224},
-            { 87, 117, 225}, { 88, 118, 226}, { 90, 120, 227}, { 91, 121, 228},
-            { 92, 123, 229}, { 93, 125, 230}, { 95, 126, 231}, { 96, 128, 232},
-            { 97, 130, 234}, { 99, 131, 234}, {100, 133, 235}, {101, 134, 236},
-            {103, 136, 237}, {104, 137, 238}, {105, 139, 239}, {107, 141, 240},
-            {108, 142, 241}, {109, 144, 241}, {111, 145, 242}, {112, 147, 243},
-            {113, 148, 244}, {115, 149, 244}, {116, 151, 245}, {117, 152, 246},
-            {119, 154, 246}, {120, 155, 247}, {122, 157, 248}, {123, 158, 248},
-            {124, 160, 249}, {126, 161, 249}, {127, 162, 250}, {128, 164, 250},
-            {130, 165, 251}, {131, 166, 251}, {133, 168, 251}, {134, 169, 252},
-            {135, 170, 252}, {137, 172, 252}, {138, 173, 253}, {139, 174, 253},
-            {141, 175, 253}, {142, 177, 253}, {144, 178, 254}, {145, 179, 254},
-            {146, 180, 254}, {148, 181, 254}, {149, 183, 254}, {151, 184, 254},
-            {152, 185, 254}, {153, 186, 254}, {155, 187, 254}, {156, 188, 254},
-            {157, 189, 254}, {159, 190, 254}, {160, 191, 254}, {162, 192, 254},
-            {163, 193, 254}, {164, 194, 254}, {166, 195, 253}, {167, 196, 253},
-            {168, 197, 253}, {170, 198, 253}, {171, 199, 252}, {172, 200, 252},
-            {174, 201, 252}, {175, 202, 251}, {176, 203, 251}, {178, 203, 251},
-            {179, 204, 250}, {180, 205, 250}, {182, 206, 249}, {183, 207, 249},
-            {184, 207, 248}, {185, 208, 248}, {187, 209, 247}, {188, 209, 246},
-            {189, 210, 246}, {190, 211, 245}, {192, 211, 245}, {193, 212, 244},
-            {194, 212, 243}, {195, 213, 242}, {197, 213, 242}, {198, 214, 241},
-            {199, 214, 240}, {200, 215, 239}, {201, 215, 238}, {202, 216, 238},
-            {204, 216, 237}, {205, 217, 236}, {206, 217, 235}, {207, 217, 234},
-            {208, 218, 233}, {209, 218, 232}, {210, 218, 231}, {211, 219, 230},
-            {213, 219, 229}, {214, 219, 228}, {215, 219, 226}, {216, 219, 225},
-            {217, 220, 224}, {218, 220, 223}, {219, 220, 222}, {220, 220, 221},
-            {221, 220, 219}, {222, 219, 218}, {223, 219, 217}, {224, 218, 215},
-            {225, 218, 214}, {226, 217, 212}, {227, 217, 211}, {228, 216, 209},
-            {229, 216, 208}, {230, 215, 207}, {231, 214, 205}, {231, 214, 204},
-            {232, 213, 202}, {233, 212, 201}, {234, 211, 199}, {235, 211, 198},
-            {236, 210, 196}, {236, 209, 195}, {237, 208, 193}, {237, 207, 192},
-            {238, 207, 190}, {239, 206, 188}, {239, 205, 187}, {240, 204, 185},
-            {241, 203, 184}, {241, 202, 182}, {242, 201, 181}, {242, 200, 179},
-            {242, 199, 178}, {243, 198, 176}, {243, 197, 175}, {244, 196, 173},
-            {244, 195, 171}, {244, 194, 170}, {245, 193, 168}, {245, 192, 167},
-            {245, 191, 165}, {246, 189, 164}, {246, 188, 162}, {246, 187, 160},
-            {246, 186, 159}, {246, 185, 157}, {246, 183, 156}, {246, 182, 154},
-            {247, 181, 152}, {247, 179, 151}, {247, 178, 149}, {247, 177, 148},
-            {247, 176, 146}, {247, 174, 145}, {247, 173, 143}, {246, 171, 141},
-            {246, 170, 140}, {246, 169, 138}, {246, 167, 137}, {246, 166, 135},
-            {246, 164, 134}, {246, 163, 132}, {245, 161, 130}, {245, 160, 129},
-            {245, 158, 127}, {244, 157, 126}, {244, 155, 124}, {244, 154, 123},
-            {243, 152, 121}, {243, 150, 120}, {243, 149, 118}, {242, 147, 117},
-            {242, 145, 115}, {241, 144, 114}, {241, 142, 112}, {240, 141, 111},
-            {240, 139, 109}, {239, 137, 108}, {238, 135, 106}, {238, 134, 105},
-            {237, 132, 103}, {236, 130, 102}, {236, 128, 100}, {235, 127,  99},
-            {234, 125,  97}, {234, 123,  96}, {233, 121,  94}, {232, 119,  93},
-            {231, 117,  92}, {230, 116,  90}, {230, 114,  89}, {229, 112,  87},
-            {228, 110,  86}, {227, 108,  84}, {226, 106,  83}, {225, 104,  82},
-            {224, 102,  80}, {223, 100,  79}, {222,  98,  78}, {221,  96,  76},
-            {220,  94,  75}, {219,  92,  74}, {218,  90,  72}, {217,  88,  71},
-            {216,  86,  70}, {215,  84,  68}, {214,  82,  67}, {212,  79,  66},
-            {211,  77,  64}, {210,  75,  63}, {209,  73,  62}, {207,  70,  61},
-            {206,  68,  60}, {205,  66,  58}, {204,  63,  57}, {202,  61,  56},
-            {201,  59,  55}, {200,  56,  53}, {198,  53,  52}, {197,  50,  51},
-            {196,  48,  50}, {194,  45,  49}, {193,  42,  48}, {191,  40,  46},
-            {190,  35,  45}, {188,  31,  44}, {187,  26,  43}, {185,  22,  42},
-            {184,  17,  41}, {182,  13,  40}, {181,   8,  39}, {179,   3,  38}
+            { 58,  76, 192},
+            { 77, 103, 215},
+            { 97, 130, 234},
+            {119, 154, 246},
+            {141, 175, 253},
+            {163, 193, 254},
+            {184, 207, 248},
+            {204, 216, 237},
+            {221, 220, 219},
+            {236, 210, 196},
+            {244, 195, 171},
+            {247, 176, 146},
+            {243, 152, 121},
+            {234, 125,  97},
+            {220,  94,  75},
+            {179,   3,  38}
+        });
+
+        /// <summary>
+        /// Colormap "copper" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Copper = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {  0,   0,   0},
+            { 19,  12,   7},
+            { 39,  24,  15},
+            { 59,  37,  23},
+            { 79,  49,  31},
+            { 98,  62,  39},
+            {118,  74,  47},
+            {138,  87,  55},
+            {158,  99,  63},
+            {177, 112,  71},
+            {197, 124,  79},
+            {217, 137,  87},
+            {237, 149,  95},
+            {255, 162, 103},
+            {255, 174, 111},
+            {255, 199, 126}
+        });
+
+        /// <summary>
+        /// Colormap "cubehelix" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Cubehelix = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {  0,   0,   0},
+            { 20,  11,  29},
+            { 26,  29,  59},
+            { 22,  55,  76},
+            { 21,  83,  75},
+            { 35, 106,  61},
+            { 67, 119,  48},
+            {113, 122,  50},
+            {161, 121,  74},
+            {196, 122, 117},
+            {211, 131, 169},
+            {208, 152, 212},
+            {198, 180, 237},
+            {193, 208, 243},
+            {203, 231, 239},
+            {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "dark2" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Dark2 = new Lazy<byte[,]>(() => new byte[,]
+        {
+            { 27, 158, 119},
+            {110, 130,  67},
+            {193, 102,  16},
+            {185, 100,  58},
+            {141, 107, 135},
+            {139,  98, 170},
+            {189,  66, 152},
+            {221,  50, 129},
+            {164, 105,  82},
+            {108, 160,  35},
+            {152, 167,  19},
+            {208, 170,   6},
+            {212, 156,   9},
+            {184, 133,  21},
+            {156, 115,  39},
+            {102, 102, 102}
+        });
+
+        /// <summary>
+        /// Colormap "flag" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Flag = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255,   0,   0},
+            {252,   0,   0},
+            {241,   0,   0},
+            {229,   0,   0},
+            {217,   0,   0},
+            {204,   0,   0},
+            {191,   0,   0},
+            {178,   0,   0},
+            {164,   0,   0},
+            {150,   0,   0},
+            {136,   0,   0},
+            {122,   0,   0},
+            {108,   0,   0},
+            { 94,   0,   0},
+            { 80,   0,   0},
+            {  0,   0,   0}
+        });
+
+        /// <summary>
+        /// Colormap "gist_earth" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Gist_Earth = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {  0,   0,   0},
+            { 10,  20, 117},
+            { 21,  56, 120},
+            { 31,  88, 123},
+            { 42, 115, 126},
+            { 51, 132, 117},
+            { 59, 141,  98},
+            { 66, 151,  78},
+            { 93, 160,  75},
+            {126, 167,  83},
+            {153, 174,  88},
+            {179, 181,  93},
+            {188, 170,  98},
+            {200, 166, 120},
+            {218, 182, 159},
+            {253, 250, 250}
+        });
+
+        /// <summary>
+        /// Colormap "gist_gray" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Gist_Gray = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {  0,   0,   0},
+            { 16,  16,  16},
+            { 32,  32,  32},
+            { 48,  48,  48},
+            { 64,  64,  64},
+            { 80,  80,  80},
+            { 96,  96,  96},
+            {112, 112, 112},
+            {128, 128, 128},
+            {144, 144, 144},
+            {160, 160, 160},
+            {176, 176, 176},
+            {192, 192, 192},
+            {208, 208, 208},
+            {224, 224, 224},
+            {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "gist_heat" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Gist_Heat = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {  0,   0,   0},
+            { 24,   0,   0},
+            { 48,   0,   0},
+            { 72,   0,   0},
+            { 96,   0,   0},
+            {120,   0,   0},
+            {144,   0,   0},
+            {168,   0,   0},
+            {192,   0,   0},
+            {216,  32,   0},
+            {240,  65,   0},
+            {255,  97,   0},
+            {255, 129,   2},
+            {255, 161,  66},
+            {255, 193, 131},
+            {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "gist_ncar" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Gist_Ncar = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {  0,   0, 128},
+            {  0,  74,  55},
+            {  0,  70, 255},
+            {  0, 224, 255},
+            {  0, 250, 176},
+            {  6, 254,  20},
+            {103, 212,   0},
+            {145, 255,  23},
+            {218, 255,  31},
+            {255, 227,   0},
+            {255, 188,  12},
+            {255,  66,   0},
+            {255,   0,  70},
+            {213,  20, 255},
+            {205,  97, 244},
+            {254, 247, 254}
+        });
+
+        /// <summary>
+        /// Colormap "gist_rainbow" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Gist_Rainbow = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255,   0,  40},
+            {255,  45,   0},
+            {255, 131,   0},
+            {255, 218,   0},
+            {205, 255,   0},
+            {118, 255,   0},
+            { 32, 255,   0},
+            {  0, 255,  53},
+            {  0, 255, 139},
+            {  0, 255, 225},
+            {  0, 197, 255},
+            {  0, 110, 255},
+            {  0,  23, 255},
+            { 63,   0, 255},
+            {150,   0, 255},
+            {255,   0, 191}
+        });
+
+        /// <summary>
+        /// Colormap "gist_stern" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Gist_Stern = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {  0,   0,   0},
+            {244,  16,  32},
+            {165,  32,  64},
+            { 85,  48,  96},
+            { 64,  64, 128},
+            { 80,  80, 160},
+            { 96,  96, 192},
+            {112, 112, 224},
+            {128, 128, 252},
+            {144, 144, 184},
+            {160, 160, 116},
+            {176, 176,  48},
+            {192, 192,  17},
+            {208, 208,  77},
+            {224, 224, 138},
+            {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "gist_yarg" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Gist_Yarg = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255, 255, 255},
+            {239, 239, 239},
+            {223, 223, 223},
+            {207, 207, 207},
+            {191, 191, 191},
+            {175, 175, 175},
+            {159, 159, 159},
+            {143, 143, 143},
+            {127, 127, 127},
+            {111, 111, 111},
+            { 95,  95,  95},
+            { 79,  79,  79},
+            { 63,  63,  63},
+            { 47,  47,  47},
+            { 31,  31,  31},
+            {  0,   0,   0}
+        });
+
+        /// <summary>
+        /// Colormap "gnbu" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Gnbu = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {247, 252, 240},
+            {235, 247, 229},
+            {223, 242, 218},
+            {213, 238, 207},
+            {203, 234, 196},
+            {185, 227, 188},
+            {167, 220, 181},
+            {144, 212, 188},
+            {122, 203, 196},
+            { 99, 191, 203},
+            { 77, 178, 210},
+            { 59, 158, 200},
+            { 42, 139, 189},
+            { 24, 121, 180},
+            {  8, 102, 170},
+            {  8,  64, 129}
         });
 
         /// <summary>
         /// Colormap "gnuplot" taken from matplotlib
         /// </summary>
-        public static readonly Lazy<byte[,]> GnuPlot = new Lazy<byte[,]>(() => new byte[,]
+        public static readonly Lazy<byte[,]> Gnuplot = new Lazy<byte[,]>(() => new byte[,]
         {
-            {  0,   0,   0}, { 15,   0,   6}, { 22,   0,  12}, { 27,   0,  18},
-            { 31,   0,  25}, { 35,   0,  31}, { 39,   0,  37}, { 42,   0,  43},
-            { 45,   0,  49}, { 47,   0,  56}, { 50,   0,  62}, { 52,   0,  68},
-            { 55,   0,  74}, { 57,   0,  80}, { 59,   0,  86}, { 61,   0,  92},
-            { 63,   0,  97}, { 65,   0, 103}, { 67,   0, 109}, { 69,   0, 115},
-            { 71,   0, 120}, { 73,   0, 126}, { 74,   0, 131}, { 76,   0, 136},
-            { 78,   0, 142}, { 79,   0, 147}, { 81,   0, 152}, { 82,   0, 157},
-            { 84,   0, 162}, { 85,   0, 167}, { 87,   0, 171}, { 88,   0, 176},
-            { 90,   0, 180}, { 91,   0, 185}, { 93,   0, 189}, { 94,   0, 193},
-            { 95,   0, 197}, { 97,   0, 201}, { 98,   0, 205}, { 99,   0, 209},
-            {100,   0, 212}, {102,   1, 215}, {103,   1, 219}, {104,   1, 222},
-            {105,   1, 225}, {107,   1, 228}, {108,   1, 230}, {109,   1, 233},
-            {110,   1, 236}, {111,   1, 238}, {112,   1, 240}, {114,   2, 242},
-            {115,   2, 244}, {116,   2, 246}, {117,   2, 247}, {118,   2, 249},
-            {119,   2, 250}, {120,   2, 251}, {121,   3, 252}, {122,   3, 253},
-            {123,   3, 253}, {124,   3, 254}, {125,   3, 254}, {126,   3, 254},
-            {127,   4, 254}, {128,   4, 254}, {129,   4, 254}, {130,   4, 254},
-            {131,   4, 253}, {132,   5, 252}, {133,   5, 251}, {134,   5, 250},
-            {135,   5, 249}, {136,   5, 248}, {137,   6, 246}, {138,   6, 245},
-            {139,   6, 243}, {140,   7, 241}, {141,   7, 239}, {141,   7, 237},
-            {142,   7, 234}, {143,   8, 232}, {144,   8, 229}, {145,   8, 226},
-            {146,   9, 223}, {147,   9, 220}, {148,   9, 217}, {148,  10, 214},
-            {149,  10, 210}, {150,  10, 207}, {151,  11, 203}, {152,  11, 199},
-            {153,  11, 195}, {153,  12, 191}, {154,  12, 187}, {155,  13, 183},
-            {156,  13, 178}, {157,  14, 174}, {158,  14, 169}, {158,  14, 164},
-            {159,  15, 159}, {160,  15, 154}, {161,  16, 149}, {162,  16, 144},
-            {162,  17, 139}, {163,  17, 134}, {164,  18, 128}, {165,  18, 123},
-            {165,  19, 117}, {166,  19, 112}, {167,  20, 106}, {168,  21, 100},
-            {168,  21,  95}, {169,  22,  89}, {170,  22,  83}, {171,  23,  77},
-            {171,  24,  71}, {172,  24,  65}, {173,  25,  59}, {174,  25,  53},
-            {174,  26,  46}, {175,  27,  40}, {176,  27,  34}, {177,  28,  28},
-            {177,  29,  21}, {178,  30,  15}, {179,  30,   9}, {179,  31,   3},
-            {180,  32,   0}, {181,  33,   0}, {182,  33,   0}, {182,  34,   0},
-            {183,  35,   0}, {184,  36,   0}, {184,  37,   0}, {185,  37,   0},
-            {186,  38,   0}, {186,  39,   0}, {187,  40,   0}, {188,  41,   0},
-            {188,  42,   0}, {189,  43,   0}, {190,  44,   0}, {190,  44,   0},
-            {191,  45,   0}, {192,  46,   0}, {192,  47,   0}, {193,  48,   0},
-            {194,  49,   0}, {194,  50,   0}, {195,  51,   0}, {196,  52,   0},
-            {196,  54,   0}, {197,  55,   0}, {198,  56,   0}, {198,  57,   0},
-            {199,  58,   0}, {200,  59,   0}, {200,  60,   0}, {201,  61,   0},
-            {201,  62,   0}, {202,  64,   0}, {203,  65,   0}, {203,  66,   0},
-            {204,  67,   0}, {205,  69,   0}, {205,  70,   0}, {206,  71,   0},
-            {206,  72,   0}, {207,  74,   0}, {208,  75,   0}, {208,  76,   0},
-            {209,  78,   0}, {210,  79,   0}, {210,  81,   0}, {211,  82,   0},
-            {211,  83,   0}, {212,  85,   0}, {213,  86,   0}, {213,  88,   0},
-            {214,  89,   0}, {214,  91,   0}, {215,  92,   0}, {216,  94,   0},
-            {216,  95,   0}, {217,  97,   0}, {217,  98,   0}, {218, 100,   0},
-            {218, 102,   0}, {219, 103,   0}, {220, 105,   0}, {220, 107,   0},
-            {221, 108,   0}, {221, 110,   0}, {222, 112,   0}, {222, 114,   0},
-            {223, 115,   0}, {224, 117,   0}, {224, 119,   0}, {225, 121,   0},
-            {225, 123,   0}, {226, 124,   0}, {226, 126,   0}, {227, 128,   0},
-            {228, 130,   0}, {228, 132,   0}, {229, 134,   0}, {229, 136,   0},
-            {230, 138,   0}, {230, 140,   0}, {231, 142,   0}, {231, 144,   0},
-            {232, 146,   0}, {233, 148,   0}, {233, 150,   0}, {234, 152,   0},
-            {234, 154,   0}, {235, 157,   0}, {235, 159,   0}, {236, 161,   0},
-            {236, 163,   0}, {237, 165,   0}, {237, 168,   0}, {238, 170,   0},
-            {238, 172,   0}, {239, 175,   0}, {240, 177,   0}, {240, 179,   0},
-            {241, 182,   0}, {241, 184,   0}, {242, 187,   0}, {242, 189,   0},
-            {243, 192,   0}, {243, 194,   0}, {244, 197,   0}, {244, 199,   0},
-            {245, 202,   0}, {245, 204,   0}, {246, 207,   0}, {246, 209,   0},
-            {247, 212,   0}, {247, 215,   0}, {248, 217,   0}, {248, 220,   0},
-            {249, 223,   0}, {249, 226,   0}, {250, 228,   0}, {250, 231,   0},
-            {251, 234,   0}, {251, 237,   0}, {252, 240,   0}, {252, 243,   0},
-            {253, 246,   0}, {253, 249,   0}, {254, 252,   0}, {255, 255,   0}
+            {  0,   0,   0},
+            { 63,   0,  97},
+            { 90,   0, 180},
+            {110,   1, 236},
+            {127,   4, 254},
+            {142,   7, 234},
+            {156,  13, 178},
+            {168,  21,  95},
+            {180,  32,   0},
+            {191,  45,   0},
+            {201,  62,   0},
+            {211,  83,   0},
+            {221, 108,   0},
+            {230, 138,   0},
+            {238, 172,   0},
+            {255, 255,   0}
         });
 
         /// <summary>
-        /// Colormap "gnuplot" taken from matplotlib
+        /// Colormap "gnuplot2" taken from matplotlib
         /// </summary>
-        public static readonly Lazy<byte[,]> GnuPlot2 = new Lazy<byte[,]>(() => new byte[,]
+        public static readonly Lazy<byte[,]> Gnuplot2 = new Lazy<byte[,]>(() => new byte[,]
         {
-            {  0,   0,   0}, {  0,   0,   4}, {  0,   0,   8}, {  0,   0,  12},
-            {  0,   0,  16}, {  0,   0,  20}, {  0,   0,  24}, {  0,   0,  28},
-            {  0,   0,  32}, {  0,   0,  36}, {  0,   0,  40}, {  0,   0,  44},
-            {  0,   0,  48}, {  0,   0,  52}, {  0,   0,  56}, {  0,   0,  60},
-            {  0,   0,  64}, {  0,   0,  68}, {  0,   0,  72}, {  0,   0,  76},
-            {  0,   0,  80}, {  0,   0,  84}, {  0,   0,  88}, {  0,   0,  92},
-            {  0,   0,  96}, {  0,   0, 100}, {  0,   0, 104}, {  0,   0, 108},
-            {  0,   0, 112}, {  0,   0, 116}, {  0,   0, 120}, {  0,   0, 124},
-            {  0,   0, 128}, {  0,   0, 131}, {  0,   0, 136}, {  0,   0, 140},
-            {  0,   0, 144}, {  0,   0, 147}, {  0,   0, 152}, {  0,   0, 156},
-            {  0,   0, 160}, {  0,   0, 163}, {  0,   0, 168}, {  0,   0, 172},
-            {  0,   0, 176}, {  0,   0, 179}, {  0,   0, 184}, {  0,   0, 188},
-            {  0,   0, 192}, {  0,   0, 195}, {  0,   0, 200}, {  0,   0, 204},
-            {  0,   0, 208}, {  0,   0, 211}, {  0,   0, 216}, {  0,   0, 220},
-            {  0,   0, 224}, {  0,   0, 227}, {  0,   0, 232}, {  0,   0, 236},
-            {  0,   0, 240}, {  0,   0, 243}, {  0,   0, 248}, {  0,   0, 252},
-            {  0,   0, 255}, {  3,   0, 255}, {  7,   0, 255}, { 10,   0, 255},
-            { 13,   0, 255}, { 16,   0, 255}, { 19,   0, 255}, { 22,   0, 255},
-            { 25,   0, 255}, { 28,   0, 255}, { 32,   0, 255}, { 35,   0, 255},
-            { 38,   0, 255}, { 41,   0, 255}, { 44,   0, 255}, { 47,   0, 255},
-            { 50,   0, 255}, { 53,   0, 255}, { 57,   0, 255}, { 60,   0, 255},
-            { 63,   0, 255}, { 66,   0, 255}, { 69,   0, 255}, { 72,   0, 255},
-            { 75,   0, 255}, { 78,   0, 255}, { 82,   0, 255}, { 85,   0, 255},
-            { 88,   0, 255}, { 91,   0, 255}, { 94,   0, 255}, { 97,   0, 255},
-            {100,   0, 255}, {103,   0, 255}, {107,   0, 255}, {110,   0, 255},
-            {113,   0, 255}, {116,   0, 255}, {119,   0, 255}, {122,   0, 255},
-            {125,   0, 255}, {128,   0, 255}, {132,   0, 255}, {135,   0, 255},
-            {138,   1, 253}, {141,   3, 251}, {144,   5, 249}, {147,   7, 247},
-            {150,   9, 245}, {153,  11, 243}, {157,  13, 241}, {160,  15, 239},
-            {163,  17, 237}, {166,  19, 235}, {169,  21, 233}, {172,  23, 231},
-            {175,  25, 229}, {178,  27, 227}, {182,  29, 225}, {185,  31, 223},
-            {188,  33, 221}, {191,  35, 219}, {194,  37, 217}, {197,  39, 215},
-            {200,  41, 213}, {203,  43, 211}, {207,  45, 209}, {210,  47, 207},
-            {213,  49, 205}, {216,  51, 203}, {219,  53, 201}, {222,  55, 199},
-            {225,  57, 197}, {228,  59, 195}, {232,  61, 193}, {235,  63, 191},
-            {238,  65, 189}, {241,  67, 187}, {244,  69, 185}, {247,  71, 183},
-            {250,  73, 181}, {253,  75, 179}, {255,  77, 177}, {255,  79, 175},
-            {255,  81, 173}, {255,  83, 171}, {255,  85, 169}, {255,  87, 167},
-            {255,  89, 165}, {255,  91, 163}, {255,  93, 161}, {255,  95, 159},
-            {255,  97, 157}, {255,  99, 155}, {255, 101, 153}, {255, 103, 151},
-            {255, 105, 149}, {255, 107, 147}, {255, 109, 145}, {255, 111, 143},
-            {255, 113, 141}, {255, 115, 139}, {255, 117, 137}, {255, 119, 135},
-            {255, 121, 133}, {255, 123, 131}, {255, 125, 129}, {255, 127, 127},
-            {255, 129, 125}, {255, 131, 123}, {255, 133, 121}, {255, 135, 119},
-            {255, 137, 117}, {255, 139, 115}, {255, 141, 113}, {255, 143, 111},
-            {255, 145, 109}, {255, 147, 107}, {255, 149, 105}, {255, 151, 103},
-            {255, 153, 101}, {255, 155,  99}, {255, 157,  97}, {255, 159,  95},
-            {255, 161,  93}, {255, 163,  91}, {255, 165,  89}, {255, 167,  87},
-            {255, 169,  85}, {255, 171,  83}, {255, 173,  81}, {255, 175,  79},
-            {255, 177,  77}, {255, 179,  75}, {255, 181,  73}, {255, 183,  71},
-            {255, 185,  69}, {255, 187,  67}, {255, 189,  65}, {255, 191,  63},
-            {255, 193,  61}, {255, 195,  59}, {255, 197,  57}, {255, 199,  55},
-            {255, 201,  53}, {255, 203,  51}, {255, 205,  49}, {255, 207,  47},
-            {255, 209,  45}, {255, 211,  43}, {255, 213,  41}, {255, 215,  39},
-            {255, 217,  37}, {255, 219,  35}, {255, 221,  33}, {255, 223,  31},
-            {255, 225,  29}, {255, 227,  27}, {255, 229,  25}, {255, 231,  23},
-            {255, 233,  21}, {255, 235,  19}, {255, 237,  17}, {255, 239,  15},
-            {255, 241,  13}, {255, 243,  11}, {255, 245,   9}, {255, 247,   7},
-            {255, 249,   5}, {255, 251,   3}, {255, 253,   1}, {255, 255,   4},
-            {255, 255,  17}, {255, 255,  29}, {255, 255,  42}, {255, 255,  54},
-            {255, 255,  67}, {255, 255,  79}, {255, 255,  92}, {255, 255, 104},
-            {255, 255, 117}, {255, 255, 130}, {255, 255, 142}, {255, 255, 154},
-            {255, 255, 167}, {255, 255, 179}, {255, 255, 192}, {255, 255, 204},
-            {255, 255, 217}, {255, 255, 230}, {255, 255, 242}, {255, 255, 255}
+            {  0,   0,   0},
+            {  0,   0,  64},
+            {  0,   0, 128},
+            {  0,   0, 192},
+            {  0,   0, 255},
+            { 50,   0, 255},
+            {100,   0, 255},
+            {150,   9, 245},
+            {200,  41, 213},
+            {250,  73, 181},
+            {255, 105, 149},
+            {255, 137, 117},
+            {255, 169,  85},
+            {255, 201,  53},
+            {255, 233,  21},
+            {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "gray" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Gray = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {  0,   0,   0},
+            { 16,  16,  16},
+            { 32,  32,  32},
+            { 48,  48,  48},
+            { 64,  64,  64},
+            { 80,  80,  80},
+            { 96,  96,  96},
+            {112, 112, 112},
+            {128, 128, 128},
+            {144, 144, 144},
+            {160, 160, 160},
+            {176, 176, 176},
+            {192, 192, 192},
+            {208, 208, 208},
+            {224, 224, 224},
+            {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "greens" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Greens = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {247, 252, 245},
+            {237, 248, 234},
+            {228, 244, 223},
+            {213, 238, 207},
+            {198, 232, 191},
+            {179, 224, 173},
+            {160, 216, 154},
+            {137, 206, 135},
+            {115, 195, 117},
+            { 89, 183, 105},
+            { 64, 170,  92},
+            { 49, 154,  80},
+            { 34, 138,  68},
+            { 16, 123,  55},
+            {  0, 107,  43},
+            {  0,  68,  27}
+        });
+
+        /// <summary>
+        /// Colormap "greys" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Greys = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255, 255, 255},
+            {247, 247, 247},
+            {239, 239, 239},
+            {228, 228, 228},
+            {216, 216, 216},
+            {202, 202, 202},
+            {188, 188, 188},
+            {168, 168, 168},
+            {149, 149, 149},
+            {131, 131, 131},
+            {114, 114, 114},
+            { 97,  97,  97},
+            { 80,  80,  80},
+            { 58,  58,  58},
+            { 35,  35,  35},
+            {  0,   0,   0}
         });
 
         /// <summary>
@@ -1502,141 +2580,45 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[,]> Hot = new Lazy<byte[,]>(() => new byte[,]
         {
-            { 10,   0,   0}, { 13,   0,   0}, { 15,   0,   0}, { 18,   0,   0},
-            { 21,   0,   0}, { 23,   0,   0}, { 26,   0,   0}, { 28,   0,   0},
-            { 31,   0,   0}, { 34,   0,   0}, { 36,   0,   0}, { 39,   0,   0},
-            { 42,   0,   0}, { 44,   0,   0}, { 47,   0,   0}, { 49,   0,   0},
-            { 52,   0,   0}, { 55,   0,   0}, { 57,   0,   0}, { 60,   0,   0},
-            { 63,   0,   0}, { 65,   0,   0}, { 68,   0,   0}, { 70,   0,   0},
-            { 73,   0,   0}, { 76,   0,   0}, { 78,   0,   0}, { 81,   0,   0},
-            { 84,   0,   0}, { 86,   0,   0}, { 89,   0,   0}, { 91,   0,   0},
-            { 94,   0,   0}, { 97,   0,   0}, { 99,   0,   0}, {102,   0,   0},
-            {105,   0,   0}, {107,   0,   0}, {110,   0,   0}, {112,   0,   0},
-            {115,   0,   0}, {118,   0,   0}, {120,   0,   0}, {123,   0,   0},
-            {126,   0,   0}, {128,   0,   0}, {131,   0,   0}, {133,   0,   0},
-            {136,   0,   0}, {139,   0,   0}, {141,   0,   0}, {144,   0,   0},
-            {147,   0,   0}, {149,   0,   0}, {152,   0,   0}, {154,   0,   0},
-            {157,   0,   0}, {160,   0,   0}, {162,   0,   0}, {165,   0,   0},
-            {168,   0,   0}, {170,   0,   0}, {173,   0,   0}, {175,   0,   0},
-            {178,   0,   0}, {181,   0,   0}, {183,   0,   0}, {186,   0,   0},
-            {189,   0,   0}, {191,   0,   0}, {194,   0,   0}, {196,   0,   0},
-            {199,   0,   0}, {202,   0,   0}, {204,   0,   0}, {207,   0,   0},
-            {210,   0,   0}, {212,   0,   0}, {215,   0,   0}, {217,   0,   0},
-            {220,   0,   0}, {223,   0,   0}, {225,   0,   0}, {228,   0,   0},
-            {231,   0,   0}, {233,   0,   0}, {236,   0,   0}, {238,   0,   0},
-            {241,   0,   0}, {244,   0,   0}, {246,   0,   0}, {249,   0,   0},
-            {252,   0,   0}, {254,   0,   0}, {255,   2,   0}, {255,   5,   0},
-            {255,   7,   0}, {255,  10,   0}, {255,  12,   0}, {255,  15,   0},
-            {255,  18,   0}, {255,  20,   0}, {255,  23,   0}, {255,  26,   0},
-            {255,  28,   0}, {255,  31,   0}, {255,  33,   0}, {255,  36,   0},
-            {255,  39,   0}, {255,  41,   0}, {255,  44,   0}, {255,  47,   0},
-            {255,  49,   0}, {255,  52,   0}, {255,  54,   0}, {255,  57,   0},
-            {255,  60,   0}, {255,  62,   0}, {255,  65,   0}, {255,  68,   0},
-            {255,  70,   0}, {255,  73,   0}, {255,  75,   0}, {255,  78,   0},
-            {255,  81,   0}, {255,  83,   0}, {255,  86,   0}, {255,  89,   0},
-            {255,  91,   0}, {255,  94,   0}, {255,  96,   0}, {255,  99,   0},
-            {255, 102,   0}, {255, 104,   0}, {255, 107,   0}, {255, 110,   0},
-            {255, 112,   0}, {255, 115,   0}, {255, 117,   0}, {255, 120,   0},
-            {255, 123,   0}, {255, 125,   0}, {255, 128,   0}, {255, 131,   0},
-            {255, 133,   0}, {255, 136,   0}, {255, 138,   0}, {255, 141,   0},
-            {255, 144,   0}, {255, 146,   0}, {255, 149,   0}, {255, 151,   0},
-            {255, 154,   0}, {255, 157,   0}, {255, 159,   0}, {255, 162,   0},
-            {255, 165,   0}, {255, 167,   0}, {255, 170,   0}, {255, 172,   0},
-            {255, 175,   0}, {255, 178,   0}, {255, 180,   0}, {255, 183,   0},
-            {255, 186,   0}, {255, 188,   0}, {255, 191,   0}, {255, 193,   0},
-            {255, 196,   0}, {255, 199,   0}, {255, 201,   0}, {255, 204,   0},
-            {255, 207,   0}, {255, 209,   0}, {255, 212,   0}, {255, 214,   0},
-            {255, 217,   0}, {255, 220,   0}, {255, 222,   0}, {255, 225,   0},
-            {255, 228,   0}, {255, 230,   0}, {255, 233,   0}, {255, 235,   0},
-            {255, 238,   0}, {255, 241,   0}, {255, 243,   0}, {255, 246,   0},
-            {255, 249,   0}, {255, 251,   0}, {255, 254,   0}, {255, 255,   2},
-            {255, 255,   6}, {255, 255,  10}, {255, 255,  14}, {255, 255,  18},
-            {255, 255,  22}, {255, 255,  26}, {255, 255,  30}, {255, 255,  34},
-            {255, 255,  38}, {255, 255,  42}, {255, 255,  46}, {255, 255,  50},
-            {255, 255,  54}, {255, 255,  58}, {255, 255,  62}, {255, 255,  65},
-            {255, 255,  69}, {255, 255,  73}, {255, 255,  77}, {255, 255,  81},
-            {255, 255,  85}, {255, 255,  89}, {255, 255,  93}, {255, 255,  97},
-            {255, 255, 101}, {255, 255, 105}, {255, 255, 109}, {255, 255, 113},
-            {255, 255, 117}, {255, 255, 121}, {255, 255, 125}, {255, 255, 128},
-            {255, 255, 132}, {255, 255, 136}, {255, 255, 140}, {255, 255, 144},
-            {255, 255, 148}, {255, 255, 152}, {255, 255, 156}, {255, 255, 160},
-            {255, 255, 164}, {255, 255, 168}, {255, 255, 172}, {255, 255, 176},
-            {255, 255, 180}, {255, 255, 184}, {255, 255, 188}, {255, 255, 191},
-            {255, 255, 195}, {255, 255, 199}, {255, 255, 203}, {255, 255, 207},
-            {255, 255, 211}, {255, 255, 215}, {255, 255, 219}, {255, 255, 223},
-            {255, 255, 227}, {255, 255, 231}, {255, 255, 235}, {255, 255, 239},
-            {255, 255, 243}, {255, 255, 247}, {255, 255, 251}, {255, 255, 255}
+            { 10,   0,   0},
+            { 52,   0,   0},
+            { 94,   0,   0},
+            {136,   0,   0},
+            {178,   0,   0},
+            {220,   0,   0},
+            {255,   7,   0},
+            {255,  49,   0},
+            {255,  91,   0},
+            {255, 133,   0},
+            {255, 175,   0},
+            {255, 217,   0},
+            {255, 255,   6},
+            {255, 255,  69},
+            {255, 255, 132},
+            {255, 255, 255}
         });
 
         /// <summary>
-        /// Colormap "gist_earth" taken from matplotlib
+        /// Colormap "hsv" taken from matplotlib
         /// </summary>
-        public static readonly Lazy<byte[,]> GistEarth = new Lazy<byte[,]>(() => new byte[,]
+        public static readonly Lazy<byte[,]> Hsv = new Lazy<byte[,]>(() => new byte[,]
         {
-            {  0,   0,   0}, {  0,   0,  43}, {  1,   0,  56}, {  1,   0,  67},
-            {  2,   0,  78}, {  3,   0,  88}, {  3,   0,  99}, {  4,   0, 110},
-            {  5,   2, 115}, {  5,   4, 116}, {  6,   6, 116}, {  7,   9, 116},
-            {  7,  11, 116}, {  8,  13, 116}, {  9,  16, 117}, {  9,  18, 117},
-            { 10,  20, 117}, { 11,  22, 117}, { 11,  25, 117}, { 12,  27, 117},
-            { 13,  29, 118}, { 13,  32, 118}, { 14,  34, 118}, { 15,  36, 118},
-            { 15,  39, 118}, { 16,  41, 119}, { 17,  43, 119}, { 17,  45, 119},
-            { 18,  48, 119}, { 19,  50, 119}, { 19,  52, 119}, { 20,  54, 120},
-            { 21,  56, 120}, { 21,  58, 120}, { 22,  60, 120}, { 23,  62, 120},
-            { 23,  64, 121}, { 24,  66, 121}, { 25,  69, 121}, { 25,  71, 121},
-            { 26,  73, 121}, { 27,  75, 121}, { 27,  77, 122}, { 28,  79, 122},
-            { 29,  81, 122}, { 29,  83, 122}, { 30,  84, 122}, { 31,  86, 123},
-            { 31,  88, 123}, { 32,  90, 123}, { 33,  92, 123}, { 33,  94, 123},
-            { 34,  96, 123}, { 35,  97, 124}, { 35,  99, 124}, { 36, 101, 124},
-            { 37, 102, 124}, { 37, 104, 124}, { 38, 105, 125}, { 39, 107, 125},
-            { 39, 109, 125}, { 40, 110, 125}, { 41, 112, 125}, { 41, 113, 125},
-            { 42, 115, 126}, { 43, 116, 126}, { 43, 118, 126}, { 44, 120, 126},
-            { 45, 121, 126}, { 45, 123, 127}, { 46, 124, 127}, { 47, 126, 127},
-            { 47, 127, 127}, { 48, 128, 126}, { 48, 129, 125}, { 49, 129, 123},
-            { 49, 130, 122}, { 50, 130, 121}, { 50, 131, 120}, { 51, 132, 119},
-            { 51, 132, 117}, { 52, 133, 116}, { 52, 133, 115}, { 53, 134, 114},
-            { 53, 134, 112}, { 54, 135, 111}, { 54, 136, 110}, { 55, 136, 109},
-            { 55, 137, 108}, { 56, 137, 106}, { 56, 138, 105}, { 56, 138, 104},
-            { 57, 139, 103}, { 57, 140, 101}, { 58, 140, 100}, { 58, 141,  99},
-            { 59, 141,  98}, { 59, 142,  97}, { 60, 142,  95}, { 60, 143,  94},
-            { 61, 144,  93}, { 61, 144,  92}, { 62, 145,  90}, { 62, 145,  89},
-            { 63, 146,  88}, { 63, 147,  87}, { 64, 147,  85}, { 64, 148,  84},
-            { 64, 148,  83}, { 65, 149,  82}, { 65, 149,  81}, { 66, 150,  79},
-            { 66, 151,  78}, { 67, 151,  77}, { 67, 152,  76}, { 68, 152,  74},
-            { 68, 153,  73}, { 69, 153,  72}, { 71, 154,  71}, { 73, 155,  70},
-            { 75, 155,  70}, { 78, 156,  71}, { 80, 156,  71}, { 82, 157,  72},
-            { 84, 157,  72}, { 87, 158,  73}, { 89, 159,  74}, { 91, 159,  74},
-            { 93, 160,  75}, { 95, 160,  75}, { 98, 161,  76}, {100, 161,  77},
-            {102, 162,  77}, {104, 163,  78}, {107, 163,  78}, {109, 163,  79},
-            {111, 164,  79}, {113, 164,  80}, {115, 165,  81}, {118, 165,  81},
-            {120, 166,  82}, {121, 166,  82}, {123, 167,  82}, {125, 167,  82},
-            {126, 167,  83}, {128, 168,  83}, {130, 168,  83}, {131, 169,  84},
-            {133, 169,  84}, {135, 170,  84}, {136, 170,  85}, {138, 171,  85},
-            {140, 171,  85}, {141, 171,  86}, {143, 172,  86}, {145, 172,  86},
-            {146, 173,  87}, {148, 173,  87}, {150, 174,  87}, {151, 174,  88},
-            {153, 174,  88}, {154, 175,  88}, {156, 175,  88}, {158, 176,  89},
-            {159, 176,  89}, {161, 177,  89}, {163, 177,  90}, {164, 178,  90},
-            {166, 178,  90}, {168, 178,  91}, {169, 179,  91}, {171, 179,  91},
-            {173, 180,  92}, {174, 180,  92}, {176, 181,  92}, {178, 181,  93},
-            {179, 181,  93}, {181, 182,  93}, {182, 182,  94}, {183, 181,  94},
-            {183, 181,  94}, {184, 180,  95}, {184, 179,  95}, {185, 178,  95},
-            {185, 177,  95}, {185, 176,  96}, {186, 175,  96}, {186, 175,  96},
-            {187, 174,  97}, {187, 173,  97}, {188, 172,  97}, {188, 171,  98},
-            {188, 170,  98}, {189, 169,  98}, {189, 169,  99}, {190, 168,  99},
-            {190, 167,  99}, {190, 166, 100}, {191, 165, 100}, {191, 164, 100},
-            {192, 163, 101}, {192, 163, 103}, {193, 163, 105}, {194, 163, 108},
-            {195, 164, 110}, {197, 164, 113}, {198, 165, 115}, {199, 166, 118},
-            {200, 166, 120}, {201, 167, 123}, {202, 168, 125}, {203, 169, 127},
-            {204, 170, 130}, {206, 171, 132}, {207, 172, 135}, {208, 173, 137},
-            {209, 173, 140}, {210, 174, 142}, {211, 175, 145}, {212, 176, 147},
-            {213, 177, 150}, {214, 178, 152}, {216, 179, 154}, {217, 181, 157},
-            {218, 182, 159}, {219, 183, 162}, {220, 185, 164}, {221, 186, 167},
-            {222, 188, 169}, {223, 189, 172}, {225, 191, 175}, {226, 193, 178},
-            {227, 195, 181}, {228, 197, 184}, {229, 199, 187}, {230, 201, 190},
-            {231, 203, 193}, {232, 205, 196}, {233, 207, 199}, {235, 209, 202},
-            {236, 211, 205}, {237, 213, 208}, {238, 215, 211}, {239, 217, 214},
-            {240, 220, 217}, {241, 222, 220}, {242, 224, 223}, {244, 227, 226},
-            {245, 230, 229}, {246, 233, 232}, {247, 236, 235}, {248, 239, 238},
-            {249, 242, 241}, {250, 245, 244}, {251, 248, 247}, {253, 250, 250}
+            {255,   0,   0},
+            {255,  94,   0},
+            {255, 189,   0},
+            {226, 255,   0},
+            {131, 255,   0},
+            { 37, 255,   0},
+            {  0, 255,  57},
+            {  0, 255, 151},
+            {  0, 255, 245},
+            {  0, 169, 255},
+            {  0,  75, 255},
+            { 19,   0, 255},
+            {113,   0, 255},
+            {208,   0, 255},
+            {255,   0, 207},
+            {255,   0,  23}
         });
 
         /// <summary>
@@ -1644,70 +2626,22 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[,]> Inferno = new Lazy<byte[,]>(() => new byte[,]
         {
-            {  0,   0,   3}, {  0,   0,   4}, {  0,   0,   6}, {  1,   0,   7},
-            {  1,   1,   9}, {  1,   1,  11}, {  2,   1,  14}, {  2,   2,  16},
-            {  3,   2,  18}, {  4,   3,  20}, {  4,   3,  22}, {  5,   4,  24},
-            {  6,   4,  27}, {  7,   5,  29}, {  8,   6,  31}, {  9,   6,  33},
-            { 10,   7,  35}, { 11,   7,  38}, { 13,   8,  40}, { 14,   8,  42},
-            { 15,   9,  45}, { 16,   9,  47}, { 18,  10,  50}, { 19,  10,  52},
-            { 20,  11,  54}, { 22,  11,  57}, { 23,  11,  59}, { 25,  11,  62},
-            { 26,  11,  64}, { 28,  12,  67}, { 29,  12,  69}, { 31,  12,  71},
-            { 32,  12,  74}, { 34,  11,  76}, { 36,  11,  78}, { 38,  11,  80},
-            { 39,  11,  82}, { 41,  11,  84}, { 43,  10,  86}, { 45,  10,  88},
-            { 46,  10,  90}, { 48,  10,  92}, { 50,   9,  93}, { 52,   9,  95},
-            { 53,   9,  96}, { 55,   9,  97}, { 57,   9,  98}, { 59,   9, 100},
-            { 60,   9, 101}, { 62,   9, 102}, { 64,   9, 102}, { 65,   9, 103},
-            { 67,  10, 104}, { 69,  10, 105}, { 70,  10, 105}, { 72,  11, 106},
-            { 74,  11, 106}, { 75,  12, 107}, { 77,  12, 107}, { 79,  13, 108},
-            { 80,  13, 108}, { 82,  14, 108}, { 83,  14, 109}, { 85,  15, 109},
-            { 87,  15, 109}, { 88,  16, 109}, { 90,  17, 109}, { 91,  17, 110},
-            { 93,  18, 110}, { 95,  18, 110}, { 96,  19, 110}, { 98,  20, 110},
-            { 99,  20, 110}, {101,  21, 110}, {102,  21, 110}, {104,  22, 110},
-            {106,  23, 110}, {107,  23, 110}, {109,  24, 110}, {110,  24, 110},
-            {112,  25, 110}, {114,  25, 109}, {115,  26, 109}, {117,  27, 109},
-            {118,  27, 109}, {120,  28, 109}, {122,  28, 109}, {123,  29, 108},
-            {125,  29, 108}, {126,  30, 108}, {128,  31, 107}, {129,  31, 107},
-            {131,  32, 107}, {133,  32, 106}, {134,  33, 106}, {136,  33, 106},
-            {137,  34, 105}, {139,  34, 105}, {141,  35, 105}, {142,  36, 104},
-            {144,  36, 104}, {145,  37, 103}, {147,  37, 103}, {149,  38, 102},
-            {150,  38, 102}, {152,  39, 101}, {153,  40, 100}, {155,  40, 100},
-            {156,  41,  99}, {158,  41,  99}, {160,  42,  98}, {161,  43,  97},
-            {163,  43,  97}, {164,  44,  96}, {166,  44,  95}, {167,  45,  95},
-            {169,  46,  94}, {171,  46,  93}, {172,  47,  92}, {174,  48,  91},
-            {175,  49,  91}, {177,  49,  90}, {178,  50,  89}, {180,  51,  88},
-            {181,  51,  87}, {183,  52,  86}, {184,  53,  86}, {186,  54,  85},
-            {187,  55,  84}, {189,  55,  83}, {190,  56,  82}, {191,  57,  81},
-            {193,  58,  80}, {194,  59,  79}, {196,  60,  78}, {197,  61,  77},
-            {199,  62,  76}, {200,  62,  75}, {201,  63,  74}, {203,  64,  73},
-            {204,  65,  72}, {205,  66,  71}, {207,  68,  70}, {208,  69,  68},
-            {209,  70,  67}, {210,  71,  66}, {212,  72,  65}, {213,  73,  64},
-            {214,  74,  63}, {215,  75,  62}, {217,  77,  61}, {218,  78,  59},
-            {219,  79,  58}, {220,  80,  57}, {221,  82,  56}, {222,  83,  55},
-            {223,  84,  54}, {224,  86,  52}, {226,  87,  51}, {227,  88,  50},
-            {228,  90,  49}, {229,  91,  48}, {230,  92,  46}, {230,  94,  45},
-            {231,  95,  44}, {232,  97,  43}, {233,  98,  42}, {234, 100,  40},
-            {235, 101,  39}, {236, 103,  38}, {237, 104,  37}, {237, 106,  35},
-            {238, 108,  34}, {239, 109,  33}, {240, 111,  31}, {240, 112,  30},
-            {241, 114,  29}, {242, 116,  28}, {242, 117,  26}, {243, 119,  25},
-            {243, 121,  24}, {244, 122,  22}, {245, 124,  21}, {245, 126,  20},
-            {246, 128,  18}, {246, 129,  17}, {247, 131,  16}, {247, 133,  14},
-            {248, 135,  13}, {248, 136,  12}, {248, 138,  11}, {249, 140,   9},
-            {249, 142,   8}, {249, 144,   8}, {250, 145,   7}, {250, 147,   6},
-            {250, 149,   6}, {250, 151,   6}, {251, 153,   6}, {251, 155,   6},
-            {251, 157,   6}, {251, 158,   7}, {251, 160,   7}, {251, 162,   8},
-            {251, 164,  10}, {251, 166,  11}, {251, 168,  13}, {251, 170,  14},
-            {251, 172,  16}, {251, 174,  18}, {251, 176,  20}, {251, 177,  22},
-            {251, 179,  24}, {251, 181,  26}, {251, 183,  28}, {251, 185,  30},
-            {250, 187,  33}, {250, 189,  35}, {250, 191,  37}, {250, 193,  40},
-            {249, 195,  42}, {249, 197,  44}, {249, 199,  47}, {248, 201,  49},
-            {248, 203,  52}, {248, 205,  55}, {247, 207,  58}, {247, 209,  60},
-            {246, 211,  63}, {246, 213,  66}, {245, 215,  69}, {245, 217,  72},
-            {244, 219,  75}, {244, 220,  79}, {243, 222,  82}, {243, 224,  86},
-            {243, 226,  89}, {242, 228,  93}, {242, 230,  96}, {241, 232, 100},
-            {241, 233, 104}, {241, 235, 108}, {241, 237, 112}, {241, 238, 116},
-            {241, 240, 121}, {241, 242, 125}, {242, 243, 129}, {242, 244, 133},
-            {243, 246, 137}, {244, 247, 141}, {245, 248, 145}, {246, 250, 149},
-            {247, 251, 153}, {249, 252, 157}, {250, 253, 160}, {252, 254, 164}
+            {  0,   0,   3},
+            { 10,   7,  35},
+            { 32,  12,  74},
+            { 60,   9, 101},
+            { 87,  15, 109},
+            {112,  25, 110},
+            {137,  34, 105},
+            {163,  43,  97},
+            {187,  55,  84},
+            {209,  70,  67},
+            {228,  90,  49},
+            {241, 114,  29},
+            {249, 142,   8},
+            {251, 172,  16},
+            {248, 203,  52},
+            {252, 254, 164}
         });
 
         /// <summary>
@@ -1715,70 +2649,68 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[,]> Jet = new Lazy<byte[,]>(() => new byte[,]
         {
-            {  0,   0, 127}, {  0,   0, 132}, {  0,   0, 136}, {  0,   0, 141},
-            {  0,   0, 145}, {  0,   0, 150}, {  0,   0, 154}, {  0,   0, 159},
-            {  0,   0, 163}, {  0,   0, 168}, {  0,   0, 172}, {  0,   0, 177},
-            {  0,   0, 182}, {  0,   0, 186}, {  0,   0, 191}, {  0,   0, 195},
-            {  0,   0, 200}, {  0,   0, 204}, {  0,   0, 209}, {  0,   0, 213},
-            {  0,   0, 218}, {  0,   0, 222}, {  0,   0, 227}, {  0,   0, 232},
-            {  0,   0, 236}, {  0,   0, 241}, {  0,   0, 245}, {  0,   0, 250},
-            {  0,   0, 254}, {  0,   0, 255}, {  0,   0, 255}, {  0,   0, 255},
-            {  0,   0, 255}, {  0,   4, 255}, {  0,   8, 255}, {  0,  12, 255},
-            {  0,  16, 255}, {  0,  20, 255}, {  0,  24, 255}, {  0,  28, 255},
-            {  0,  32, 255}, {  0,  36, 255}, {  0,  40, 255}, {  0,  44, 255},
-            {  0,  48, 255}, {  0,  52, 255}, {  0,  56, 255}, {  0,  60, 255},
-            {  0,  64, 255}, {  0,  68, 255}, {  0,  72, 255}, {  0,  76, 255},
-            {  0,  80, 255}, {  0,  84, 255}, {  0,  88, 255}, {  0,  92, 255},
-            {  0,  96, 255}, {  0, 100, 255}, {  0, 104, 255}, {  0, 108, 255},
-            {  0, 112, 255}, {  0, 116, 255}, {  0, 120, 255}, {  0, 124, 255},
-            {  0, 128, 255}, {  0, 132, 255}, {  0, 136, 255}, {  0, 140, 255},
-            {  0, 144, 255}, {  0, 148, 255}, {  0, 152, 255}, {  0, 156, 255},
-            {  0, 160, 255}, {  0, 164, 255}, {  0, 168, 255}, {  0, 172, 255},
-            {  0, 176, 255}, {  0, 180, 255}, {  0, 184, 255}, {  0, 188, 255},
-            {  0, 192, 255}, {  0, 196, 255}, {  0, 200, 255}, {  0, 204, 255},
-            {  0, 208, 255}, {  0, 212, 255}, {  0, 216, 255}, {  0, 220, 254},
-            {  0, 224, 250}, {  0, 228, 247}, {  2, 232, 244}, {  5, 236, 241},
-            {  8, 240, 237}, { 12, 244, 234}, { 15, 248, 231}, { 18, 252, 228},
-            { 21, 255, 225}, { 24, 255, 221}, { 28, 255, 218}, { 31, 255, 215},
-            { 34, 255, 212}, { 37, 255, 208}, { 41, 255, 205}, { 44, 255, 202},
-            { 47, 255, 199}, { 50, 255, 195}, { 54, 255, 192}, { 57, 255, 189},
-            { 60, 255, 186}, { 63, 255, 183}, { 66, 255, 179}, { 70, 255, 176},
-            { 73, 255, 173}, { 76, 255, 170}, { 79, 255, 166}, { 83, 255, 163},
-            { 86, 255, 160}, { 89, 255, 157}, { 92, 255, 154}, { 95, 255, 150},
-            { 99, 255, 147}, {102, 255, 144}, {105, 255, 141}, {108, 255, 137},
-            {112, 255, 134}, {115, 255, 131}, {118, 255, 128}, {121, 255, 125},
-            {124, 255, 121}, {128, 255, 118}, {131, 255, 115}, {134, 255, 112},
-            {137, 255, 108}, {141, 255, 105}, {144, 255, 102}, {147, 255,  99},
-            {150, 255,  95}, {154, 255,  92}, {157, 255,  89}, {160, 255,  86},
-            {163, 255,  83}, {166, 255,  79}, {170, 255,  76}, {173, 255,  73},
-            {176, 255,  70}, {179, 255,  66}, {183, 255,  63}, {186, 255,  60},
-            {189, 255,  57}, {192, 255,  54}, {195, 255,  50}, {199, 255,  47},
-            {202, 255,  44}, {205, 255,  41}, {208, 255,  37}, {212, 255,  34},
-            {215, 255,  31}, {218, 255,  28}, {221, 255,  24}, {224, 255,  21},
-            {228, 255,  18}, {231, 255,  15}, {234, 255,  12}, {237, 255,   8},
-            {241, 252,   5}, {244, 248,   2}, {247, 244,   0}, {250, 240,   0},
-            {254, 237,   0}, {255, 233,   0}, {255, 229,   0}, {255, 226,   0},
-            {255, 222,   0}, {255, 218,   0}, {255, 215,   0}, {255, 211,   0},
-            {255, 207,   0}, {255, 203,   0}, {255, 200,   0}, {255, 196,   0},
-            {255, 192,   0}, {255, 189,   0}, {255, 185,   0}, {255, 181,   0},
-            {255, 177,   0}, {255, 174,   0}, {255, 170,   0}, {255, 166,   0},
-            {255, 163,   0}, {255, 159,   0}, {255, 155,   0}, {255, 152,   0},
-            {255, 148,   0}, {255, 144,   0}, {255, 140,   0}, {255, 137,   0},
-            {255, 133,   0}, {255, 129,   0}, {255, 126,   0}, {255, 122,   0},
-            {255, 118,   0}, {255, 115,   0}, {255, 111,   0}, {255, 107,   0},
-            {255, 103,   0}, {255, 100,   0}, {255,  96,   0}, {255,  92,   0},
-            {255,  89,   0}, {255,  85,   0}, {255,  81,   0}, {255,  77,   0},
-            {255,  74,   0}, {255,  70,   0}, {255,  66,   0}, {255,  63,   0},
-            {255,  59,   0}, {255,  55,   0}, {255,  52,   0}, {255,  48,   0},
-            {255,  44,   0}, {255,  40,   0}, {255,  37,   0}, {255,  33,   0},
-            {255,  29,   0}, {255,  26,   0}, {255,  22,   0}, {254,  18,   0},
-            {250,  15,   0}, {245,  11,   0}, {241,   7,   0}, {236,   3,   0},
-            {232,   0,   0}, {227,   0,   0}, {222,   0,   0}, {218,   0,   0},
-            {213,   0,   0}, {209,   0,   0}, {204,   0,   0}, {200,   0,   0},
-            {195,   0,   0}, {191,   0,   0}, {186,   0,   0}, {182,   0,   0},
-            {177,   0,   0}, {172,   0,   0}, {168,   0,   0}, {163,   0,   0},
-            {159,   0,   0}, {154,   0,   0}, {150,   0,   0}, {145,   0,   0},
-            {141,   0,   0}, {136,   0,   0}, {132,   0,   0}, {127,   0,   0}
+            {  0,   0, 127},
+            {  0,   0, 200},
+            {  0,   0, 255},
+            {  0,  64, 255},
+            {  0, 128, 255},
+            {  0, 192, 255},
+            { 21, 255, 225},
+            { 73, 255, 173},
+            {124, 255, 121},
+            {176, 255,  70},
+            {228, 255,  18},
+            {255, 207,   0},
+            {255, 148,   0},
+            {255,  89,   0},
+            {255,  29,   0},
+            {127,   0,   0}
+        });
+
+        /// <summary>
+        /// Colormap "magma" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Magma = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {  0,   0,   3},
+            { 10,   7,  34},
+            { 28,  16,  70},
+            { 53,  15, 106},
+            { 80,  18, 123},
+            {105,  28, 128},
+            {130,  37, 129},
+            {156,  46, 127},
+            {182,  54, 121},
+            {208,  65, 111},
+            {230,  81,  98},
+            {245, 106,  91},
+            {251, 136,  97},
+            {254, 166, 113},
+            {254, 196, 136},
+            {251, 252, 191}
+        });
+
+        /// <summary>
+        /// Colormap "nipy_spectral" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Nipy_Spectral = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {  0,   0,   0},
+            {123,   0, 140},
+            { 66,   0, 161},
+            {  0,   0, 209},
+            {  0, 119, 221},
+            {  0, 157, 207},
+            {  0, 170, 151},
+            {  0, 156,  29},
+            {  0, 188,   0},
+            {  0, 231,   0},
+            {102, 255,   0},
+            {227, 241,   0},
+            {255, 201,   0},
+            {255, 105,   0},
+            {235,   0,   0},
+            {204, 204, 204}
         });
 
         /// <summary>
@@ -1786,70 +2718,367 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[,]> Ocean = new Lazy<byte[,]>(() => new byte[,]
         {
-            {  0, 127,   0}, {  0, 126,   1}, {  0, 124,   2}, {  0, 123,   3},
-            {  0, 121,   4}, {  0, 120,   5}, {  0, 118,   6}, {  0, 117,   7},
-            {  0, 115,   8}, {  0, 114,   9}, {  0, 112,  10}, {  0, 111,  11},
-            {  0, 109,  12}, {  0, 108,  13}, {  0, 106,  14}, {  0, 105,  15},
-            {  0, 103,  16}, {  0, 102,  17}, {  0, 100,  18}, {  0,  99,  19},
-            {  0,  97,  20}, {  0,  96,  21}, {  0,  94,  22}, {  0,  93,  23},
-            {  0,  91,  24}, {  0,  89,  25}, {  0,  88,  26}, {  0,  87,  27},
-            {  0,  85,  28}, {  0,  84,  29}, {  0,  82,  30}, {  0,  81,  31},
-            {  0,  79,  32}, {  0,  78,  32}, {  0,  76,  34}, {  0,  74,  35},
-            {  0,  73,  36}, {  0,  72,  36}, {  0,  70,  38}, {  0,  69,  39},
-            {  0,  67,  40}, {  0,  66,  40}, {  0,  64,  42}, {  0,  63,  43},
-            {  0,  61,  44}, {  0,  60,  44}, {  0,  58,  46}, {  0,  56,  47},
-            {  0,  55,  48}, {  0,  54,  48}, {  0,  52,  50}, {  0,  50,  51},
-            {  0,  49,  52}, {  0,  48,  52}, {  0,  46,  54}, {  0,  44,  55},
-            {  0,  43,  56}, {  0,  42,  56}, {  0,  40,  58}, {  0,  39,  59},
-            {  0,  37,  60}, {  0,  36,  60}, {  0,  34,  62}, {  0,  32,  63},
-            {  0,  31,  64}, {  0,  30,  65}, {  0,  28,  65}, {  0,  26,  67},
-            {  0,  25,  68}, {  0,  24,  69}, {  0,  22,  70}, {  0,  20,  71},
-            {  0,  19,  72}, {  0,  18,  73}, {  0,  16,  73}, {  0,  15,  75},
-            {  0,  13,  76}, {  0,  12,  77}, {  0,  10,  78}, {  0,   8,  79},
-            {  0,   7,  80}, {  0,   6,  81}, {  0,   4,  81}, {  0,   2,  83},
-            {  0,   1,  84}, {  0,   0,  85}, {  0,   1,  86}, {  0,   2,  87},
-            {  0,   4,  88}, {  0,   5,  89}, {  0,   7,  89}, {  0,   8,  91},
-            {  0,  10,  92}, {  0,  11,  93}, {  0,  13,  94}, {  0,  15,  95},
-            {  0,  16,  96}, {  0,  17,  97}, {  0,  19,  97}, {  0,  21,  99},
-            {  0,  22, 100}, {  0,  24, 101}, {  0,  25, 102}, {  0,  27, 103},
-            {  0,  28, 104}, {  0,  30, 105}, {  0,  31, 105}, {  0,  32, 107},
-            {  0,  34, 108}, {  0,  35, 109}, {  0,  37, 110}, {  0,  39, 111},
-            {  0,  40, 112}, {  0,  41, 113}, {  0,  43, 113}, {  0,  45, 115},
-            {  0,  46, 116}, {  0,  48, 117}, {  0,  49, 118}, {  0,  50, 119},
-            {  0,  52, 120}, {  0,  53, 121}, {  0,  55, 121}, {  0,  56, 123},
-            {  0,  58, 124}, {  0,  59, 125}, {  0,  61, 126}, {  0,  63, 127},
-            {  0,  64, 128}, {  0,  65, 129}, {  0,  67, 130}, {  0,  68, 131},
-            {  0,  70, 131}, {  0,  72, 133}, {  0,  73, 134}, {  0,  75, 135},
-            {  0,  76, 136}, {  0,  78, 137}, {  0,  79, 138}, {  0,  81, 139},
-            {  0,  82, 140}, {  0,  84, 141}, {  0,  85, 142}, {  0,  87, 143},
-            {  0,  88, 144}, {  0,  89, 145}, {  0,  91, 146}, {  0,  92, 147},
-            {  0,  94, 147}, {  0,  96, 149}, {  0,  97, 150}, {  0,  98, 151},
-            {  0, 100, 152}, {  0, 101, 153}, {  0, 103, 154}, {  0, 104, 155},
-            {  0, 106, 156}, {  0, 108, 157}, {  0, 109, 158}, {  0, 111, 159},
-            {  0, 112, 160}, {  0, 113, 161}, {  0, 115, 162}, {  0, 116, 163},
-            {  0, 118, 163}, {  0, 120, 165}, {  0, 121, 166}, {  0, 123, 167},
-            {  0, 124, 168}, {  0, 126, 169}, {  0, 127, 170}, {  2, 129, 171},
-            {  5, 130, 172}, {  8, 131, 173}, { 11, 133, 174}, { 14, 134, 175},
-            { 17, 136, 176}, { 20, 137, 177}, { 23, 139, 178}, { 26, 140, 179},
-            { 29, 142, 179}, { 32, 144, 181}, { 35, 145, 182}, { 38, 147, 183},
-            { 41, 148, 184}, { 44, 149, 185}, { 47, 151, 186}, { 50, 152, 187},
-            { 54, 154, 188}, { 57, 156, 189}, { 60, 157, 190}, { 63, 159, 191},
-            { 65, 160, 192}, { 68, 162, 193}, { 71, 163, 194}, { 74, 164, 195},
-            { 77, 166, 195}, { 81, 168, 197}, { 84, 169, 198}, { 87, 171, 199},
-            { 90, 172, 200}, { 93, 174, 201}, { 96, 175, 202}, { 98, 177, 203},
-            {102, 178, 204}, {105, 180, 205}, {108, 181, 206}, {111, 183, 207},
-            {114, 184, 208}, {117, 186, 209}, {120, 187, 210}, {123, 189, 211},
-            {126, 190, 211}, {129, 192, 213}, {131, 193, 214}, {134, 195, 215},
-            {137, 196, 216}, {140, 197, 217}, {143, 199, 218}, {146, 200, 219},
-            {150, 202, 220}, {153, 204, 221}, {156, 205, 222}, {159, 207, 223},
-            {162, 208, 224}, {164, 210, 225}, {167, 211, 226}, {170, 212, 227},
-            {173, 214, 227}, {177, 216, 229}, {180, 217, 230}, {183, 219, 231},
-            {186, 220, 232}, {189, 222, 233}, {192, 223, 234}, {195, 225, 235},
-            {197, 226, 236}, {200, 227, 237}, {203, 229, 238}, {206, 230, 239},
-            {209, 232, 240}, {212, 233, 241}, {215, 235, 242}, {218, 236, 243},
-            {221, 238, 243}, {225, 240, 245}, {227, 241, 246}, {230, 243, 247},
-            {233, 244, 248}, {236, 245, 249}, {239, 247, 250}, {242, 248, 251},
-            {246, 250, 252}, {249, 252, 253}, {252, 253, 254}, {255, 255, 255}
+            {  0, 127,   0},
+            {  0, 103,  16},
+            {  0,  79,  32},
+            {  0,  55,  48},
+            {  0,  31,  64},
+            {  0,   7,  80},
+            {  0,  16,  96},
+            {  0,  40, 112},
+            {  0,  64, 128},
+            {  0,  88, 144},
+            {  0, 112, 160},
+            { 17, 136, 176},
+            { 65, 160, 192},
+            {114, 184, 208},
+            {162, 208, 224},
+            {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "oranges" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Oranges = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255, 245, 235},
+            {254, 237, 220},
+            {253, 229, 205},
+            {253, 218, 183},
+            {253, 207, 161},
+            {253, 190, 133},
+            {253, 173, 106},
+            {253, 157,  82},
+            {252, 140,  59},
+            {246, 122,  38},
+            {240, 104,  18},
+            {228,  87,   9},
+            {215,  71,   1},
+            {190,  62,   2},
+            {164,  53,   3},
+            {127,  39,   4}
+        });
+
+        /// <summary>
+        /// Colormap "orrd" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Orrd = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255, 247, 236},
+            {254, 239, 217},
+            {253, 231, 199},
+            {253, 221, 178},
+            {253, 211, 157},
+            {253, 199, 144},
+            {252, 186, 131},
+            {252, 163, 109},
+            {251, 140,  88},
+            {245, 120,  80},
+            {238,  99,  71},
+            {226,  73,  50},
+            {214,  46,  30},
+            {196,  22,  14},
+            {177,   0,   0},
+            {127,   0,   0}
+        });
+
+        /// <summary>
+        /// Colormap "paired" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Paired = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {166, 206, 227},
+            { 72, 146, 194},
+            { 86, 159, 164},
+            {169, 218, 131},
+            { 81, 175,  66},
+            {141, 157,  93},
+            {247, 135, 135},
+            {231,  47,  49},
+            {240, 112,  71},
+            {253, 177,  87},
+            {254, 133,  10},
+            {223, 157, 126},
+            {174, 144, 197},
+            {108,  64, 155},
+            {204, 189, 153},
+            {177,  89,  40}
+        });
+
+        /// <summary>
+        /// Colormap "pastel1" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Pastel1 = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {251, 180, 174},
+            {214, 192, 200},
+            {179, 205, 226},
+            {191, 220, 211},
+            {204, 234, 197},
+            {213, 218, 212},
+            {222, 203, 227},
+            {238, 210, 196},
+            {254, 217, 166},
+            {254, 236, 185},
+            {254, 254, 203},
+            {241, 234, 196},
+            {229, 216, 190},
+            {241, 217, 213},
+            {252, 218, 236},
+            {242, 242, 242}
+        });
+
+        /// <summary>
+        /// Colormap "pastel2" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Pastel2 = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {179, 226, 205},
+            {211, 216, 190},
+            {244, 207, 176},
+            {237, 207, 191},
+            {215, 211, 217},
+            {211, 210, 231},
+            {229, 206, 229},
+            {242, 205, 225},
+            {236, 224, 214},
+            {230, 242, 202},
+            {239, 243, 190},
+            {250, 242, 178},
+            {251, 237, 182},
+            {245, 230, 195},
+            {235, 222, 204},
+            {204, 204, 204}
+        });
+
+        /// <summary>
+        /// Colormap "pink" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Pink = new Lazy<byte[,]>(() => new byte[,]
+        {
+            { 30,   0,   0},
+            { 84,  52,  52},
+            {116,  73,  73},
+            {140,  90,  90},
+            {161, 104, 104},
+            {179, 116, 116},
+            {194, 130, 127},
+            {201, 152, 137},
+            {208, 171, 147},
+            {214, 189, 156},
+            {221, 205, 164},
+            {227, 220, 172},
+            {233, 233, 182},
+            {238, 238, 203},
+            {244, 244, 222},
+            {255, 255, 255}
+        });
+
+        /// <summary>
+        /// Colormap "piyg" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Piyg = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {142,   1,  82},
+            {176,  17, 108},
+            {203,  50, 137},
+            {219, 108, 168},
+            {231, 151, 196},
+            {242, 187, 220},
+            {250, 214, 234},
+            {250, 233, 242},
+            {246, 246, 246},
+            {236, 245, 221},
+            {217, 239, 187},
+            {188, 226, 141},
+            {153, 205,  97},
+            {119, 181,  59},
+            { 87, 155,  39},
+            { 39, 100,  25}
+        });
+
+        /// <summary>
+        /// Colormap "plasma" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Plasma = new Lazy<byte[,]>(() => new byte[,]
+        {
+            { 12,   7, 134},
+            { 49,   4, 150},
+            { 76,   2, 161},
+            {101,   0, 167},
+            {126,   3, 167},
+            {149,  17, 161},
+            {169,  35, 149},
+            {187,  53, 134},
+            {203,  71, 119},
+            {217,  89, 105},
+            {229, 108,  91},
+            {240, 128,  77},
+            {248, 149,  64},
+            {252, 172,  50},
+            {253, 196,  39},
+            {239, 248,  33}
+        });
+
+        /// <summary>
+        /// Colormap "prgn" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Prgn = new Lazy<byte[,]>(() => new byte[,]
+        {
+            { 64,   0,  75},
+            { 97,  26, 110},
+            {126,  59, 141},
+            {148, 103, 166},
+            {173, 139, 189},
+            {199, 171, 210},
+            {222, 200, 226},
+            {237, 225, 237},
+            {246, 246, 246},
+            {227, 242, 223},
+            {203, 234, 197},
+            {171, 221, 165},
+            {125, 195, 126},
+            { 80, 165,  90},
+            { 40, 131,  64},
+            {  0,  68,  27}
+        });
+
+        /// <summary>
+        /// Colormap "prism" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Prism = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255,   0,   0},
+            {  0,  47, 232},
+            {245, 255,   0},
+            {255,   0,  57},
+            {  0,  86, 195},
+            {255, 241,   0},
+            {240,   0, 112},
+            {  0, 126, 150},
+            {255, 215,   0},
+            {202,   0, 163},
+            {  0, 163,  98},
+            {255, 184,   0},
+            {162,   0, 206},
+            { 16, 197,  42},
+            {255, 148,   0},
+            { 84, 254,   0}
+        });
+
+        /// <summary>
+        /// Colormap "pubu" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Pubu = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255, 247, 251},
+            {245, 238, 246},
+            {235, 230, 241},
+            {221, 219, 235},
+            {207, 208, 229},
+            {186, 198, 224},
+            {165, 188, 218},
+            {140, 178, 212},
+            {115, 168, 206},
+            { 83, 156, 199},
+            { 53, 143, 191},
+            { 28, 127, 183},
+            {  4, 111, 175},
+            {  4, 100, 157},
+            {  3,  89, 139},
+            {  2,  56,  88}
+        });
+
+        /// <summary>
+        /// Colormap "pubugn" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Pubugn = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255, 247, 251},
+            {245, 236, 245},
+            {235, 225, 239},
+            {221, 217, 234},
+            {207, 208, 229},
+            {186, 198, 224},
+            {165, 188, 218},
+            {133, 178, 212},
+            {102, 168, 206},
+            { 77, 156, 199},
+            { 52, 143, 190},
+            { 26, 136, 163},
+            {  1, 128, 136},
+            {  1, 117, 112},
+            {  1, 106,  88},
+            {  1,  70,  54}
+        });
+
+        /// <summary>
+        /// Colormap "puor" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Puor = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {127,  59,   8},
+            {159,  77,   6},
+            {190,  98,   9},
+            {218, 125,  18},
+            {238, 157,  60},
+            {253, 189, 110},
+            {253, 214, 162},
+            {251, 233, 207},
+            {246, 246, 246},
+            {226, 228, 239},
+            {205, 205, 228},
+            {181, 175, 212},
+            {151, 141, 189},
+            {121, 103, 166},
+            { 93,  55, 143},
+            { 45,   0,  75}
+        });
+
+        /// <summary>
+        /// Colormap "purd" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Purd = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {247, 244, 249},
+            {238, 234, 243},
+            {230, 224, 238},
+            {221, 204, 228},
+            {211, 184, 217},
+            {206, 166, 208},
+            {201, 147, 198},
+            {212, 123, 187},
+            {223, 100, 175},
+            {227,  69, 156},
+            {230,  40, 136},
+            {217,  29, 110},
+            {204,  17,  85},
+            {177,   8,  76},
+            {150,   0,  66},
+            {103,   0,  31}
+        });
+
+        /// <summary>
+        /// Colormap "purples" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Purples = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {252, 251, 253},
+            {245, 243, 248},
+            {238, 236, 244},
+            {228, 227, 239},
+            {217, 217, 234},
+            {202, 203, 227},
+            {187, 188, 219},
+            {172, 171, 209},
+            {157, 153, 199},
+            {142, 138, 192},
+            {127, 124, 185},
+            {116, 102, 174},
+            {105,  80, 162},
+            { 94,  58, 152},
+            { 83,  37, 142},
+            { 63,   0, 125}
         });
 
         /// <summary>
@@ -1857,70 +3086,160 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[,]> Rainbow = new Lazy<byte[,]>(() => new byte[,]
         {
-            {127,   0, 255}, {125,   3, 254}, {123,   6, 254}, {121,   9, 254},
-            {119,  12, 254}, {117,  15, 254}, {115,  18, 254}, {113,  21, 254},
-            {111,  25, 254}, {109,  28, 254}, {107,  31, 254}, {105,  34, 254},
-            {103,  37, 254}, {101,  40, 254}, { 99,  43, 254}, { 97,  46, 253},
-            { 95,  49, 253}, { 93,  53, 253}, { 91,  56, 253}, { 89,  59, 253},
-            { 87,  62, 253}, { 85,  65, 252}, { 83,  68, 252}, { 81,  71, 252},
-            { 79,  74, 252}, { 77,  77, 251}, { 75,  80, 251}, { 73,  83, 251},
-            { 71,  86, 251}, { 69,  89, 250}, { 67,  92, 250}, { 65,  95, 250},
-            { 63,  97, 250}, { 61, 100, 249}, { 59, 103, 249}, { 57, 106, 249},
-            { 55, 109, 248}, { 53, 112, 248}, { 51, 115, 248}, { 49, 117, 247},
-            { 47, 120, 247}, { 45, 123, 246}, { 43, 126, 246}, { 41, 128, 246},
-            { 39, 131, 245}, { 37, 134, 245}, { 35, 136, 244}, { 33, 139, 244},
-            { 31, 142, 243}, { 29, 144, 243}, { 27, 147, 243}, { 25, 149, 242},
-            { 23, 152, 242}, { 21, 154, 241}, { 19, 157, 241}, { 17, 159, 240},
-            { 15, 162, 239}, { 13, 164, 239}, { 11, 167, 238}, {  9, 169, 238},
-            {  7, 171, 237}, {  5, 174, 237}, {  3, 176, 236}, {  1, 178, 236},
-            {  0, 180, 235}, {  2, 183, 234}, {  4, 185, 234}, {  6, 187, 233},
-            {  8, 189, 232}, { 10, 191, 232}, { 12, 193, 231}, { 14, 195, 230},
-            { 16, 197, 230}, { 18, 199, 229}, { 20, 201, 228}, { 22, 203, 228},
-            { 24, 205, 227}, { 26, 207, 226}, { 28, 209, 226}, { 30, 210, 225},
-            { 32, 212, 224}, { 34, 214, 223}, { 36, 215, 223}, { 38, 217, 222},
-            { 40, 219, 221}, { 42, 220, 220}, { 44, 222, 220}, { 46, 223, 219},
-            { 48, 225, 218}, { 50, 226, 217}, { 52, 228, 216}, { 54, 229, 215},
-            { 56, 230, 215}, { 58, 232, 214}, { 60, 233, 213}, { 62, 234, 212},
-            { 64, 236, 211}, { 66, 237, 210}, { 68, 238, 209}, { 70, 239, 209},
-            { 72, 240, 208}, { 74, 241, 207}, { 76, 242, 206}, { 78, 243, 205},
-            { 80, 244, 204}, { 82, 245, 203}, { 84, 246, 202}, { 86, 246, 201},
-            { 88, 247, 200}, { 90, 248, 199}, { 92, 249, 198}, { 94, 249, 197},
-            { 96, 250, 196}, { 98, 250, 195}, {100, 251, 194}, {102, 251, 193},
-            {104, 252, 192}, {106, 252, 191}, {108, 253, 190}, {110, 253, 189},
-            {112, 253, 188}, {114, 254, 187}, {116, 254, 186}, {118, 254, 185},
-            {120, 254, 184}, {122, 254, 183}, {124, 254, 181}, {126, 254, 180},
-            {128, 254, 179}, {130, 254, 178}, {132, 254, 177}, {134, 254, 176},
-            {136, 254, 175}, {138, 254, 174}, {140, 254, 172}, {142, 253, 171},
-            {144, 253, 170}, {146, 253, 169}, {148, 252, 168}, {150, 252, 167},
-            {152, 251, 165}, {154, 251, 164}, {156, 250, 163}, {158, 250, 162},
-            {160, 249, 161}, {162, 249, 159}, {164, 248, 158}, {166, 247, 157},
-            {168, 246, 156}, {170, 246, 154}, {172, 245, 153}, {174, 244, 152},
-            {176, 243, 151}, {178, 242, 149}, {180, 241, 148}, {182, 240, 147},
-            {184, 239, 146}, {186, 238, 144}, {188, 237, 143}, {190, 236, 142},
-            {192, 234, 140}, {194, 233, 139}, {196, 232, 138}, {198, 230, 136},
-            {200, 229, 135}, {202, 228, 134}, {204, 226, 132}, {206, 225, 131},
-            {208, 223, 130}, {210, 222, 128}, {212, 220, 127}, {214, 219, 126},
-            {216, 217, 124}, {218, 215, 123}, {220, 214, 122}, {222, 212, 120},
-            {224, 210, 119}, {226, 209, 117}, {228, 207, 116}, {230, 205, 115},
-            {232, 203, 113}, {234, 201, 112}, {236, 199, 110}, {238, 197, 109},
-            {240, 195, 108}, {242, 193, 106}, {244, 191, 105}, {246, 189, 103},
-            {248, 187, 102}, {250, 185, 100}, {252, 183,  99}, {254, 180,  97},
-            {255, 178,  96}, {255, 176,  95}, {255, 174,  93}, {255, 171,  92},
-            {255, 169,  90}, {255, 167,  89}, {255, 164,  87}, {255, 162,  86},
-            {255, 159,  84}, {255, 157,  83}, {255, 154,  81}, {255, 152,  80},
-            {255, 149,  78}, {255, 147,  77}, {255, 144,  75}, {255, 142,  74},
-            {255, 139,  72}, {255, 136,  71}, {255, 134,  69}, {255, 131,  68},
-            {255, 128,  66}, {255, 126,  65}, {255, 123,  63}, {255, 120,  62},
-            {255, 117,  60}, {255, 115,  59}, {255, 112,  57}, {255, 109,  56},
-            {255, 106,  54}, {255, 103,  53}, {255, 100,  51}, {255,  97,  49},
-            {255,  95,  48}, {255,  92,  46}, {255,  89,  45}, {255,  86,  43},
-            {255,  83,  42}, {255,  80,  40}, {255,  77,  39}, {255,  74,  37},
-            {255,  71,  36}, {255,  68,  34}, {255,  65,  32}, {255,  62,  31},
-            {255,  59,  29}, {255,  56,  28}, {255,  53,  26}, {255,  49,  25},
-            {255,  46,  23}, {255,  43,  21}, {255,  40,  20}, {255,  37,  18},
-            {255,  34,  17}, {255,  31,  15}, {255,  28,  14}, {255,  25,  12},
-            {255,  21,  10}, {255,  18,   9}, {255,  15,   7}, {255,  12,   6},
-            {255,   9,   4}, {255,   6,   3}, {255,   3,   1}, {255,   0,   0}
+            {127,   0, 255},
+            { 95,  49, 253},
+            { 63,  97, 250},
+            { 31, 142, 243},
+            {  0, 180, 235},
+            { 32, 212, 224},
+            { 64, 236, 211},
+            { 96, 250, 196},
+            {128, 254, 179},
+            {160, 249, 161},
+            {192, 234, 140},
+            {224, 210, 119},
+            {255, 178,  96},
+            {255, 139,  72},
+            {255,  95,  48},
+            {255,   0,   0}
+        });
+
+        /// <summary>
+        /// Colormap "rdbu" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Rdbu = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {103,   0,  31},
+            {150,  15,  38},
+            {187,  42,  51},
+            {209,  87,  73},
+            {229, 131, 104},
+            {245, 172, 139},
+            {250, 206, 182},
+            {250, 229, 217},
+            {246, 246, 246},
+            {222, 235, 242},
+            {191, 220, 235},
+            {152, 200, 223},
+            {104, 170, 207},
+            { 61, 139, 191},
+            { 40, 111, 176},
+            {  5,  48,  97}
+        });
+
+        /// <summary>
+        /// Colormap "rdgy" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Rdgy = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {103,   0,  31},
+            {150,  15,  38},
+            {187,  42,  51},
+            {209,  87,  73},
+            {229, 131, 104},
+            {245, 172, 139},
+            {250, 206, 182},
+            {253, 233, 220},
+            {254, 254, 254},
+            {234, 234, 234},
+            {213, 213, 213},
+            {189, 189, 189},
+            {159, 159, 159},
+            {125, 125, 125},
+            { 89,  89,  89},
+            { 26,  26,  26}
+        });
+
+        /// <summary>
+        /// Colormap "rdpu" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Rdpu = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255, 247, 243},
+            {253, 235, 231},
+            {252, 223, 220},
+            {252, 210, 206},
+            {251, 196, 191},
+            {250, 177, 186},
+            {249, 158, 180},
+            {248, 130, 170},
+            {246, 103, 160},
+            {233,  77, 155},
+            {220,  51, 150},
+            {196,  25, 137},
+            {172,   1, 125},
+            {146,   1, 122},
+            {120,   0, 118},
+            { 73,   0, 106}
+        });
+
+        /// <summary>
+        /// Colormap "rdylbu" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Rdylbu = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {165,   0,  38},
+            {196,  30,  38},
+            {222,  63,  46},
+            {240, 101,  63},
+            {248, 142,  82},
+            {253, 180, 103},
+            {253, 212, 132},
+            {254, 236, 162},
+            {254, 254, 192},
+            {234, 247, 227},
+            {209, 235, 243},
+            {176, 219, 234},
+            {141, 193, 220},
+            {108, 164, 204},
+            { 79, 129, 186},
+            { 49,  54, 149}
+        });
+
+        /// <summary>
+        /// Colormap "rdylgn" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Rdylgn = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {165,   0,  38},
+            {196,  30,  38},
+            {222,  63,  46},
+            {240, 101,  63},
+            {248, 142,  82},
+            {253, 180, 102},
+            {253, 212, 129},
+            {254, 236, 159},
+            {254, 254, 189},
+            {230, 244, 157},
+            {203, 232, 129},
+            {171, 219, 109},
+            {132, 202, 102},
+            { 90, 183,  96},
+            { 42, 159,  84},
+            {  0, 104,  55}
+        });
+
+        /// <summary>
+        /// Colormap "reds" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Reds = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255, 245, 240},
+            {254, 234, 224},
+            {253, 223, 209},
+            {252, 205, 185},
+            {252, 186, 160},
+            {252, 166, 137},
+            {251, 145, 113},
+            {251, 125,  93},
+            {250, 105,  73},
+            {244,  81,  58},
+            {238,  58,  43},
+            {220,  40,  36},
+            {202,  23,  28},
+            {183,  19,  24},
+            {163,  14,  20},
+            {103,   0,  13}
         });
 
         /// <summary>
@@ -1928,70 +3247,91 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[,]> Seismic = new Lazy<byte[,]>(() => new byte[,]
         {
-            {  0,   0,  76}, {  0,   0,  79}, {  0,   0,  82}, {  0,   0,  84},
-            {  0,   0,  87}, {  0,   0,  90}, {  0,   0,  93}, {  0,   0,  96},
-            {  0,   0,  98}, {  0,   0, 101}, {  0,   0, 104}, {  0,   0, 107},
-            {  0,   0, 110}, {  0,   0, 112}, {  0,   0, 115}, {  0,   0, 118},
-            {  0,   0, 121}, {  0,   0, 124}, {  0,   0, 126}, {  0,   0, 129},
-            {  0,   0, 132}, {  0,   0, 135}, {  0,   0, 138}, {  0,   0, 140},
-            {  0,   0, 143}, {  0,   0, 146}, {  0,   0, 149}, {  0,   0, 152},
-            {  0,   0, 154}, {  0,   0, 157}, {  0,   0, 160}, {  0,   0, 163},
-            {  0,   0, 166}, {  0,   0, 168}, {  0,   0, 171}, {  0,   0, 174},
-            {  0,   0, 177}, {  0,   0, 180}, {  0,   0, 182}, {  0,   0, 185},
-            {  0,   0, 188}, {  0,   0, 191}, {  0,   0, 194}, {  0,   0, 196},
-            {  0,   0, 199}, {  0,   0, 202}, {  0,   0, 205}, {  0,   0, 208},
-            {  0,   0, 210}, {  0,   0, 213}, {  0,   0, 216}, {  0,   0, 219},
-            {  0,   0, 222}, {  0,   0, 224}, {  0,   0, 227}, {  0,   0, 230},
-            {  0,   0, 233}, {  0,   0, 236}, {  0,   0, 238}, {  0,   0, 241},
-            {  0,   0, 244}, {  0,   0, 247}, {  0,   0, 250}, {  0,   0, 252},
-            {  1,   1, 255}, {  5,   5, 255}, {  8,   8, 255}, { 13,  13, 255},
-            { 17,  17, 255}, { 21,  21, 255}, { 25,  25, 255}, { 29,  29, 255},
-            { 33,  33, 255}, { 37,  37, 255}, { 40,  40, 255}, { 45,  45, 255},
-            { 49,  49, 255}, { 53,  53, 255}, { 57,  57, 255}, { 61,  61, 255},
-            { 65,  65, 255}, { 69,  69, 255}, { 72,  72, 255}, { 77,  77, 255},
-            { 81,  81, 255}, { 85,  85, 255}, { 89,  89, 255}, { 93,  93, 255},
-            { 97,  97, 255}, {101, 101, 255}, {104, 104, 255}, {109, 109, 255},
-            {113, 113, 255}, {117, 117, 255}, {121, 121, 255}, {125, 125, 255},
-            {129, 129, 255}, {133, 133, 255}, {136, 136, 255}, {141, 141, 255},
-            {145, 145, 255}, {149, 149, 255}, {153, 153, 255}, {157, 157, 255},
-            {161, 161, 255}, {165, 165, 255}, {168, 168, 255}, {173, 173, 255},
-            {177, 177, 255}, {181, 181, 255}, {185, 185, 255}, {189, 189, 255},
-            {193, 193, 255}, {197, 197, 255}, {200, 200, 255}, {205, 205, 255},
-            {209, 209, 255}, {213, 213, 255}, {217, 217, 255}, {221, 221, 255},
-            {225, 225, 255}, {229, 229, 255}, {232, 232, 255}, {237, 237, 255},
-            {241, 241, 255}, {245, 245, 255}, {249, 249, 255}, {253, 253, 255},
-            {255, 253, 253}, {255, 249, 249}, {255, 245, 245}, {255, 241, 241},
-            {255, 237, 237}, {255, 233, 233}, {255, 229, 229}, {255, 225, 225},
-            {255, 221, 221}, {255, 217, 217}, {255, 213, 213}, {255, 209, 209},
-            {255, 205, 205}, {255, 201, 201}, {255, 197, 197}, {255, 193, 193},
-            {255, 189, 189}, {255, 185, 185}, {255, 180, 180}, {255, 177, 177},
-            {255, 173, 173}, {255, 169, 169}, {255, 164, 164}, {255, 161, 161},
-            {255, 157, 157}, {255, 153, 153}, {255, 148, 148}, {255, 145, 145},
-            {255, 141, 141}, {255, 137, 137}, {255, 132, 132}, {255, 129, 129},
-            {255, 125, 125}, {255, 121, 121}, {255, 117, 117}, {255, 113, 113},
-            {255, 109, 109}, {255, 105, 105}, {255, 101, 101}, {255,  97,  97},
-            {255,  93,  93}, {255,  89,  89}, {255,  85,  85}, {255,  81,  81},
-            {255,  77,  77}, {255,  73,  73}, {255,  69,  69}, {255,  65,  65},
-            {255,  61,  61}, {255,  56,  56}, {255,  53,  53}, {255,  48,  48},
-            {255,  45,  45}, {255,  40,  40}, {255,  37,  37}, {255,  32,  32},
-            {255,  29,  29}, {255,  24,  24}, {255,  21,  21}, {255,  16,  16},
-            {255,  13,  13}, {255,   8,   8}, {255,   5,   5}, {255,   0,   0},
-            {253,   0,   0}, {251,   0,   0}, {249,   0,   0}, {247,   0,   0},
-            {245,   0,   0}, {243,   0,   0}, {241,   0,   0}, {239,   0,   0},
-            {237,   0,   0}, {235,   0,   0}, {233,   0,   0}, {231,   0,   0},
-            {229,   0,   0}, {227,   0,   0}, {225,   0,   0}, {223,   0,   0},
-            {221,   0,   0}, {219,   0,   0}, {217,   0,   0}, {215,   0,   0},
-            {213,   0,   0}, {211,   0,   0}, {209,   0,   0}, {207,   0,   0},
-            {205,   0,   0}, {203,   0,   0}, {201,   0,   0}, {199,   0,   0},
-            {197,   0,   0}, {195,   0,   0}, {193,   0,   0}, {191,   0,   0},
-            {189,   0,   0}, {187,   0,   0}, {185,   0,   0}, {183,   0,   0},
-            {181,   0,   0}, {179,   0,   0}, {177,   0,   0}, {175,   0,   0},
-            {173,   0,   0}, {171,   0,   0}, {169,   0,   0}, {167,   0,   0},
-            {165,   0,   0}, {163,   0,   0}, {161,   0,   0}, {159,   0,   0},
-            {157,   0,   0}, {155,   0,   0}, {153,   0,   0}, {151,   0,   0},
-            {149,   0,   0}, {147,   0,   0}, {145,   0,   0}, {143,   0,   0},
-            {141,   0,   0}, {139,   0,   0}, {137,   0,   0}, {135,   0,   0},
-            {133,   0,   0}, {131,   0,   0}, {129,   0,   0}, {127,   0,   0}
+            {  0,   0,  76},
+            {  0,   0, 121},
+            {  0,   0, 166},
+            {  0,   0, 210},
+            {  1,   1, 255},
+            { 65,  65, 255},
+            {129, 129, 255},
+            {193, 193, 255},
+            {255, 253, 253},
+            {255, 189, 189},
+            {255, 125, 125},
+            {255,  61,  61},
+            {253,   0,   0},
+            {221,   0,   0},
+            {189,   0,   0},
+            {127,   0,   0}
+        });
+
+        /// <summary>
+        /// Colormap "set1" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Set1 = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {228,  26,  28},
+            {141,  76, 106},
+            { 55, 126, 183},
+            { 66, 150, 128},
+            { 77, 174,  74},
+            {115, 125, 119},
+            {153,  78, 161},
+            {204, 103,  79},
+            {255, 129,   0},
+            {255, 193,  26},
+            {253, 251,  50},
+            {208, 166,  45},
+            {167,  87,  43},
+            {208, 108, 119},
+            {244, 129, 189},
+            {153, 153, 153}
+        });
+
+        /// <summary>
+        /// Colormap "set2" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Set2 = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {102, 194, 165},
+            {167, 170, 135},
+            {233, 147, 106},
+            {216, 147, 131},
+            {167, 155, 177},
+            {158, 155, 201},
+            {198, 146, 197},
+            {226, 143, 186},
+            {197, 178, 137},
+            {169, 212,  89},
+            {200, 216,  69},
+            {239, 216,  53},
+            {247, 211,  74},
+            {236, 202, 118},
+            {221, 193, 152},
+            {179, 179, 179}
+        });
+
+        /// <summary>
+        /// Colormap "set3" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Set3 = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {141, 211, 199},
+            {219, 241, 185},
+            {230, 228, 193},
+            {194, 181, 210},
+            {236, 141, 138},
+            {195, 150, 157},
+            {145, 177, 195},
+            {231, 179, 117},
+            {214, 201, 101},
+            {194, 218, 131},
+            {244, 206, 216},
+            {231, 212, 221},
+            {208, 191, 209},
+            {188, 130, 189},
+            {198, 198, 194},
+            {255, 237, 111}
         });
 
         /// <summary>
@@ -1999,70 +3339,68 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[,]> Spectral = new Lazy<byte[,]>(() => new byte[,]
         {
-            {  0,   0,   0}, {  9,   0,  10}, { 18,   0,  21}, { 28,   0,  31},
-            { 37,   0,  42}, { 46,   0,  53}, { 56,   0,  63}, { 65,   0,  74},
-            { 74,   0,  85}, { 84,   0,  95}, { 93,   0, 106}, {102,   0, 117},
-            {112,   0, 127}, {119,   0, 136}, {120,   0, 137}, {122,   0, 138},
-            {123,   0, 140}, {124,   0, 141}, {126,   0, 142}, {127,   0, 144},
-            {128,   0, 145}, {129,   0, 146}, {131,   0, 148}, {132,   0, 149},
-            {133,   0, 150}, {135,   0, 152}, {130,   0, 153}, {119,   0, 155},
-            {109,   0, 156}, { 98,   0, 157}, { 87,   0, 159}, { 77,   0, 160},
-            { 66,   0, 161}, { 55,   0, 163}, { 45,   0, 164}, { 34,   0, 165},
-            { 23,   0, 167}, { 13,   0, 168}, {  2,   0, 169}, {  0,   0, 173},
-            {  0,   0, 177}, {  0,   0, 181}, {  0,   0, 185}, {  0,   0, 189},
-            {  0,   0, 193}, {  0,   0, 197}, {  0,   0, 201}, {  0,   0, 205},
-            {  0,   0, 209}, {  0,   0, 213}, {  0,   0, 217}, {  0,   0, 221},
-            {  0,   9, 221}, {  0,  18, 221}, {  0,  28, 221}, {  0,  37, 221},
-            {  0,  46, 221}, {  0,  56, 221}, {  0,  65, 221}, {  0,  74, 221},
-            {  0,  84, 221}, {  0,  93, 221}, {  0, 102, 221}, {  0, 112, 221},
-            {  0, 119, 221}, {  0, 122, 221}, {  0, 125, 221}, {  0, 127, 221},
-            {  0, 130, 221}, {  0, 133, 221}, {  0, 135, 221}, {  0, 138, 221},
-            {  0, 141, 221}, {  0, 143, 221}, {  0, 146, 221}, {  0, 149, 221},
-            {  0, 151, 221}, {  0, 153, 219}, {  0, 155, 215}, {  0, 156, 211},
-            {  0, 157, 207}, {  0, 159, 203}, {  0, 160, 199}, {  0, 161, 195},
-            {  0, 163, 191}, {  0, 164, 187}, {  0, 165, 183}, {  0, 167, 179},
-            {  0, 168, 175}, {  0, 169, 171}, {  0, 170, 168}, {  0, 170, 165},
-            {  0, 170, 162}, {  0, 170, 160}, {  0, 170, 157}, {  0, 170, 154},
-            {  0, 170, 151}, {  0, 170, 149}, {  0, 170, 146}, {  0, 170, 143},
-            {  0, 170, 141}, {  0, 170, 138}, {  0, 170, 135}, {  0, 168, 125},
-            {  0, 167, 114}, {  0, 166, 103}, {  0, 164,  93}, {  0, 163,  82},
-            {  0, 162,  71}, {  0, 160,  61}, {  0, 159,  50}, {  0, 158,  39},
-            {  0, 156,  29}, {  0, 155,  18}, {  0, 154,   7}, {  0, 153,   0},
-            {  0, 156,   0}, {  0, 158,   0}, {  0, 161,   0}, {  0, 164,   0},
-            {  0, 166,   0}, {  0, 169,   0}, {  0, 172,   0}, {  0, 174,   0},
-            {  0, 177,   0}, {  0, 180,   0}, {  0, 182,   0}, {  0, 185,   0},
-            {  0, 188,   0}, {  0, 190,   0}, {  0, 193,   0}, {  0, 196,   0},
-            {  0, 198,   0}, {  0, 201,   0}, {  0, 204,   0}, {  0, 207,   0},
-            {  0, 209,   0}, {  0, 212,   0}, {  0, 215,   0}, {  0, 217,   0},
-            {  0, 220,   0}, {  0, 223,   0}, {  0, 225,   0}, {  0, 228,   0},
-            {  0, 231,   0}, {  0, 233,   0}, {  0, 236,   0}, {  0, 239,   0},
-            {  0, 241,   0}, {  0, 244,   0}, {  0, 247,   0}, {  0, 249,   0},
-            {  0, 252,   0}, {  0, 255,   0}, { 14, 255,   0}, { 29, 255,   0},
-            { 43, 255,   0}, { 58, 255,   0}, { 73, 255,   0}, { 87, 255,   0},
-            {102, 255,   0}, {117, 255,   0}, {131, 255,   0}, {146, 255,   0},
-            {161, 255,   0}, {175, 255,   0}, {187, 254,   0}, {191, 253,   0},
-            {195, 251,   0}, {199, 250,   0}, {203, 249,   0}, {207, 247,   0},
-            {211, 246,   0}, {215, 245,   0}, {219, 243,   0}, {223, 242,   0},
-            {227, 241,   0}, {231, 239,   0}, {235, 238,   0}, {238, 236,   0},
-            {239, 233,   0}, {241, 231,   0}, {242, 228,   0}, {243, 225,   0},
-            {245, 223,   0}, {246, 220,   0}, {247, 217,   0}, {249, 215,   0},
-            {250, 212,   0}, {251, 209,   0}, {253, 207,   0}, {254, 204,   0},
-            {255, 201,   0}, {255, 197,   0}, {255, 193,   0}, {255, 189,   0},
-            {255, 185,   0}, {255, 181,   0}, {255, 177,   0}, {255, 173,   0},
-            {255, 169,   0}, {255, 165,   0}, {255, 161,   0}, {255, 157,   0},
-            {255, 153,   0}, {255, 141,   0}, {255, 129,   0}, {255, 117,   0},
-            {255, 105,   0}, {255,  93,   0}, {255,  81,   0}, {255,  69,   0},
-            {255,  57,   0}, {255,  44,   0}, {255,  32,   0}, {255,  20,   0},
-            {255,   8,   0}, {254,   0,   0}, {251,   0,   0}, {249,   0,   0},
-            {246,   0,   0}, {243,   0,   0}, {241,   0,   0}, {238,   0,   0},
-            {235,   0,   0}, {233,   0,   0}, {230,   0,   0}, {227,   0,   0},
-            {225,   0,   0}, {222,   0,   0}, {220,   0,   0}, {219,   0,   0},
-            {217,   0,   0}, {216,   0,   0}, {215,   0,   0}, {213,   0,   0},
-            {212,   0,   0}, {211,   0,   0}, {209,   0,   0}, {208,   0,   0},
-            {207,   0,   0}, {205,   0,   0}, {204,   0,   0}, {204,  12,  12},
-            {204,  27,  27}, {204,  44,  44}, {204,  60,  60}, {204,  76,  76},
-            {204,  92,  92}, {204, 108, 108}, {204, 124, 124}, {204, 140, 140},
-            {204, 156, 156}, {204, 172, 172}, {204, 188, 188}, {204, 204, 204}
+            {  0,   0,   0},
+            {123,   0, 140},
+            { 66,   0, 161},
+            {  0,   0, 209},
+            {  0, 119, 221},
+            {  0, 157, 207},
+            {  0, 170, 151},
+            {  0, 156,  29},
+            {  0, 188,   0},
+            {  0, 231,   0},
+            {102, 255,   0},
+            {227, 241,   0},
+            {255, 201,   0},
+            {255, 105,   0},
+            {235,   0,   0},
+            {204, 204, 204}
+        });
+
+        /// <summary>
+        /// Colormap "spring" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Spring = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255,   0, 255},
+            {255,  16, 239},
+            {255,  32, 223},
+            {255,  48, 207},
+            {255,  64, 191},
+            {255,  80, 175},
+            {255,  96, 159},
+            {255, 112, 143},
+            {255, 128, 127},
+            {255, 144, 111},
+            {255, 160,  95},
+            {255, 176,  79},
+            {255, 192,  63},
+            {255, 208,  47},
+            {255, 224,  31},
+            {255, 255,   0}
+        });
+
+        /// <summary>
+        /// Colormap "summer" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Summer = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {  0, 127, 102},
+            { 16, 135, 102},
+            { 32, 143, 102},
+            { 48, 151, 102},
+            { 64, 159, 102},
+            { 80, 167, 102},
+            { 96, 175, 102},
+            {112, 183, 102},
+            {128, 191, 102},
+            {144, 199, 102},
+            {160, 207, 102},
+            {176, 215, 102},
+            {192, 223, 102},
+            {208, 231, 102},
+            {224, 239, 102},
+            {255, 255, 102}
         });
 
         /// <summary>
@@ -2070,70 +3408,22 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[,]> Terrain = new Lazy<byte[,]>(() => new byte[,]
         {
-            { 51,  51, 153}, { 49,  53, 155}, { 48,  56, 158}, { 47,  59, 161},
-            { 45,  61, 163}, { 44,  64, 166}, { 43,  67, 169}, { 41,  69, 171},
-            { 40,  72, 174}, { 39,  75, 177}, { 37,  77, 179}, { 36,  80, 182},
-            { 35,  83, 185}, { 33,  85, 187}, { 32,  88, 190}, { 31,  91, 193},
-            { 29,  93, 195}, { 28,  96, 198}, { 27,  98, 201}, { 25, 101, 203},
-            { 24, 104, 206}, { 23, 107, 209}, { 21, 109, 211}, { 20, 112, 214},
-            { 19, 115, 217}, { 17, 117, 219}, { 16, 120, 222}, { 14, 123, 225},
-            { 13, 125, 227}, { 12, 128, 230}, { 11, 131, 233}, {  9, 133, 235},
-            {  8, 136, 238}, {  7, 138, 241}, {  5, 141, 243}, {  4, 144, 246},
-            {  3, 147, 249}, {  1, 149, 251}, {  0, 152, 254}, {  0, 154, 250},
-            {  0, 156, 244}, {  0, 158, 238}, {  0, 160, 232}, {  0, 162, 226},
-            {  0, 164, 220}, {  0, 166, 214}, {  0, 168, 208}, {  0, 170, 202},
-            {  0, 172, 196}, {  0, 174, 190}, {  0, 176, 184}, {  0, 178, 178},
-            {  0, 180, 172}, {  0, 182, 166}, {  0, 184, 160}, {  0, 186, 154},
-            {  0, 188, 148}, {  0, 190, 142}, {  0, 192, 136}, {  0, 194, 130},
-            {  0, 196, 124}, {  0, 198, 118}, {  0, 200, 112}, {  0, 202, 106},
-            {  1, 204, 102}, {  5, 205, 103}, {  8, 205, 103}, { 13, 206, 104},
-            { 17, 207, 105}, { 21, 208, 106}, { 25, 209, 107}, { 29, 209, 107},
-            { 33, 210, 108}, { 37, 211, 109}, { 40, 212, 110}, { 45, 213, 111},
-            { 49, 213, 111}, { 53, 214, 112}, { 57, 215, 113}, { 61, 216, 114},
-            { 65, 217, 115}, { 69, 217, 115}, { 72, 218, 116}, { 77, 219, 117},
-            { 81, 220, 118}, { 85, 221, 119}, { 89, 221, 119}, { 93, 222, 120},
-            { 97, 223, 121}, {101, 224, 122}, {104, 225, 122}, {109, 225, 123},
-            {113, 226, 124}, {117, 227, 125}, {121, 228, 126}, {125, 229, 127},
-            {129, 229, 127}, {133, 230, 128}, {136, 231, 129}, {141, 232, 130},
-            {145, 233, 131}, {149, 233, 131}, {153, 234, 132}, {157, 235, 133},
-            {161, 236, 134}, {165, 237, 135}, {168, 237, 135}, {173, 238, 136},
-            {177, 239, 137}, {181, 240, 138}, {185, 241, 139}, {189, 241, 139},
-            {193, 242, 140}, {197, 243, 141}, {200, 244, 142}, {205, 245, 143},
-            {209, 245, 143}, {213, 246, 144}, {217, 247, 145}, {221, 248, 146},
-            {225, 249, 147}, {229, 249, 147}, {232, 250, 148}, {237, 251, 149},
-            {241, 252, 150}, {245, 253, 151}, {249, 253, 151}, {253, 254, 152},
-            {254, 253, 152}, {252, 251, 151}, {250, 248, 150}, {248, 246, 149},
-            {246, 243, 148}, {244, 240, 147}, {242, 238, 145}, {240, 235, 144},
-            {238, 233, 143}, {236, 230, 142}, {234, 228, 141}, {232, 225, 140},
-            {230, 223, 139}, {228, 220, 138}, {226, 217, 137}, {224, 215, 136},
-            {222, 212, 135}, {220, 210, 134}, {218, 207, 133}, {216, 205, 131},
-            {214, 202, 130}, {211, 199, 129}, {210, 197, 128}, {208, 194, 127},
-            {206, 192, 126}, {204, 189, 125}, {202, 187, 124}, {200, 184, 123},
-            {198, 182, 122}, {195, 179, 121}, {194, 176, 120}, {192, 174, 118},
-            {190, 171, 117}, {188, 169, 116}, {186, 166, 115}, {184, 164, 114},
-            {182, 161, 113}, {179, 159, 112}, {178, 156, 111}, {176, 153, 110},
-            {174, 151, 109}, {172, 148, 108}, {170, 146, 107}, {168, 143, 106},
-            {166, 141, 104}, {163, 138, 103}, {162, 135, 102}, {160, 133, 101},
-            {158, 130, 100}, {156, 128,  99}, {154, 125,  98}, {152, 123,  97},
-            {150, 120,  96}, {147, 118,  95}, {146, 115,  94}, {144, 112,  93},
-            {142, 110,  91}, {140, 107,  90}, {138, 105,  89}, {136, 102,  88},
-            {134, 100,  87}, {131,  97,  86}, {130,  95,  85}, {128,  92,  84},
-            {129,  93,  86}, {131,  96,  88}, {133,  98,  91}, {135, 101,  94},
-            {136, 103,  96}, {139, 106,  99}, {141, 109, 102}, {143, 111, 104},
-            {145, 114, 107}, {147, 116, 110}, {149, 119, 112}, {151, 121, 115},
-            {153, 124, 118}, {155, 127, 121}, {157, 129, 123}, {159, 132, 126},
-            {161, 134, 129}, {163, 137, 131}, {165, 139, 134}, {167, 142, 137},
-            {168, 144, 139}, {171, 147, 142}, {173, 150, 145}, {175, 152, 147},
-            {177, 155, 150}, {179, 157, 153}, {181, 160, 155}, {183, 162, 158},
-            {185, 165, 161}, {187, 167, 163}, {189, 170, 166}, {191, 173, 169},
-            {193, 175, 171}, {195, 178, 174}, {196, 180, 177}, {199, 183, 179},
-            {200, 185, 182}, {203, 188, 185}, {205, 191, 187}, {207, 193, 190},
-            {209, 196, 193}, {211, 198, 196}, {212, 201, 198}, {215, 203, 201},
-            {217, 206, 204}, {219, 208, 206}, {221, 211, 209}, {223, 214, 212},
-            {225, 216, 214}, {227, 219, 217}, {228, 221, 220}, {231, 224, 222},
-            {232, 226, 225}, {235, 229, 228}, {237, 231, 230}, {239, 234, 233},
-            {241, 237, 236}, {243, 239, 238}, {244, 242, 241}, {247, 244, 244},
-            {249, 247, 246}, {251, 249, 249}, {253, 252, 252}, {255, 255, 255}
+            { 51,  51, 153},
+            { 29,  93, 195},
+            {  8, 136, 238},
+            {  0, 172, 196},
+            {  1, 204, 102},
+            { 65, 217, 115},
+            {129, 229, 127},
+            {193, 242, 140},
+            {254, 253, 152},
+            {222, 212, 135},
+            {190, 171, 117},
+            {158, 130, 100},
+            {129,  93,  86},
+            {161, 134, 129},
+            {193, 175, 171},
+            {255, 255, 255}
         });
 
         /// <summary>
@@ -2141,70 +3431,160 @@ namespace SciColorMaps
         /// </summary>
         public static readonly Lazy<byte[,]> Viridis = new Lazy<byte[,]>(() => new byte[,]
         {
-            { 68,   1,  84}, { 68,   2,  85}, { 68,   3,  87}, { 69,   5,  88},
-            { 69,   6,  90}, { 69,   8,  91}, { 70,   9,  92}, { 70,  11,  94},
-            { 70,  12,  95}, { 70,  14,  97}, { 71,  15,  98}, { 71,  17,  99},
-            { 71,  18, 101}, { 71,  20, 102}, { 71,  21, 103}, { 71,  22, 105},
-            { 71,  24, 106}, { 72,  25, 107}, { 72,  26, 108}, { 72,  28, 110},
-            { 72,  29, 111}, { 72,  30, 112}, { 72,  32, 113}, { 72,  33, 114},
-            { 72,  34, 115}, { 72,  35, 116}, { 71,  37, 117}, { 71,  38, 118},
-            { 71,  39, 119}, { 71,  40, 120}, { 71,  42, 121}, { 71,  43, 122},
-            { 71,  44, 123}, { 70,  45, 124}, { 70,  47, 124}, { 70,  48, 125},
-            { 70,  49, 126}, { 69,  50, 127}, { 69,  52, 127}, { 69,  53, 128},
-            { 69,  54, 129}, { 68,  55, 129}, { 68,  57, 130}, { 67,  58, 131},
-            { 67,  59, 131}, { 67,  60, 132}, { 66,  61, 132}, { 66,  62, 133},
-            { 66,  64, 133}, { 65,  65, 134}, { 65,  66, 134}, { 64,  67, 135},
-            { 64,  68, 135}, { 63,  69, 135}, { 63,  71, 136}, { 62,  72, 136},
-            { 62,  73, 137}, { 61,  74, 137}, { 61,  75, 137}, { 61,  76, 137},
-            { 60,  77, 138}, { 60,  78, 138}, { 59,  80, 138}, { 59,  81, 138},
-            { 58,  82, 139}, { 58,  83, 139}, { 57,  84, 139}, { 57,  85, 139},
-            { 56,  86, 139}, { 56,  87, 140}, { 55,  88, 140}, { 55,  89, 140},
-            { 54,  90, 140}, { 54,  91, 140}, { 53,  92, 140}, { 53,  93, 140},
-            { 52,  94, 141}, { 52,  95, 141}, { 51,  96, 141}, { 51,  97, 141},
-            { 50,  98, 141}, { 50,  99, 141}, { 49, 100, 141}, { 49, 101, 141},
-            { 49, 102, 141}, { 48, 103, 141}, { 48, 104, 141}, { 47, 105, 141},
-            { 47, 106, 141}, { 46, 107, 142}, { 46, 108, 142}, { 46, 109, 142},
-            { 45, 110, 142}, { 45, 111, 142}, { 44, 112, 142}, { 44, 113, 142},
-            { 44, 114, 142}, { 43, 115, 142}, { 43, 116, 142}, { 42, 117, 142},
-            { 42, 118, 142}, { 42, 119, 142}, { 41, 120, 142}, { 41, 121, 142},
-            { 40, 122, 142}, { 40, 122, 142}, { 40, 123, 142}, { 39, 124, 142},
-            { 39, 125, 142}, { 39, 126, 142}, { 38, 127, 142}, { 38, 128, 142},
-            { 38, 129, 142}, { 37, 130, 142}, { 37, 131, 141}, { 36, 132, 141},
-            { 36, 133, 141}, { 36, 134, 141}, { 35, 135, 141}, { 35, 136, 141},
-            { 35, 137, 141}, { 34, 137, 141}, { 34, 138, 141}, { 34, 139, 141},
-            { 33, 140, 141}, { 33, 141, 140}, { 33, 142, 140}, { 32, 143, 140},
-            { 32, 144, 140}, { 32, 145, 140}, { 31, 146, 140}, { 31, 147, 139},
-            { 31, 148, 139}, { 31, 149, 139}, { 31, 150, 139}, { 30, 151, 138},
-            { 30, 152, 138}, { 30, 153, 138}, { 30, 153, 138}, { 30, 154, 137},
-            { 30, 155, 137}, { 30, 156, 137}, { 30, 157, 136}, { 30, 158, 136},
-            { 30, 159, 136}, { 30, 160, 135}, { 31, 161, 135}, { 31, 162, 134},
-            { 31, 163, 134}, { 32, 164, 133}, { 32, 165, 133}, { 33, 166, 133},
-            { 33, 167, 132}, { 34, 167, 132}, { 35, 168, 131}, { 35, 169, 130},
-            { 36, 170, 130}, { 37, 171, 129}, { 38, 172, 129}, { 39, 173, 128},
-            { 40, 174, 127}, { 41, 175, 127}, { 42, 176, 126}, { 43, 177, 125},
-            { 44, 177, 125}, { 46, 178, 124}, { 47, 179, 123}, { 48, 180, 122},
-            { 50, 181, 122}, { 51, 182, 121}, { 53, 183, 120}, { 54, 184, 119},
-            { 56, 185, 118}, { 57, 185, 118}, { 59, 186, 117}, { 61, 187, 116},
-            { 62, 188, 115}, { 64, 189, 114}, { 66, 190, 113}, { 68, 190, 112},
-            { 69, 191, 111}, { 71, 192, 110}, { 73, 193, 109}, { 75, 194, 108},
-            { 77, 194, 107}, { 79, 195, 105}, { 81, 196, 104}, { 83, 197, 103},
-            { 85, 198, 102}, { 87, 198, 101}, { 89, 199, 100}, { 91, 200,  98},
-            { 94, 201,  97}, { 96, 201,  96}, { 98, 202,  95}, {100, 203,  93},
-            {103, 204,  92}, {105, 204,  91}, {107, 205,  89}, {109, 206,  88},
-            {112, 206,  86}, {114, 207,  85}, {116, 208,  84}, {119, 208,  82},
-            {121, 209,  81}, {124, 210,  79}, {126, 210,  78}, {129, 211,  76},
-            {131, 211,  75}, {134, 212,  73}, {136, 213,  71}, {139, 213,  70},
-            {141, 214,  68}, {144, 214,  67}, {146, 215,  65}, {149, 215,  63},
-            {151, 216,  62}, {154, 216,  60}, {157, 217,  58}, {159, 217,  56},
-            {162, 218,  55}, {165, 218,  53}, {167, 219,  51}, {170, 219,  50},
-            {173, 220,  48}, {175, 220,  46}, {178, 221,  44}, {181, 221,  43},
-            {183, 221,  41}, {186, 222,  39}, {189, 222,  38}, {191, 223,  36},
-            {194, 223,  34}, {197, 223,  33}, {199, 224,  31}, {202, 224,  30},
-            {205, 224,  29}, {207, 225,  28}, {210, 225,  27}, {212, 225,  26},
-            {215, 226,  25}, {218, 226,  24}, {220, 226,  24}, {223, 227,  24},
-            {225, 227,  24}, {228, 227,  24}, {231, 228,  25}, {233, 228,  25},
-            {236, 228,  26}, {238, 229,  27}, {241, 229,  28}, {243, 229,  30},
-            {246, 230,  31}, {248, 230,  33}, {250, 230,  34}, {253, 231,  36}
+            { 68,   1,  84},
+            { 71,  24, 106},
+            { 71,  44, 123},
+            { 66,  64, 133},
+            { 58,  82, 139},
+            { 50,  98, 141},
+            { 44, 114, 142},
+            { 38, 129, 142},
+            { 32, 144, 140},
+            { 30, 159, 136},
+            { 40, 174, 127},
+            { 62, 188, 115},
+            { 94, 201,  97},
+            {131, 211,  75},
+            {173, 220,  48},
+            {253, 231,  36}
+        });
+
+        /// <summary>
+        /// Colormap "winter" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Winter = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {  0,   0, 255},
+            {  0,  16, 247},
+            {  0,  32, 239},
+            {  0,  48, 231},
+            {  0,  64, 223},
+            {  0,  80, 215},
+            {  0,  96, 207},
+            {  0, 112, 199},
+            {  0, 128, 191},
+            {  0, 144, 183},
+            {  0, 160, 175},
+            {  0, 176, 167},
+            {  0, 192, 159},
+            {  0, 208, 151},
+            {  0, 224, 143},
+            {  0, 255, 127}
+        });
+
+        /// <summary>
+        /// Colormap "wistia" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Wistia = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {228, 255, 122},
+            {234, 249,  97},
+            {241, 243,  73},
+            {248, 237,  49},
+            {255, 231,  25},
+            {255, 221,  19},
+            {255, 210,  12},
+            {255, 199,   6},
+            {255, 188,   0},
+            {255, 181,   0},
+            {255, 174,   0},
+            {255, 166,   0},
+            {254, 159,   0},
+            {254, 151,   0},
+            {253, 143,   0},
+            {252, 127,   0}
+        });
+
+        /// <summary>
+        /// Colormap "ylgn" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Ylgn = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255, 255, 229},
+            {250, 253, 206},
+            {246, 251, 184},
+            {231, 245, 173},
+            {216, 239, 162},
+            {194, 230, 152},
+            {172, 220, 141},
+            {145, 209, 131},
+            {119, 197, 120},
+            { 91, 184, 106},
+            { 64, 170,  92},
+            { 49, 150,  79},
+            { 34, 131,  66},
+            { 16, 117,  60},
+            {  0, 103,  54},
+            {  0,  69,  41}
+        });
+
+        /// <summary>
+        /// Colormap "ylgnbu" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Ylgnbu = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255, 255, 217},
+            {245, 251, 196},
+            {236, 247, 177},
+            {217, 240, 178},
+            {198, 232, 180},
+            {162, 218, 183},
+            {126, 204, 187},
+            { 95, 193, 191},
+            { 64, 181, 195},
+            { 46, 162, 193},
+            { 29, 144, 191},
+            { 31, 118, 179},
+            { 34,  93, 167},
+            { 35,  71, 157},
+            { 36,  51, 146},
+            {  8,  29,  88}
+        });
+
+        /// <summary>
+        /// Colormap "ylorbr" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Ylorbr = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255, 255, 229},
+            {255, 250, 208},
+            {254, 246, 187},
+            {254, 236, 166},
+            {254, 226, 144},
+            {254, 211, 111},
+            {254, 195,  78},
+            {254, 173,  59},
+            {253, 152,  40},
+            {244, 131,  30},
+            {235, 111,  19},
+            {219,  93,  10},
+            {202,  75,   2},
+            {177,  63,   3},
+            {151,  51,   4},
+            {102,  37,   6}
+        });
+
+        /// <summary>
+        /// Colormap "ylorrd" taken from matplotlib
+        /// </summary>
+        public static readonly Lazy<byte[,]> Ylorrd = new Lazy<byte[,]>(() => new byte[,]
+        {
+            {255, 255, 204},
+            {255, 245, 181},
+            {254, 236, 159},
+            {254, 226, 138},
+            {254, 216, 117},
+            {254, 197,  96},
+            {253, 177,  75},
+            {253, 158,  67},
+            {252, 140,  59},
+            {252, 108,  50},
+            {251,  76,  41},
+            {238,  50,  34},
+            {226,  25,  28},
+            {207,  12,  33},
+            {187,   0,  38},
+            {128,   0,  38}
         });
 
     #endregion
@@ -2215,21 +3595,81 @@ namespace SciColorMaps
         public static readonly Dictionary<string, Lazy<byte[,]>>
             ByName = new Dictionary<string, Lazy<byte[,]>>
         {
-            { "bone", Bone },
-            { "cool", Cool },
-            { "coolwarm", CoolWarm },
-            { "gist_earth", GistEarth },
-            { "gnuplot", GnuPlot },
-            { "gnuplot2", GnuPlot2 },
-            { "hot", Hot },
-            { "inferno", Inferno },
-            { "jet", Jet },
-            { "ocean", Ocean },
-            { "rainbow", Rainbow },
-            { "seismic", Seismic },
-            { "spectral", Spectral },
-            { "terrain", Terrain },
-            { "viridis", Viridis }
+            {"accent", Accent},
+            {"afmhot", Afmhot},
+            {"autumn", Autumn},
+            {"binary", Binary},
+            {"blues", Blues},
+            {"bone", Bone},
+            {"brbg", Brbg},
+            {"brg", Brg},
+            {"bugn", Bugn},
+            {"bupu", Bupu},
+            {"bwr", Bwr},
+            {"cmrmap", Cmrmap},
+            {"cool", Cool},
+            {"coolwarm", Coolwarm},
+            {"copper", Copper},
+            {"cubehelix", Cubehelix},
+            {"dark2", Dark2},
+            {"flag", Flag},
+            {"gist_earth", Gist_Earth},
+            {"gist_gray", Gist_Gray},
+            {"gist_heat", Gist_Heat},
+            {"gist_ncar", Gist_Ncar},
+            {"gist_rainbow", Gist_Rainbow},
+            {"gist_stern", Gist_Stern},
+            {"gist_yarg", Gist_Yarg},
+            {"gnbu", Gnbu},
+            {"gnuplot", Gnuplot},
+            {"gnuplot2", Gnuplot2},
+            {"gray", Gray},
+            {"greens", Greens},
+            {"greys", Greys},
+            {"hot", Hot},
+            {"hsv", Hsv},
+            {"inferno", Inferno},
+            {"jet", Jet},
+            {"magma", Magma},
+            {"nipy_spectral", Nipy_Spectral},
+            {"ocean", Ocean},
+            {"oranges", Oranges},
+            {"orrd", Orrd},
+            {"paired", Paired},
+            {"pastel1", Pastel1},
+            {"pastel2", Pastel2},
+            {"pink", Pink},
+            {"piyg", Piyg},
+            {"plasma", Plasma},
+            {"prgn", Prgn},
+            {"prism", Prism},
+            {"pubu", Pubu},
+            {"pubugn", Pubugn},
+            {"puor", Puor},
+            {"purd", Purd},
+            {"purples", Purples},
+            {"rainbow", Rainbow},
+            {"rdbu", Rdbu},
+            {"rdgy", Rdgy},
+            {"rdpu", Rdpu},
+            {"rdylbu", Rdylbu},
+            {"rdylgn", Rdylgn},
+            {"reds", Reds},
+            {"seismic", Seismic},
+            {"set1", Set1},
+            {"set2", Set2},
+            {"set3", Set3},
+            {"spectral", Spectral},
+            {"spring", Spring},
+            {"summer", Summer},
+            {"terrain", Terrain},
+            {"viridis", Viridis},
+            {"winter", Winter},
+            {"wistia", Wistia},
+            {"ylgn", Ylgn},
+            {"ylgnbu", Ylgnbu},
+            {"ylorbr", Ylorbr},
+            {"ylorrd", Ylorrd}
         };
 
         /// <summary>

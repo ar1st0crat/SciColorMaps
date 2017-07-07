@@ -5,11 +5,13 @@
 
 Simple and convenient library providing custom .NET color maps (user-defined or imported from matplotlib) for scientific visualization.
 
-Library comes in two versions:
+Library comes in two versions (also available as NuGet packages):
 
 - **SciColorMaps.Portable.dll** does not rely on any framework-dependent color structure (like ```System.Drawing.Color``` or ```System.Windows.Media.Color```). It operates with pure byte arrays, so it can be used in any .NET project.
 
 - **SciColorMaps.dll** provides some additional functions that handle GDI+ colors, so it can be used in WinForms and WPF projects.
+
+*NuGet packages contain binaries with all 75 matplotlib colormaps included. In most cases only a small subset of them is what is really needed. Luckily, SciColorMaps can be customized and recompiled quite easily. This repo includes special helper script for making your own SciColorMaps dll. Please [read instructions here](#compiling-scicolormaps) how to use it.*
 
 
 ## Base ColorMap class
@@ -18,13 +20,13 @@ Usage example:
 
 ```
 // create 'viridis' colormap with 256 colors, mapping values from range [0, 1]
-var cmap = new ColorMap();
+var cmap1 = new ColorMap();
 
 // create 'rainbow' colormap with 256 colors, mapping values from range [0, 1]
-var cmap = new ColorMap("rainbow");
+var cmap2 = new ColorMap("rainbow");
 
 // create 'gnuplot' colormap with 256 colors, mapping values from range [-7.5, 7.5]
-var cmap = new ColorMap("gnuplot", -7.5, 7.5);
+var cmap3 = new ColorMap("gnuplot", -7.5, 7.5);
 
 // create 'coolwarm' colormap with 64 colors, mapping values from range [10, 100]
 var cmap = new ColorMap("coolwarm", 10, 100, 64);
@@ -38,22 +40,13 @@ foreach (var palette in ColorMap.Palettes)
     Console.WriteLine(palette);
 }
 
-// currently prints:
-// bone
-// cool
-// coolwarm
-// gist_earth
-// gnuplot
-// gnuplot2
-// hot
-// inferno
-// jet
-// ocean
-// rainbow
-// seismic
-// spectral
-// terrain
-// viridis
+// prints full set of 75 matplotlib colormaps:
+// accent
+// afmhot
+// autumn
+// ...
+// ylorbr
+// ylorrd
 
 ```
 
@@ -173,25 +166,6 @@ var cmap = new MirrorColorMap(new ColorMap("ocean"));
 
 ```
 
-## Compiling SciColorMaps
-
-1) Accessing elements in jagged arrays is significantly faster (up to **40%**) compared to rectangular arrays, hence the jagged arrays are used and compiled by default. If an efficient memory management is of more importance then compile SciColorMaps with the 'RECTANGULAR' conditional symbol.
-
-| compilation   | dll size |
-----------------|-----------
-| default       | ~259kb   |
-| RECTANGULAR   | ~27kb    |
-
-
-2) If you want to save some bytes you can remove any standard color map - just comment out all declarations you don't need in file ```Palette.cs```.
-
-Also, if you are worried about the memory usage, please note that palette arrays are instantiated *lazily* in the calling code, e.g.:
-
-```
-var palette = Palette.GnuPlot.Value;
-
-```
-
 
 ## WinForms demo app
 
@@ -207,3 +181,69 @@ Left button click on colormap strip -> open dialog for constructing your own pal
 Shows how to use SciColorMaps.Portable.
 
 ![WPF](https://github.com/ar1st0crat/SciColorMaps/blob/master/Screenshots/Wpf.png)
+
+
+## Compiling SciColorMaps
+
+All customizable parameters are contained in ```Palette.cs``` file. So there's a helper script that can generate this file according to particular needs. Here's how to use it:
+
+1) Download or clone this repo
+
+2) Go to ```matplotlib``` folder and edit ```colormaps.txt``` text file, e.g.:
+
+```
+ocean
+hot
+coolwarm
+```
+
+Basically you include here only colormaps you really need. You can view all available colormap names in ```colormaps``` subfolder. If you specify non-existing colormap it'll be simply ignored.
+
+Note also that 'viridis' will be included to the list anyway since it's the default modern colormap.
+
+3) run ```generate_cs.py``` script:
+
+```
+python generate_cs.py [-r 16] [-p] [-a]
+```
+
+```-r``` - colormap resolution (number of base colors; should be 8, 16, 32, 64, 128 or 256)
+
+```-p``` - if specified then generate cs file for portable SciColorMaps version
+
+```-a``` - if specified then generate cs file with all palettes found in ```colormaps``` folder (ignoring ```colormaps.txt``` input file)
+
+Examples:
+```
+// generate cs file with all palettes found in colormaps folder 
+// (ignore colormaps.txt) and resolution = 8 base colors
+
+python generate_cs.py -r 8 -a
+
+
+// generate cs file for portable version 
+// (with default resolution = 16 base colors)
+
+python generate_cs.py -p
+```
+
+4) go to ```cs``` subfolder and copy generated ```Palette.cs``` file to ```SciColorMaps``` or ```SciColorMaps.Portable``` project folder.
+
+5) open ```SciColorMaps.sln``` in Visual Studio and compile new dll.
+
+
+**RECTANGULAR conditional compilation symbol**
+
+Accessing elements in jagged arrays is significantly faster (up to **40%**) compared to rectangular arrays, hence the jagged arrays are used and compiled by default. If an efficient memory management is of more importance then compile SciColorMaps with the 'RECTANGULAR' conditional compilation symbol.
+
+| compilation   | dll size |
+----------------|-----------
+| default       | ~95kb    |
+| RECTANGULAR   | ~29kb    |
+
+Also, if you are worried about the memory usage, please note that palette arrays are instantiated *lazily* in the calling code, e.g.:
+
+```
+var palette = Palette.GnuPlot.Value;
+
+```
