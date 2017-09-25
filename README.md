@@ -18,7 +18,7 @@ Library comes in two versions (also available as NuGet packages):
 
 Usage example:
 
-```
+```C#
 // create 'viridis' colormap with 256 colors, mapping values from range [0, 1]
 var cmap1 = new ColorMap();
 
@@ -59,7 +59,7 @@ foreach (var palette in ColorMap.Palettes)
 
 Users can create their own color palettes, like this:
 
-```
+```C#
 // === works for both versions of SciColorMaps ===
 
 var rgbs = new [] { 
@@ -102,7 +102,7 @@ Note also, the first color position should be 0.0f and last position should be 1
 
 For example, in WPF the following extension method can be used:
 
-```
+```C#
 using SciColorMaps.Portable;
 
 public static class ColorUtils
@@ -129,7 +129,7 @@ SciColorMaps provides the ```GrayColorMap``` decorator class. This class gently 
 
 Usage example:
 
-```
+```C#
 // upper sreenshot
 var cmap1 = new GrayColorMap(new ColorMap("gnuplot2", min, max));
 
@@ -160,7 +160,7 @@ SciColorMaps also provides the ```MirrorColorMap``` decorator class. This class 
 
 Usage example:
 
-```
+```C#
 // mirrored colors
 var cmap = new MirrorColorMap(new ColorMap("ocean"));
 
@@ -181,6 +181,15 @@ Left button click on colormap strip -> open dialog for constructing your own pal
 Shows how to use SciColorMaps.Portable.
 
 ![WPF](https://github.com/ar1st0crat/SciColorMaps/blob/master/Screenshots/Wpf.png)
+
+
+## UWP demo app
+
+Shows how to use SciColorMaps.Portable in UWP projects.
+
+The app allows loading sound from wav/mp3/mp4 files as well as recording sound from any input device (most likely, the microphone). When the audio signal is loaded, the app evaluates and visualizes its spectrogram in 2D and 3D. The visualization is based on the colormap selected in the left panel of a main page. Check it out: 3D-spectrogram with 'blues' colormap looks just like mountains in the fog ))
+
+![UWP](https://github.com/ar1st0crat/SciColorMaps/blob/master/Screenshots/Uwp.png)
 
 
 ## Compiling SciColorMaps
@@ -243,7 +252,7 @@ Accessing elements in jagged arrays is significantly faster (up to **40%**) comp
 
 Also, if you are worried about the memory usage, please note that palette arrays are instantiated *lazily* in the calling code, e.g.:
 
-```
+```C#
 var palette = Palette.GnuPlot.Value;
 
 ```

@@ -1,0 +1,76 @@
+﻿<Page
+    x:Class="SciColorMaps.DemoUwp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SciColorMaps.DemoUwp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    mc:Ignorable="d">
+
+    <Page.TopAppBar>
+        <CommandBar Background="DarkSlateGray" Foreground="White" Opacity="0.9"
+                    HorizontalAlignment="Center">
+            <CommandBar.Content>
+                <Grid/>
+            </CommandBar.Content>
+            <AppBarButton Icon="Shuffle" Label="mirror"
+                          Foreground="White"
+                          Click="MirrorClick" />
+            <AppBarButton Icon="MusicInfo" Label="load"
+                          Foreground="White"
+                          Click="LoadClick" />
+            <AppBarButton Icon="Microphone" Label="record"
+                          Foreground="White"
+                          Click="RecordClick" />
+        </CommandBar>
+    </Page.TopAppBar>
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush>
+                <GradientStopCollection>
+                    <GradientStop Color="White" Offset="0"/>
+                    <GradientStop Color="LightSlateGray" Offset="1.2"/>
+                </GradientStopCollection>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="190" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <GridView Grid.Column="0"
+                  ItemsSource="{x:Bind ColorMaps}"
+                  SelectionChanged="{x:Bind SelectedColorMapChanged}"
+                  Padding="10">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="local:ColorMapInfo">
+                    <StackPanel Orientation="Vertical">
+                        <Ellipse Fill="{x:Bind PaletteBrush}"
+                                 Width="55" Height="55"
+                                 Margin="5"/>
+                        <TextBlock Text="{x:Bind Title}" 
+                                   HorizontalAlignment="Center"
+                                   MinWidth="80" />
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+
+            <canvas:CanvasControl Grid.Row="0"
+                                  x:Name="SpectrumView3D"
+                                  Draw="{x:Bind CanvasControlDraw3D}" />
+            <canvas:CanvasControl Grid.Row="1"
+                                  x:Name="SpectrumView"
+                                  Draw="{x:Bind CanvasControlDraw}" />
+        </Grid>
+
+    </Grid>
+</Page>
