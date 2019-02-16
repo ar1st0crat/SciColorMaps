@@ -1,7 +1,7 @@
 # SciColorMaps
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![NuGet](https://img.shields.io/nuget/v/Nuget.Core.svg)
+ ![NuGet](https://img.shields.io/nuget/dt/ar1st0crat.SciColorMaps.svg?style=flat)
 
 Simple and convenient library providing custom .NET color maps (user-defined or imported from matplotlib) for scientific visualization.
 
