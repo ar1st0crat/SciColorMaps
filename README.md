@@ -1,7 +1,7 @@
 # SciColorMaps
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![NuGet](https://img.shields.io/nuget/v/Nuget.Core.svg)
+![NuGet](https://img.shields.io/nuget/dt/ar1st0crat.SciColorMaps.Portable)
 
 Simple and convenient library providing custom .NET color maps (user-defined or imported from matplotlib) for scientific visualization.
 
@@ -125,7 +125,7 @@ var color = cmap[0.3].ToMediaColor();
 
 ## Grayscale colormaps
 
-SciColorMaps provides the ```GrayColorMap``` decorator class. This class gently substitutes base palette with its grayscale analog during construction.
+SciColorMaps provides the ```GrayColorMap``` decorator class. This class replaces base palette with its grayscale analog during construction.
 
 Usage example:
 
@@ -156,7 +156,7 @@ var cmap2 = new GrayColorMap(new ColorMap("gnuplot2", min, max), GrayScaleOption
 
 ## Mirrored colormaps
 
-SciColorMaps also provides the ```MirrorColorMap``` decorator class. This class substitutes base palette with its mirrored analog during construction.
+SciColorMaps also provides the ```MirrorColorMap``` decorator class. This class replaces base palette with its mirrored analog during construction.
 
 Usage example:
 
